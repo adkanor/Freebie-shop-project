@@ -43,6 +43,8 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^8.49.0",
+    "eslint-plugin-react": "^7.33.2",
     "formik": "^2.4.5",
     "jest": "^27.5.1",
     "redux-devtools-extension": "^2.13.9",
