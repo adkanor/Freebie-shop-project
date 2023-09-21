@@ -22,13 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint src//**.{jsx,js}"
   },
   "browserslist": {
     "production": [
@@ -43,10 +38,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint": "^8.49.0",
     "eslint-plugin-react": "^7.33.2",
     "formik": "^2.4.5",
     "jest": "^27.5.1",
+    "prettier": "^3.0.3",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "yup": "^1.2.0"
