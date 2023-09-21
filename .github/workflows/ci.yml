@@ -35,7 +35,7 @@ jobs:
           node-version: 18.17.1
 
       - name: Install dependencies
-        run: npm install --prefix freebie-shop-project
+        run: npm install --prefix frontend
 
       - name: Run build
-        run: npm run build --prefix freebie-shop-project
+        run: npm run build --prefix frontend
