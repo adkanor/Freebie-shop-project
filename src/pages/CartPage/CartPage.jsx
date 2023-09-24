@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Separator from "../../components/Separator/Separator.jsx";
 import styles from "./CartPage.module.css";
 import arrowLeft from "../../assets/icons/Cart/Arrow-right-nav.svg";
-
+import BlackButton from "../../components/BlackButton/BlackButton.jsx";
 const CartPage = () => {
     return (
         <>
@@ -73,7 +73,7 @@ const CartPage = () => {
                                     type="text"
                                     placeholder="Add promo code"
                                 />
-                                <button className="button-black ">Apply</button>
+                                <BlackButton text="dcg" />
                             </div>
                         </div>
                     </div>
