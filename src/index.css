@@ -6,6 +6,7 @@ html {
 
 body {
     margin: 0;
+    box-sizing: border-box;
 }
 
 main {
@@ -30,6 +31,12 @@ pre {
 
 a {
     background-color: transparent;
+    text-decoration: none;
+
+}
+ol, ul {
+	list-style: none;
+    padding: 0;
 }
 
 abbr[title] {
@@ -180,6 +187,8 @@ template {
 }
 
 :root {
+    /* separator */
+    --separator-line:rgba(0,0,0,0.10);
     /* background */
     --gray-primary: #f0f0f0;
     --gray-secondary: #f2f0f1;
@@ -231,6 +240,14 @@ template {
     font-family: "Satoshi 700";
     font-style: normal;
     font-weight: normal;
+
     src: local("Satoshi-Bold"),
     url("./assets/fonts/Satoshi/Satoshi-Bold.woff") format("woff");
+}
+    src: local("Satoshi-Bold"), url("./assets/fonts/Satoshi/Satoshi-Bold.woff") format("woff");
+  }
+/* Максимальная ширина контента */
+.section{
+  max-width: 1240px; 
+  margin: 0 auto; 
 }
