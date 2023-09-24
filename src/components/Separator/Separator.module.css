@@ -1,17 +1,17 @@
-
-    /* Стили для мобильных устройств */
+/* Стили для мобильных устройств */
 .separator {
-    width: 90%; 
+    width: 90%;
     height: 1px;
-    background-color: var(--separator-line); 
+    background-color: var(--separator-line);
     margin: 0 auto;
     margin-bottom: 24px;
 }
 
+
 /* Медиа-запрос для адаптации линии для более широких экранов (например, планшеты и десктопы) */
 @media (min-width: 768px) {
     .separator {
-        width: 90%;  
-        max-width: 1240px; 
-}
+        width: 90%;
+        max-width: 1240px;
+    }
 }
