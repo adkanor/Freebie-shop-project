@@ -5,6 +5,7 @@ html {
 }
 body {
     margin: 0;
+    box-sizing: border-box;
 }
 main {
     display: block;
@@ -24,6 +25,12 @@ pre {
 }
 a {
     background-color: transparent;
+    text-decoration: none;
+
+}
+ol, ul {
+	list-style: none;
+    padding: 0;
 }
 abbr[title] {
     border-bottom: none;
@@ -132,6 +139,8 @@ template {
 }
 
 :root {
+    /* separator */
+    --separator-line:rgba(0,0,0,0.10);
     /* background */
     --gray-primary: #F0F0F0;
     --gray-secondary: #F2F0F1;
@@ -182,4 +191,8 @@ template {
     font-weight: normal;
     src: local("Satoshi-Bold"), url("./assets/fonts/Satoshi/Satoshi-Bold.woff") format("woff");
   }
-  
+/* Максимальная ширина контента */
+.section{
+  max-width: 1240px; 
+  margin: 0 auto; 
+}
