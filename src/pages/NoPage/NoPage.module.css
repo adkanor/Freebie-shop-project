@@ -9,7 +9,7 @@
 }
 
 .noPageTitle{
-    color: black;
+    color: var(--black-text);
     font-size: 110px;
     font-family: Inter, sans-serif;
     font-weight: 500;
@@ -20,7 +20,7 @@
 
 .noPageSubtitle{
     margin-top: 20px;
-    color: black;
+    color: var(--black-text);
     font-size: 16px;
     font-family: Poppins sans-serif;
     font-weight: 400;
@@ -34,8 +34,8 @@
     padding: 10px 30px ;
     border: none;
     border-radius: 10px;
-    background-color: #DB4444;
-    color: #FAFAFA;
+    background-color: var(--red-text);
+    color : var(--white-text);
     font-size: 16px;
     font-family: Poppins sans-serif;
     font-weight: 500;
