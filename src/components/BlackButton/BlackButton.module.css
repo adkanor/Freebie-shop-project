@@ -1,0 +1,21 @@
+.blackButton {
+    display: block;
+    color: var(--white-text);
+    border-radius: 62px;
+    text-align: center;
+    background-color: var(--black--background);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.42);
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
+}
+.blackButton:hover {
+    background-color: #181818;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.blackButton:active {
+    background-color: #3c3c3c;
+    box-shadow: none;
+}
