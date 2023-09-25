@@ -1,0 +1,121 @@
+.cartItem {
+    display: flex;
+    width: 100%;
+    position: relative;
+    padding-bottom: 16px;
+    margin-top: 16px;
+}
+.cartItem:not(:last-child) {
+    border-bottom: 1px solid var(--separator-line);
+}
+.cartItem:first-child {
+    margin-top: 0px;
+}
+.cartImg {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin-right: 14px;
+    background-color: var(--gray-secondary);
+}
+.container img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.cartItemDeleteIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.cartItemTitle {
+    max-width: 170px;
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 16px;
+    margin: 4px 0;
+}
+.cartItemContent {
+    flex: 1;
+}
+.cartItemSize,
+.cartItemColor {
+    display: flex;
+    font-size: 12px;
+    font-family: "Satoshi 400", Arial, sans-serif;
+}
+.cartItemSize p,
+.cartItemColor p {
+    color: var(--black-text);
+    margin-bottom: 2px;
+    margin-right: 5px;
+}
+.cartItemSize span,
+.cartItemColor span {
+    color: var(--gray-text-primary);
+
+    margin-right: 5px;
+}
+.cartItemTotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.cartItemTotal p {
+    font-size: 24px;
+    font-family: "Satoshi 700", Arial, sans-serif;
+}
+.cartQuantity {
+    background-color: var(--separator-line);
+    border-radius: 62px;
+}
+.quantityNumber {
+    padding: 0px 4px;
+}
+.quantityBtnDown {
+    border-top-left-radius: 62px;
+    border-bottom-left-radius: 62px;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.quantityBtnUp {
+    border-top-right-radius: 62px;
+    border-bottom-right-radius: 62px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+@media (min-width: 766px) {
+    .cartImg {
+        width: 124px;
+        height: 124px;
+        margin-right: 16px;
+    }
+    .cartItemTitle {
+        max-width: 300px;
+        font-size: 20px;
+    }
+    .cartItemSize,
+    .cartItemColor {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .cartItemTotal {
+        margin-top: 13px;
+        line-height: 1.5;
+    }
+    .quantityNumber {
+        display: inline-block;
+        padding: 8px 15px;
+    }
+    .quantityBtnDown {
+        padding-left: 15px;
+    }
+    .quantityBtnUp {
+        padding-right: 15px;
+    }
+}
