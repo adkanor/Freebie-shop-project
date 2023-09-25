@@ -3,9 +3,6 @@ import styles from "./Footer.module.css";
 
 
 const Footer = () => {
-<<<<<<< Updated upstream
-    return <div>Footer</div>;
-=======
 
 
   return (
@@ -40,7 +37,6 @@ const Footer = () => {
       </div>
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default Footer;
