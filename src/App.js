@@ -13,9 +13,10 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/footer" element={<Footer />} />
+                {/* <Route path="/footer" element={<Footer />} /> */}
                 <Route path="*" element={<NoPage />} />
             </Routes>
+            <Footer />
         </>
     );
 };
