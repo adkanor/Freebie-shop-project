@@ -7,18 +7,18 @@ import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 
 const App = () => {
-  return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<MainSection />} />
-        <Route path="/cart" element={<CartPage />} />
-        {/* <Route path="/footer" element={<Footer />} /> */}
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <Routes>
+                <Route path="/" element={<MainSection />} />
+                <Route path="/cart" element={<CartPage />} />
+                {/* <Route path="/footer" element={<Footer />} /> */}
+                <Route path="*" element={<NoPage />} />
+            </Routes>
+            <Footer />
+        </>
+    );
 };
 
 export default App;
