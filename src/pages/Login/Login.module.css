@@ -1,0 +1,63 @@
+.loginWrapper{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.loginTitle{
+    color: var(--black-text);
+    font-family: "Satoshi 700", Arial, sans-serif ;
+    font-size: 30px;
+    font-style: normal;
+    line-height: 30px;
+    letter-spacing: 1px
+
+}
+
+.loginSubtitle{
+    margin-top: 14px;
+    color: var(--black-text);
+    font-size: 16px;
+    font-family: "Satoshi 400", Arial, sans-serif ;
+    line-height: 24px;
+    word-wrap: break-word
+}
+.formBlock{
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formTitle{
+    margin: 0;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.formWrapper{
+    margin-bottom: 30px;
+
+}
+
+
+.submitBtn{
+    margin: 20px 10px 10px;
+    width: 130px;
+    height: 30px;
+    border: none;
+    
+}
+
+@media screen and (max-width:920px ) {
+    .loginWrapper{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:765px ) {
+    .loginWrapper{
+        width: 60%;
+    }
+}
