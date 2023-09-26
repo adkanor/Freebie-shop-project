@@ -18,6 +18,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>
+            <Footer />
         </>
     );
 };

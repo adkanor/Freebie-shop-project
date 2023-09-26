@@ -130,7 +130,6 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/* colors */
 :root {
     /* separator */
     --separator-line: rgba(0, 0, 0, 0.1);
@@ -198,8 +197,9 @@ table {
 
 /* Максимальная ширина контента */
 .section {
+    box-sizing: border-box;
     max-width: 1440px;
     margin: 0 auto;
-    padding-left: clamp(10px, 5%, 100px);
-    padding-right: clamp(10px, 5%, 100px);
+    padding-left: 20px;
+    padding-right: 20px;
 }
