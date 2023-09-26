@@ -3,7 +3,7 @@ import style from "./Login.module.css";
 import { Form, Formik } from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "../../components/ValidationSchema/validationSchema";
-import ButtonForm from "../../components/ButtonForm/ButtonForm";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
     return (
@@ -37,7 +37,14 @@ const Login = () => {
                                 errorText={errors.password}
                                 type={"password"}
                             />
-                            <ButtonForm type={"submit"} text={"Log In"}/>
+                            <Button type={"submit"} text={"Log In"} style={{
+                                padding: "16px 48px",
+                                backgroundColor: "var(--login-btn)",
+                                color: "var(--white-text)",
+                                border: "none",
+                            }}/>
+
+
                         </Form>
                     )}
                 </Formik>
