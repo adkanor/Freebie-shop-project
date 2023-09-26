@@ -3,7 +3,7 @@
     color: var(--white-text);
     border-radius: 62px;
     text-align: center;
-    background-color: var(--black--background);
+    background-color: var(--gray-primary);
     border: none;
     cursor: pointer;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.42);
@@ -13,7 +13,7 @@
 }
 .blackButton:hover {
     background-color: #181818;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
 .blackButton:active {
     background-color: #3c3c3c;
