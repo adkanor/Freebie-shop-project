@@ -20,7 +20,7 @@
     margin-top: 14px;
     color: var(--black-text);
     font-size: 16px;
-    font-family: "Satoshi 400", Arial, sans-serif ;
+    font-family: "Satoshi 400", Arial, sans-serif;
     line-height: 24px;
     word-wrap: break-word
 }
@@ -42,13 +42,17 @@
 }
 
 
-.submitBtn{
-    margin: 20px 10px 10px;
-    width: 130px;
-    height: 30px;
-    border: none;
-    
+.loginBtn{
+    font-family: "Satoshi 500", Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.ForgetPassword {
+    color: var(--login-btn);
+}
+
 
 @media screen and (max-width:920px ) {
     .loginWrapper{

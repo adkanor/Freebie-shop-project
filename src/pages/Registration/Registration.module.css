@@ -1,0 +1,17 @@
+.registrationWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.registrationBanner{
+    width: 40%;
+}
+
+.registrationBanner img {
+    width: 100%;
+}
+
+.registrationFormWrapper{
+    width: 40%;
+}
