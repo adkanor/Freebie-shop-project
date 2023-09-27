@@ -5,7 +5,7 @@ import arrowLeft from "../../assets/icons/Cart/Arrow-right-nav.svg";
 import Button from "../../components/Button/Button.jsx";
 import promo from "../../assets/icons/Cart/Promo.svg";
 import CartItem from "../../components/CartItem/CartItem.jsx";
-
+// import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 const CartPage = () => {
     return (
         <>
@@ -37,6 +37,7 @@ const CartPage = () => {
                         </li>
                     </ul>
                 </nav>
+                {/* <EmptyCartPage /> */}
                 <h1 className={styles.cartPageTitle}>Your cart</h1>
                 <div className={styles.cartContainer}>
                     <ul className={styles.cartContent}>
