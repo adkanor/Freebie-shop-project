@@ -144,10 +144,6 @@ a {
   }
 }
 
-.desktopSearchBar input {
-  display: none;
-}
-
 .mobileMenuItems {
   display: flex;
   align-items: center;
@@ -387,4 +383,8 @@ label::before {
   .desktopItemText {
     font-size: 16px;
   }
+  
+.desktopSearchBar input {
+  display: none;
+}
 }
