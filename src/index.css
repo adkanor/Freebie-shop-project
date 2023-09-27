@@ -144,6 +144,7 @@ table {
     --white-text: rgba(255, 255, 255, 1);
     --gray-text-primary: rgba(0, 0, 0, 0.6);
     --gray-text-secondary: rgba(0, 0, 0, 0.4);
+    --login-btn:rgba(219,68,68,100);
 
     /* svg */
     --yellow-star: #ffc633;
@@ -196,8 +197,11 @@ table {
 
 /* Максимальная ширина контента */
 .section {
+    box-sizing: border-box;
     max-width: 1440px;
+    min-width: 320px;
     margin: 0 auto;
-    padding-left: clamp(10px, 5%, 100px);
-    padding-right: clamp(10px, 5%, 100px);
+    padding-left: 20px;
+    padding-right: 20px;
+
 }

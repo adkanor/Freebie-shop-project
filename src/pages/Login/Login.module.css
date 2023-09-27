@@ -1,0 +1,95 @@
+.loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.loginWrapper{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+.bannerContainer{
+    width: 60%;
+}
+
+.bannerLogin {
+    width: 100%;
+}
+
+.loginTitle{
+    color: var(--black-text);
+    font-family: "Satoshi 700", Arial, sans-serif ;
+    font-size: 30px;
+    font-style: normal;
+    line-height: 30px;
+    letter-spacing: 1px
+
+}
+
+.loginSubtitle{
+    margin-top: 14px;
+    color: var(--black-text);
+    font-size: 16px;
+    font-family: "Satoshi 400", Arial, sans-serif;
+    line-height: 24px;
+    word-wrap: break-word
+}
+.formBlock{
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formTitle{
+    margin: 0;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.formWrapper{
+    margin-bottom: 30px;
+
+}
+
+
+.loginBtn{
+    font-family: "Satoshi 500", Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ForgetPassword {
+    color: var(--login-btn);
+}
+
+
+@media screen and (max-width:920px ) {
+    .loginWrapper{
+        width: 50%;
+        max-width: 500px;
+
+    }
+    .bannerContainer{
+        display: none;
+    }
+    .loginContainer{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:765px ) {
+    .loginWrapper{
+        width: 80%;
+        max-width:400px;
+
+    }
+    .loginTitle{
+        font-size: 25px;
+    }
+}
+
+
