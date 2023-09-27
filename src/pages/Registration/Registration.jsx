@@ -1,9 +1,11 @@
 import React from "react";
-import validationSchema from "../../components/ValidationSchema/validationSchema";
+import validationSchema from "./validationSchema";
 import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import Button from "../../components/Button/Button";
 import style from "./Registration.module.css";
+import googleIcon from "../../assets/icons/Registration/google.svg";
+import {Link} from "react-router-dom";
 
 const url ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz6RwvgggYzVqj1g1WegTjmGl5vzxPaCm6Lg&usqp=CAU";
 
@@ -13,10 +15,11 @@ const Registration = () => {
     return (
         <div className={style.registrationWrapper}>
             <div className={style.registrationBanner}>
-                <img src={url} alt="photo" />
+                <img src={url} alt="bannerLogin" />
             </div>
-
             <div className={style.registrationFormWrapper}>
+                <p className={style.registrationTitle}>Create an account</p>
+                <p className={style.registrationSubTitle}>Enter your details below</p>
                 <Formik initialValues={{
                     name:"",
                     email: "",
@@ -51,6 +54,7 @@ const Registration = () => {
                                 width:"100%",
                                 maxWidth: "500px",
                                 padding: "16px 48px",
+                                fontSize:"20px",
                                 backgroundColor: "var(--login-btn)",
                                 color: "var(--white-text)",
                                 border: "none",
@@ -59,6 +63,33 @@ const Registration = () => {
 
                     )}
                 </Formik>
+                <div>
+
+                    <Button
+                        // text="Sign up with Google"
+                        style={{
+                            marginTop: "20px",
+                            width: "100%",
+                            height: "50px",
+                            maxWidth: "500px",
+                            background: "transparent",
+                            color: "var(--gray-text-primary)",
+                            textAlign: "center"
+                        }}
+                    >
+                        <div className={style.googleRegistration} >
+                            <img
+                                className={style.googleIconRegistration}
+                                src={googleIcon} alt="googleIcon"
+                                width="24" height="24" />
+                            <span>Sign up with Google</span>
+                        </div>
+                    </Button>
+                    <div className={style.redirectPanel}>
+                        <p>Already have account?</p>
+                        <Link className={style.redirectLogin}  to="/login" > Log in</Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

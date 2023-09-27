@@ -1,9 +1,22 @@
+.loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .loginWrapper{
-    width: 30%;
+    width: 35%;
     display: flex;
     flex-direction: column;
 
 
+}
+.bannerContainer{
+    width: 60%;
+}
+
+.bannerLogin {
+    width: 100%;
 }
 
 .loginTitle{
@@ -57,11 +70,26 @@
 @media screen and (max-width:920px ) {
     .loginWrapper{
         width: 50%;
+        max-width: 500px;
+
+    }
+    .bannerContainer{
+        display: none;
+    }
+    .loginContainer{
+        justify-content: center;
     }
 }
 
 @media screen and (max-width:765px ) {
     .loginWrapper{
-        width: 60%;
+        width: 80%;
+        max-width:400px;
+
+    }
+    .loginTitle{
+        font-size: 25px;
     }
 }
+
+
