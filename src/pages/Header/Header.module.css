@@ -1,16 +1,19 @@
-.desktopItemText{
+.desktopItemText {
   color: #000;
   font-family: "Satoshi 400";
   font-size: 16px;
-} 
-a{
+}
+
+a {
   text-decoration: none;
 }
+
 .desktopMenuList {
   list-style-type: none;
   display: none;
   align-items: center;
 }
+
 .menuItem {
   height: 60px;
   display: flex;
@@ -18,24 +21,15 @@ a{
   color: rgb(0, 0, 0);
   font-weight: 500;
   position: relative;
+
   &.searchIcon {
-      margin-right: 0;
+    margin-right: 0;
   }
   svg {
-      font-size: 18px;
+    font-size: 18px;
   }
-  cursor: pointer;
-}
 
-.desktopMenuList:before{
-  content: " ";
-  position: fixed;
-  left: 0;
-  top: 280px;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.3);
-  z-index: -1;
+  cursor: pointer;
 }
 
 .header {
@@ -46,17 +40,24 @@ a{
   padding-left: 20px;
   padding-right: 20px;
   transition: all ease 0.5s;
-    .mobileSearchBar {
-      width: 100%;
-      height: 60px;
-      background-color: white;
-      position: absolute;
-      top: 90px;
-      left: 0;
-      animation: mobileMenu 0.3s ease forwards; 
+  .mobileSearchBar {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    animation: mobileMenu 0.3s ease forwards;
   }
 }
+
+/* Mobile View */
 .header.mobileView {
+  .wrapper {
+    border: 0;
+  }
+
+  /* Desktop Menu in Mobile View */
   .desktopMenuList {
     z-index: 222;
     background-color: #F0F0F0;
@@ -69,24 +70,78 @@ a{
     width: 100%;
     padding: 33px 0px;
     animation: mobileMenu 0.3s ease forwards;
-      .menuItem {
-        font-size: 20px;
-        width: 100%;
-        height: auto;
-        padding: 15px 20px;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-          &:last-child {
-              display: none;
-          }
-        }
+    .menuItem {
+      font-size: 20px;
+      width: 100%;
+      height: auto;
+      padding: 15px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      /* Hide the last menu item in mobile view */
+      &:last-child {
+        display: none;
+      }
     }
+  }
+
+  /* Dark overlay background */
+  .desktopMenuList::after {
+    content: " ";
+    position: fixed;
+    left: 0;
+    top: 280px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
 }
 
-.desktopSearchBar input {
-  display: none;
+/* Dark overlay background for mobile search bar */
+.mobileSearchBar::before {
+  content: " ";
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* Mobile View Close */
+.header.mobileViewClose {
+  .desktopMenuList {
+    z-index: 222;
+    background-color: #F0F0F0;
+    gap: 50px;
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    padding: 33px 0px;
+    animation: mobileMenuClose 0.3s ease forwards;
+    .menuItem {
+      font-size: 20px;
+      width: 100%;
+      height: auto;
+      padding: 15px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      /* Hide the last menu item in mobile view */
+      &:last-child {
+        display: none;
+      }
+    }
+  }
 }
 
 .mobileMenuItems {
@@ -95,14 +150,14 @@ a{
   gap: 20px;
 }
 
-.logoText{
+.logoText {
   font-family: "Integral-CF 700";
   padding-bottom: 6px;
   color: #000;
   font-size: 25.2px;
 }
 
-.mobileMenuItems svg{
+.mobileMenuItems svg {
   font-size: 18px;
   color: white;
 }
@@ -111,51 +166,67 @@ a{
   display: flex;
   align-items: center;
   height: 40px;
-  width: 100%;   
+  width: 100%;
 }
 
-.mobileSearchInput img{
+.mobileSearchInput img {
   padding-right: 20px;
 }
-
-.mobileSearchInput svg{
+.mobileSearchInput svg {
   font-size: 20px;
   flex-shrink: 0;
   cursor: pointer;
 }
 
-.mobileSearchInput input{
+/* Mobile Search Input Field */
+.mobileSearchInput input {
   width: 100%;
   height: 50px;
   background-color: white;
   outline: 0;
   border: 0;
-  border-radius: 30px 0 0 30px;
   padding: 0 20px;
   font-size: 14px;
 }
-.desktopLogo{
+
+.imgLink {
+  cursor: pointer;
+}
+
+.desktopLogo {
   display: none;
 }
 
-.desktopSvgs{
+.desktopSvgs {
   display: none;
 }
 
-.mobileSvgs{
+.mobileSvgs {
   display: flex;
   gap: 12px;
-} 
-@keyframes mobileMenu {
-    0% {
-        transform: translateY(-130%);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
-.desktopSearchBar input{
+/* Keyframes for Mobile Menu Animation */
+@keyframes mobileMenu {
+  0% {
+    transform: translateY(-130%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for Mobile Menu Close Animation */
+@keyframes mobileMenuClose {
+  100% {
+    transform: translateY(-130%);
+  }
+  0% {
+    transform: translateY(0);
+  }
+}
+
+.desktopSearchBar input {
   font-family: "Satoshi 400";
   width: 25vw;
   max-width: 545px;
@@ -165,60 +236,56 @@ a{
   background: #F0F0F0;
   padding: 4px 42px;
   padding-right: 0px;
-
 }
 
-.show{
+/* Show and Hide Classes */
+.show {
   display: block;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
-.wrapper{
+.wrapper {
   padding: 24px 0px;
+  border-bottom: 1px solid var(--separator-line);
 }
-
-.desktopItem{
+.desktopItem {
   white-space: nowrap;
 }
-
-
-.mobileMenu{
+.mobileMenu {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
-.sectionNew{
-  max-width: 1440px;
-  min-width: 320px;
-  margin: 0 auto;
-}
-
-.mobileMenuItems{
+.mobileMenuItems {
   justify-content: space-between;
 }
 
-.desktopMenuItems{
+/* Desktop Menu Items */
+.desktopMenuItems {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-label{
+
+/* Label for Search Icon */
+label {
   position: relative;
 }
-label::before{
+
+/* Search Icon Image */
+label::before {
   content: "";
   position: absolute;
   left: 9px;
   top: 6px;
   bottom: 5px;
   width: 25px;
-  background: url("../../assets/icons/Header/Search.svg")
+  background: url("../../assets/icons/Header/Search.svg");
 }
-
 .sectionHeader {
   box-sizing: border-box;
   max-width: 1440px;
@@ -226,8 +293,8 @@ label::before{
   margin: 0 auto;
 }
 
-
-.notification{
+/* Notification */
+.notification {
   width: 100%;
   height: 34px;
   background-color: #000;
@@ -235,8 +302,7 @@ label::before{
   justify-content: center;
   align-items: center;
 }
-
-.info p{
+.info p {
   color: #FFF;
   font-family: "Satoshi 400";
   font-size: 12px;
@@ -244,8 +310,7 @@ label::before{
   line-height: normal;
   width: 301px;
 }
-
-.info span{
+.info span {
   color: #FFF;
   font-family: "Satoshi 500";
   font-size: 12px;
@@ -253,70 +318,73 @@ label::before{
   line-height: normal;
   text-decoration-line: underline;
 }
-.desktopItem{
-  white-space: nowrap;
-}
 
+/* Media Queries for Tablet Screen */
 @media screen and (max-width: 991px) {
-  .desktopItemText{
+  .desktopItemText {
     font-size: calc(0.4rem + 1vw);
   }
-  .logoText{
+  .logoText {
     font-size: calc(1rem + 1.23vw);
   }
 }
 
+/* Media Queries for Screens Above 766px */
 @media only screen and (min-width: 766px) {
-  .mobileSearchInput input{
+  .mobileSearchInput input {
     height: 60px;
     font-size: 20px;
     padding: 0 30px;
   }
-  .desktopMenuList:before{
+  .desktopMenuList::after {
     content: " ";
     background-color: rgba(0, 0, 0, 0);
     width: 0px;
     height: 0px;
   }
-  .logoText{
+  .logoText {
     font-size: 28px;
   }
-  .mobileMenuItems{
-      display: none;
+  .mobileMenuItems {
+    display: none;
   }
   .desktopMenuList {
-      display: flex;
-      gap: Clamp(19px, 3%, 45px);
+    display: flex;
+    gap: clamp(19px, 3%, 45px);
   }
-  .desktopSearchBar input {
+  .desktopLogo {
     display: block;
   }
-  .desktopLogo{
-    display: block;
-  }
-  .desktopSvgs{
+  .desktopSvgs {
     display: flex;
     flex-wrap: nowrap;
     gap: 12px;
   }
 }
+
+/* Media Queries for Screens Above 1440px */
 @media screen and (min-width: 1440px) {
-  .desktopItemText{
+  .desktopItemText {
     font-size: 16px;
   }
-  .logoText{
+  .logoText {
     font-size: 32px;
   }
-  .desktopSearchBar input{
+  .desktopSearchBar input {
     height: 24px !important;
   }
-  label::before{
-    top:3px;
+  label::before {
+    top: 3px;
   }
 }
 
-@media screen and (max-width: 766px){
-  .desktopItemText{
+/* Media Queries for Mobile Screens */
+@media screen and (max-width: 766px) {
+  .desktopItemText {
     font-size: 16px;
   }
+  
+.desktopSearchBar input {
+  display: none;
+}
 }

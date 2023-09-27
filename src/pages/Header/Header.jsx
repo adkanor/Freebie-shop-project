@@ -11,6 +11,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
+    const [show, setShow] = useState(false);
     const [query, setQuery] = useState("");
     const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
@@ -18,7 +19,9 @@ const Header = () => {
     //hide menu when resizing the window resolution
     useEffect(() => {
         window.addEventListener("resize", () => {
-            closeMobileMenu();
+            setMobileMenu(false);
+            setShowSearch(false);
+            setShow(false);
         });
         return () =>
             window.removeEventListener("resize", () => {
@@ -28,18 +31,19 @@ const Header = () => {
 
     //lock or unlock scroll
     useEffect(() => {
-        if (!mobileMenu) {
+        if (!showSearch && !mobileMenu) {
             document.body.style.overflow = "visible";
         } else {
             document.body.style.overflow = "hidden";
         }
-    }, [mobileMenu]);
+    }, [mobileMenu, showSearch]);
 
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
                 navigate(`/search/${query}`);
                 setShowSearch(false);
+
                 event.target.value = "";
             }, 1000);
         }
@@ -57,7 +61,24 @@ const Header = () => {
 
     const closeMobileMenu = () => {
         setMobileMenu(false);
+        setShow(true);
         setShowSearch(false);
+    };
+
+    const toggleAnimationMenu = () => {
+        if (show) {
+            if (mobileMenu) {
+                return styles.mobileView;
+            } else {
+                return styles.mobileViewClose;
+            }
+        } else {
+            if (mobileMenu) {
+                return styles.mobileView;
+            } else {
+                return "";
+            }
+        }
     };
 
     return (
@@ -71,11 +92,7 @@ const Header = () => {
                 </span>
             </div>
             <div className={styles.sectionHeader}>
-                <header
-                    className={`${styles.header} ${
-                        mobileMenu ? styles.mobileView : ""
-                    }`}
-                >
+                <header className={`${styles.header} ${toggleAnimationMenu()}`}>
                     <div className={styles.wrapper}>
                         <div className={styles.desktopMenuItems}>
                             <ul className={styles.desktopMenuList}>
@@ -154,7 +171,7 @@ const Header = () => {
                                     <div className={styles.mobileMenu}>
                                         <img
                                             src={VscChromeClose}
-                                            onClick={() => setMobileMenu(false)}
+                                            onClick={closeMobileMenu}
                                             alt="Close SVG"
                                         />
                                         <div
@@ -219,6 +236,7 @@ const Header = () => {
                                             src={HiOutlineSearchBlack}
                                             onClick={openSearch}
                                             alt="Search SVG"
+                                            className={styles.imgLink}
                                         />
                                         <Link to="test">
                                             <img
@@ -261,6 +279,7 @@ const Header = () => {
                                         src={VscChromeClose}
                                         onClick={() => setShowSearch(false)}
                                         alt="Close SVG"
+                                        className={styles.imgLink}
                                     />
                                 </div>
                             </div>
