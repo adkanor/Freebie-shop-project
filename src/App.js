@@ -5,6 +5,7 @@ import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./pages/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
+import Login from "./pages/Login/Login";
 
 const App = () => {
     return (
@@ -13,7 +14,8 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
-                {/* <Route path="/footer" element={<Footer />} /> */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/footer" element={<Footer />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>
             <Footer />

@@ -144,6 +144,7 @@ table {
     --white-text: rgba(255, 255, 255, 1);
     --gray-text-primary: rgba(0, 0, 0, 0.6);
     --gray-text-secondary: rgba(0, 0, 0, 0.4);
+    --login-btn:rgba(219,68,68,100);
 
     /* svg */
     --yellow-star: #ffc633;
