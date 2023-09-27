@@ -11,7 +11,7 @@ const NoPage = () => {
         <p className={style.noPageSubtitle}>Your visited page not found. You may go home page.</p>
         <Button onClick={() => navigate(-1)} text={"Go back"} style={{
             marginTop:"20px",
-            padding: "16px 48px",
+            padding: "10px 30px",
             backgroundColor: "var(--login-btn)",
             color: "var(--white-text)",
             border: "none",
