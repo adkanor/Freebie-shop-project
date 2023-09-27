@@ -70,7 +70,7 @@ const Footer = () => {
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
                                     <li key={i} className={styles.FooterListItem}>
-                                        <a className={styles.FooterListLink} href="#">{item}</a>
+                                        <a className={styles.FooterListLink} href="/">{item}</a>
                                     </li>
                                 ))}
                             </ul>
