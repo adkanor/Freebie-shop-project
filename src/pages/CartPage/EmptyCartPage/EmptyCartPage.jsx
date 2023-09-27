@@ -14,10 +14,17 @@ const EmptyCartPage = () => {
                 className={styles.emptyCartIcon}
                 src={EmptyCart}
                 alt="Empty cart page"
+                width="100px"
+                height="100px"
             />
             <Link className={styles.emptyCartLink} to="/">
                 <p>Back to home page</p>
-                <img src={arrow} alt="Arrow link to main page" />
+                <img
+                    src={arrow}
+                    alt="Arrow link to main page"
+                    width="25px"
+                    height="25px"
+                />
             </Link>
         </div>
     );
