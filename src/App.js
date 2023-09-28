@@ -12,7 +12,6 @@ const App = () => {
     return (
         <>
             <Header />
-            <StarRating rating={2.6} starSizePx={55}/>
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
