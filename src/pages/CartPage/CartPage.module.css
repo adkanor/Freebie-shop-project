@@ -39,7 +39,6 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 14px;
     margin-bottom: 20px;
-    margin-right: 20px;
 }
 
 /* Cart Summary section */
@@ -139,6 +138,7 @@
     }
     .cartContent {
         flex: 2;
+        margin-right: 20px;
     }
     .cartSummary {
         flex: 1;
