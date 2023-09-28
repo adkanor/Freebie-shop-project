@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
+import Slider from "../../components/Slider/Slider";
 const MainPage = () => {
     return (
         <section className="section">
+            <Slider/>
             <div className={styles.browseContainer}>
                 <div className={styles.title}>BROWSE BY DRESS STYLE</div>
                 <div className={styles.gridContainer}>

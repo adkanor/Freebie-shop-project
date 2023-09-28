@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import style from "./Slider.module.css";
-import PropTypes from "prop-types";
 import axios from "axios";
 
 const responsive = {
@@ -35,8 +34,8 @@ const Slider = () => {
 
     ));
     return (
-        <div className={style.sliderWrapper}>
-            <div >
+        <div>
+            <div className={style.sliderWrapper} >
                 <Carousel
                     swipeable={false}
                     draggable={false}
@@ -50,20 +49,15 @@ const Slider = () => {
                     keyBoardControl={false}
                     transitionDuration={1500}
                     containerClass="carousel-container"
-
                 >
                     {pictures}
-                    {/*<div className={style.sliderItemWrapper} ><img className={style.sliderItem} src={"https://static.espreso.tv/uploads/article/2442937/images/im-dodge_challenger_srt_demon_8.jpeg"}/></div>*/}
-                    {/*<div className={style.sliderItemWrapper} ><img className={style.sliderItem} src={"https://mc.today/wp-content/uploads/2022/02/image5-1.png"}/></div>*/}
-                    {/*<div className={style.sliderItemWrapper} ><img className={style.sliderItem} src={"https://autoselect.ua/wp-content/uploads/2021/12/1-1.jpg"}/></div>*/}
 
                 </Carousel>
             </div>
+            <div className={style.bannerStatic}><img src={banner[0]} alt={"bannerStatic"}/></div>
         </div>
     );
 };
-Slider.propTypes={
-    urls:PropTypes.string.isRequired
-};
+
 
 export default Slider;
