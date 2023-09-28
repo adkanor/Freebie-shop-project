@@ -1,0 +1,87 @@
+.browseContainer {
+    background: var(--gray-primary);
+    padding: 40px 24px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.title {
+    color: var(--text-black);
+    font-size: 32px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-family: "Integral-CF 700";
+    margin-bottom: 20px;
+}
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-row-gap: 16px;
+}
+.gridItem {
+    background-color: var(--white-text);
+    min-width: 90%;
+    min-height: 200px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.gridItem p {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-family: "Satoshi 700";
+    font-size: 24px;
+    color: var(--black-text);
+}
+.gridItem:nth-child(1) {
+    background-image: url(../../assets/img/BrowseByStyle/CasualStyle.png);
+}
+
+.gridItem:nth-child(2) {
+    background-image: url(../../assets/img/BrowseByStyle/FormalStyle.png);
+}
+
+.gridItem:nth-child(3) {
+    background-image: url(../../assets/img/BrowseByStyle/PartyStyle.png);
+}
+
+.gridItem:nth-child(4) {
+    background-image: url(../../assets/img/BrowseByStyle/GymStyle.png);
+}
+
+@media screen and (min-width: 766px) {
+    .browseContainer {
+        padding: 70px 50px;
+    }
+    .gridContainer {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+
+    .gridItem:nth-child(1) {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .gridItem:nth-child(2) {
+        grid-area: 1 / 2 / 2 / 4;
+    }
+
+    .gridItem:nth-child(3) {
+        grid-area: 2 / 1 / 3 / 3;
+    }
+
+    .gridItem:nth-child(4) {
+        grid-area: 2 / 3 / 3 / 4;
+    }
+    .title {
+        font-size: 48px;
+    }
+    .gridItem p {
+        font-size: 36px;
+    }
+}
