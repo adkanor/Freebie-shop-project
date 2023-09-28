@@ -7,7 +7,7 @@ import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
-import Slider from "./components/Slider/Slider";
+
 
 const App = () => {
     return (
@@ -16,7 +16,6 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/test" element={<Slider />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/footer" element={<Footer />} />
