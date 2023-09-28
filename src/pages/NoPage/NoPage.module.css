@@ -20,25 +20,13 @@
 .noPageSubtitle{
     margin-top: 20px;
     color: var(--black-text);
-    font-size: 16px;
+    font-size: 20px;
     font-family: "Satoshi 400", Arial, sans-serif;
     line-height: 24px;
     word-wrap: break-word
 
 }
 
-.goBackBtn{
-    margin-top: 20px;
-    padding: 10px 30px ;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--red-text);
-    color : var(--white-text);
-    font-size: 16px;
-    font-family: "Satoshi 200", Arial, sans-serif;
-    line-height: 24px;
-    word-wrap: break-word
-}
 
 @media screen and (max-width:920px ){
     .noPageTitle{
@@ -47,6 +35,8 @@
     }
     .noPageSubtitle{
         font-size: 16px;
+        margin-top: 40px;
+
 
     }
     .goBackBtn{
@@ -67,141 +57,7 @@
     .goBackBtn{
         line-height: 8px;
         padding: 10px 20px ;
-        font-size: 12px;
-        border-radius: 5px;
-        margin-top: 5px;
-    }
-}
-
-.noPageTitle{
-    color: var(--black-text);
-    font-size: 110px;
-    font-family:"Satoshi 700", Arial, sans-serif;
-    line-height: 115px;
-    letter-spacing: 3px;
-    word-wrap: break-word
-}
-
-.noPageSubtitle{
-    margin-top: 10px;
-    color: var(--black-text);
-    font-size: 16px;
-    font-family: "Satoshi 400", Arial, sans-serif;
-    line-height: 24px;
-    word-wrap: break-word
-
-}
-
-.goBackBtn{
-    margin-top: 20px;
-    padding: 10px 30px ;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--login-btn);
-    color: var(--gray-primary);
-    font-size: 16px;
-    font-family: Poppins sans-serif;
-    font-weight: 500;
-    line-height: 24px;
-    word-wrap: break-word
-}
-
-@media screen and (max-width:920px ){
-    .noPageTitle{
-        font-size: 60px;
-        line-height: 12px;
-    }
-    .noPageSubtitle{
-        font-size: 16px;
-
-    }
-    .goBackBtn{
-        line-height: 12px;
-    }
-}
-
-@media screen and (max-width:520px ){
-    .noPageTitle{
-        font-size: 30px;
-        line-height: 16px;
-    }
-    .noPageSubtitle{
         font-size: 8px;
-        margin-top: 10px;
-
-    }
-    .goBackBtn{
-        line-height: 8px;
-        padding: 10px 20px ;
-        font-size: 12px;
-        border-radius: 5px;
-        margin-top: 5px;
-    }
-}
-
-.noPageTitle{
-    color: black;
-    font-size: 110px;
-    font-family: Inter, sans-serif;
-    font-weight: 500;
-    line-height: 115px;
-    letter-spacing: 3px;
-    word-wrap: break-word
-}
-
-.noPageSubtitle{
-    margin-top: 20px;
-    color: black;
-    font-size: 16px;
-    font-family: Poppins sans-serif;
-    font-weight: 400;
-    line-height: 24px;
-    word-wrap: break-word
-
-}
-
-.goBackBtn{
-    margin-top: 20px;
-    padding: 10px 30px ;
-    border: none;
-    border-radius: 10px;
-    background-color: #DB4444;
-    color: #FAFAFA;
-    font-size: 16px;
-    font-family: Poppins sans-serif;
-    font-weight: 500;
-    line-height: 24px;
-    word-wrap: break-word
-}
-
-@media screen and (max-width:920px ){
-    .noPageTitle{
-        font-size: 60px;
-        line-height: 12px;
-    }
-    .noPageSubtitle{
-        font-size: 16px;
-
-    }
-    .goBackBtn{
-        line-height: 12px;
-    }
-}
-
-@media screen and (max-width:520px ){
-    .noPageTitle{
-        font-size: 30px;
-        line-height: 16px;
-    }
-    .noPageSubtitle{
-        font-size: 8px;
-        margin-top: 10px;
-
-    }
-    .goBackBtn{
-        line-height: 8px;
-        padding: 10px 20px ;
-        font-size: 12px;
         border-radius: 5px;
         margin-top: 5px;
     }

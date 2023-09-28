@@ -1,0 +1,80 @@
+.registrationWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.registrationBanner{
+    width: 55%;
+}
+
+.registrationBanner img {
+    width: 100%;
+}
+
+.registrationFormWrapper{
+    width: 35%;
+}
+
+.registrationTitle{
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 36px;
+
+}
+
+.registrationSubTitle{
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 16px;
+    margin: 16px 0;
+}
+
+.googleRegistration{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+
+}
+
+.googleIconRegistration{
+    margin-right:10px;
+}
+
+.redirectPanel{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 500px;
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 20px;
+    color: var(--gray-text-primary);
+
+}
+
+.redirectLogin{
+    font-family: "Satoshi 600", Arial, sans-serif;
+    text-decoration: underline ;
+}
+
+@media screen and (max-width:920px ) {
+    .registrationBanner{
+        display: none;
+    }
+    .registrationFormWrapper{
+        width: 50%;
+    }
+    .registrationTitle{
+        font-size: 26px;
+    }
+
+}
+
+@media screen and (max-width:765px ) {
+    .registrationFormWrapper{
+        width: 70%;
+    }
+    .redirectLogin{
+        font-size: 16px;
+    }
+}
