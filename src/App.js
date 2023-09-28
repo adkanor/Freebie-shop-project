@@ -6,11 +6,13 @@ import Footer from "./pages/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
+import StarRating from "./components/StarRating/StarRating";
 
 const App = () => {
     return (
         <>
             <Header />
+            <StarRating rating={2.6} starSizePx={55}/>
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
