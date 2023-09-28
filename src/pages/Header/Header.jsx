@@ -60,9 +60,11 @@ const Header = () => {
     };
 
     const closeMobileMenu = () => {
-        setMobileMenu(false);
-        setShow(true);
-        setShowSearch(false);
+        if (document.body.style.overflow === "hidden") {
+            setMobileMenu(false);
+            setShow(true);
+            setShowSearch(false);
+        }
     };
 
     const toggleAnimationMenu = () => {
