@@ -9,7 +9,7 @@
     justify-content: flex-start;
 }
 .breadcrumbsList li {
-    margin-right: 4px;
+    margin-right: 5px;
 }
 .breadcrumbsLinkToHome {
     color: var(--gray-text-primary);
@@ -17,7 +17,8 @@
 .breadcrumbsArrow {
     width: 14px;
     height: 14px;
-    margin-right: 6px;
+    margin-right: 5px;
+    margin-top: 2px;
 }
 .breadcrumbsLinkToCart {
     color: var(--black-text);
@@ -39,7 +40,6 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 14px;
     margin-bottom: 20px;
-    margin-right: 20px;
 }
 
 /* Cart Summary section */
@@ -116,7 +116,7 @@
         margin-bottom: 24px;
     }
     .breadcrumbsArrow {
-        margin-right: 10px;
+        /* margin-right: 10px; */
         width: 16px;
         height: 16px;
     }
@@ -139,6 +139,7 @@
     }
     .cartContent {
         flex: 2;
+        margin-right: 20px;
     }
     .cartSummary {
         flex: 1;
