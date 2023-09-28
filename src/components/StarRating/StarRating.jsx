@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const StarRating = ({ rating, starSizePx }) => {
+const StarRating = ({ rating, starSize }) => {
     const roundedRating = Math.floor(rating);
     const stars = [];
 
@@ -9,7 +9,7 @@ const StarRating = ({ rating, starSizePx }) => {
         if (i <= roundedRating) {
             stars.push(
                 <span
-                    style={{color: "gold" }}
+                    style={{color: "var(--yellow-star)" }}
                     key={i}
                 >
                     {"\u2605"}
@@ -22,12 +22,12 @@ const StarRating = ({ rating, starSizePx }) => {
                         position: "relative",
                         display: "inline-block",
                         zIndex: "-1",
-                        color: "#dbdbdb",
+                        color: "var(--gray-primary)",
                     }}
                 >
                     <span
                         style={{
-                            color: "gold",
+                            color: "var(--yellow-star)",
                             position: "absolute",
                             width: `${(rating - roundedRating) * 100}%`,
                             overflow: "hidden",
@@ -41,7 +41,7 @@ const StarRating = ({ rating, starSizePx }) => {
         } else {
             stars.push(
                 <span
-                    style={{color: "#dbdbdb" }}
+                    style={{color: "var(--gray-primary)" }}
                     key={i}
                 >
                     {"\u2606"}
@@ -50,12 +50,12 @@ const StarRating = ({ rating, starSizePx }) => {
         }
     }
 
-    return <div style={{fontSize: `${starSizePx}px`}}>{stars}</div>;
+    return <div style={{fontSize: `${starSize}`}}>{stars}</div>;
 };
 
 StarRating.propTypes = {
     rating: PropTypes.number.isRequired,
-    starSizePx: PropTypes.number.isRequired,
+    starSize: PropTypes.string.isRequired,
 };
 
 export default StarRating;
