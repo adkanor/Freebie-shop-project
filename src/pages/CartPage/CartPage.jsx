@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./CartPage.module.css";
-import arrowLeft from "../../assets/icons/Cart/Arrow-right-nav.svg";
+// import arrowLeft from "../../assets/icons/Cart/Arrow-right-nav.svg";
+import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
+
 import Button from "../../components/Button/Button.jsx";
 import promo from "../../assets/icons/Cart/Promo.svg";
 import CartItem from "../../components/CartItem/CartItem.jsx";
@@ -22,7 +24,7 @@ const CartPage = () => {
                         </li>
                         <img
                             className={styles.breadcrumbsArrow}
-                            src={arrowLeft}
+                            src={arrow}
                             alt="arrowLeft"
                             width="14"
                             height="14"
