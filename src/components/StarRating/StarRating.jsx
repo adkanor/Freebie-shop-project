@@ -50,7 +50,7 @@ const StarRating = ({ rating, starSizePx }) => {
         }
     }
 
-    return <div style={{fontSize: `${starSizePx}px}`}}>{stars}</div>;
+    return <div style={{fontSize: `${starSizePx}px`}}>{stars}</div>;
 };
 
 StarRating.propTypes = {
