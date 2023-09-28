@@ -58,6 +58,4 @@ StarRating.propTypes = {
     starSizePx: PropTypes.number.isRequired,
 };
 
-StarRating.propTypes.rating = PropTypes.range(0, 5);
-
 export default StarRating;
