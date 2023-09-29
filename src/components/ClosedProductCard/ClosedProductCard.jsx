@@ -11,7 +11,7 @@ function ClosedProductCard({name, price, imageURL, SKU, rating}) {
             </div>
             <h6 className={style.productName}>{name}</h6>
             <div className={style.grade}>
-                <StarRating rating={rating} starSize="1.3rem"/>
+                <StarRating rating={rating} starSize="1.1rem"/>
                 <span className={style.ratingSpan}>
                     <span>{rating}</span>/5
                 </span>

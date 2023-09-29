@@ -3,15 +3,15 @@
     flex-direction: column;
     row-gap: 0.5rem;
     padding: 1rem;
-    width: 250px;
+    width: 300px;
 }
 
 .imgWrapper {
     background-color: var(--gray-primary);
-    padding: 0.5rem;
+    padding: 1.5rem;
     border-radius: 1rem;
     margin-bottom: 0.5rem;
-    height: 250px;
+    height: 300px;
     display: flex;
     align-items: center;
 }
@@ -23,7 +23,7 @@
 }
 
 .productName {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
 }
 
 .productName {
@@ -37,7 +37,7 @@
 
 .ratingSpan {
     font-family: "Satoshi 400";
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     padding-bottom: 0.14rem;
     padding-left: 0.5rem;
     color: var(--gray-text-primary);
@@ -50,4 +50,5 @@
 
 .priceSpan {
     font-family: 'Satoshi 700';
+    font-size: 1.5rem;
 }
