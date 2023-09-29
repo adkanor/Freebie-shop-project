@@ -60,7 +60,7 @@ a {
   /* Desktop Menu in Mobile View */
   .desktopMenuList {
     z-index: 222;
-    background-color: #F0F0F0;
+    background-color: var(--gray-primary);
     gap: 50px;
     display: flex;
     position: absolute;
@@ -116,7 +116,7 @@ a {
 .header.mobileViewClose {
   .desktopMenuList {
     z-index: 222;
-    background-color: #F0F0F0;
+    background-color: var(--gray-primary);
     gap: 50px;
     display: flex;
     position: absolute;
@@ -233,7 +233,7 @@ a {
   height: 28px;
   border-radius: 62px;
   border: 0;
-  background: #F0F0F0;
+  background: var(--gray-primary);
   padding: 4px 42px;
   padding-right: 0px;
 }
