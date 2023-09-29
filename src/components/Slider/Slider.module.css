@@ -1,0 +1,25 @@
+
+.sliderItemWrapper{
+    height: 500px;
+}
+
+.sliderItem{
+    width: 100%;
+    height: 100%;
+}
+.bannerStatic{
+    display: none;
+}
+
+.bannerStatic img{
+    width: 100%;
+}
+
+@media screen and (max-width: 921px){
+    .sliderWrapper{
+        display: none;
+    }
+    .bannerStatic{
+        display: block;
+    }
+}
