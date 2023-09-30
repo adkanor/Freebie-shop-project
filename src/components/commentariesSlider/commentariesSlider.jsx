@@ -63,10 +63,10 @@ const CommentariesSlider = () => {
                     arrows={false}
                     renderButtonGroupOutside={true}
                     centerMode={true}
-                    customTransition="transform 1000ms ease-in-out"
+                    customTransition="transform 500ms ease-in-out"
                     infinite={true}
                     keyBoardControl={false}
-                    transitionDuration={1500}
+                    transitionDuration={500}
                     containerClass="carousel-container"
                 >
                     {commentariesBlock}
