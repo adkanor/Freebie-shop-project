@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./pages/Header/Header";
+// import Header2 from "./pages/Header/Header2.jsx";
 import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./components/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";
