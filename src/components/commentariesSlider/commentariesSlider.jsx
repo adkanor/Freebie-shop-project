@@ -1,27 +1,30 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
-
 import Carousel from "react-multi-carousel";
 import CommentariesCard from "../commentariesCard/CommentariesCard";
+import CustomButtonGroup from "../ButtonGroupSlider/ButtonGroupSlider";
 import style from "./commentariesBlock.module.css";
+
+
 
 const responsive = {
     desktop: {
         breakpoint: { max: 1450, min: 492 },
         items: 3,
-        slidesToSlide: 3
+        slidesToSlide: 3,
+        partialVisibilityGutter : 40
     }
 
 };
 
 const CommentariesSlider = () => {
     const [commentaries, setCommentaries] = useState([]);
+    const carouselRef = useRef(null);
 
     useEffect(() => {
         axios
             .get("/reviews.json")
             .then((res) => {
-                console.log(res.data);
                 setCommentaries(res.data);
             })
             .catch((error) => {
@@ -35,20 +38,33 @@ const CommentariesSlider = () => {
     ));
 
 
+    const handlePrevClick = () => {
+        carouselRef.current.previous();
+    };
+
+    const handleNextClick = () => {
+        carouselRef.current.next();
+    };
+
+
 
     return (
         <div>
-            <div className={style.commentariesBlockWrapper} >
+            <div className={style.buttonGroup}>
+                <CustomButtonGroup next={handleNextClick} previous={handlePrevClick}/>
+            </div>
+            <div >
                 <Carousel
                     swipeable={false}
                     draggable={false}
                     pauseOnHover={false}
-                    showDots={true}
                     responsive={responsive}
-                    // autoPlay={true}
+                    ref={carouselRef}
+                    arrows={false}
+                    renderButtonGroupOutside={true}
+                    centerMode={true}
                     customTransition="transform 1000ms ease-in-out"
                     infinite={true}
-                    // autoPlaySpeed={3000}
                     keyBoardControl={false}
                     transitionDuration={1500}
                     containerClass="carousel-container"
