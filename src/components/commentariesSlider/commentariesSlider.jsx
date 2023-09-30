@@ -9,10 +9,16 @@ import style from "./commentariesBlock.module.css";
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 1450, min: 492 },
-        items: 3,
-        slidesToSlide: 3,
-        partialVisibilityGutter : 40
+        breakpoint: { max: 1441, min: 1200 },
+        items: 2,
+        slidesToSlide: 2,
+        partialVisibilityGutter : 20
+    },
+    tablet: {
+        breakpoint: { max: 1199, min: 900 },
+        items: 1,
+        slidesToSlide: 1,
+        partialVisibilityGutter : 50
     }
 
 };
