@@ -1,0 +1,32 @@
+.commentariesWrapper{
+    /*margin-bottom: 10px;*/
+    width: 350px;
+    height: 300px;
+    margin: 0 auto 10px;
+    padding: 35px;
+    box-sizing: border-box;
+    border: 1px solid var(--gray-text-secondary);
+    border-radius: 20px;
+
+}
+
+.commentariesUserName{
+    margin-right: 10px;
+
+}
+.commentariesUserInfo{
+    margin:10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 20px;
+}
+
+.commentariesText{
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 16px;
+    color: var(--gray-text-primary);
+    line-height: 22px;
+}
+
