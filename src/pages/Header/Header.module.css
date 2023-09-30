@@ -1,35 +1,100 @@
+a {
+	text-decoration: none;
+}
+
+header .navBtn {
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--textColor);
+	visibility: hidden;
+	opacity: 0;
+	font-size: 1.8rem;
+}
+@media only screen and (max-width: 991px) {
+	header .navBtn {
+		visibility: visible;
+		opacity: 1;
+    padding-bottom:4px;
+	}
+
+	header ul {
+		position: fixed;
+		top: -90vh;
+		left: 0;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--gray-primary);
+		transition: 0.5s ease-in-out;
+	}
+	header label {
+		position: fixed;
+		top: -90vh;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--gray-primary);
+		transition: 0.5s;
+	}
+
+	header .responsiveNav {
+		transform: translateY(100vh);
+	}
+	header .responsiveSearch {
+		transform: translateY(100vh);
+	}
+  
+
+  ul.q.desktopMenuList::after{
+    content: " ";
+    position: fixed;  
+    left: 0;
+    top: 378px;
+    width: 100vw;
+    height: 180vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+
+  
+  label.q.desktopSearchBar::after{
+    content: " ";
+    position: fixed;  
+    left: 0;
+    top: 90px;
+    width: 100vw;
+    height: 180vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+}
+
+.mobileItems{
+	display: flex;
+	gap: 12px;
+  align-items: center;
+}
+
 .desktopItemText {
   color: #000;
   font-family: "Satoshi 400";
   font-size: 16px;
 }
 
-a {
-  text-decoration: none;
-}
-
 .desktopMenuList {
   list-style-type: none;
   display: none;
   align-items: center;
-}
-
-.menuItem {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  color: rgb(0, 0, 0);
-  font-weight: 500;
-  position: relative;
-
-  &.searchIcon {
-    margin-right: 0;
-  }
-  svg {
-    font-size: 18px;
-  }
-
-  cursor: pointer;
 }
 
 .header {
@@ -40,190 +105,19 @@ a {
   padding-left: 20px;
   padding-right: 20px;
   transition: all ease 0.5s;
-  .mobileSearchBar {
-    width: 100%;
-    height: 60px;
-    background-color: white;
-    position: absolute;
-    top: 90px;
-    left: 0;
-    animation: mobileMenu 0.3s ease forwards;
-  }
-}
-
-/* Mobile View */
-.header.mobileView {
-  .wrapper {
-    border: 0;
-  }
-
-  /* Desktop Menu in Mobile View */
-  .desktopMenuList {
-    z-index: 222;
-    background-color: var(--gray-primary);
-    gap: 50px;
-    display: flex;
-    position: absolute;
-    top: 90px;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    padding: 33px 0px;
-    animation: mobileMenu 0.3s ease forwards;
-    .menuItem {
-      font-size: 20px;
-      width: 100%;
-      height: auto;
-      padding: 15px 20px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      /* Hide the last menu item in mobile view */
-      &:last-child {
-        display: none;
-      }
-    }
-  }
-
-  /* Dark overlay background */
-  .desktopMenuList::after {
-    content: " ";
-    position: fixed;
-    left: 0;
-    top: 280px;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-  }
-}
-
-/* Dark overlay background for mobile search bar */
-.mobileSearchBar::before {
-  content: " ";
-  position: fixed;
-  left: 0;
-  top: 60px;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: -1;
-}
-
-/* Mobile View Close */
-.header.mobileViewClose {
-  .desktopMenuList {
-    z-index: 222;
-    background-color: var(--gray-primary);
-    gap: 50px;
-    display: flex;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    padding: 33px 0px;
-    animation: mobileMenuClose 0.3s ease forwards;
-    .menuItem {
-      font-size: 20px;
-      width: 100%;
-      height: auto;
-      padding: 15px 20px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      /* Hide the last menu item in mobile view */
-      &:last-child {
-        display: none;
-      }
-    }
-  }
-}
-
-.mobileMenuItems {
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }
 
 .logoText {
   font-family: "Integral-CF 700";
-  padding-bottom: 6px;
+  padding-bottom: 10px;
   color: #000;
   font-size: 25.2px;
-}
-
-.mobileMenuItems svg {
-  font-size: 18px;
-  color: white;
-}
-
-.mobileSearchInput {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  width: 100%;
-}
-
-.mobileSearchInput img {
-  padding-right: 20px;
-}
-.mobileSearchInput svg {
-  font-size: 20px;
-  flex-shrink: 0;
   cursor: pointer;
-}
-
-/* Mobile Search Input Field */
-.mobileSearchInput input {
-  width: 100%;
-  height: 50px;
-  background-color: white;
-  outline: 0;
-  border: 0;
-  padding: 0 20px;
-  font-size: 14px;
-}
-
-.imgLink {
-  cursor: pointer;
-}
-
-.desktopLogo {
-  display: none;
-}
-
-.desktopSvgs {
-  display: none;
 }
 
 .mobileSvgs {
   display: flex;
   gap: 12px;
-}
-
-/* Keyframes for Mobile Menu Animation */
-@keyframes mobileMenu {
-  0% {
-    transform: translateY(-130%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* Keyframes for Mobile Menu Close Animation */
-@keyframes mobileMenuClose {
-  100% {
-    transform: translateY(-130%);
-  }
-  0% {
-    transform: translateY(0);
-  }
 }
 
 .desktopSearchBar input {
@@ -237,14 +131,8 @@ a {
   padding: 4px 42px;
   padding-right: 0px;
 }
-
-/* Show and Hide Classes */
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
+.desktopSearchBar input:focus {
+  outline: none;
 }
 
 .wrapper {
@@ -253,11 +141,8 @@ a {
 }
 .desktopItem {
   white-space: nowrap;
-}
-.mobileMenu {
   display: flex;
-  gap: 16px;
-  align-items: center;
+    align-items: center;
 }
 
 .mobileMenuItems {
@@ -277,15 +162,18 @@ label {
 }
 
 /* Search Icon Image */
-label::before {
-  content: "";
+label::before{
+    content: "";
+    z-index: 1;
   position: absolute;
-  left: 9px;
-  top: 6px;
+  left: 10px;
+    top: 5px;
   bottom: 5px;
   width: 25px;
   background: url("../../assets/icons/Header/Search.svg");
-}
+  background-repeat: no-repeat;
+  }
+
 .sectionHeader {
   box-sizing: border-box;
   max-width: 1440px;
@@ -319,39 +207,15 @@ label::before {
   text-decoration-line: underline;
 }
 
-/* Media Queries for Tablet Screen */
-@media screen and (max-width: 991px) {
-  .desktopItemText {
-    font-size: calc(0.4rem + 1vw);
-  }
-  .logoText {
-    font-size: calc(1rem + 1.23vw);
-  }
-}
-
 /* Media Queries for Screens Above 766px */
 @media only screen and (min-width: 766px) {
-  .mobileSearchInput input {
-    height: 60px;
-    font-size: 20px;
-    padding: 0 30px;
-  }
-  .desktopMenuList::after {
-    content: " ";
-    background-color: rgba(0, 0, 0, 0);
-    width: 0px;
-    height: 0px;
-  }
   .logoText {
     font-size: 28px;
   }
   .mobileMenuItems {
     display: none;
   }
-  .desktopMenuList {
-    display: flex;
-    gap: clamp(19px, 3%, 45px);
-  }
+  
   .desktopLogo {
     display: block;
   }
@@ -359,8 +223,13 @@ label::before {
     display: flex;
     flex-wrap: nowrap;
     gap: 12px;
+    align-items: center;
   }
 }
+.desktopMenuList {
+    display: flex;
+    gap: 19px
+  }
 
 /* Media Queries for Screens Above 1440px */
 @media screen and (min-width: 1440px) {
@@ -370,12 +239,7 @@ label::before {
   .logoText {
     font-size: 32px;
   }
-  .desktopSearchBar input {
-    height: 24px !important;
-  }
-  label::before {
-    top: 3px;
-  }
+
 }
 
 /* Media Queries for Mobile Screens */
@@ -383,8 +247,34 @@ label::before {
   .desktopItemText {
     font-size: 16px;
   }
-  
-.desktopSearchBar input {
-  display: none;
 }
+
+@media screen and (max-width: 991px) {
+  .desktopMenuList{
+     gap: 78px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .desktopSearchBar input{
+    font-family: "Satoshi 400";
+    font-size: 15px;
+    width: 79vw;
+    height: 44px;
+    border-radius: 62px;
+    border: 0;
+    background: var(--gray-primary);
+    padding: 4px 48px;
+    padding-right: 20px;
+    position: relative;
+  }
+  label::before{
+display: none;
+  }
+}
+
+.desktopSvgs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  align-items: center;
 }
