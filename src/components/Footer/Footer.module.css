@@ -53,18 +53,20 @@
 .FooterWrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
 }
 
 .LogoContainer {
-  flex: 1 0 250px;
+
+  flex: auto;
+  max-width: 100%;
 }
 
 .FooterListBox {
-  width: 159px;
-  flex: 1 0 160px;
+  width: 149px;
+  flex: 1 0 155px;
 }
 
 .Logo {
@@ -98,6 +100,7 @@
 
 .FooterListItem {
   margin-bottom: 10px;
+  cursor: pointer;
 }
 .FooterListItem:last-child {
   margin-bottom: 0px;
@@ -126,33 +129,22 @@
   font-family: "Satoshi 400";
 }
 
-@media screen and (min-width: 766px) and (max-width: 991px) {
-  .FooterWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1.875rem;
-  }
+
+@media only screen and (min-width: 766px) {
   .EmailContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    padding: 32px 44px 28px 44px;
   }
   .EmailContainerTitle {
     width: 400px;
+    margin-bottom: 0px;
   }
   .EmailForm {
     width: 280px;
-  }
-  .LogoContainer {
-    width: 100%;
-    flex: 1 0 600px;
-  }
-  .FooterListBox {
-    width: 159px;
-    flex: 1 1 250px;
   }
   .AuthorBlock {
     display: flex;
@@ -163,16 +155,13 @@
   .AuthorMark {
     margin-bottom: 10px;
   }
+  .LogoContainer {
+    width: 100%;    
+  }
 }
 
-@media screen and (min-width: 992px) {
-  .FooterContainer {
-    width: 77.5rem;
-  }
+@media screen and (min-width: 1440px) {
   .EmailContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 36px 64px;
   }
   .EmailContainerTitle {
@@ -184,13 +173,7 @@
   .EmailForm {
     width: 350px;
   }
-  .AuthorBlock {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .AuthorMark {
-    margin-bottom: 10px;
+  .LogoContainer {
+    width: 250px;
   }
 }

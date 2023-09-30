@@ -1,0 +1,54 @@
+.cardWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    padding: 1rem;
+    width: 300px;
+}
+
+.imgWrapper {
+    background-color: var(--gray-primary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    height: 300px;
+    display: flex;
+    align-items: center;
+}
+
+.imgWrapper > img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.productName {
+    font-size: 1.25rem;
+}
+
+.productName {
+    font-family: "Satoshi 700";
+}
+
+.grade {
+    display: flex;
+    align-items: flex-end;
+}
+
+.ratingSpan {
+    font-family: "Satoshi 400";
+    font-size: 0.875rem;
+    padding-bottom: 0.14rem;
+    padding-left: 0.5rem;
+    color: var(--gray-text-primary);
+}
+
+.ratingSpan > span {
+    font-family: "Satoshi 700";
+    color: black;
+}
+
+.priceSpan {
+    font-family: 'Satoshi 700';
+    font-size: 1.5rem;
+}
