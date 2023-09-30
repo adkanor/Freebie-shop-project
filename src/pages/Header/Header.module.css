@@ -82,6 +82,7 @@ header .navBtn {
 .mobileItems{
 	display: flex;
 	gap: 12px;
+  align-items: center;
 }
 
 .desktopItemText {
