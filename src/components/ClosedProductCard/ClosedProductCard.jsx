@@ -13,6 +13,7 @@ function ClosedProductCard({
     sale,
     salePrice,
 }) {
+    console.log(rating);
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`products/${id}`}>
@@ -47,7 +48,7 @@ ClosedProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     sale: PropTypes.number,
     salePrice: PropTypes.number,
 };
