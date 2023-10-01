@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { FETCH_PRODUCTS } from "./action";
 
 const initState = {
