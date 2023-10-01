@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function VisaIcon({ width, height, fill }) {
+function VisaIcon({ width, height }) {
     return (
         <svg
             width={width}
@@ -38,7 +38,6 @@ function VisaIcon({ width, height, fill }) {
 VisaIcon.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fill: PropTypes.string.isRequired,
 };
 
 export default VisaIcon;

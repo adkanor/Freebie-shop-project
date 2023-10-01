@@ -9,6 +9,7 @@ import GooglePayIcon from "../../assets/icons/Payment/GooglePayIcon";
 import MastercardIcon from "../../assets/icons/Payment/MastercardIcon";
 import PayPalIcon from "../../assets/icons/Payment/PayPalIcon";
 import VisaIcon from "../../assets/icons/Payment/VisaIcon";
+import BlackButton from "../Button/Button";
 
 const Footer = () => {
 
@@ -42,9 +43,14 @@ const Footer = () => {
                             type="text"
                             placeholder="Enter your email address"
                         />
-                        <button className={styles.EmailSendBtn} type="submit">
-                            Subscribe to Newsletter
-                        </button>
+                        <BlackButton
+                            text="Subscribe to newsletter"
+                            style={{ 
+                                padding: "12px 16px",
+                                color: "black",
+                                backgroundColor: "var(--gray-primary)"
+                            }}   
+                        />
                     </div>
                 </section>
                 <section className={styles.FooterWrapper}>
@@ -59,9 +65,9 @@ const Footer = () => {
                         </div>
                         <div className={styles.IconContainer}>
                             <TwitterIcon fill="black" />
-                            <FaceBookIcon />
+                            <FaceBookIcon fill="black" />
                             <InstagramIcon fill="black" />
-                            <GitHubIcon />
+                            <GitHubIcon fill="black" />
                         </div>
                     </div>
                     {sections.map((section, index) => (
@@ -78,13 +84,14 @@ const Footer = () => {
                     ))}
                 </section>
                 <section className={styles.AuthorBlock}>
+            
                     <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
                     <div className={styles.Payment}>
-                        <VisaIcon width="46px" height="30px" />
-                        <MastercardIcon width="46px" height="30px" />
-                        <PayPalIcon width="46px" height="30px" />
-                        <ApplePayIcon width="46px" height="30px" />
-                        <GooglePayIcon width="46px" height="30px" />
+                        <VisaIcon width={46} height={30} />
+                        <MastercardIcon width={46} height={30} />
+                        <PayPalIcon width={46} height={30} />
+                        <ApplePayIcon width={46} height={30} />
+                        <GooglePayIcon width={46} height={30} />
                     </div>
                 </section>
             </div>

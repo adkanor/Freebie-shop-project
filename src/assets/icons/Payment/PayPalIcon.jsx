@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function PayPalIcon({ width, height, fill }) {
+function PayPalIcon({ width, height }) {
     return (
         <svg
             width={width}
@@ -41,7 +41,6 @@ function PayPalIcon({ width, height, fill }) {
 PayPalIcon.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fill: PropTypes.string.isRequired,
 };
 
 export default PayPalIcon;
