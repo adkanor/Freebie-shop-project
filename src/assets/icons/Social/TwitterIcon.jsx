@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function TwitterIcon({ width, fill }) {
+function TwitterIcon({ fill }) {
     return (
         <svg
-            width={width}
-            height={width}
+            // width={width}
+            // height={width}
             viewBox="0 0 28 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,6 @@ function TwitterIcon({ width, fill }) {
 }
 
 TwitterIcon.propTypes = {
-    width: PropTypes.number.isRequired,
     fill: PropTypes.string.isRequired,
 };
 

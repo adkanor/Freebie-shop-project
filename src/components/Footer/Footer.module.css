@@ -54,6 +54,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
 }
@@ -65,6 +66,8 @@
 }
 
 .FooterListBox {
+  width: 149px;
+  flex: 1 0 155px;
   width: 149px;
   flex: 1 0 155px;
 }
@@ -100,6 +103,7 @@
 
 .FooterListItem {
   margin-bottom: 10px;
+  cursor: pointer;
   cursor: pointer;
 }
 .FooterListItem:last-child {
@@ -142,6 +146,7 @@
   .EmailContainerTitle {
     width: 400px;
     margin-bottom: 0px;
+    margin-bottom: 0px;
   }
   .EmailForm {
     width: 280px;
@@ -155,6 +160,12 @@
   .AuthorMark {
     margin-bottom: 10px;
   }
+  .LogoContainer {
+    width: 100%;    
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .LogoContainer {
     width: 100%;    
   }

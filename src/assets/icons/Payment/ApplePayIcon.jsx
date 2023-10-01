@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function ApplePayIcon({ width, height, fill }) {
+function ApplePayIcon({ width, height }) {
     return (
         <svg
             width={width}
@@ -44,7 +44,6 @@ function ApplePayIcon({ width, height, fill }) {
 ApplePayIcon.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fill: PropTypes.string.isRequired,
 };
 
 export default ApplePayIcon;
