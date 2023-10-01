@@ -1,0 +1,10 @@
+.buttonGroup{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.carousel-item{
+   width: 100%;
+}
+

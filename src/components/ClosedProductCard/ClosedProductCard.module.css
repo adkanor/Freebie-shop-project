@@ -48,7 +48,29 @@
     color: black;
 }
 
-.priceSpan {
+.defaultPriceSpan {
     font-family: 'Satoshi 700';
     font-size: 1.5rem;
+}
+
+.salePriceContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 0.8rem;
+}
+
+.onSalePriceSpan {
+    font-family: 'Satoshi 700';
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    color: var(--gray-text-primary);
+}
+
+.saleValue {
+    background-color: var(--red-background-discount);
+    font-family: "Satoshi 500";
+    font-size: 0.75rem;
+    color: var(--red-text);
+    padding: 6px 14px 6px 14px;
+    border-radius: 3.875rem;
 }

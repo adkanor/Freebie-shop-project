@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
+import CommentariesSlider from "../../components/commentariesSlider/СommentariesSlider";
 const MainPage = () => {
     return (
         <section className="section">
@@ -23,6 +24,9 @@ const MainPage = () => {
                     </Link>
                 </div>
             </div>
+            <CommentariesSlider/>
+
+
         </section>
     );
 
