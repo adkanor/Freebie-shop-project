@@ -18,8 +18,8 @@
 
 .imgWrapper > img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
 }
 
 .productName {
@@ -49,7 +49,7 @@
 }
 
 .defaultPriceSpan {
-    font-family: 'Satoshi 700';
+    font-family: "Satoshi 700";
     font-size: 1.5rem;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .onSalePriceSpan {
-    font-family: 'Satoshi 700';
+    font-family: "Satoshi 700";
     font-size: 1.5rem;
     text-decoration: line-through;
     color: var(--gray-text-primary);

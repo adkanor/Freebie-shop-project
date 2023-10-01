@@ -12,6 +12,7 @@ function ClosedProductCard({
     sale,
     salePrice,
 }) {
+    console.log(rating);
     return (
         <div className={style.cardWrapper}>
             <div className={style.imgWrapper}>
@@ -38,11 +39,11 @@ function ClosedProductCard({
 }
 
 ClosedProductCard.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     sale: PropTypes.number,
     salePrice: PropTypes.number,
 };
