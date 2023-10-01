@@ -1,0 +1,25 @@
+.commentWrapper {
+    border: 1px solid var(--separator-line);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8rem;
+}
+
+.username {
+    font-family: "Satoshi 700";
+    font-size: 1.25rem;
+}
+
+.commentP {
+    font-family: "Satoshi 400";
+    color: var(--gray-text-primary);
+    line-height: 1.375rem;
+}
+
+.commentDate {
+    font-size: 0.9rem;
+    font-family: "Satoshi 500";
+    color: var(--gray-text-primary);
+}
