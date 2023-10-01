@@ -6,7 +6,7 @@ import axios from "axios";
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 1450, min: 492 },
+        breakpoint: { max: 3000, min: 492 },
         items: 1,
         slidesToSlide: 1
     }

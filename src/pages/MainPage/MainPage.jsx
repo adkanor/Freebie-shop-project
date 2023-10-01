@@ -3,10 +3,12 @@ import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
 import CommentariesSlider from "../../components/commentariesSlider/СommentariesSlider";
+import BrandBox from "../../components/BrandsRow/BrandsRow";
 const MainPage = () => {
     return (
         <section className="section">
             <Slider/>
+            <BrandBox />
             <div className={styles.browseContainer}>
                 <div className={styles.title}>BROWSE BY DRESS STYLE</div>
                 <div className={styles.gridContainer}>
