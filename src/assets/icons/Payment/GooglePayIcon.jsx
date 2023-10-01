@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function GooglePayIcon({ width, height, fill }) {
+function GooglePayIcon({ width, height }) {
     return (
         <svg
             width={width}
@@ -46,7 +46,6 @@ function GooglePayIcon({ width, height, fill }) {
 GooglePayIcon.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fill: PropTypes.string.isRequired,
 };
 
 export default GooglePayIcon;

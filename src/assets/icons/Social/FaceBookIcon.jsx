@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FacebookIcon = ({ width, fill }) => {
+const FacebookIcon = ({ fill }) => {
     return (
         <svg
-            width={width}
-            height={width}
+            // width={width}
+            // height={width}
             viewBox="0 0 28 28"
             fill={fill}
             xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ const FacebookIcon = ({ width, fill }) => {
 };
 
 FacebookIcon.propTypes = {
-    width: PropTypes.number.isRequired, 
+    // width: PropTypes.number.isRequired, 
     fill: PropTypes.string.isRequired, 
 };
 

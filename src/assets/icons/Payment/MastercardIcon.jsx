@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function MastercardIcon({ width, height, fill }) {
+function MastercardIcon({ width, height }) {
     return (
         <svg
             width={width}
@@ -43,7 +43,6 @@ function MastercardIcon({ width, height, fill }) {
 MastercardIcon.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fill: PropTypes.string.isRequired,
 };
 
 export default MastercardIcon;

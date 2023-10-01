@@ -161,6 +161,12 @@
 }
 
 @media screen and (min-width: 1440px) {
+  .LogoContainer {
+    width: 100%;    
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .EmailContainer {
     padding: 36px 64px;
   }
