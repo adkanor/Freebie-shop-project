@@ -1,0 +1,77 @@
+.profile-container {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-table {
+    width: 100%;
+    border-spacing: 0 10px; /* Расстояние между рядами 10px */
+    margin-bottom: 30px; /* Расстояние между таблицами 40px */
+}
+
+.profile-cell {
+    padding: 10px 20px;
+    color: var(--text-black);
+    font-family: "Satoshi 400";
+    font-size: 20px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.profile-heading {
+    color: var(--text-black);
+    font-size: 28px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-family: "Satoshi 400";
+    margin-bottom: 20px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 80%; /* Ширина полей 100% контейнера */
+    padding: 10px; /* Отступы внутри полей */
+    font-size: 16px; /* Размер шрифта */
+    background-color: rgba(240, 240, 240, 1); /* Серый фон */
+    border: none; /* Убрать рамку */
+    color: rgba(0, 0, 0, 0.6);
+    ; /* Темно-серый цвет текста */
+    font-family: "Satoshi 400";
+
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+
+/* Добавьте стили для полей ввода по вашему усмотрению */
+.blackButton {
+    color: var(--white-text);
+    background-color: #000000; /* Черный цвет */
+    border: none;
+    border-radius: 62px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
+    font-size: 16px; /* Размер текста */
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.42);
+}
+
+.blackButton:hover {
+    background-color: #181818;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.blackButton:active {
+    background-color: #3c3c3c;
+    box-shadow: none;
+}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-
 import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
 import HiOutlineSearchBlack from "../../assets/icons/Header/Search-balck.svg";
 import VscChromeClose from "../../assets/icons/Filter/Close.svg";
@@ -152,7 +151,7 @@ const Header = () => {
                                     />
                                 )}
 
-                                <Link to="test" onClick={hideAll}>
+                                <Link to="/EditProfile" onClick={hideAll}>
                                     <img src={AccountSVG} alt="Account SVG" />
                                 </Link>
                                 <Link to="cart" onClick={hideAll}>
