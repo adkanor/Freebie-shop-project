@@ -13,7 +13,6 @@ function ClosedProductCard({
     sale,
     salePrice,
 }) {
-    console.log(rating);
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`products/${id}`}>
