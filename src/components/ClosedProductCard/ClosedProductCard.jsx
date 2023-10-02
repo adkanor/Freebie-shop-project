@@ -12,9 +12,8 @@ function ClosedProductCard({
     sale,
     salePrice,
 }) {
-    console.log(rating);
     return (
-        <div className={style.cardWrapper}>
+        <li className={style.cardWrapper}>
             <div className={style.imgWrapper}>
                 <img src={imageURL} alt="productImg" />
             </div>
@@ -34,7 +33,7 @@ function ClosedProductCard({
             ) : (
                 <span className={style.defaultPriceSpan}>${price}</span>
             )}
-        </div>
+        </li>
     );
 }
 
