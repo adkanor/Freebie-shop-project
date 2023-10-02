@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
+import Button from "../Button/Button";
+import findClothes from "../../assets/img/BrowseByStyle/FindClothes.png";
 import "react-multi-carousel/lib/styles.css";
 import style from "./Slider.module.css";
 import axios from "axios";
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 1450, min: 492 },
+        breakpoint: { max: 3000, min: 492 },
         items: 1,
-        slidesToSlide: 1
-    }
-
+        slidesToSlide: 1,
+    },
 };
-
-
 
 const Slider = () => {
     const [banner, setBanners] = useState([]);
@@ -29,13 +28,18 @@ const Slider = () => {
             });
     }, []);
 
-    const pictures = banner.map((item,index) =>(
-        <div className={style.sliderItemWrapper} key={item}><img className={style.sliderItem} src={item} alt={`banner ${index}`}/></div>
-
+    const pictures = banner.map((item, index) => (
+        <div className={style.sliderItemWrapper} key={item}>
+            <img
+                className={style.sliderItem}
+                src={item}
+                alt={`banner ${index}`}
+            />
+        </div>
     ));
     return (
         <div>
-            <div className={style.sliderWrapper} >
+            <div className={style.sliderWrapper}>
                 <Carousel
                     swipeable={false}
                     draggable={false}
@@ -51,13 +55,53 @@ const Slider = () => {
                     containerClass="carousel-container"
                 >
                     {pictures}
-
                 </Carousel>
             </div>
-            <div className={style.bannerStatic}><img src={banner[0]} alt={"bannerStatic"}/></div>
+            <div className={style.bannerStatic}>
+                <h1 className={style.bannerTitle}>
+                    Find clothes that matches your style
+                </h1>
+                <p className={style.bannerContent}>
+                    Browse through our diverse range of meticulously crafted
+                    garments, designed to bring out your individuality and cater
+                    to your sense of style.
+                </p>
+                <Button
+                    text="Shop Now"
+                    style={{
+                        margin: "auto",
+                        marginBottom: "16px",
+                        padding: "16px 100px",
+                        backgroundColor: "var(--black--background)",
+                    }}
+                    type="text"
+                ></Button>
+                <div className={style.bannerNumbers}>
+                    <div className={style.bannerInfo}>
+                        <p>200+</p>
+                        <span className={style.bannerInfoText}>
+                            International Brands
+                        </span>
+                    </div>
+                    <div className={style.bannerInfo}>
+                        <p>2,000+</p>
+                        <span>High-Quality Products</span>
+                    </div>
+                </div>
+                <div className={style.bannerInfo}>
+                    <p>30,000+</p>
+                    <span>Happy Customers</span>
+                </div>
+
+                {/* <img src={banner[0]} alt={"bannerStatic"}/> */}
+            </div>
+            <img
+                className={style.bannerTitleImg}
+                src={findClothes}
+                alt="Shop title `Find clothes`"
+            />
         </div>
     );
 };
-
 
 export default Slider;
