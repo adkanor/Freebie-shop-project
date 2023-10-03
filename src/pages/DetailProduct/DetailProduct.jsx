@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DetailProduct.module.css";
 import { Link } from "react-router-dom";
 import stylesCartPage from "../CartPage/CartPage.module.css";
@@ -10,16 +10,7 @@ import { Formik, Form } from "formik";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductColors from "../../components/DetailProductColors/DetailProductColors";
-
-const style = {
-    backgroundColor: "var(--gray-primary)",
-    color: "black",
-    padding: "10px 20px",
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    justifyContent: "center",
-};
+import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -40,14 +31,8 @@ const DetailProduct = () => {
         size: "",
         amount: 0,
     };
-    const [currentButton, setcurrentButton] = useState(null);
-    const buttonClick = (buttonValue) => {
-        setcurrentButton(buttonValue);
-    };
-
     const handleSubmit = (values) => {
-        console.log("LData:", values);
-        values.size = currentButton;
+        console.log("Data:", values);
     };
     return (
         <div className={"section"}>
@@ -115,7 +100,6 @@ const DetailProduct = () => {
                                         Select Colors
                                     </p>
                                     <div className={styles.colors}>
-                                        {/* работаю над этим */}
                                         <DetailProductColors
                                             amount={3}
                                             colorList={colorList}
@@ -124,38 +108,7 @@ const DetailProduct = () => {
                                     </div>
                                 </div>
                                 <div className={styles.sizeFilter}>
-                                    <p className={styles.filterSize}>
-                                        Select Size
-                                    </p>
-                                    <div className={styles.size}>
-                                        <BlackButton
-                                            type={"button"}
-                                            text={"Small"}
-                                            style={style}
-                                            onClick={() => buttonClick("Small")}
-                                        />
-                                        <BlackButton
-                                            type={"button"}
-                                            text={"Medium"}
-                                            style={style}
-                                            onClick={() =>
-                                                buttonClick("Medium")
-                                            }
-                                        />
-                                        <BlackButton
-                                            type={"button"}
-                                            text={"Large"}
-                                            style={style}
-                                            onClick={() => buttonClick("Large")}
-                                        />
-                                        <BlackButton
-                                            text={"X-Large"}
-                                            style={style}
-                                            onClick={() =>
-                                                buttonClick("X-Large")
-                                            }
-                                        />
-                                    </div>
+                                    <DetailProductButtonGroup values={values} />
                                 </div>
                                 <div className={styles.purchaseFilter}>
                                     <div
