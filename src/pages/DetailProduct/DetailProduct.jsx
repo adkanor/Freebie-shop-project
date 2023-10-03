@@ -40,14 +40,14 @@ const DetailProduct = () => {
         size: "",
         amount: 0,
     };
-    const [selectedButton, setSelectedButton] = useState(null);
-    const handleButtonClick = (buttonValue) => {
-        setSelectedButton(buttonValue);
+    const [currentButton, setcurrentButton] = useState(null);
+    const buttonClick = (buttonValue) => {
+        setcurrentButton(buttonValue);
     };
 
     const handleSubmit = (values) => {
-        console.log("Отправка формы с данными:", values);
-        values.size = selectedButton;
+        console.log("LData:", values);
+        values.size = currentButton;
     };
     return (
         <div className={"section"}>
@@ -132,31 +132,27 @@ const DetailProduct = () => {
                                             type={"button"}
                                             text={"Small"}
                                             style={style}
-                                            onClick={() =>
-                                                handleButtonClick("Small")
-                                            }
+                                            onClick={() => buttonClick("Small")}
                                         />
                                         <BlackButton
                                             type={"button"}
                                             text={"Medium"}
                                             style={style}
                                             onClick={() =>
-                                                handleButtonClick("Medium")
+                                                buttonClick("Medium")
                                             }
                                         />
                                         <BlackButton
                                             type={"button"}
                                             text={"Large"}
                                             style={style}
-                                            onClick={() =>
-                                                handleButtonClick("Large")
-                                            }
+                                            onClick={() => buttonClick("Large")}
                                         />
                                         <BlackButton
                                             text={"X-Large"}
                                             style={style}
                                             onClick={() =>
-                                                handleButtonClick("X-Large")
+                                                buttonClick("X-Large")
                                             }
                                         />
                                     </div>

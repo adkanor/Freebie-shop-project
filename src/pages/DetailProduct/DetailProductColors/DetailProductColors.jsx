@@ -5,10 +5,10 @@ import { Field } from "formik";
 
 const DetailProductColors = ({ amount, colorList, values }) => {
     const buttons = [];
-    const [selectedColor, setSelectedColor] = useState(values.color);
+    const [color, setColor] = useState(values.color);
 
     const handleColorChange = (value) => {
-        setSelectedColor(value);
+        setColor(value);
         values.color = colorList[value];
     };
 
@@ -19,7 +19,7 @@ const DetailProductColors = ({ amount, colorList, values }) => {
                 <Field
                     type="radio"
                     name="color"
-                    checked={selectedColor === colorValue}
+                    checked={color === colorValue}
                     onChange={() => handleColorChange(colorValue)}
                     value={1}
                     id={colorValue}
