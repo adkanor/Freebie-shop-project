@@ -13,7 +13,7 @@ const BlackButton = ({ text, style, type, onClick , children}) => {
     );
 };
 BlackButton.propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     style: PropTypes.object,
     type: PropTypes.string,
     onClick: PropTypes.func,

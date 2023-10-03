@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const GitHubIcon = ({ width, fill }) => {
+const GitHubIcon = ({ fill }) => {
     return (
         <svg
-            width={width}
-            height={width}
+            // width={width}
+            // height={width}
             viewBox="0 0 28 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const GitHubIcon = ({ width, fill }) => {
 };
 
 GitHubIcon.propTypes = {
-    width: PropTypes.number.isRequired,
+    // width: PropTypes.number.isRequired,
     fill: PropTypes.string.isRequired,
 };
 

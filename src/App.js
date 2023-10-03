@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./pages/Header/Header";
+import DetailProduct from "./pages/DetailProduct/DetailProduct";
 import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./components/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";
@@ -16,6 +17,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/product/:id" element={<DetailProduct/>} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />

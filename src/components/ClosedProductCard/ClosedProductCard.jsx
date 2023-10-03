@@ -13,7 +13,7 @@ function ClosedProductCard({
     salePrice,
 }) {
     return (
-        <div className={style.cardWrapper}>
+        <li className={style.cardWrapper}>
             <div className={style.imgWrapper}>
                 <img src={imageURL} alt="productImg" />
             </div>
@@ -33,16 +33,16 @@ function ClosedProductCard({
             ) : (
                 <span className={style.defaultPriceSpan}>${price}</span>
             )}
-        </div>
+        </li>
     );
 }
 
 ClosedProductCard.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     sale: PropTypes.number,
     salePrice: PropTypes.number,
 };

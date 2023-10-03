@@ -1,8 +1,29 @@
+.newArrivalsContainer {
+    border-bottom: 1px solid var(--separator-line);
+    padding-bottom: 40px;
+}
+.newArrivalsContainer h2,
+.topSellingContainer h2 {
+    text-align: center;
+    font-family: "Integral-CF 700";
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 32px;
+}
+
+.newArrivalsList,
+.topSellingList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
 .browseContainer {
     background: var(--gray-primary);
     padding: 40px 24px;
     border-radius: 20px;
-    margin-bottom: 50px;
+    margin: 50px auto;
     text-align: center;
 }
 .title {
@@ -53,6 +74,13 @@
 }
 
 @media screen and (min-width: 766px) {
+    .newArrivalsContainer {
+        padding-bottom: 64px;
+    }
+    .newArrivalsContainer h2,
+    .topSellingContainer h2 {
+        font-size: 48px;
+    }
     .browseContainer {
         padding: 70px 50px;
     }
@@ -83,5 +111,12 @@
     }
     .gridItem p {
         font-size: 36px;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .newArrivalsList,
+    .topSellingList {
+        flex-wrap: nowrap;
     }
 }
