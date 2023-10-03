@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DetailProduct.module.css";
 import { Link } from "react-router-dom";
 import stylesCartPage from "../CartPage/CartPage.module.css";
@@ -9,6 +9,7 @@ import BlackButton from "../../components/Button/Button";
 import { Formik, Form } from "formik";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import DetailProductSlider from "./DetailProductSlider/DetailProductSlider";
+import DetailProductColors from "./DetailProductColors/DetailProductColors";
 
 const style = {
     backgroundColor: "var(--gray-primary)",
@@ -28,9 +29,8 @@ const styleBlack = {
     width: "100%",
     justifyContent: "center",
 };
-const handleSubmit = (values) => {
-    console.log("Отправка формы с данными:", values);
-};
+
+const colorList = ["green", "pink", "red", "gray"];
 
 const DetailProduct = () => {
     // const { id } = useParams();
@@ -40,7 +40,15 @@ const DetailProduct = () => {
         size: "",
         amount: 0,
     };
+    const [selectedButton, setSelectedButton] = useState(null);
+    const handleButtonClick = (buttonValue) => {
+        setSelectedButton(buttonValue);
+    };
 
+    const handleSubmit = (values) => {
+        console.log("Отправка формы с данными:", values);
+        values.size = selectedButton;
+    };
     return (
         <div className={"section"}>
             <nav className={stylesCartPage.sectionNav}>
@@ -108,9 +116,11 @@ const DetailProduct = () => {
                                     </p>
                                     <div className={styles.colors}>
                                         {/* работаю над этим */}
-                                        <div className={styles.color}></div>
-                                        <div className={styles.color}></div>
-                                        <div className={styles.color}></div>
+                                        <DetailProductColors
+                                            amount={3}
+                                            colorList={colorList}
+                                            values={values}
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.sizeFilter}>
@@ -119,20 +129,35 @@ const DetailProduct = () => {
                                     </p>
                                     <div className={styles.size}>
                                         <BlackButton
+                                            type={"button"}
                                             text={"Small"}
                                             style={style}
+                                            onClick={() =>
+                                                handleButtonClick("Small")
+                                            }
                                         />
                                         <BlackButton
+                                            type={"button"}
                                             text={"Medium"}
                                             style={style}
+                                            onClick={() =>
+                                                handleButtonClick("Medium")
+                                            }
                                         />
                                         <BlackButton
+                                            type={"button"}
                                             text={"Large"}
                                             style={style}
+                                            onClick={() =>
+                                                handleButtonClick("Large")
+                                            }
                                         />
                                         <BlackButton
                                             text={"X-Large"}
                                             style={style}
+                                            onClick={() =>
+                                                handleButtonClick("X-Large")
+                                            }
                                         />
                                     </div>
                                 </div>
