@@ -8,8 +8,8 @@ import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
 import { Formik, Form } from "formik";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
-import DetailProductSlider from "./DetailProductSlider/DetailProductSlider";
-import DetailProductColors from "./DetailProductColors/DetailProductColors";
+import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
+import DetailProductColors from "../../components/DetailProductColors/DetailProductColors";
 
 const style = {
     backgroundColor: "var(--gray-primary)",

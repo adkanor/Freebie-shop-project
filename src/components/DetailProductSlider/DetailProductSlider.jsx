@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../DetailProduct.module.css";
+import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import axios from "axios";
 
 const DetailProductSlider = () => {
@@ -26,28 +26,28 @@ const DetailProductSlider = () => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <img src={largeImage} alt="Большой квадрат" />
+                    <img src={largeImage} alt="Big square" />
                 </div>
             </div>
             <div className={styles.smallSquareContainer}>
                 <div className={styles.smallSquare}>
                     <img
                         src={banner[0]}
-                        alt="Большой квадрат"
+                        alt="Small square"
                         onClick={() => handleImageClick(banner[0])}
                     />
                 </div>
                 <div className={styles.smallSquare}>
                     <img
                         src={banner[1]}
-                        alt="Большой квадрат"
+                        alt="Small square"
                         onClick={() => handleImageClick(banner[1])}
                     />
                 </div>
                 <div className={styles.smallSquare}>
                     <img
                         src={banner[2]}
-                        alt="Большой квадрат"
+                        alt="Small square"
                         onClick={() => handleImageClick(banner[2])}
                     />
                 </div>
