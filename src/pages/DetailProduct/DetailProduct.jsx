@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DetailProduct.module.css";
 import { Link } from "react-router-dom";
 import stylesCartPage from "../CartPage/CartPage.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
 import { Formik, Form } from "formik";
@@ -11,6 +11,8 @@ import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductColors from "../../components/DetailProductColors/DetailProductColors";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
+import { useSelector } from "react-redux";
+import NoPage from "../NoPage/NoPage";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -21,19 +23,36 @@ const styleBlack = {
     justifyContent: "center",
 };
 
-const colorList = ["green", "pink", "red", "gray"];
-
 const DetailProduct = () => {
-    // const { id } = useParams();
-    // const cardToShow = data.find((item) => item.id === Number(id));
+    const products = useSelector(
+        (state) => state.getAllProductsReducer.allProducts
+    );
+    const [info, setInfo] = useState(null);
+    const { id } = useParams();
+
+    useEffect(() => {
+        const productInfo = products.find((item) => item._id === id);
+        productInfo && setInfo(productInfo);
+    }, [id, products]);
+
+    const handleSubmit = (values) => {
+        console.log("Data:", values);
+    };
+
     const initialValues = {
         color: "",
         size: "",
         amount: 0,
     };
-    const handleSubmit = (values) => {
-        console.log("Data:", values);
-    };
+
+    if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+        return <NoPage />;
+    }
+
+    else if (!info) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className={"section"}>
             <nav className={stylesCartPage.sectionNav}>
@@ -58,41 +77,44 @@ const DetailProduct = () => {
                             to="/cart"
                             className={stylesCartPage.breadcrumbsLinkToCart}
                         >
-                            T-shirts
+                            {info.category}
                         </Link>
                     </li>
                 </ul>
             </nav>
             <div className={styles.productWrapper}>
-                <DetailProductSlider />
+                <DetailProductSlider imageArr={[info.url_image, info.url_image, info.url_image, info.url_image]}/>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                     {({ values }) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
-                                    One Life Graphic T-shirt
+                                    {info.name}
                                 </h1>
                                 <div className={styles.ratingContainer}>
                                     <StarRating
-                                        rating={4.5}
+                                        rating={Number(info.rate)}
                                         starSize="1.6rem"
                                     />
-                                    <p className={styles.ratingValue}>4.5/5</p>
+                                    <p className={styles.ratingValue}>{info.rate}/5</p>
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
-                                        $260
+                                        ${info.price}
                                     </h2>
-                                    <h2 className={styles.oldPrice}>$300</h2>
-                                    <span className={styles.discount}>
-                                        -40%
-                                    </span>
+                                    {!!Number(info.discount) && (
+                                        <>
+                                            <h2 className={styles.oldPrice}>
+                                                ${info.price}
+                                            </h2>
+                                            <span className={styles.discount}>
+                                                -{info.discount}%
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                                 <p className={styles.productText}>
-                                    This graphic t-shirt which is perfect for
-                                    any occasion. Crafted from a soft and
-                                    breathable fabric, it offers superior
-                                    comfort and style.
+                                    {info.description}
                                 </p>
 
                                 <div className={styles.colorFilter}>
@@ -101,14 +123,14 @@ const DetailProduct = () => {
                                     </p>
                                     <div className={styles.colors}>
                                         <DetailProductColors
-                                            amount={3}
-                                            colorList={colorList}
+                                            amount={info.colors.length}
+                                            colorList={info.colors}
                                             values={values}
                                         />
                                     </div>
                                 </div>
                                 <div className={styles.sizeFilter}>
-                                    <DetailProductButtonGroup values={values} />
+                                    <DetailProductButtonGroup sizes={["XS", "S", "M"]} values={values} />
                                 </div>
                                 <div className={styles.purchaseFilter}>
                                     <div

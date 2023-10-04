@@ -1,10 +1,8 @@
 import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { fetchProducts } from "../../stores/action";
 import Slider from "../../components/Slider/Slider";
 import CommentariesSlider from "../../components/commentariesSlider/СommentariesSlider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
@@ -12,16 +10,9 @@ import Filters from "../../components/Filters/Filters";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 
 const MainPage = () => {
-    const dispatch = useDispatch();
-    const products = useSelector(
-        (state) => state.getAllProductsReducer.allProducts
-    );
+    const products = useSelector((state) =>  state.getAllProductsReducer.allProducts);
     const firstFourProducts = products.slice(0, 4); // первые 4 карточки товара для отображения новых поступлений
-    const secondFourProducts = products.slice(4, 8);
-
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
+    const secondFourProducts = products.slice(0, 4);
 
     return (
         <section className="section">
