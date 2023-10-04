@@ -34,9 +34,9 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                             ...style,
                             backgroundColor:
                                 size === activeButton
-                                    ? "black"
+                                    ? "var(--black--background)"
                                     : "var(--gray-primary)",
-                            color: size === activeButton ? "white" : "black",
+                            color: size === activeButton ? "var(--white-text)" : "var(--black-text)",
                         }}
                         onClick={() => buttonClick(size)}
                     />
