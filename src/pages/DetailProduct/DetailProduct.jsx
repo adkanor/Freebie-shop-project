@@ -93,7 +93,7 @@ const DetailProduct = () => {
                                 </h1>
                                 <div className={styles.ratingContainer}>
                                     <StarRating
-                                        rating={info.rate}
+                                        rating={Number(info.rate)}
                                         starSize="1.6rem"
                                     />
                                     <p className={styles.ratingValue}>{info.rate}/5</p>

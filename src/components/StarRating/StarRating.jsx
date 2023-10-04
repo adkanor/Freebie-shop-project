@@ -33,6 +33,7 @@ const StarRating = ({ rating, starSize }) => {
                             width: `${(rating - roundedRating) * 100}%`,
                             overflow: "hidden",
                         }}
+                        key={`inner${i}`}
                     >
                         {"\u2605"}
                     </span>
