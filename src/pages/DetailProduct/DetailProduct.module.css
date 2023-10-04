@@ -11,8 +11,9 @@
 .smallSquare {
     width: 100%;
     height: 106px;   
-    border-radius: 20px;
+    border-radius: 10%;
     background-color: var(--gray-primary);
+    cursor: pointer;
 }
 
 .productWrapper{
@@ -149,10 +150,11 @@ padding: 6px 12px;
     .bigSquareContainer{
       order: 2;
       margin-left: 12px;
+      margin-bottom: -14px;
     }
     .smallSquare{
       width: 152px;
-    height: 100%;
+      height: 100%;
     }
     .productWrapper{
         flex-direction: row;

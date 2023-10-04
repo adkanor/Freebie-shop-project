@@ -24,6 +24,7 @@ const StarRating = ({ rating, starSize }) => {
                         zIndex: "-1",
                         color: "var(--gray-primary)",
                     }}
+                    key={i}
                 >
                     <span
                         style={{
