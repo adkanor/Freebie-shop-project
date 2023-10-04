@@ -26,11 +26,11 @@
 }
 
 .PaginateBtn:hover {
-    box-shadow: 0px 2px 4px var(--separator-line);
+    box-shadow: 0px 1px 2px var(--separator-line);
 }
 
 .PaginateBtn:active {
-    transform: translateY(3px);
+    transform: scale(0.90);
 }
 
 .BtnTxt {
