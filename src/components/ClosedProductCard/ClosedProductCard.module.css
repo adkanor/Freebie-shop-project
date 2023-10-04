@@ -4,6 +4,7 @@
     row-gap: 0.5rem;
     padding: 1rem;
     width: 300px;
+    color: var(--black-text);
 }
 
 .imgWrapper {

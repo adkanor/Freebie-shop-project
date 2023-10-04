@@ -10,12 +10,14 @@ const RecommendationProducts = ({ title, arrayofProducts, children }) => {
             <ul className={styles.productslist}>
                 {arrayofProducts.map((product) => (
                     <ClosedProductCard
-                        key={product.id}
-                        // id={product.id}
+                        key={product._id}
+                        id={product._id}
                         name={product.name}
-                        price={product.price}
-                        imageURL={product.image_urls[0]}
-                        rating={3.6}
+                        price={Number(product.price)}
+                        imageURL={product.url_image}
+                        rating={Number(product.rate)}
+                        sale={Number(product.discount)}
+                        salePrice={Number(product.price)}
                     />
                 ))}
             </ul>
