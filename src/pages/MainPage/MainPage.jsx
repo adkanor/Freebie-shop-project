@@ -10,9 +10,11 @@ import Filters from "../../components/Filters/Filters";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 
 const MainPage = () => {
-    const products = useSelector((state) =>  state.getAllProductsReducer.allProducts);
+    const products = useSelector(
+        (state) => state.getAllProductsReducer.allProducts
+    );
     const firstFourProducts = products.slice(0, 4); // первые 4 карточки товара для отображения новых поступлений
-    const secondFourProducts = products.slice(0, 4);
+    const secondFourProducts = products.slice(0, 4); // вторые  4 карточки товара для отображения новых поступлений
 
     return (
         <section className="section">
