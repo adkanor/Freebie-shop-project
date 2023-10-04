@@ -19,7 +19,7 @@
 .imgWrapper > img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .productName {
@@ -73,4 +73,25 @@
     color: var(--red-text);
     padding: 6px 14px 6px 14px;
     border-radius: 3.875rem;
+}
+
+@media screen and (max-width: 765px){
+    .cardWrapper {
+        width: 198px;
+    }
+    .imgWrapper {
+        height: 198px;
+    }
+    .productName {
+        font-size: 1rem;
+    }
+    .ratingSpan {
+        font-size: 0.75rem;
+    }
+    .defaultPriceSpan {
+        font-size: 1.25rem;
+    }
+    .onSalePriceSpan {
+        font-size: 1.25rem;
+    }
 }
