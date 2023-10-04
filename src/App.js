@@ -11,6 +11,7 @@ import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import Pagination from "./components/Pagination/Pagination";
+import DressStyle from "./components/DressStyle/DressStyle";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
             <Header />
             <Routes>
                 <Route path="/" element={<MainSection />} />
+                <Route path="/:style" element={<DressStyle />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/products/:id" element={<DetailProduct/>} />
                 {/* <Route path="/footer" element={<Footer />} /> */}

@@ -26,7 +26,7 @@ const DetailProductColors = ({ amount, colorList, values }) => {
                     id={colorValue}
                 />
                 <label htmlFor={colorValue}>
-                    <span style={{ backgroundColor: colorList[colorValue]}}>
+                    <span style={{ backgroundColor: colorList[colorValue] }}>
                         <img
                             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg"
                             alt="Checked Icon"

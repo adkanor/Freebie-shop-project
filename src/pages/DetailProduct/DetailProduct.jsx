@@ -47,9 +47,7 @@ const DetailProduct = () => {
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
         return <NoPage />;
-    }
-
-    else if (!info) {
+    } else if (!info) {
         return <div>Loading...</div>;
     }
 
@@ -83,7 +81,14 @@ const DetailProduct = () => {
                 </ul>
             </nav>
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={[info.url_image, info.url_image, info.url_image, info.url_image]}/>
+                <DetailProductSlider
+                    imageArr={[
+                        info.url_image,
+                        info.url_image,
+                        info.url_image,
+                        info.url_image,
+                    ]}
+                />
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                     {({ values }) => (
                         <Form>
@@ -96,7 +101,9 @@ const DetailProduct = () => {
                                         rating={Number(info.rate)}
                                         starSize="1.6rem"
                                     />
-                                    <p className={styles.ratingValue}>{info.rate}/5</p>
+                                    <p className={styles.ratingValue}>
+                                        {info.rate}/5
+                                    </p>
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
@@ -130,7 +137,10 @@ const DetailProduct = () => {
                                     </div>
                                 </div>
                                 <div className={styles.sizeFilter}>
-                                    <DetailProductButtonGroup sizes={["XS", "S", "M"]} values={values} />
+                                    <DetailProductButtonGroup
+                                        sizes={["XS", "S", "M"]}
+                                        values={values}
+                                    />
                                 </div>
                                 <div className={styles.purchaseFilter}>
                                     <div
