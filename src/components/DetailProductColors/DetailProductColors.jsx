@@ -2,6 +2,7 @@ import styles from "./DetailProductColors.module.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Field } from "formik";
+// import { darkenHexColor } from "../../utils/colorformatting";
 
 const DetailProductColors = ({ amount, colorList, values }) => {
     const buttons = [];
@@ -12,7 +13,7 @@ const DetailProductColors = ({ amount, colorList, values }) => {
         values.color = colorList[value];
     };
 
-    for (let i = 0; i <= amount - 1; i++) {
+    for (let i = 0; i < amount; i++) {
         const colorValue = i + 1;
         buttons.push(
             <div key={colorValue}>
@@ -29,6 +30,7 @@ const DetailProductColors = ({ amount, colorList, values }) => {
                         <img
                             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg"
                             alt="Checked Icon"
+                            style={{ filter: "brightness(0.7)" }}
                         />
                     </span>
                 </label>

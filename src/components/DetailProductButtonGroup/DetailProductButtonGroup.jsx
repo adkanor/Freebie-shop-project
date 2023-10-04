@@ -1,9 +1,11 @@
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import BlackButton from "../Button/Button";
 
-const DetailProductButtonGroup = ({ values }) => {
+const DetailProductButtonGroup = ({ sizes, values }) => {
+    const [activeButton, setActiveButton] = useState(null);
+
     const style = {
         backgroundColor: "var(--gray-primary)",
         color: "black",
@@ -13,44 +15,42 @@ const DetailProductButtonGroup = ({ values }) => {
         width: "100%",
         justifyContent: "center",
     };
-    const buttonClick = (buttonValue) => {
-        values.size = buttonValue;
+
+    const buttonClick = (size) => {
+        values.size = size;
+        setActiveButton(size);
     };
 
     return (
         <>
             <p className={styles.filterSize}>Select Size</p>
             <div className={styles.size}>
-                <BlackButton
-                    type={"button"}
-                    text={"Small"}
-                    style={style}
-                    onClick={() => buttonClick("Small")}
-                />
-                <BlackButton
-                    type={"button"}
-                    text={"Medium"}
-                    style={style}
-                    onClick={() => buttonClick("Medium")}
-                />
-                <BlackButton
-                    type={"button"}
-                    text={"Large"}
-                    style={style}
-                    onClick={() => buttonClick("Large")}
-                />
-                <BlackButton
-                    type={"button"}
-                    text={"X-Large"}
-                    style={style}
-                    onClick={() => buttonClick("X-Large")}
-                />
+                {sizes.map((size, index) => (
+                    <BlackButton
+                        key={index}
+                        text={size}
+                        type={"button"}
+                        style={{
+                            ...style,
+                            backgroundColor:
+                                size === activeButton
+                                    ? "var(--black--background)"
+                                    : "var(--gray-primary)",
+                            color:
+                                size === activeButton
+                                    ? "var(--white-text)"
+                                    : "var(--black-text)",
+                        }}
+                        onClick={() => buttonClick(size)}
+                    />
+                ))}
             </div>
         </>
     );
 };
 
 DetailProductButtonGroup.propTypes = {
+    sizes: PropTypes.array.isRequired,
     values: PropTypes.object,
 };
 

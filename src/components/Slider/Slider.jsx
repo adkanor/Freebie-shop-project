@@ -34,6 +34,7 @@ const Slider = () => {
                 className={style.sliderItem}
                 src={item}
                 alt={`banner ${index}`}
+                style={{objectFit: "cover"}}
             />
         </div>
     ));
