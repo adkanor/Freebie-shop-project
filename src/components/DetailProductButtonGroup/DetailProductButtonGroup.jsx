@@ -1,9 +1,11 @@
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import BlackButton from "../Button/Button";
 
 const DetailProductButtonGroup = ({ sizes, values }) => {
+    const [activeButton, setActiveButton] = useState(null);
+
     const style = {
         backgroundColor: "var(--gray-primary)",
         color: "black",
@@ -13,8 +15,10 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
         width: "100%",
         justifyContent: "center",
     };
-    const buttonClick = (buttonValue) => {
-        values.size = buttonValue;
+
+    const buttonClick = (size) => {
+        values.size = size;
+        setActiveButton(size);
     };
 
     return (
@@ -24,9 +28,16 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                 {sizes.map((size, index) => (
                     <BlackButton
                         key={index}
-                        type={"button"}
                         text={size}
-                        style={style}
+                        type={"button"}
+                        style={{
+                            ...style,
+                            backgroundColor:
+                                size === activeButton
+                                    ? "black"
+                                    : "var(--gray-primary)",
+                            color: size === activeButton ? "white" : "black",
+                        }}
                         onClick={() => buttonClick(size)}
                     />
                 ))}
