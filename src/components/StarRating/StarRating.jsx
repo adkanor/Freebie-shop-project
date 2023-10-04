@@ -24,6 +24,7 @@ const StarRating = ({ rating, starSize }) => {
                         zIndex: "-1",
                         color: "var(--gray-primary)",
                     }}
+                    key={i}
                 >
                     <span
                         style={{
@@ -32,6 +33,7 @@ const StarRating = ({ rating, starSize }) => {
                             width: `${(rating - roundedRating) * 100}%`,
                             overflow: "hidden",
                         }}
+                        key={`inner${i}`}
                     >
                         {"\u2605"}
                     </span>

@@ -1,0 +1,178 @@
+.bigSquare {
+    width: 100%;
+    height: 290px;
+    border-radius: 20px;
+    background-color: var(--gray-primary);
+    margin-bottom: 14px;
+}
+
+.smallSquare {
+    width: 100%;
+    flex: 1;
+    border-radius: 10%;
+    background-color: var(--gray-primary);
+    cursor: pointer;
+}
+
+.productWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+
+    justify-content: space-between;
+}
+
+.productSlider {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.smallSquareContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.bigSquare img,
+.smallSquare img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.purchaseFilter {
+    gap: 12px;
+    display: flex;
+    height: 50px;
+    padding-top: 24px;
+}
+.productTitle {
+    font-family: "Integral-CF 700";
+    font-size: 24px;
+}
+
+.productContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+.productPriceContainer {
+    display: flex;
+    gap: 10px;
+}
+.colors {
+    display: flex;
+    gap: 20px;
+    padding-top: 10px;
+}
+
+.size {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.currentPrice,
+.oldPrice,
+.discount {
+    font-family: "Satoshi 700";
+    font-size: 24px;
+}
+
+.oldPrice {
+    color: rgba(0, 0, 0, 0.3);
+    text-decoration: line-through;
+}
+
+.productText {
+    font-family: "Satoshi 400";
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px var(--separator-line) solid;
+    padding-bottom: 24px;
+}
+.filterTitle,
+.filterSize {
+    font-family: "Satoshi 400";
+    font-size: 14px;
+}
+.color {
+    width: 50px;
+    height: 50px;
+    border-radius: 60px;
+    background-color: #f33;
+}
+.ratingContainer {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.ratingValue {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Satoshi 400";
+    font-size: 14px;
+}
+
+.discount {
+    display: flex;
+    align-items: center;
+    border-radius: 62px;
+    background: rgba(255, 51, 51, 0.1);
+    color: #f33;
+    font-family: "Satoshi 500";
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.filterSize {
+    padding-bottom: 12px;
+}
+
+.sizeFilter {
+    border-bottom: 1px var(--separator-line) solid;
+    padding-bottom: 24px;
+}
+
+@media screen and (min-width: 991px) {
+    .smallSquareContainer {
+        flex-direction: column;
+        order: 1;
+    }
+    .bigSquareContainer {
+        order: 2;
+        margin-left: 12px;
+        margin-bottom: -14px;
+    }
+    .smallSquare {
+        width: 152px;
+        height: 100%;
+    }
+    .productWrapper {
+        flex-direction: row;
+    }
+    .productSlider {
+        max-width: 615px;
+        flex-direction: row;
+    }
+    .productTitle {
+        font-size: 40px;
+    }
+    .currentPrice,
+    .oldPrice {
+        font-size: 32px;
+    }
+    .productText,
+    .filterTitle,
+    .filterSize {
+        font-size: 16px;
+    }
+    .bigSquare {
+        width: 100%;
+        height: 530px;
+    }
+}

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./stores/action";
 import Header from "./pages/Header/Header";
-// import Header2 from "./pages/Header/Header2.jsx";
+import DetailProduct from "./pages/DetailProduct/DetailProduct";
 import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./components/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";
@@ -11,12 +13,20 @@ import Registration from "./pages/Registration/Registration";
 
 
 const App = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchProducts());
+    }, [dispatch]);
+
     return (
         <>
             <Header />
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/products/:id" element={<DetailProduct/>} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />
