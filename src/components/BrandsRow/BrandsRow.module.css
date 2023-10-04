@@ -1,0 +1,60 @@
+.BrandWrapper {
+    background-color: var(--black--background);
+    box-sizing: border-box;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 39px 16px;
+}
+
+.BrandsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1.25rem;
+    column-gap: 10px;
+    justify-content: center;
+}
+
+.BrandsLogo {
+    display: block;
+    height: 20px;
+    width: 30%;
+}
+
+@media only screen and (min-width: 766px) {
+    .BrandWrapper {
+        padding: 39px 50px;
+    }
+    .BrandsContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .BrandsLogo {
+        display: block;
+        width: auto;
+        animation: moveInCircle 13s infinite linear;
+    }
+}
+
+@keyframes moveInCircle {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    25% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}

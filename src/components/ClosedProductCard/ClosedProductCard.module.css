@@ -4,6 +4,7 @@
     row-gap: 0.5rem;
     padding: 1rem;
     width: 300px;
+    color: var(--black-text);
 }
 
 .imgWrapper {
@@ -18,7 +19,7 @@
 
 .imgWrapper > img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -49,7 +50,7 @@
 }
 
 .defaultPriceSpan {
-    font-family: 'Satoshi 700';
+    font-family: "Satoshi 700";
     font-size: 1.5rem;
 }
 
@@ -60,7 +61,7 @@
 }
 
 .onSalePriceSpan {
-    font-family: 'Satoshi 700';
+    font-family: "Satoshi 700";
     font-size: 1.5rem;
     text-decoration: line-through;
     color: var(--gray-text-primary);
@@ -73,4 +74,25 @@
     color: var(--red-text);
     padding: 6px 14px 6px 14px;
     border-radius: 3.875rem;
+}
+
+@media screen and (max-width: 765px){
+    .cardWrapper {
+        width: 198px;
+    }
+    .imgWrapper {
+        height: 198px;
+    }
+    .productName {
+        font-size: 1rem;
+    }
+    .ratingSpan {
+        font-size: 0.75rem;
+    }
+    .defaultPriceSpan {
+        font-size: 1.25rem;
+    }
+    .onSalePriceSpan {
+        font-size: 1.25rem;
+    }
 }

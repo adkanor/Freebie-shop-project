@@ -162,7 +162,7 @@ label {
 }
 
 /* Search Icon Image */
-label::before{
+.desktopSearchBar::before{
     content: "";
     z-index: 1;
   position: absolute;
