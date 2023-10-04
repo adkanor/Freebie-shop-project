@@ -47,7 +47,7 @@ ClosedProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
-    rating: PropTypes.number,
+    rating: PropTypes.number.isRequired,
     sale: PropTypes.number,
     salePrice: PropTypes.number,
 };
