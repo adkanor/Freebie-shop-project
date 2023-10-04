@@ -10,8 +10,8 @@ import AccountSVG from "../../assets/icons/Header/Account.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 
-import NavigationBar from "./NavigationBar/NavigationBar";
-import SearchBar from "./SearchBar/SearchBar";
+import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Header = () => {
     const [query, setQuery] = useState("");
