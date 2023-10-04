@@ -25,6 +25,7 @@ const Filters = () => {
             minPrice: MIN_PRICE,
             maxPrice: MAX_PRICE,
             size: "",
+            sex: "",
         },
     });
 
@@ -39,6 +40,7 @@ const Filters = () => {
         console.log("Selected Size:", formik.values.size);
         console.log("Min Price:", formik.values.minPrice);
         console.log("Max Price:", formik.values.maxPrice);
+        console.log("Sex:", formik.values.sex);
     };
 
     return (
@@ -52,6 +54,32 @@ const Filters = () => {
                 />
             </div>
             <form onSubmit={handleSubmit}>
+                <div className={styles.filterSex}>
+                    <h3 className={styles.filterTitle}>Gender</h3>
+
+                    <label>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="sex"
+                            value="Man"
+                            onChange={formik.handleChange}
+                            checked={formik.values.sex === "Man"}
+                        />
+                        Man
+                    </label>
+                    <label>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="sex"
+                            value="Woman"
+                            onChange={formik.handleChange}
+                            checked={formik.values.sex === "Woman"}
+                        />
+                        Woman
+                    </label>
+                </div>
                 <div className={styles.filterCategory}>
                     <h3 className={styles.filterTitle}>Categories</h3>
                     {categories.map((category) => (

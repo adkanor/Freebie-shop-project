@@ -6,6 +6,7 @@ import Button from "../../components/Button/Button";
 import Slider from "../../components/Slider/Slider";
 import CommentariesSlider from "../../components/commentariesSlider/СommentariesSlider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
+import Filters from "../../components/Filters/Filters";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 
 const MainPage = () => {
@@ -17,6 +18,7 @@ const MainPage = () => {
 
     return (
         <section className="section">
+            <Filters />
             <Slider />
             <BrandBox />
             <RecommendationProducts
