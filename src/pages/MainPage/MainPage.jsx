@@ -31,11 +31,20 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
         axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods/10")
             .then(response => {
                 addArrivalsList(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getRatingGoods/10")
+            .then(response => {
                 addTopSelling(response.data);
             })
             .catch(error => {
                 console.error(error);
             });
+
+
     },[]);
 
     return (
