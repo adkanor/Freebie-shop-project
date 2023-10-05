@@ -14,10 +14,9 @@ const RecommendationProducts = ({ title, arrayofProducts, children }) => {
                         id={product._id}
                         name={product.name}
                         price={Number(product.price)}
-                        imageURL={product.url_image}
-                        rating={Number(product.rate)}
+                        imageURL={product.url_image[0]}
+                        rating={Number(product.rating)}
                         sale={Number(product.discount)}
-                        salePrice={Number(product.price)}
                     />
                 ))}
             </ul>

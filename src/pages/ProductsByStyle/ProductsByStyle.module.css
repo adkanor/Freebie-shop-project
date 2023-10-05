@@ -1,0 +1,48 @@
+.sectionNav {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-family: "Satoshi 400", Arial, sans-serif;
+}
+/* Navigation Home > Cart */
+.breadcrumbsList {
+    display: flex;
+    justify-content: flex-start;
+    text-transform: uppercase;
+}
+.breadcrumbsList li {
+    margin-right: 5px;
+}
+.breadcrumbsLinkToHome {
+    color: var(--gray-text-primary);
+}
+.breadcrumbsArrow {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+.breadcrumbsLinkToCart {
+    color: var(--black-text);
+}
+.stylePage {
+    display: flex;
+    align-items: flex-start;
+}
+.styleTitle {
+    font-size: 32px;
+    font-family: "Satoshi 700";
+}
+.styleTitle::first-letter {
+    text-transform: capitalize;
+}
+.styleContent {
+    display: flex;
+    flex-direction: column;
+}
+.productslist {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    list-style: none;
+    padding: 0;
+}
