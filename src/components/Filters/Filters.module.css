@@ -1,0 +1,64 @@
+.filterSection {
+    width: 30%;
+    padding: 20px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--separator-line);
+    margin-bottom: 150px;
+}
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+}
+.filtersName {
+    font-size: 20px;
+    font-family: "Satoshi 700";
+    margin: 10px 0;
+}
+.filterTitle {
+    font-size: 20px;
+    color: var(--black-text);
+    font-family: "Satoshi 700";
+    margin-bottom: 20px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--separator-line);
+}
+.filterPriceInfo {
+    margin: 7px auto;
+    font-size: 13px;
+    color: var(--black-text);
+    font-family: "Satoshi 400";
+}
+.filterPriceInfo span {
+    margin-left: 5px;
+}
+label {
+    display: block;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 3px;
+    font-family: "Satoshi 400";
+    color: var(--gray-text-primary);
+}
+.radioInput {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--gray-text-primary);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+.radioInput:checked {
+    background-color: var(--black-text);
+}
+@media (min-width: 766px) {
+    .filterPriceInfo {
+        margin: 13px auto;
+        font-size: 17px;
+    }
+    .filterPriceInfo span {
+        margin-left: 40px;
+    }
+}
