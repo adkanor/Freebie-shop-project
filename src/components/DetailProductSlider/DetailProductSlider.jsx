@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
-import axios from "axios";
+import PropTypes from "prop-types";
 
-const DetailProductSlider = () => {
-    const [banner, setBanners] = useState([]);
-    const [largeImage, setLargeImage] = useState(
-        "https://static.vecteezy.com/system/resources/thumbnails/012/628/220/small_2x/plain-black-t-shirt-on-transparent-background-free-png.png"
-    );
+const DetailProductSlider = ({ imageArr }) => {
+    const [largeImage, setLargeImage] = useState(imageArr[0]);
+    // eslint-disable-next-line
+    const [banners, _] = useState(imageArr.slice(1));
 
     const handleImageClick = (image) => {
         setLargeImage(image);
     };
 
-    useEffect(() => {
-        axios
-            .get("/detailproduct.json")
-            .then((res) => {
-                setBanners(res.data);
-            })
-            .catch((error) => {
-                console.error("Помилка при отриманні даних:", error);
-            });
-    }, []);
     return (
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
@@ -30,30 +19,22 @@ const DetailProductSlider = () => {
                 </div>
             </div>
             <div className={styles.smallSquareContainer}>
-                <div className={styles.smallSquare}>
-                    <img
-                        src={banner[0]}
-                        alt="Small square"
-                        onClick={() => handleImageClick(banner[0])}
-                    />
-                </div>
-                <div className={styles.smallSquare}>
-                    <img
-                        src={banner[1]}
-                        alt="Small square"
-                        onClick={() => handleImageClick(banner[1])}
-                    />
-                </div>
-                <div className={styles.smallSquare}>
-                    <img
-                        src={banner[2]}
-                        alt="Small square"
-                        onClick={() => handleImageClick(banner[2])}
-                    />
-                </div>
+                {banners.map((bannerImg, index) => (
+                    <div key={index} className={styles.smallSquare}>
+                        <img
+                            src={bannerImg}
+                            alt="Small square"
+                            onClick={() => handleImageClick(bannerImg)}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     );
+};
+
+DetailProductSlider.propTypes = {
+    imageArr: PropTypes.array.isRequired,
 };
 
 export default DetailProductSlider;

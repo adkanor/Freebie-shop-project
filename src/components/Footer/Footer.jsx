@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./Footer.module.css";
-import FaceBookIcon from "../../assets/icons/Social/FaceBookIcon";
-import GitHubIcon from "../../assets/icons/Social/GitHubIcon";
-import InstagramIcon from "../../assets/icons/Social/InstagramIcon";
-import TwitterIcon from "../../assets/icons/Social/TwitterIcon";
-import ApplePayIcon from "../../assets/icons/Payment/ApplePayIcon";
-import GooglePayIcon from "../../assets/icons/Payment/GooglePayIcon";
-import MastercardIcon from "../../assets/icons/Payment/MastercardIcon";
-import PayPalIcon from "../../assets/icons/Payment/PayPalIcon";
-import VisaIcon from "../../assets/icons/Payment/VisaIcon";
+
+import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
+import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
+import InstagramIcon from "../../assets/icons/Social/Instagram.svg";
+import TwitterIcon from "../../assets/icons/Social/Twitter.svg";
+
+import ApplePayIcon from "../../assets/icons/Payment/ApplePay.svg";
+import GooglePayIcon from "../../assets/icons/Payment/GooglePay.svg";
+import MastercardIcon from "../../assets/icons/Payment/Mastercard.svg";
+import PayPalIcon from "../../assets/icons/Payment/PayPal.svg";
+import VisaIcon from "../../assets/icons/Payment/Visa.svg";
+
 import BlackButton from "../Button/Button";
 
 const Footer = () => {
@@ -64,10 +67,30 @@ const Footer = () => {
                             </p>
                         </div>
                         <div className={styles.IconContainer}>
-                            <TwitterIcon fill="black" />
-                            <FaceBookIcon fill="black" />
-                            <InstagramIcon fill="black" />
-                            <GitHubIcon fill="black" />
+                            <a href="/" className="SocialMedia">
+                                <img
+                                    src={TwitterIcon}
+                                    alt="TwitterIcon"
+                                />
+                            </a>
+                            <a href="/" className="SocialMedia">
+                                <img
+                                    src={FaceBookIcon}
+                                    alt="FaceBookIcon"
+                                />
+                            </a>
+                            <a href="/" className="SocialMedia">
+                                <img
+                                    src={InstagramIcon}
+                                    alt="InstagramIcon"
+                                />
+                            </a>
+                            <a href="/" className="SocialMedia">
+                                <img
+                                    src={GitHubIcon}
+                                    alt="GitHubIcon"
+                                />
+                            </a>
                         </div>
                     </div>
                     {sections.map((section, index) => (
@@ -87,11 +110,11 @@ const Footer = () => {
             
                     <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
                     <div className={styles.Payment}>
-                        <VisaIcon width={46} height={30} />
-                        <MastercardIcon width={46} height={30} />
-                        <PayPalIcon width={46} height={30} />
-                        <ApplePayIcon width={46} height={30} />
-                        <GooglePayIcon width={46} height={30} />
+                        <img src={VisaIcon} alt="VisaIcon"/>
+                        <img src={MastercardIcon} alt="MastercardIcon"/>
+                        <img src={PayPalIcon} alt="PayPalIcon"/>
+                        <img src={ApplePayIcon} alt="ApplePayIcon"/>
+                        <img src={GooglePayIcon} alt="GooglePayIcon"/>
                     </div>
                 </section>
             </div>

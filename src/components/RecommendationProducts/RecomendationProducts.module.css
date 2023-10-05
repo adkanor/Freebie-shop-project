@@ -1,0 +1,33 @@
+.recommendationProducts {
+    border-bottom: 1px solid var(--separator-line);
+    padding-bottom: 40px;
+}
+.recommendationProducts h2 {
+    text-align: center;
+    font-family: "Integral-CF 700";
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 32px;
+}
+
+.productslist {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+@media screen and (min-width: 766px) {
+    .recommendationProducts {
+        padding-bottom: 64px;
+    }
+    .recommendationProducts h2 {
+        font-size: 48px;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .productslist {
+        flex-wrap: nowrap;
+    }
+}
