@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
-import Filters from "../../components/Filters/Filters";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 
 const MainPage = () => {
@@ -17,7 +16,6 @@ const MainPage = () => {
 
     return (
         <section className="section">
-            <Filters />
             <Slider />
             <BrandBox />
             <RecommendationProducts
