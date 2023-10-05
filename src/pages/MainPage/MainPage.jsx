@@ -21,6 +21,7 @@ import Button from "../../components/Button/Button";
 
 
 const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) => {
+    // const [rerender, setRerender] = "off";
     // const products = useSelector(
     //     (state) => state.getAllProductsReducer.allProducts
     // );
@@ -43,9 +44,7 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
             .catch(error => {
                 console.error(error);
             });
-
-
-    },[]);
+    },[addArrivalsList,addTopSelling]);
 
     return (
         <section className="section">
@@ -125,6 +124,7 @@ MainPage.propTypes = {
     addTopSelling: PropTypes.func,
     topSaleList: PropTypes.array,
     newArrivals: PropTypes.array,
+    state:PropTypes.object
 };
 
 
