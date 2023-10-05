@@ -1,8 +1,5 @@
-.commentariesWrapper{
-    /*margin-bottom: 10px;*/
-    width: 350px;
-    height: 300px;
-    margin: 0 auto 10px;
+.commentsWrapper{
+
     padding: 35px;
     box-sizing: border-box;
     border: 1px solid var(--gray-text-secondary);
@@ -10,11 +7,11 @@
 
 }
 
-.commentariesUserName{
+.commentsUserName{
     margin-right: 10px;
 
 }
-.commentariesUserInfo{
+.commentsUserInfo{
     margin:10px 0 10px;
     display: flex;
     align-items: center;
@@ -23,7 +20,7 @@
     font-size: 20px;
 }
 
-.commentariesText{
+.commentsText{
     font-family: "Satoshi 400", Arial, sans-serif;
     font-size: 16px;
     color: var(--gray-text-primary);
