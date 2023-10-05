@@ -32,7 +32,7 @@ CommentsCard.propTypes = {
     firstName:PropTypes.string.isRequired,
     lastName:PropTypes.string.isRequired,
     commentaries:PropTypes.string.isRequired,
-    rating:PropTypes.string.isRequired,
+    rating:PropTypes.number.isRequired,
     style:PropTypes.object
     
 };
