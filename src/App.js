@@ -10,7 +10,6 @@ import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
-import Pagination from "./components/Pagination/Pagination";
 import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 
 const App = () => {
@@ -34,7 +33,6 @@ const App = () => {
                 <Route path="/footer" element={<Footer />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>
-            <Pagination />
             <Footer />
         </>
     );
