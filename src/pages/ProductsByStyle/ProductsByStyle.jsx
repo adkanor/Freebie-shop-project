@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 // import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
@@ -7,10 +7,15 @@ import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import styles from "./ProductsByStyle.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
+import Pagination from "../../components/Pagination/Pagination";
+
+let PageSize = 2; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
+
 const ProductsByStyle = () => {
     const [productByStyle, setProductByStyle] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const { style } = useParams();
+    const [currentPage, setCurrentPage] = useState(1); 
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,6 +36,16 @@ const ProductsByStyle = () => {
 
         fetchData();
     }, [style]);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return filteredProducts.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, filteredProducts]);
 
     return (
         <section className="section">
@@ -71,7 +86,7 @@ const ProductsByStyle = () => {
                         <p>dsfsdf</p>
                     </div>
                     <ul className={styles.productslist}>
-                        {filteredProducts.map((product) => (
+                        {currentTableData.map((product) => (
                             <ClosedProductCard
                                 key={product._id}
                                 id={product._id}
@@ -83,6 +98,13 @@ const ProductsByStyle = () => {
                             />
                         ))}
                     </ul>
+                    <Pagination
+                        className="pagination-bar"
+                        currentPage={currentPage}
+                        totalCount={filteredProducts.length}
+                        pageSize={PageSize}
+                        onPageChange={handlePageChange}
+                    />
                 </div>
             </div>
         </section>
