@@ -1,0 +1,29 @@
+.commentsWrapper{
+
+    padding: 35px;
+    box-sizing: border-box;
+    border: 1px solid var(--gray-text-secondary);
+    border-radius: 20px;
+
+}
+
+.commentsUserName{
+    margin-right: 10px;
+
+}
+.commentsUserInfo{
+    margin:10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 20px;
+}
+
+.commentsText{
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 16px;
+    color: var(--gray-text-primary);
+    line-height: 22px;
+}
+

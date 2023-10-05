@@ -1,30 +1,34 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import CommentariesCard from "../commentariesCard/CommentariesCard";
 import CustomButtonGroup from "../ButtonGroupSlider/ButtonGroupSlider";
 import style from "./CommentariesBlock.module.css";
 
+
+
+
 const responsive = {
     desktop: {
-        breakpoint: { max: 3000, min: 1200 },
+        breakpoint: {  max:3000, min: 1200 },
         items: 3,
         slidesToSlide: 3,
-        centerMode: "true",
+        centerMode: "true"
     },
     tablet: {
         breakpoint: { max: 1199, min: 780 },
         items: 2,
         slidesToSlide: 2,
-        centerMode: "true",
+        centerMode: "true"
     },
-    mobile: {
-        breakpoint: { max: 779, min: 0 },
-        items: 1,
+    mobile : {
+        breakpoint : {  max : 779 ,  min : 0  } ,
+        items : 1 ,
         slidesToSlide: 1,
-        partialVisibilityGutter: 0,
-        centerMode: "false",
-    },
+        partialVisibilityGutter : 0,
+        centerMode:"false"
+
+    }
 };
 
 const CommentariesSlider = () => {
@@ -42,14 +46,11 @@ const CommentariesSlider = () => {
             });
     }, []);
 
-    const commentariesBlock = commentaries.map((item, index) => (
-        <CommentariesCard
-            key={index}
-            name={item.name}
-            commentaries={item.respond}
-            rating={item.rating}
-        />
+
+    const commentariesBlock = commentaries.map((item, index)=>(
+        <CommentariesCard key={index} name={item.name} commentaries={item.respond} rating={item.rating}/>
     ));
+
 
     const handlePrevClick = () => {
         carouselRef.current.previous();
@@ -59,16 +60,13 @@ const CommentariesSlider = () => {
         carouselRef.current.next();
     };
 
+
     return (
-        <>
+        <div>
             <div className={style.buttonGroup}>
-                <h2 className={style.buttonGroupTitle}>Our happy customers</h2>
-                <CustomButtonGroup
-                    next={handleNextClick}
-                    previous={handlePrevClick}
-                />
+                <CustomButtonGroup next={handleNextClick} previous={handlePrevClick}/>
             </div>
-            <div className={style.carousel}>
+            <div >
                 <Carousel
                     swipeable={false}
                     draggable={false}
@@ -87,9 +85,13 @@ const CommentariesSlider = () => {
                     itemClass="carousel-item"
                 >
                     {commentariesBlock}
+
                 </Carousel>
             </div>
-        </>
+
+        </div>
+
+
     );
 };
 
