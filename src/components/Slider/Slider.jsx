@@ -19,17 +19,17 @@ const Slider = () => {
 
     useEffect(() => {
         axios
-            .get("/Banners.json")
+            .get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners")
             .then((res) => {
-                setBanners(res.data);
+                setBanners(res.data[0].urls);
             })
             .catch((error) => {
-                console.error("Помилка при отриманні даних:", error);
+                console.error("404:", error);
             });
     }, []);
 
     const pictures = banner.map((item, index) => (
-        <div className={style.sliderItemWrapper} key={item}>
+        <div className={style.sliderItemWrapper} key={index}>
             <img
                 className={style.sliderItem}
                 src={item}
