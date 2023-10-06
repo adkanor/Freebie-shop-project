@@ -8,14 +8,16 @@ import styles from "./ProductsByStyle.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
 import Pagination from "../../components/Pagination/Pagination";
-
+import Sorting from "../../components/SortingBlock/Sorting";
+import filters from "../../assets/icons/Filter/Edit.svg";
+import Button from "../../components/Button/Button";
 let PageSize = 2; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
-
 const ProductsByStyle = () => {
     const [productByStyle, setProductByStyle] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const { style } = useParams();
-    const [currentPage, setCurrentPage] = useState(1); 
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -80,32 +82,66 @@ const ProductsByStyle = () => {
                     filteredProducts={filteredProducts}
                     setFilteredProducts={setFilteredProducts}
                 />
-                <div className={styles.styleContent}>
-                    <div>
-                        <h2 className={styles.styleTitle}>{style}</h2>
-                        <p>dsfsdf</p>
-                    </div>
-                    <ul className={styles.productslist}>
-                        {currentTableData.map((product) => (
-                            <ClosedProductCard
-                                key={product._id}
-                                id={product._id}
-                                name={product.name}
-                                price={Number(product.price)}
-                                imageURL={product.url_image[0]}
-                                rating={Number(product.rating)}
-                                sale={Number(product.discount)}
+                {productByStyle.length > 0 ? (
+                    <div className={styles.styleContent}>
+                        <div className={styles.styleSorting}>
+                            <h2 className={styles.styleTitle}>{style}</h2>
+                            <img
+                                className={styles.filterIcon}
+                                src={filters}
+                                alt="filter icon"
+                                width={30}
+                                height={30}
                             />
-                        ))}
-                    </ul>
-                    <Pagination
-                        className="pagination-bar"
-                        currentPage={currentPage}
-                        totalCount={filteredProducts.length}
-                        pageSize={PageSize}
-                        onPageChange={handlePageChange}
-                    />
-                </div>
+                            <Sorting
+                                filteredProducts={filteredProducts}
+                                setFilteredProducts={setFilteredProducts}
+                            />
+                        </div>
+                        <ul className={styles.productslist}>
+                            {currentTableData.map((product) => (
+                                <ClosedProductCard
+                                    key={product._id}
+                                    id={product._id}
+                                    name={product.name}
+                                    price={Number(product.price)}
+                                    imageURL={product.url_image[0]}
+                                    rating={Number(product.rating)}
+                                    sale={Number(product.discount)}
+                                />
+                            ))}
+                        </ul>
+                        <Pagination
+                            className="pagination-bar"
+                            currentPage={currentPage}
+                            totalCount={filteredProducts.length}
+                            pageSize={PageSize}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
+                ) : (
+                    <div className={styles.noProducts}>
+                        <h2 className={styles.noProductsError}>
+                            No products found
+                        </h2>
+                        <p className={styles.noProductsMessage}>
+                            Sorry, there are currently no products available.
+                        </p>
+                        <Link className={styles.goHomeLink} to="/">
+                            <Button
+                                type={"text"}
+                                text={"Go to main page"}
+                                style={{
+                                    backgroundColor:
+                                        "var(--gray-text-secondary)",
+                                    color: "var(--white-text)",
+                                    width: "100%",
+                                    padding: "15px 0",
+                                }}
+                            />
+                        </Link>
+                    </div>
+                )}
             </div>
         </section>
     );
