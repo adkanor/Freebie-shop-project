@@ -1,51 +1,73 @@
-.PaginateWrapper {
-    box-sizing: border-box;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.PaginateBox {
+.PaginationContainer {
+	box-sizing: border-box;
+	padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+	justify-content: center;
+    list-style-type: none;
     border-top: 1px solid var(--separator-line);
-    padding-top: 20px;
-}
-
-.PaginateBtn {
-    border: 1px solid rgba(0, 0, 0, 0.10);
-    border-radius: 8px;
+	max-width: 1440px;
+    min-width: 320px;
+  }
+  
+  .PaginationItem:not(:first-child):not(:last-child) {
+    padding: 0 12px;
+    height: 32px;
+    text-align: center;
+    margin: auto 4px;
+    font-family: "Satoshi 400";
+    color: var(--gray-text-secondary);
     display: flex;
-    gap: .5rem;
+    box-sizing: border-box;
     align-items: center;
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    line-height: 20px;
+    font-size: 14px;
+    min-width: 32px;
     user-select: none;
-}
+  }
 
-.PaginateBtn:hover {
-    box-shadow: 0px 1px 2px var(--separator-line);
-}
+  .PaginationItem:first-child {
+	margin-right: auto;
+  }
 
-.PaginateBtn:active {
-    transform: scale(0.90);
-}
+  .PaginationItem:last-child {
+	margin-left: auto;
+  }
 
-.BtnTxt {
+  .ArrowBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    padding: 8px 14px;
+    border: 1px solid var(--separator-line);
+    border-radius: 8px;
     font-family: "Satoshi 500";
-    font-size: 12px;
+    user-select: none;
+  }
+  
+  .PaginationItem.dots:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+  
+  .PaginationItem:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .PaginationItem.selected {
+    background-color: rgba(0, 0, 0, 0.08);
     color: var(--black-text);
-}
-
-.ArrowBox {
-    width: 16px;
-    height: 16px;
-}
-
-@media only screen and (min-width: 766px) {
-    .BtnTxt {
-        font-size: 14px;
-    }
-}
+  }
+  
+  .PaginationItem.disabled {
+    pointer-events: none;
+  }
+  
+  .PaginationItem.disabled:hover {
+    background-color: transparent;
+    cursor: default;
+  }

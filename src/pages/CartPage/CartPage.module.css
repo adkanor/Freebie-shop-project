@@ -5,6 +5,7 @@
 }
 /* Navigation Home > Cart */
 .breadcrumbsList {
+    text-transform: uppercase;
     display: flex;
     justify-content: flex-start;
 }

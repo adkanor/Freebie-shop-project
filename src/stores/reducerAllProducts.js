@@ -7,7 +7,6 @@ const initState = {
 const getAllProductsReducer = (state = initState, action) => {
     switch (action.type) {
         case FETCH_PRODUCTS:
-            console.log(action.payload);
             return { ...state, allProducts: action.payload };
         default:
             return state;

@@ -1,9 +1,9 @@
 .filterSection {
-    width: 30%;
+    width: 250px;
     padding: 20px 24px;
     border-radius: 20px;
     border: 1px solid var(--separator-line);
-    margin-bottom: 150px;
+    margin: 50px 50px 150px 0;
 }
 .filterHeader {
     display: flex;
