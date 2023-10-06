@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-// import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import axios from "axios";
@@ -12,11 +11,13 @@ import Sorting from "../../components/SortingBlock/Sorting";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
 let PageSize = 2; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
+
 const ProductsByStyle = () => {
     const [productByStyle, setProductByStyle] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const { style } = useParams();
+    const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const { style } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,18 +40,26 @@ const ProductsByStyle = () => {
         fetchData();
     }, [style]);
 
+    // Function to setCurrentPage
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
+    // Function to calculate currentTableData
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return filteredProducts.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, filteredProducts]);
 
+    // Function to toogle Filters
+    const toogleFilters = () => {
+        setFiltresVisible(true);
+    };
+
     return (
         <section className="section">
+            {/* Navigation above page */}
             <nav className={styles.sectionNav}>
                 <ul className={styles.breadcrumbsList}>
                     <li>
@@ -61,7 +70,7 @@ const ProductsByStyle = () => {
                     <img
                         className={styles.breadcrumbsArrow}
                         src={arrow}
-                        alt="arrowLeft"
+                        alt="arrow to left in navigation"
                         width="14"
                         height="14"
                     />
@@ -75,14 +84,16 @@ const ProductsByStyle = () => {
                     </li>
                 </ul>
             </nav>
-
+            {/* Main section */}
             <div className={styles.stylePage}>
                 <Filters
+                    setFiltresVisible={setFiltresVisible}
+                    filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
                     filteredProducts={filteredProducts}
                     setFilteredProducts={setFilteredProducts}
                 />
-                {productByStyle.length > 0 ? (
+                {filteredProducts.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
                             <h2 className={styles.styleTitle}>{style}</h2>
@@ -90,8 +101,9 @@ const ProductsByStyle = () => {
                                 className={styles.filterIcon}
                                 src={filters}
                                 alt="filter icon"
-                                width={30}
-                                height={30}
+                                width="30"
+                                height="30"
+                                onClick={toogleFilters}
                             />
                             <Sorting
                                 filteredProducts={filteredProducts}
@@ -120,6 +132,7 @@ const ProductsByStyle = () => {
                         />
                     </div>
                 ) : (
+                    /* Page visible if there is no products in the array */
                     <div className={styles.noProducts}>
                         <h2 className={styles.noProductsError}>
                             No products found
