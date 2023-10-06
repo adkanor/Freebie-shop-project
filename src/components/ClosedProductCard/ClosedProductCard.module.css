@@ -78,10 +78,10 @@
 
 @media screen and (max-width: 765px){
     .cardWrapper {
-        width: 198px;
+        width: 196px;
     }
     .imgWrapper {
-        height: 198px;
+        height: 196px;
     }
     .productName {
         font-size: 1rem;

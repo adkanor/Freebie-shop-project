@@ -6,9 +6,11 @@ const DetailProductSlider = ({ imageArr }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     // eslint-disable-next-line
     const [banners, _] = useState(imageArr.slice(1));
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-    const handleImageClick = (image) => {
-        setLargeImage(image);
+    const handleImageClick = (e, index) => {
+        setLargeImage(e.target.src);
+        setSelectedImageIndex(index);
     };
 
     return (
@@ -19,12 +21,17 @@ const DetailProductSlider = ({ imageArr }) => {
                 </div>
             </div>
             <div className={styles.smallSquareContainer}>
-                {banners.map((bannerImg, index) => (
-                    <div key={index} className={styles.smallSquare}>
+                {imageArr.map((bannerImg, index) => (
+                    <div
+                        key={index}
+                        className={`${styles.smallSquare} ${
+                            selectedImageIndex === index ? styles.choosenSquare : ""
+                        }`}
+                    >
                         <img
                             src={bannerImg}
                             alt="Small square"
-                            onClick={() => handleImageClick(bannerImg)}
+                            onClick={(e) => handleImageClick(e, index)}
                         />
                     </div>
                 ))}

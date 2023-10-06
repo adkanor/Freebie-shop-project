@@ -2,35 +2,40 @@ import styles from "./DetailProductColors.module.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Field } from "formik";
-// import { darkenHexColor } from "../../utils/colorformatting";
+import { isColorLight } from "../../utils/colorformatting";
 
-const DetailProductColors = ({ amount, colorList, values }) => {
+const DetailProductColors = ({ colorList, values }) => {
     const buttons = [];
     const [color, setColor] = useState(values.color);
 
     const handleColorChange = (value) => {
         setColor(value);
-        values.color = colorList[value];
+        values.color = value;
     };
 
-    for (let i = 0; i < amount; i++) {
-        const colorValue = i + 1;
+    for (let i of colorList) {
         buttons.push(
-            <div key={colorValue}>
+            <div key={i}>
                 <Field
                     type="radio"
                     name="color"
-                    checked={color === colorValue}
-                    onChange={() => handleColorChange(colorValue)}
+                    checked={color === i}
+                    onChange={() => handleColorChange(i)}
                     value={1}
-                    id={colorValue}
+                    id={i}
                 />
-                <label htmlFor={colorValue}>
-                    <span style={{ backgroundColor: colorList[colorValue]}}>
+                <label htmlFor={i}>
+                    <span style={{ backgroundColor: i }}>
                         <img
                             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg"
                             alt="Checked Icon"
-                            style={{ filter: "brightness(0.7)" }}
+                            style={{
+                                filter: `${
+                                    isColorLight(i)
+                                        ? "brightness(0)"
+                                        : "brightness(1)"
+                                }`,
+                            }}
                         />
                     </span>
                 </label>
@@ -42,7 +47,6 @@ const DetailProductColors = ({ amount, colorList, values }) => {
 };
 
 DetailProductColors.propTypes = {
-    amount: PropTypes.number.isRequired,
     colorList: PropTypes.array,
     values: PropTypes.object,
 };

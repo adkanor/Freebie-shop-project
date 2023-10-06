@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import BlackButton from "../Button/Button";
 
 const DetailProductButtonGroup = ({ sizes, values }) => {
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButton, setActiveButton] = useState(values.size);
 
     const style = {
         backgroundColor: "var(--gray-primary)",

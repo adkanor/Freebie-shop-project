@@ -39,17 +39,9 @@ const DetailProduct = () => {
         console.log("Data:", values);
     };
 
-    const initialValues = {
-        color: "",
-        size: "",
-        amount: 0,
-    };
-
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
         return <NoPage />;
-    }
-
-    else if (!info) {
+    } else if (!info) {
         return <div>Loading...</div>;
     }
 
@@ -74,18 +66,40 @@ const DetailProduct = () => {
                     />
                     <li>
                         <Link
-                            to="/cart"
+                            to="/"
+                            style={{ textTransform: "capitalize" }}
                             className={stylesCartPage.breadcrumbsLinkToCart}
                         >
-                            {info.category}
+                            {info.sex}
                         </Link>
                     </li>
+                    <img
+                        className={stylesCartPage.breadcrumbsArrow}
+                        src={arrow}
+                        alt="arrowLeft"
+                        width="14"
+                        height="14"
+                    />
+                    <Link
+                        to="/"
+                        style={{ textTransform: "capitalize" }}
+                        className={stylesCartPage.breadcrumbsLinkToCart}
+                    >
+                        {info.category}
+                    </Link>
                 </ul>
             </nav>
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={[info.url_image, info.url_image, info.url_image, info.url_image]}/>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                    {({ values }) => (
+                <DetailProductSlider imageArr={info.url_image} />
+                <Formik
+                    initialValues={{
+                        color: "#ffffff",
+                        size: info.sizes[0].size,
+                        amount: 1,
+                    }}
+                    onSubmit={handleSubmit}
+                >
+                    {({ values, isValid, dirty }) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
@@ -93,10 +107,12 @@ const DetailProduct = () => {
                                 </h1>
                                 <div className={styles.ratingContainer}>
                                     <StarRating
-                                        rating={Number(info.rate)}
+                                        rating={Number(info.rating)}
                                         starSize="1.6rem"
                                     />
-                                    <p className={styles.ratingValue}>{info.rate}/5</p>
+                                    <p className={styles.ratingValue}>
+                                        {info.rating}/5
+                                    </p>
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
@@ -123,14 +139,23 @@ const DetailProduct = () => {
                                     </p>
                                     <div className={styles.colors}>
                                         <DetailProductColors
-                                            amount={info.colors.length}
-                                            colorList={info.colors}
+                                            colorList={[
+                                                "#ffffff",
+                                                "#000000",
+                                                "#ff0000",
+                                                "#ffee00",
+                                            ]}
                                             values={values}
                                         />
                                     </div>
                                 </div>
                                 <div className={styles.sizeFilter}>
-                                    <DetailProductButtonGroup sizes={["XS", "S", "M"]} values={values} />
+                                    <DetailProductButtonGroup
+                                        sizes={info.sizes.map(
+                                            (item) => item.size
+                                        )}
+                                        values={values}
+                                    />
                                 </div>
                                 <div className={styles.purchaseFilter}>
                                     <div
@@ -152,7 +177,7 @@ const DetailProduct = () => {
                                                 stylesCard.quantityNumber
                                             }
                                         >
-                                            4
+                                            1
                                         </span>
                                         <button
                                             className={stylesCard.quantityBtnUp}
@@ -164,6 +189,7 @@ const DetailProduct = () => {
                                         type={"submit"}
                                         text="Add to cart"
                                         style={styleBlack}
+                                        disabled={!isValid || !dirty}
                                     />
                                 </div>
                             </div>
