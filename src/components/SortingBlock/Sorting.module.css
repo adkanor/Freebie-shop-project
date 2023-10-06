@@ -1,0 +1,30 @@
+.SortContainer {
+    display: none;
+    align-items: center;
+}
+.SortContainerLabel {
+    font-size: 16px;
+    font-family: "Satoshi 500";
+    color: var(--black-text);
+    margin-right: 10px;
+}
+.SortSelect {
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--gray-primary);
+    color: var(--black-text);
+    font-family: "Satoshi 400";
+    font-size: 16px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.SortSelect option {
+    background-color: var(--gray-primary);
+}
+
+@media (min-width: 766px) {
+    .SortContainer {
+        display: flex;
+    }
+}
