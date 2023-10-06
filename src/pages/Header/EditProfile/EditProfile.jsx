@@ -1,29 +1,52 @@
 import React, { useState } from "react";
-import "./EditProfile.css"; // Импортируем CSS файл
+import { useFormik } from "formik";
+import styles from "./EditProfile.module.css";
+import { Link } from "react-router-dom";
+import arrow from "../../../assets/icons/Cart/arrow-right-bold.svg";
+import Button from "../../../components/Button/Button.jsx";
 
 function EditProfile() {
-    const [firstName, setFirstName] = useState("");
-    const [secondName, setSecondName] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState("");
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
-    const [firstNameError, setFirstNameError] = useState("");
-    const [secondNameError, setSecondNameError] = useState("");
-    const [passwordMismatch, setPasswordMismatch] = useState(false);
+    const [submitClicked, setSubmitClicked] = useState(false);
+    const [passwordMismatch, setPasswordMismatch] = useState(false); // Добавлено
 
-    const handleSaveChanges = () => {
-        // Ваша логика обработки сохранения изменений здесь
-        if (newPassword !== confirmNewPassword) {
-            setPasswordMismatch(true);
-        } else {
-            setPasswordMismatch(false);
-        }
-    };
+    const formik = useFormik({
+        initialValues: {
+            firstName: "",
+            secondName: "",
+            email: "",
+            address: "",
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+        },
+        validate: (values) => {
+            const errors = {};
+
+            if (values.newPassword !== values.confirmNewPassword) {
+                errors.confirmNewPassword = "Passwords do not match.";
+            }
+
+            if (!/^[a-zA-Z]+$/.test(values.firstName)) {
+                errors.firstName = "Invalid characters in First Name.";
+            }
+
+            if (!/^[a-zA-Z]+$/.test(values.secondName)) {
+                errors.secondName = "Invalid characters in Second Name.";
+            }
+
+            return errors;
+        },
+        onSubmit: (values) => {
+            if (values.newPassword !== values.confirmNewPassword) {
+                setPasswordMismatch(true);
+            } else {
+                setPasswordMismatch(false);
+            }
+        },
+    });
 
     const togglePasswordVisibility = (field) => {
         if (field === "current-password") {
@@ -35,175 +58,197 @@ function EditProfile() {
         }
     };
 
-    const handleFirstNameInput = (e) => {
-        const value = e.target.value;
-        // Проверка на наличие запрещенных символов в имени
-        const regex = /^[A-Za-z]+$/;
-        if (!regex.test(value)) {
-            setFirstNameError("Please enter a valid first name.");
-        } else {
-            setFirstNameError(""); // Очищаем ошибку, если она была
-        }
-        setFirstName(value);
-    };
+    const firstNameError = submitClicked && formik.errors.firstName;
+    const secondNameError = submitClicked && formik.errors.secondName;
 
-    const handleSecondNameInput = (e) => {
-        const value = e.target.value;
-        // Проверка на наличие запрещенных символов в фамилии
-        const regex = /^[A-Za-z]+$/;
-        if (!regex.test(value)) {
-            setSecondNameError("Please enter a valid last name.");
-        } else {
-            setSecondNameError(""); // Очищаем ошибку, если она была
-        }
-        setSecondName(value);
+    const handleSaveChanges = () => {
+        setSubmitClicked(true);
+        formik.handleSubmit();
     };
 
     return (
-        <div className="profile-container">
-            <h1 className="profile-heading">Edit Your Profile</h1>
-            <table className="profile-table">
-                <tbody>
-                    <tr>
-                        <td className="profile-cell">First Name:</td>
-                        <td className="profile-cell">Second Name:</td>
-                    </tr>
-                    <tr>
-                        <td className="profile-cell">
+        <div className={styles.profileContainer}>
+            <div className={styles.rightColumn}>
+                <nav className={styles.sectionNav}>
+                    <ul className={styles.breadcrumbsList}>
+                        <li>
+                            <Link to="/" className={styles.breadcrumbsLinkToHome}>
+                                Home
+                            </Link>
+                        </li>
+                        <img
+                            className={styles.breadcrumbsArrow}
+                            src={arrow}
+                            alt="arrowLeft"
+                            width="14"
+                            height="14"
+                        />
+                        <li>
+                            <Link to="/EditProfile" className={styles.breadcrumbsLinkToCart}>
+                                Account
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+                <Link to="/EditProfile" className={styles.manageAccountHeading}>
+                    Manage My Account
+                </Link>
+                <Link to="/EditProfile" className={styles.accountLink}>
+                    My Profile
+                </Link>
+                <Link to="/test" className={styles.accountLink}>
+                    Address
+                </Link>
+                <Link to="/test" className={styles.accountLink}>
+                    My Payment Options
+                </Link>
+                <Link to="/cart" className={styles.manageAccountHeading}>
+                    My Orders
+                </Link>
+                <Link to="/test" className={styles.manageAccountHeading}>
+                    My Wishlist
+                </Link>
+            </div>
+            <div className={styles.leftColumn}>
+                <h1 className={styles.profileHeading}>Edit Your Profile</h1>
+                <div className={styles.columnContainer}>
+                    <div className={styles.column}>
+                        <div className={styles.formGroup}>
+                            <h2 className={styles.profileChangesHeading}>First Name</h2>
+                            <label htmlFor="firstName"></label>
                             <input
                                 type="text"
-                                id="first-name"
-                                name="first-name"
+                                id="firstName"
+                                name="firstName"
                                 placeholder="John"
-                                value={firstName}
-                                onInput={handleFirstNameInput}
-                                required
+                                {...formik.getFieldProps("firstName")}
                             />
-                            {firstNameError && <p className="error-message">{firstNameError}</p>}
-                        </td>
-                        <td className="profile-cell">
-                            <input
-                                type="text"
-                                id="second-name"
-                                name="second-name"
-                                placeholder="Smith"
-                                value={secondName}
-                                onInput={handleSecondNameInput}
-                                required
-                            />
-                            {secondNameError && <p className="error-message">{secondNameError}</p>}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table className="profile-table">
-                <tbody>
-                    <tr>
-                        <td className="profile-cell">Email:</td>
-                        <td className="profile-cell">Address:</td>
-                    </tr>
-                    <tr>
-                        <td className="profile-cell">
+                            {firstNameError && (
+                                <p className={styles.errorMessage}>{firstNameError}</p>
+                            )}
+                        </div>
+                        <div className={styles.formGroup}>
+                            <h2 className={styles.profileChangesHeading}>Email</h2>
+                            <label htmlFor="email"></label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
                                 placeholder="example@mail.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
+                                {...formik.getFieldProps("email")}
                             />
-                        </td>
-                        <td className="profile-cell">
+                        </div>
+                    </div>
+                    <div className={styles.column}>
+                        <div className={styles.formGroup}>
+                            <h2 className={styles.profileChangesHeading}>Second Name</h2>
+                            <label htmlFor="secondName"></label>
+                            <input
+                                type="text"
+                                id="secondName"
+                                name="secondName"
+                                placeholder="Smith"
+                                {...formik.getFieldProps("secondName")}
+                            />
+                            {secondNameError && (
+                                <p className={styles.errorMessage}>{secondNameError}</p>
+                            )}
+                        </div>
+                        <div className={styles.formGroup}>
+                            <h2 className={styles.profileChangesHeading}>Address</h2>
+                            <label htmlFor="address"></label>
                             <input
                                 type="text"
                                 id="address"
                                 name="address"
                                 placeholder="Kingston, 5236, United States"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                                required
+                                {...formik.getFieldProps("address")}
                             />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table className="profile-table">
-                <tbody>
-                    <tr>
-                        <td className="profile-cell">Password Changes:</td>
-                    </tr>
-                    <tr>
-                        <td className="profile-cell">
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.column}>
+                    <h2 className={styles.profileChangesHeading}>Profile Changes</h2>
+                    <div className={styles.formGroup}>
+                        <div className={styles.passwordInputGroup}>
                             <input
                                 type={showCurrentPassword ? "text" : "password"}
-                                id="current-password"
-                                name="current-password"
+                                id="currentPassword"
+                                name="currentPassword"
                                 placeholder="Current Password"
-                                value={currentPassword}
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                required
+                                {...formik.getFieldProps("currentPassword")}
                             />
                             <span
                                 id="current-password-toggle"
-                                className="password-toggle"
+                                className={styles.passwordToggle}
                                 onClick={() => togglePasswordVisibility("current-password")}
                             >
                                 {showCurrentPassword ? "👁️" : "🔒"}
                             </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="profile-cell">
+                        </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                        <div className={styles.passwordInputGroup}>
                             <input
                                 type={showNewPassword ? "text" : "password"}
-                                id="new-password"
-                                name="new-password"
+                                id="newPassword"
+                                name="newPassword"
                                 placeholder="Create New Password"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                required
+                                {...formik.getFieldProps("newPassword")}
                             />
                             <span
                                 id="new-password-toggle"
-                                className="password-toggle"
+                                className={styles.passwordToggle}
                                 onClick={() => togglePasswordVisibility("new-password")}
                             >
                                 {showNewPassword ? "👁️" : "🔒"}
                             </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="profile-cell">
+                        </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                        <div className={styles.passwordInputGroup}>
                             <input
                                 type={showConfirmNewPassword ? "text" : "password"}
-                                id="confirm-new-password"
-                                name="confirm-new-password"
+                                id="confirmNewPassword"
+                                name="confirmNewPassword"
                                 placeholder="Confirm New Password"
-                                value={confirmNewPassword}
-                                onChange={(e) => setConfirmNewPassword(e.target.value)}
-                                required
+                                {...formik.getFieldProps("confirmNewPassword")}
                             />
                             <span
                                 id="confirm-new-password-toggle"
-                                className="password-toggle"
+                                className={styles.passwordToggle}
                                 onClick={() => togglePasswordVisibility("confirm-new-password")}
                             >
                                 {showConfirmNewPassword ? "👁️" : "🔒"}
                             </span>
-                            {passwordMismatch && <p className="error-message">Passwords do not match.</p>}
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button
-                type="button"
-                className="blackButton"
-                onClick={handleSaveChanges}
-            >
-                Save Changes
-            </button>
+                        </div>
+                        {formik.touched.confirmNewPassword &&
+                            formik.errors.confirmNewPassword && (
+                            <p className={styles.errorMessage}>
+                                {formik.errors.confirmNewPassword}
+                            </p>
+                        )}
+                        {passwordMismatch && (
+                            <p className={styles.errorMessage}>Passwords do not match.</p>
+                        )}
+                    </div>
+                </div>
+                {submitClicked && (firstNameError || secondNameError) && (
+                    <p className={styles.errorMessage}>
+                        Please fix the errors before saving.
+                    </p>
+                )}
+                <Button
+                    text="Save Changes"
+                    style={{
+                        width: "40%",
+                        padding: "16px 0",
+                        margin: "0 auto",
+                        backgroundColor: "var(--black--background)",
+                    }}
+                    onClick={handleSaveChanges}
+                />
+            </div>
         </div>
     );
 }
