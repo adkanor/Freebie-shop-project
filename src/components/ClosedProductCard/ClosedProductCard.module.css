@@ -80,6 +80,7 @@
         width: 170px;
     }
     .imgWrapper {
+        padding: .6rem;
         height: 170px;
     }
     .productName {
