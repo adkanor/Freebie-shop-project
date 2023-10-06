@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
-    padding: 1rem;
-    width: 300px;
+    width: 296px;
     color: var(--black-text);
 }
 
@@ -12,7 +11,7 @@
     padding: 1.5rem;
     border-radius: 1rem;
     margin-bottom: 0.5rem;
-    height: 300px;
+    height: 296px;
     display: flex;
     align-items: center;
 }
@@ -78,10 +77,10 @@
 
 @media screen and (max-width: 765px){
     .cardWrapper {
-        width: 196px;
+        width: 170px;
     }
     .imgWrapper {
-        height: 196px;
+        height: 170px;
     }
     .productName {
         font-size: 1rem;
