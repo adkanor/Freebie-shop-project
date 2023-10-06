@@ -1,27 +1,39 @@
 .filterSection {
-    width: 250px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 90vw;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
     padding: 20px 24px;
     border-radius: 20px;
     border: 1px solid var(--separator-line);
-    margin: 50px 50px 150px 0;
+    display: none;
 }
+
 .filterHeader {
     display: flex;
     justify-content: space-between;
 }
 .filtersName {
-    font-size: 20px;
+    font-size: 16px;
     font-family: "Satoshi 700";
-    margin: 10px 0;
+    margin: 6px 0;
 }
 .filterTitle {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--black-text);
     font-family: "Satoshi 700";
-    margin-bottom: 20px;
-    margin-top: 15px;
-    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-top: 17px;
     border-top: 1px solid var(--separator-line);
+}
+.filterIcon {
+    display: none;
+}
+.filterToClose {
+    display: block;
 }
 .filterPriceInfo {
     margin: 7px auto;
@@ -48,17 +60,37 @@ label {
     border-radius: 50%;
     outline: none;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .radioInput:checked {
     background-color: var(--black-text);
 }
 @media (min-width: 766px) {
-    .filterPriceInfo {
-        margin: 13px auto;
-        font-size: 17px;
+    .filtersName {
+        font-size: 20px;
+        margin: 10px 0;
     }
-    .filterPriceInfo span {
-        margin-left: 40px;
+    .filterTitle {
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+        padding-top: 10px;
+    }
+    .filterSectionWrapper {
+        background-color: transparent;
+    }
+    .filterSection {
+        display: block;
+        position: static;
+        background-color: transparent;
+        width: 250px;
+        margin: 50px 50px 150px 0;
+    }
+    .filterIcon {
+        display: block;
+    }
+    .filterToClose {
+        display: none;
     }
 }

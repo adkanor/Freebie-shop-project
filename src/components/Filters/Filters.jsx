@@ -1,10 +1,12 @@
 import React from "react";
+import { useMemo } from "react";
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import MultiRangeSlider from "multi-range-slider-react";
 import { useFormik } from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
+import closeIcon from "../../assets/icons/Filter/Close.svg";
 
 const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
     const MIN_PRICE = 10;
@@ -19,6 +21,15 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
         "skirts",
         "shorts and Dresses",
     ];
+    let filteredByCategories = useMemo(
+        () => [...filteredProducts],
+        [filteredProducts]
+    );
+
+    let productsNotFiltered = useMemo(
+        () => [...productByStyle],
+        [productByStyle]
+    );
 
     const formik = useFormik({
         initialValues: {
@@ -30,22 +41,20 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
         },
     });
 
+    // Function for processing price changes
     const changePriceInput = (e) => {
         formik.setFieldValue("minPrice", e.minValue);
         formik.setFieldValue("maxPrice", e.maxValue);
     };
 
+    // Function for applying filters
     const applyFilters = (e) => {
         e.preventDefault();
-        console.log(formik.values.category);
-        let filteredByCategories = filteredProducts;
-        console.log(filteredByCategories);
 
         if (formik.values.category !== "") {
             filteredByCategories = filteredByCategories.filter(
                 (product) => product.category === formik.values.category
             );
-            console.log(filteredByCategories);
         }
         if (formik.values.size !== "") {
             filteredByCategories = filteredByCategories.filter((product) =>
@@ -73,10 +82,13 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
             console.log("Нет отфильтрованных продуктов.");
         }
     };
+
+    // Function to reset filters
     const resetFilters = () => {
-        setFilteredProducts(productByStyle);
+        setFilteredProducts(productsNotFiltered);
         formik.resetForm();
     };
+
     return (
         <aside className={styles.filterSection}>
             <div className={styles.filterHeader}>
@@ -86,11 +98,15 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
                     src={filters}
                     alt="Filter icons"
                 />
+                <img
+                    className={styles.filterToClose}
+                    src={closeIcon}
+                    alt="Filter icons"
+                />
             </div>
             <form onSubmit={applyFilters}>
                 <div className={styles.filterSex}>
                     <h3 className={styles.filterTitle}>Gender</h3>
-
                     <label>
                         <input
                             className={styles.radioInput}
@@ -161,7 +177,6 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
                         {formik.values.maxPrice}
                     </p>
                 </div>
-
                 <div className={styles.filterSize}>
                     <h3 className={styles.filterTitle}>Sizes</h3>
                     {sizes.map((size) => (
@@ -178,6 +193,7 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
                         </label>
                     ))}
                 </div>
+
                 <Button
                     type={"submit"}
                     text={"Apply"}
@@ -188,20 +204,21 @@ const Filters = ({ productByStyle, filteredProducts, setFilteredProducts }) => {
                         margin: "20px 0",
                     }}
                 />
+                <Button
+                    type={"text"}
+                    text={"Reset"}
+                    style={{
+                        color: "var(--black-text)",
+                        width: "100%",
+                        padding: "7px 0",
+                    }}
+                    onClick={resetFilters}
+                />
             </form>
-            <Button
-                type={"text"}
-                text={"Reset"}
-                style={{
-                    color: "var(--black-text)",
-                    width: "100%",
-                    padding: "7px 0",
-                }}
-                onClick={resetFilters}
-            />
         </aside>
     );
 };
+
 Filters.propTypes = {
     productByStyle: PropTypes.array.isRequired,
     filteredProducts: PropTypes.array.isRequired,
