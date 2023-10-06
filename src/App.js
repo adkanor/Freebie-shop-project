@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./pages/Header/Header";
-import EditProfile from "./pages/Header/EditProfile/EditProfile";
+import EditProfile from "./pages/EditProfile/EditProfile";
 import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./components/Footer/Footer";
 import MainSection from "./pages/MainPage/MainPage";

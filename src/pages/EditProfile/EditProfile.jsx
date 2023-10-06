@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import styles from "./EditProfile.module.css";
 import { Link } from "react-router-dom";
-import arrow from "../../../assets/icons/Cart/arrow-right-bold.svg";
-import Button from "../../../components/Button/Button.jsx";
+import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
+import Button from "../../components/Button/Button.jsx";
 
 function EditProfile() {
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
     const [submitClicked, setSubmitClicked] = useState(false);
-    const [passwordMismatch, setPasswordMismatch] = useState(false); // Добавлено
+    const [passwordMismatch, setPasswordMismatch] = useState(false);
 
     const formik = useFormik({
         initialValues: {

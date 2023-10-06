@@ -3,7 +3,6 @@
     margin-bottom: 8px;
     font-family: "Satoshi 400", Arial, sans-serif;
 }
-/* Navigation Home > Cart */
 .breadcrumbsList {
     display: flex;
     justify-content: flex-start;
@@ -23,18 +22,15 @@
 .breadcrumbsLinkToCart {
     color: var(--black-text);
 }
-/* Cart Title */
 .cartPageTitle {
     font-size: 32px;
     margin-bottom: 20px;
     font-family: "Integral-CF 700", Arial, sans-serif;
 }
-/* cartContainer */
 .cartContainer {
     display: flex;
     flex-direction: column;
 }
-/* cartContent */
 .cartContent {
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -42,7 +38,6 @@
     margin-bottom: 20px;
 }
 
-/* Cart Summary section */
 .cartSummary {
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -109,14 +104,12 @@
     width: 20px;
     height: 20px;
 }
-/* Медиа-запрос для больших єкранов */
 @media (min-width: 766px) {
     .sectionNav {
         margin-top: 24px;
         margin-bottom: 24px;
     }
     .breadcrumbsArrow {
-        /* margin-right: 10px; */
         width: 16px;
         height: 16px;
     }
