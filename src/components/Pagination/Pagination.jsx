@@ -45,9 +45,9 @@ const Pagination = props => {
                     className={styles.ArrowBox}
                 >
                     <img
+                        className={styles.Arrow}
                         src={LeftArrow}
                         alt="LeftArrow"
-                        height={20}
                     />
                     Previous
                 </div>
@@ -76,9 +76,9 @@ const Pagination = props => {
                 >
                     Next
                     <img
+                        className={styles.Arrow}
                         src={RightArrow}
                         alt="RightArrow"
-                        height={20}
                     />
                 </div>
             </li>
