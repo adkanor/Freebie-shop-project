@@ -1,0 +1,83 @@
+
+
+.productContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productImg{
+    width: 54px;
+height: 54px;
+padding: 6px 2.116px 5.778px 3px;
+object-fit: cover;
+}
+
+.productDetails{
+    display: flex;
+    align-items: center;
+}
+.productTitle{
+    padding-left: 40px;
+}
+
+.productTitle, .productPrice{
+    color: #000;
+font-family: "Satoshi 400";
+font-size: 16px;
+font-style: normal;
+line-height: 24px;
+}
+
+.formContent, .productsWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 32px; 
+}
+
+.productsWrapper{
+    overflow-y: scroll;
+    height: 200px;
+}
+
+.subtotalContainer, .shippingContainer, .totalContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title, .price, .paymentTitle{
+    color: #000;
+    font-family: "Satoshi 400";
+    font-size: 16px;
+    font-style: normal;
+    line-height: 24px;
+}
+
+.subtotalContainer, .shippingContainer{
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.325);
+}
+
+.payment{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.paymentBank, .paymentCash{
+    display: flex;
+    gap: 10px;
+}
+
+.couponContainer > input{
+    display: flex;
+    width: 100%;
+    padding: 10px 0px 11px 26px;
+    border-radius: 4px;
+    border: 1px solid #000;
+}
+
+.couponContainer{
+    display: flex;
+    gap:16px;
+}

@@ -11,6 +11,7 @@ import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
+import CheckOut from "./pages/CheckOut/CheckOut";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="/" element={<MainSection />} />
                 <Route path="/:style" element={<ProductsByStyle />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
                 <Route path="/login" element={<Login />} />
