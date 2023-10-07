@@ -4,20 +4,20 @@ import PropTypes from "prop-types";
 
 import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
 const RecommendationProducts = ({ title, arrayofProducts, children }) => {
+    const littleArr = arrayofProducts.length ? arrayofProducts.slice(0,4) : [];
     return (
         <div className={styles.recommendationProducts}>
             <h2>{title}</h2>
             <ul className={styles.productslist}>
-                {arrayofProducts.map((product) => (
+                {littleArr.map((product) => (
                     <ClosedProductCard
                         key={product._id}
                         id={product._id}
                         name={product.name}
                         price={Number(product.price)}
-                        imageURL={product.url_image}
-                        rating={Number(product.rate)}
+                        imageURL={product.url_image[0]}
+                        rating={Number(product.rating)}
                         sale={Number(product.discount)}
-                        salePrice={Number(product.price)}
                     />
                 ))}
             </ul>

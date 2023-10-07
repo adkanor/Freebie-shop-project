@@ -1,18 +1,101 @@
 .filterSection {
-    width: 295px;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100vw;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
     padding: 20px 24px;
     border-radius: 20px;
     border: 1px solid var(--separator-line);
+    box-shadow: 0px -30px 50px #888888;
+    overflow-y: auto;
+}
+.hiddenfilterSection {
+    display: none;
 }
 .filterHeader {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 24px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--separator-line);
+}
+.filtersName {
+    font-size: 14px;
+    font-family: "Satoshi 700";
+    margin: 6px 0;
 }
 .filterTitle {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--black-text);
     font-family: "Satoshi 700";
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-top: 17px;
+    border-top: 1px solid var(--separator-line);
+}
+.filterIcon {
+    display: none;
+}
+.filterToClose {
+    display: block;
+}
+.filterPriceInfo {
+    margin: 7px auto;
+    font-size: 13px;
+    color: var(--black-text);
+    font-family: "Satoshi 400";
+}
+.filterPriceInfo span {
+    margin-left: 5px;
+}
+label {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-family: "Satoshi 400";
+    color: var(--gray-text-primary);
+}
+.radioInput {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--gray-text-primary);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.radioInput:checked {
+    background-color: var(--black-text);
+}
+@media (min-width: 766px) {
+    .filterTitle {
+        font-size: 22px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+        padding-top: 10px;
+    }
+    .filterSectionWrapper {
+        background-color: transparent;
+    }
+    .hiddenfilterSection {
+        box-sizing: border-box;
+        display: block;
+        padding: 20px 24px;
+        border: 1px solid var(--separator-line);
+        margin: 70px 50px 150px 0;
+        width: 250px;
+        border-radius: 20px;
+    }
+    .filterIcon {
+        display: block;
+    }
+    .filterToClose {
+        display: none;
+    }
+    .filtersName {
+        font-size: 24px;
+    }
 }

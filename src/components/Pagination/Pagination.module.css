@@ -1,0 +1,73 @@
+.PaginationContainer {
+	box-sizing: border-box;
+	padding: 20px;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+    list-style-type: none;
+    border-top: 1px solid var(--separator-line);
+	max-width: 1440px;
+    min-width: 320px;
+  }
+  
+  .PaginationItem:not(:first-child):not(:last-child) {
+    padding: 0 12px;
+    height: 32px;
+    text-align: center;
+    margin: auto 4px;
+    font-family: "Satoshi 400";
+    color: var(--gray-text-secondary);
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: 8px;
+    line-height: 20px;
+    font-size: 14px;
+    min-width: 32px;
+    user-select: none;
+  }
+
+  .PaginationItem:first-child {
+	margin-right: auto;
+  }
+
+  .PaginationItem:last-child {
+	margin-left: auto;
+  }
+
+  .ArrowBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    padding: 8px 14px;
+    border: 1px solid var(--separator-line);
+    border-radius: 8px;
+    font-family: "Satoshi 500";
+    user-select: none;
+  }
+  
+  .PaginationItem.dots:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+  
+  .PaginationItem:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .PaginationItem.selected {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: var(--black-text);
+  }
+  
+  .PaginationItem.disabled {
+    pointer-events: none;
+  }
+  
+  .PaginationItem.disabled:hover {
+    background-color: transparent;
+    cursor: default;
+  }
