@@ -4,17 +4,22 @@
 }
 .recommendationProducts h2 {
     text-align: center;
-    font-family: "Integral-CF 700" ;
+    font-family: "Integral-CF 700";
     font-size: 32px;
     margin-top: 50px;
     margin-bottom: 32px;
 }
 
 .productslist {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     margin-bottom: 24px;
+}
+.productslist li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (min-width: 766px) {
@@ -26,8 +31,8 @@
     }
 }
 
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 1299px) {
     .productslist {
-        flex-wrap: nowrap;
+        grid-template-columns: repeat(4, 1fr);
     }
 }
