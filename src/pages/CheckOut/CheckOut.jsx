@@ -6,7 +6,7 @@ import stylesCart from "../CartPage/CartPage.module.css";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import FormContent from "./formContent/FormContent";
 import * as Yup from "yup";
-
+import Input from "../../components/InputPassworgLogin/Input";
 const validateSchema = Yup.object().shape({
     firstName: Yup.string().max(40).required("This field is required"),
     email: Yup.string()
@@ -55,105 +55,121 @@ const CheckOut = () => {
                     alert(JSON.stringify(values, null, 2));
                 }}
             >
-                <Form>
-                    <div className={styles.formSection}>
-                        <div className={styles.formItem}>
-                            <label
-                                className={styles.formLabel}
-                                htmlFor="firstName"
-                            >
-                                First Name
-                            </label>
-                            <Field
-                                id="firstName"
-                                name="firstName"
-                                className={styles.formInput}
-                            />
-                        </div>
+                {({ errors, touched }) => (
+                    <Form className={styles.form}>
+                        <div className={styles.formSection}>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="firstName"
+                                >
+                                    First Name
+                                </label>
+                                {/* <Field
+                                    id="firstName"
+                                    name="firstName"
+                                    className={styles.formInput}
+                                /> */}
+                                <Input
+                                    name="firstName"
+                                    isError={
+                                        errors.firstName && touched.firstName
+                                    }
+                                    errorText={errors.firstName}
+                                    type={"text"}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label
-                                className={styles.formLabel}
-                                htmlFor="lastName"
-                            >
-                                Company Name
-                            </label>
-                            <Field
-                                id="companyName"
-                                name="companyName"
-                                className={styles.formInput}
-                            />
-                        </div>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="lastName"
+                                >
+                                    Company Name
+                                </label>
+                                <Field
+                                    id="companyName"
+                                    name="companyName"
+                                    className={styles.formInput}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label
-                                className={styles.formLabel}
-                                htmlFor="streetAddress"
-                            >
-                                Street Address
-                            </label>
-                            <Field
-                                id="streetAddress"
-                                name="streetAddress"
-                                className={styles.formInput}
-                            />
-                        </div>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="streetAddress"
+                                >
+                                    Street Address
+                                </label>
+                                <Field
+                                    id="streetAddress"
+                                    name="streetAddress"
+                                    className={styles.formInput}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label
-                                className={styles.formLabel}
-                                htmlFor="apartmentInfo"
-                            >
-                                Apartment, floor, etc. (optional)
-                            </label>
-                            <Field
-                                id="apartmentInfo"
-                                name="apartmentInfo"
-                                className={styles.formInput}
-                            />
-                        </div>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="apartmentInfo"
+                                >
+                                    Apartment, floor, etc. (optional)
+                                </label>
+                                <Field
+                                    id="apartmentInfo"
+                                    name="apartmentInfo"
+                                    className={styles.formInput}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label className={styles.formLabel} htmlFor="city">
-                                Town/City
-                            </label>
-                            <Field
-                                id="city"
-                                name="city"
-                                className={styles.formInput}
-                            />
-                        </div>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="city"
+                                >
+                                    Town/City
+                                </label>
+                                <Field
+                                    id="city"
+                                    name="city"
+                                    className={styles.formInput}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label
-                                className={styles.formLabel}
-                                htmlFor="phoneNumber"
-                            >
-                                Phone Number
-                            </label>
-                            <Field
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                className={styles.formInput}
-                            />
-                        </div>
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="phoneNumber"
+                                >
+                                    Phone Number
+                                </label>
+                                <Field
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    className={styles.formInput}
+                                />
+                            </div>
 
-                        <div className={styles.formItem}>
-                            <label className={styles.formLabel} htmlFor="email">
-                                Email Address
-                            </label>
-                            <Field
-                                id="email"
-                                name="email"
-                                type="email"
-                                className={styles.formInput}
-                            />
+                            <div className={styles.formItem}>
+                                <label
+                                    className={styles.formLabel}
+                                    htmlFor="email"
+                                >
+                                    Email Address
+                                </label>
+                                <Field
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    className={styles.formInput}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.formContentSection}>
-                        <FormContent />
-                    </div>
-                </Form>
+                        <div className={styles.formContentSection}>
+                            <FormContent />
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </div>
     );
