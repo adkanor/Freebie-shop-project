@@ -61,7 +61,7 @@
 .productslist li {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
 }
 .noProducts {
     margin: 250px auto;
