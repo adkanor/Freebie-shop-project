@@ -10,7 +10,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
-let PageSize = 2; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
+let PageSize = 9; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
 
 const ProductsByStyle = () => {
     const [productByStyle, setProductByStyle] = useState([]);
