@@ -12,6 +12,8 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
+import EditProfile from "./pages/EditProfile/EditProfile";
+
 
 const App = () => {
     const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const App = () => {
                 <Route path="/products/:id" element={<DetailProduct />} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
                 <Route path="/login" element={<Login />} />
+                <Route path="/EditProfile" element={<EditProfile />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/footer" element={<Footer />} />
                 <Route path="*" element={<NoPage />} />
