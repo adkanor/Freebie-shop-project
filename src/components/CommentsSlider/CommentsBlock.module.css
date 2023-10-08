@@ -1,10 +1,30 @@
-.buttonGroup{
+.buttonGroup {
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: space-between;
+
 }
 
-.carousel-item{
-   width: 100%;
+.carousel-item {
+    width: 100%;
+}
+
+.carousel {
+    margin-top: 10px;
+}
+
+.buttonGroupTitle {
+    color: var(--black-text);
+    font-family: "Integral-CF 700", Arial, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+@media screen  and (max-width: 766px) {
+    .buttonGroupTitle {
+        max-width: 70%;
+        font-size: 32px;
+        line-height: 32px;
+    }
 }
 
