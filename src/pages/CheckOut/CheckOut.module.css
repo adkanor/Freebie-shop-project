@@ -39,15 +39,27 @@ font-weight: 400;
 line-height: 24px; /* 150% */
 }
 
+.formContentSection{
+    width: 100%;
+}
+.formItem{
+    position: relative;
+}
+
+.errorMessage{
+    position: absolute;
+    color: var(--red-text);
+}
+
 @media screen and (min-width: 766px) {
     /* .formSection{
         flex-direction: row;
     } */
-    form{
+    .form{
         flex-direction: row;
         justify-content: space-between;
     }
-}
-.formContentSection{
-    width: 100%;
+    .formContentSection{
+        padding-top: 17px;
+    }
 }

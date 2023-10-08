@@ -38,6 +38,7 @@ line-height: 24px;
 .productsWrapper{
     overflow-y: scroll;
     height: 200px;
+    padding-right: 5px;
 }
 
 .subtotalContainer, .shippingContainer, .totalContainer{
@@ -80,4 +81,41 @@ line-height: 24px;
 .couponContainer{
     display: flex;
     gap:16px;
+}
+
+.paymentBank:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bankInput{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+.radioInput {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--gray-text-primary);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.radioInput:checked {
+    background-color: var(--black-text);
+}
+
+@media screen and (min-width: 766px) {
+    .formContent>button{
+        margin-top: 28px;
+    }
 }
