@@ -1,0 +1,25 @@
+.commentsDetaliesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.commentsItem {
+    width: 48%;
+    margin: 10px 0;
+}
+
+
+@media screen and (max-width: 765px ) {
+    .commentsDetaliesWrapper {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .commentsItem {
+        width: 90%;
+    }
+
+}
