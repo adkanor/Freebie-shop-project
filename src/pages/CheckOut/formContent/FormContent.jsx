@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./FormContent.module.css";
 import { Field } from "formik";
 import BlackButton from "../../../components/Button/Button";
+import svgBank from "../../../assets/icons/Payment/PaymentsBank.svg";
 const products = [
     {
         title: "LCD Monitor",
@@ -66,12 +67,28 @@ const FormContent = () => {
 
             <div className={styles.payment}>
                 <div className={styles.paymentBank}>
-                    <Field type="radio" name="payment" value="Bank" />
-                    <p className={styles.paymentTitle}>Bank</p>
+                    <div className={styles.bankInput}>
+                        <Field
+                            type="radio"
+                            className={styles.radioInput}
+                            name="payment"
+                            value="Bank"
+                        />
+                        <p className={styles.paymentTitle}>Bank</p>
+                    </div>
+
+                    <div className={styles.paymentBankSvgs}>
+                        <img src={svgBank} alt="bank payments" />
+                    </div>
                 </div>
 
                 <div className={styles.paymentCash}>
-                    <Field type="radio" name="payment" value="Cash" />
+                    <Field
+                        className={styles.radioInput}
+                        type="radio"
+                        name="payment"
+                        value="Cash"
+                    />
                     <p className={styles.paymentTitle}>Cash on delivery</p>
                 </div>
             </div>
