@@ -2,8 +2,18 @@
     margin-top: 20px;
     margin-bottom: 8px;
     font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 14px;
 }
-/* Navigation Home > Cart */
+.styleSorting {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.filterIcon {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
 .breadcrumbsList {
     display: flex;
     justify-content: flex-start;
@@ -25,8 +35,10 @@
     color: var(--black-text);
 }
 .stylePage {
+    width: 100%;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
 }
 .styleTitle {
     font-size: 32px;
@@ -36,13 +48,52 @@
     text-transform: capitalize;
 }
 .styleContent {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 .productslist {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
     grid-gap: 20px;
-    list-style: none;
-    padding: 0;
+}
+.productslist li {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.noProducts {
+    margin: 250px auto;
+    padding: 20px;
+    border: 1px solid var(--separator-line);
+    border-radius: 20px;
+}
+.noProductsMessage,
+.noProductsError {
+    color: var(--black-text);
+    font-family: "Satoshi 500";
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.noProductsError {
+    font-size: 30px;
+}
+.goHomeLink {
+    text-decoration: none;
+}
+
+@media (min-width: 766px) {
+    .filterIcon {
+        display: none;
+    }
+    .sectionNav {
+        margin-bottom: 25px;
+        font-size: 16px;
+    }
+}
+@media (min-width: 1299px) {
+    .productslist {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

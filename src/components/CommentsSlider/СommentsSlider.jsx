@@ -33,7 +33,7 @@ const CommentsSlider = () => {
 
     useEffect(() => {
         axios
-            .get("/reviews.json")
+            .get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getCountComments/10")
             .then((res) => {
                 setComments(res.data);
             })
@@ -45,12 +45,13 @@ const CommentsSlider = () => {
     const commentsBlock = comments.map((item, index) => (
         <CommentsCard
             key={index}
-            name={item.name}
-            commentaries={item.respond}
+            firstName={item.firstName}
+            lastName={item.lastName}
+            commentaries={item.text}
             rating={item.rating}
             style={{
                 width: "350px",
-                height: "300px",
+                height: "150px",
                 margin: "0 auto 10px",
 
             }}

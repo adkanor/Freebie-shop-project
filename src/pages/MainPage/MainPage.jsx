@@ -1,26 +1,58 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import {connect} from "react-redux";
 import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
-import Button from "../../components/Button/Button";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
+import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
+import {
+    saveArrivalsListOperation,
+    saveTopSellingListOperations
+} from "../../stores/getArrivals_and_getTopSelling/operation/operation";
+import axios from "axios";
+import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
+import Button from "../../components/Button/Button";
 
-const MainPage = () => {
-    const products = useSelector(
-        (state) => state.getAllProductsReducer.allProducts
-    );
-    const firstFourProducts = products.slice(0, 4); // первые 4 карточки товара для отображения новых поступлений
-    const secondFourProducts = products.slice(0, 4); // вторые  4 карточки товара для отображения новых поступлений
+
+
+
+
+
+
+const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) => {
+    // const [rerender, setRerender] = "off";
+    // const products = useSelector(
+    //     (state) => state.getAllProductsReducer.allProducts
+    // );
+    // const firstFourProducts = products.slice(0, 4); // первые 4 карточки товара для отображения новых поступлений
+    // const secondFourProducts = products.slice(0, 4); // вторые  4 карточки товара для отображения новых поступлений
+
+    useEffect(()=>{
+        axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods/10")
+            .then(response => {
+                addArrivalsList(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getRatingGoods/10")
+            .then(response => {
+                addTopSelling(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    },[addArrivalsList,addTopSelling]);
 
     return (
         <section className="section">
             <Slider />
             <BrandBox />
             <RecommendationProducts
+                arrayofProducts={newArrivals}
                 title={"New Arrivals"}
-                arrayofProducts={firstFourProducts}
             >
                 <Button
                     text="View all"
@@ -37,7 +69,7 @@ const MainPage = () => {
             </RecommendationProducts>
             <RecommendationProducts
                 title={"Top Selling"}
-                arrayofProducts={secondFourProducts}
+                arrayofProducts={topSaleList}
             >
                 <Button
                     text="View all"
@@ -69,9 +101,31 @@ const MainPage = () => {
                     </Link>
                 </div>
             </div>
+            <CommentsSlider/>
+
 
         </section>
     );
 };
 
-export default MainPage;
+const mapStateToProps = ({ newArrivalsReducer, topSaleReducer }) => ({
+    newArrivals: newArrivalsReducer,
+    topSaleList: topSaleReducer
+});
+
+const mapDispatchToProps =(dispatch)=>({
+    addArrivalsList:(items)=>dispatch(saveArrivalsListOperation(items)),
+    addTopSelling:(items) => dispatch(saveTopSellingListOperations(items))
+
+});
+
+MainPage.propTypes = {
+    addArrivalsList: PropTypes.func,
+    addTopSelling: PropTypes.func,
+    topSaleList: PropTypes.array,
+    newArrivals: PropTypes.array,
+    state:PropTypes.object
+};
+
+
+export default connect (mapStateToProps, mapDispatchToProps) (MainPage);
