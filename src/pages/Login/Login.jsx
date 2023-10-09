@@ -1,38 +1,19 @@
 import React from "react";
 import style from "./Login.module.css";
-import jwt_decode from "jwt-decode";
+
 import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
 import {Link} from "react-router-dom";
-import {GoogleLogin} from "@react-oauth/google";
+// import {GoogleLogin} from "@react-oauth/google";
+// import jwt_decode from "jwt-decode";
 
 
 const url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz6RwvgggYzVqj1g1WegTjmGl5vzxPaCm6Lg&usqp=CAU";
 
 
 const Login = () => {
-
-
-    // const sendPostMessage = (data) => {
-    //     const targetWindow = window.parent;
-    //     targetWindow.postMessage(data, "http://localhost:3000/login");
-    // };
-
-    // useEffect(() => {
-    //     const receiveMessage = (event) => {
-    //         if (event.origin === "http://localhost:3000/login") {
-    //             console.log("Отримано повідомлення:", event.data);
-    //         }
-    //     };
-    //
-    //     window.addEventListener("message", receiveMessage);
-    //
-    //     return () => {
-    //         window.removeEventListener("message", receiveMessage);
-    //     };
-    // }, []);
 
 
     return (
@@ -87,19 +68,20 @@ const Login = () => {
 
                     </Formik>
                 </div>
-                <div>
-                    <GoogleLogin
-                        onSuccess={credentialResponse => {
-                            const decoded = jwt_decode(credentialResponse.credential);
-                            console.log(decoded);
+                {/*<div>*/}
+                {/*    <GoogleLogin*/}
+                {/*        onSuccess={credentialResponse => {*/}
+                {/*            console.log(credentialResponse);*/}
+                {/*            const decoded = jwt_decode(credentialResponse.credential);*/}
+                {/*            console.log(decoded);*/}
 
 
-                        }}
-                        onError={() => {
-                            console.log("Login Failed");
-                        }}
-                    />
-                </div>
+                {/*        }}*/}
+                {/*        onError={() => {*/}
+                {/*            console.log("Login Failed");*/}
+                {/*        }}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
             </div>
 

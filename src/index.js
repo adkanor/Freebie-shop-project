@@ -13,7 +13,7 @@ root.render(
         <Provider store={store}>
             <BrowserRouter>
                 <GoogleOAuthProvider
-                    clientId={"1067707080438-8h0es3omklr0q43jc6435pf331576ftp.apps.googleusercontent.com"}>
+                    clientId={"260867558541-ctmfm0db7e62mj2dlm4881mp8th6g1cc.apps.googleusercontent.com"}>
                     <App/>
                 </GoogleOAuthProvider>
             </BrowserRouter>
