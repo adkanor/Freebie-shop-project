@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./DetailProduct.module.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import stylesCartPage from "../CartPage/CartPage.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import { Formik, Form } from "formik";
+import {Formik, Form} from "formik";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import NoPage from "../NoPage/NoPage";
+import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -27,7 +28,7 @@ const DetailProduct = () => {
         (state) => state.getAllProductsReducer.allProducts
     );
     const [info, setInfo] = useState(null);
-    const { id } = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
         const productInfo = products.find((item) => item._id === id);
@@ -39,7 +40,7 @@ const DetailProduct = () => {
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        return <NoPage />;
+        return <NoPage/>;
     } else if (!info) {
         return <div>Loading...</div>;
     }
@@ -65,8 +66,8 @@ const DetailProduct = () => {
                     />
                     <li>
                         <Link
-                            to={`/${info.style}`}
-                            style={{ textTransform: "capitalize" }}
+                            to="/"
+                            style={{textTransform: "capitalize"}}
                             className={stylesCartPage.breadcrumbsLinkToCart}
                         >
                             {info.style}
@@ -81,7 +82,7 @@ const DetailProduct = () => {
                     />
                     <Link
                         to="/"
-                        style={{ textTransform: "capitalize" }}
+                        style={{textTransform: "capitalize"}}
                         className={stylesCartPage.breadcrumbsLinkToCart}
                     >
                         {info.sex}
@@ -103,7 +104,7 @@ const DetailProduct = () => {
                 </ul>
             </nav>
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={info.url_image} />
+                <DetailProductSlider imageArr={info.url_image}/>
                 <Formik
                     initialValues={{
                         size: info.sizes[0].size,
@@ -190,7 +191,9 @@ const DetailProduct = () => {
                         </Form>
                     )}
                 </Formik>
+
             </div>
+            <DetaiLComentsCard idGoods={id}/>
         </div>
     );
 };
