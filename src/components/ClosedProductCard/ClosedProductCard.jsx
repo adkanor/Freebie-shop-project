@@ -9,7 +9,7 @@ function ClosedProductCard({ id, name, price, imageURL, rating, sale }) {
     let actualPrice = price - salePrice;
     return (
         <li key={id}>
-            <Link className={style.cardWrapper} to={`products/${id}`}>
+            <Link className={style.cardWrapper} to={`/products/${id}`}>
                 <div className={style.imgWrapper}>
                     <img src={imageURL} alt="productImg" />
                 </div>
@@ -37,7 +37,7 @@ function ClosedProductCard({ id, name, price, imageURL, rating, sale }) {
 }
 
 ClosedProductCard.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,

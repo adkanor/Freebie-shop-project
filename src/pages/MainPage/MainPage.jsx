@@ -13,7 +13,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 
 
 const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) => {
@@ -44,7 +43,6 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
 
     return (
         <section className="section">
-            <DetaiLComentsCard idGoods={"651dc2e0d5240b14613f56f0"}/>
             <Slider/>
             <BrandBox/>
             <RecommendationProducts
