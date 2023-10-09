@@ -9,7 +9,6 @@ import BlackButton from "../../components/Button/Button";
 import { Formik, Form } from "formik";
 import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
-import DetailProductColors from "../../components/DetailProductColors/DetailProductColors";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 import { useSelector } from "react-redux";
 import NoPage from "../NoPage/NoPage";
@@ -66,13 +65,27 @@ const DetailProduct = () => {
                     />
                     <li>
                         <Link
-                            to="/"
+                            to={`/${info.style}`}
                             style={{ textTransform: "capitalize" }}
                             className={stylesCartPage.breadcrumbsLinkToCart}
                         >
-                            {info.sex}
+                            {info.style}
                         </Link>
                     </li>
+                    <img
+                        className={stylesCartPage.breadcrumbsArrow}
+                        src={arrow}
+                        alt="arrowLeft"
+                        width="14"
+                        height="14"
+                    />
+                    <Link
+                        to="/"
+                        style={{ textTransform: "capitalize" }}
+                        className={stylesCartPage.breadcrumbsLinkToCart}
+                    >
+                        {info.sex}
+                    </Link>
                     <img
                         className={stylesCartPage.breadcrumbsArrow}
                         src={arrow}
@@ -93,13 +106,12 @@ const DetailProduct = () => {
                 <DetailProductSlider imageArr={info.url_image} />
                 <Formik
                     initialValues={{
-                        color: "#ffffff",
                         size: info.sizes[0].size,
                         amount: 1,
                     }}
                     onSubmit={handleSubmit}
                 >
-                    {({ values, isValid, dirty }) => (
+                    {({ values }) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
@@ -132,23 +144,6 @@ const DetailProduct = () => {
                                 <p className={styles.productText}>
                                     {info.description}
                                 </p>
-
-                                <div className={styles.colorFilter}>
-                                    <p className={styles.filterTitle}>
-                                        Select Colors
-                                    </p>
-                                    <div className={styles.colors}>
-                                        <DetailProductColors
-                                            colorList={[
-                                                "#ffffff",
-                                                "#000000",
-                                                "#ff0000",
-                                                "#ffee00",
-                                            ]}
-                                            values={values}
-                                        />
-                                    </div>
-                                </div>
                                 <div className={styles.sizeFilter}>
                                     <DetailProductButtonGroup
                                         sizes={info.sizes.map(
@@ -189,7 +184,6 @@ const DetailProduct = () => {
                                         type={"submit"}
                                         text="Add to cart"
                                         style={styleBlack}
-                                        disabled={!isValid || !dirty}
                                     />
                                 </div>
                             </div>
