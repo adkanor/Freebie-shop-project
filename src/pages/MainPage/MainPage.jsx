@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import styles from "./MainPage.module.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
 import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
@@ -15,11 +15,6 @@ import RecommendationProducts from "../../components/RecommendationProducts/Reco
 import Button from "../../components/Button/Button";
 
 
-
-
-
-
-
 const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) => {
     // const [rerender, setRerender] = "off";
     // const products = useSelector(
@@ -28,7 +23,7 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
     // const firstFourProducts = products.slice(0, 4); // первые 4 карточки товара для отображения новых поступлений
     // const secondFourProducts = products.slice(0, 4); // вторые  4 карточки товара для отображения новых поступлений
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods/10")
             .then(response => {
                 addArrivalsList(response.data);
@@ -44,12 +39,12 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
             .catch(error => {
                 console.error(error);
             });
-    },[addArrivalsList,addTopSelling]);
+    }, [addArrivalsList, addTopSelling]);
 
     return (
         <section className="section">
-            <Slider />
-            <BrandBox />
+            <Slider/>
+            <BrandBox/>
             <RecommendationProducts
                 arrayofProducts={newArrivals}
                 title={"New Arrivals"}
@@ -102,20 +97,18 @@ const MainPage = ({addArrivalsList, addTopSelling, topSaleList, newArrivals}) =>
                 </div>
             </div>
             <CommentsSlider/>
-
-
         </section>
     );
 };
 
-const mapStateToProps = ({ newArrivalsReducer, topSaleReducer }) => ({
+const mapStateToProps = ({newArrivalsReducer, topSaleReducer}) => ({
     newArrivals: newArrivalsReducer,
     topSaleList: topSaleReducer
 });
 
-const mapDispatchToProps =(dispatch)=>({
-    addArrivalsList:(items)=>dispatch(saveArrivalsListOperation(items)),
-    addTopSelling:(items) => dispatch(saveTopSellingListOperations(items))
+const mapDispatchToProps = (dispatch) => ({
+    addArrivalsList: (items) => dispatch(saveArrivalsListOperation(items)),
+    addTopSelling: (items) => dispatch(saveTopSellingListOperations(items))
 
 });
 
@@ -124,8 +117,8 @@ MainPage.propTypes = {
     addTopSelling: PropTypes.func,
     topSaleList: PropTypes.array,
     newArrivals: PropTypes.array,
-    state:PropTypes.object
+    state: PropTypes.object
 };
 
 
-export default connect (mapStateToProps, mapDispatchToProps) (MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
