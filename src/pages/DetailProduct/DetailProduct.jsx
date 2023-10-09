@@ -1,18 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DetailProduct.module.css";
-import {Link} from "react-router-dom";
-import stylesCartPage from "../CartPage/CartPage.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import {Formik, Form} from "formik";
-import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
+import { Formik, Form } from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
+import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -28,7 +26,7 @@ const DetailProduct = () => {
         (state) => state.getAllProductsReducer.allProducts
     );
     const [info, setInfo] = useState(null);
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
         const productInfo = products.find((item) => item._id === id);
@@ -40,71 +38,23 @@ const DetailProduct = () => {
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        return <NoPage/>;
+        return <NoPage />;
     } else if (!info) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className={"section"}>
-            <nav className={stylesCartPage.sectionNav}>
-                <ul className={stylesCartPage.breadcrumbsList}>
-                    <li>
-                        <Link
-                            to="/"
-                            className={stylesCartPage.breadcrumbsLinkToHome}
-                        >
-                            Home
-                        </Link>
-                    </li>
-                    <img
-                        className={stylesCartPage.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrowLeft"
-                        width="14"
-                        height="14"
-                    />
-                    <li>
-                        <Link
-                            to="/"
-                            style={{textTransform: "capitalize"}}
-                            className={stylesCartPage.breadcrumbsLinkToCart}
-                        >
-                            {info.style}
-                        </Link>
-                    </li>
-                    <img
-                        className={stylesCartPage.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrowLeft"
-                        width="14"
-                        height="14"
-                    />
-                    <Link
-                        to="/"
-                        style={{textTransform: "capitalize"}}
-                        className={stylesCartPage.breadcrumbsLinkToCart}
-                    >
-                        {info.sex}
-                    </Link>
-                    <img
-                        className={stylesCartPage.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrowLeft"
-                        width="14"
-                        height="14"
-                    />
-                    <Link
-                        to="/"
-                        style={{ textTransform: "capitalize" }}
-                        className={stylesCartPage.breadcrumbsLinkToCart}
-                    >
-                        {info.category}
-                    </Link>
-                </ul>
-            </nav>
+            <AdaptiveNav
+                linksObj={{
+                    home: "/",
+                    [info.style]: `/${info.style}`,
+                    [info.sex]: `/${info.style}/${info.sex}`,
+                    [info.category]: `/${info.style}/${info.sex}/${info.category}`
+                }}
+            />
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={info.url_image}/>
+                <DetailProductSlider imageArr={info.url_image} />
                 <Formik
                     initialValues={{
                         size: info.sizes[0].size,
@@ -162,6 +112,7 @@ const DetailProduct = () => {
                                         }}
                                     >
                                         <button
+                                            type="button"
                                             className={
                                                 stylesCard.quantityBtnDown
                                             }
@@ -173,16 +124,17 @@ const DetailProduct = () => {
                                                 stylesCard.quantityNumber
                                             }
                                         >
-                                            1
+                                            {values.amount}
                                         </span>
                                         <button
+                                            type="button"
                                             className={stylesCard.quantityBtnUp}
                                         >
                                             +
                                         </button>
                                     </div>
                                     <BlackButton
-                                        type={"submit"}
+                                        type="submit"
                                         text="Add to cart"
                                         style={styleBlack}
                                     />
@@ -191,9 +143,8 @@ const DetailProduct = () => {
                         </Form>
                     )}
                 </Formik>
-
             </div>
-            <DetaiLComentsCard idGoods={id}/>
+            <DetaiLComentsCard idGoods={id} />
         </div>
     );
 };
