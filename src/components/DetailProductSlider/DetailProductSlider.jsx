@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 
 const DetailProductSlider = ({ imageArr }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
-    // eslint-disable-next-line
-    const [banners, _] = useState(imageArr.slice(1));
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
     const handleImageClick = (e, index) => {
