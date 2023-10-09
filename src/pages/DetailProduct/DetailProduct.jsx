@@ -4,14 +4,14 @@ import stylesCard from "../../components/CartItem/CartItem.module.css";
 import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 import { useSelector } from "react-redux";
 import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
-
+import Counter from "../../components/Counter/Counter";
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
@@ -22,6 +22,7 @@ const styleBlack = {
 };
 
 const DetailProduct = () => {
+    // const [amount, setAmount] = useState(1);
     const products = useSelector(
         (state) => state.getAllProductsReducer.allProducts
     );
@@ -50,7 +51,7 @@ const DetailProduct = () => {
                     home: "/",
                     [info.style]: `/${info.style}`,
                     [info.sex]: `/${info.style}/${info.sex}`,
-                    [info.category]: `/${info.style}/${info.sex}/${info.category}`
+                    [info.category]: `/${info.style}/${info.sex}/${info.category}`,
                 }}
             />
             <div className={styles.productWrapper}>
@@ -58,7 +59,7 @@ const DetailProduct = () => {
                 <Formik
                     initialValues={{
                         size: info.sizes[0].size,
-                        amount: 1,
+                        amount: Number(1),
                     }}
                     onSubmit={handleSubmit}
                 >
@@ -111,27 +112,25 @@ const DetailProduct = () => {
                                             alignItems: "center",
                                         }}
                                     >
-                                        <button
-                                            type="button"
-                                            className={
-                                                stylesCard.quantityBtnDown
-                                            }
-                                        >
-                                            -
-                                        </button>
-                                        <span
-                                            className={
-                                                stylesCard.quantityNumber
-                                            }
-                                        >
-                                            {values.amount}
-                                        </span>
-                                        <button
-                                            type="button"
-                                            className={stylesCard.quantityBtnUp}
-                                        >
-                                            +
-                                        </button>
+                                        <Field name="amount">
+                                            {({ field, form }) => (
+                                                <Counter
+                                                    quantity={field.value}
+                                                    onDecrease={() =>
+                                                        form.setFieldValue(
+                                                            "amount",
+                                                            field.value - 1
+                                                        )
+                                                    }
+                                                    onIncrease={() =>
+                                                        form.setFieldValue(
+                                                            "amount",
+                                                            field.value + 1
+                                                        )
+                                                    }
+                                                />
+                                            )}
+                                        </Field>
                                     </div>
                                     <BlackButton
                                         type="submit"
