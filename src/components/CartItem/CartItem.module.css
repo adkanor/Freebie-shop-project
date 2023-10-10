@@ -25,6 +25,7 @@
     object-fit: contain;
 }
 .cartItemDeleteIcon {
+    cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
