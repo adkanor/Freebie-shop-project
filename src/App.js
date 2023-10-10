@@ -1,7 +1,5 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Routes, Route} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {fetchProducts} from "./stores/action";
 import Header from "./pages/Header/Header";
 import DetailProduct from "./pages/DetailProduct/DetailProduct";
 import CartPage from "./pages/CartPage/CartPage";
@@ -15,11 +13,7 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 
 
 const App = () => {
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
 
     return (
         <>

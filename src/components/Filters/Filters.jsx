@@ -26,6 +26,8 @@ const Filters = ({
         "skirts",
         "shorts",
         "dresses",
+        "joggers"
+
     ];
     const [noFiltersMatch, seNoFiltersMatch] = useState(false);
     let productsNotFiltered = useMemo(
@@ -74,8 +76,8 @@ const Filters = ({
         if (formik.values.minPrice && formik.values.maxPrice) {
             filteredProductsCopy = filteredProductsCopy.filter(
                 (product) =>
-                    product.price >= formik.values.minPrice &&
-                    product.price <= formik.values.maxPrice
+                    product.final_price >= formik.values.minPrice &&
+                    product.final_price <= formik.values.maxPrice
             );
         }
         if (filteredProductsCopy.length > 0) {
