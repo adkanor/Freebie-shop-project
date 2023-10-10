@@ -1,11 +1,14 @@
-import axios from "axios";
-export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const INCREMENT_ITEM_QUANTITY = "INCREMENT_ITEM_QUANTITY";
+export const DECREMENT_ITEM_QUANTITY = "DECREMENT_ITEM_QUANTITY";
 
-// Fetching products
-export const fetchProducts = () => async (dispatch, getState) => {
-    const response = await axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods");
-    return dispatch({
-        type: FETCH_PRODUCTS,
-        payload: response.data,
-    });
-};
+export const addToCart = (item) => ({
+    type: ADD_TO_CART,
+    payload: item,
+});
+
+export const removeFromCart = (id, selectedSize) => ({
+    type: REMOVE_FROM_CART,
+    payload: { id, selectedSize },
+});

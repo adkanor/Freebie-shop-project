@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
 
-function ClosedProductCard({ id, name, price, imageURL, rating, sale }) {
-    let salePrice = sale !== 0 ? (price * sale) / 100 : null;
-    let actualPrice = price - salePrice;
+function ClosedProductCard({ id, name, imageURL, rating, sale,price,final_price }) {
+
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`/products/${id}`}>
@@ -23,13 +22,13 @@ function ClosedProductCard({ id, name, price, imageURL, rating, sale }) {
                 {sale ? (
                     <div className={style.salePriceContainer}>
                         <span className={style.defaultPriceSpan}>
-                            ${actualPrice}
+                            ${final_price}
                         </span>
                         <span className={style.onSalePriceSpan}>${price}</span>
                         <span className={style.saleValue}>-{sale}%</span>
                     </div>
                 ) : (
-                    <span className={style.defaultPriceSpan}>${price}</span>
+                    <span className={style.defaultPriceSpan}>${final_price}</span>
                 )}
             </Link>
         </li>
@@ -40,6 +39,7 @@ ClosedProductCard.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    final_price:PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     sale: PropTypes.number,
