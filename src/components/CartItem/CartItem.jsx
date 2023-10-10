@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./CartItem.module.css";
 import deleteIcon from "../../assets/icons/Cart/Delete.svg";
+import Counter from "../Counter/Counter";
 
 const CartItem = () => {
     return (
         <li className={styles.cartItem}>
-            <div className={styles.cartImg}></div>
+            <img className={styles.cartImg} alt="Cart product"></img>
             <div className={styles.cartItemContent}>
                 <div className={styles.cartItemInfo}>
                     <h5 className={styles.cartItemTitle}>
@@ -28,14 +29,7 @@ const CartItem = () => {
                 <div className={styles.cartItemTotal}>
                     <p>$240</p>
                     <div className={styles.cartQuantity}>
-                        <button
-                            className={styles.quantityBtnDown}
-                            // disabled={amount === переменная}?
-                        >
-                            -
-                        </button>
-                        <span className={styles.quantityNumber}>4</span>
-                        <button className={styles.quantityBtnUp}>+</button>
+                        <Counter />
                     </div>
                 </div>
             </div>

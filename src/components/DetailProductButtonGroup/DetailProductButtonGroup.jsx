@@ -5,7 +5,6 @@ import BlackButton from "../Button/Button";
 
 const DetailProductButtonGroup = ({ sizes, values }) => {
     const [activeButton, setActiveButton] = useState(values.size);
-
     const style = {
         backgroundColor: "var(--gray-primary)",
         color: "black",
@@ -50,7 +49,7 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
 };
 
 DetailProductButtonGroup.propTypes = {
-    sizes: PropTypes.array.isRequired,
+    sizes: PropTypes.array,
     values: PropTypes.object,
 };
 

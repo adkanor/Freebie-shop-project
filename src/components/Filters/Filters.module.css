@@ -38,6 +38,7 @@
 }
 .filterToClose {
     display: block;
+    cursor: pointer;
 }
 .filterPriceInfo {
     margin: 7px auto;
@@ -48,13 +49,14 @@
 .filterPriceInfo span {
     margin-left: 5px;
 }
-label {
+.filterLabel {
     display: block;
     cursor: pointer;
     margin-bottom: 3px;
     font-size: 16px;
     font-family: "Satoshi 400";
     color: var(--gray-text-primary);
+    text-transform: capitalize;
 }
 .radioInput {
     appearance: none;
@@ -69,6 +71,12 @@ label {
 
 .radioInput:checked {
     background-color: var(--black-text);
+}
+.filterError {
+    color: var(--red-text);
+    margin-top: 15px;
+    font-size: 16px;
+    font-family: "Satoshi 400";
 }
 @media (min-width: 766px) {
     .filterTitle {
@@ -86,8 +94,22 @@ label {
         padding: 20px 24px;
         border: 1px solid var(--separator-line);
         margin: 70px 50px 150px 0;
-        width: 250px;
+        min-width: 170px;
+        width: 300px;
         border-radius: 20px;
+    }
+    .filterLabel {
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-family: "Satoshi 400";
+        color: var(--gray-text-primary);
+        text-transform: capitalize;
+    }
+    .filterError {
+        color: var(--red-text);
+        margin-top: 15px;
+        font-size: 16px;
+        font-family: "Satoshi 400";
     }
     .filterIcon {
         display: block;
