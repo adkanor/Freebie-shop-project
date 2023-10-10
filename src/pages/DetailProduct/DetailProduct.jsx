@@ -7,11 +7,13 @@ import BlackButton from "../../components/Button/Button";
 import { Formik, Form, Field } from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
-import { useSelector } from "react-redux";
+import axios from "axios";
 import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../stores/action";
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
@@ -22,20 +24,43 @@ const styleBlack = {
 };
 
 const DetailProduct = () => {
-    // const [amount, setAmount] = useState(1);
-    const products = useSelector(
-        (state) => state.getAllProductsReducer.allProducts
-    );
+
+    const [noAvailability, setNoAvailability] = useState(null);
+
     const [info, setInfo] = useState(null);
     const { id } = useParams();
-
+    const dispatch = useDispatch();
     useEffect(() => {
-        const productInfo = products.find((item) => item._id === id);
-        productInfo && setInfo(productInfo);
-    }, [id, products]);
 
-    const handleSubmit = (values) => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`);
+                setInfo(response.data);
+            
+                console.log(response);
+            } catch (error) {
+                console.error("Ошибка при получении данных:", error);
+            }
+        };
+        fetchData();
+    }, [id]);
+
+    const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
+        setNoAvailability(null);
+        const selectedSize = values.size;
+        const selectedAmount = values.amount;
+        const selectedSizeObj = info.sizes.find((item) => item.size === selectedSize);
+        if(selectedSizeObj && selectedSizeObj.count >= selectedAmount){
+            const tryToCart = {...info, selectedAmount:selectedAmount, selectedSize:selectedSize };
+            dispatch(addToCart(tryToCart));
+
+        } else {
+            const errorMessage = "Not enough items available.";
+            setNoAvailability(errorMessage);
+            console.log("No item is available");
+        }
+        setSubmitting(false);
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
@@ -80,7 +105,7 @@ const DetailProduct = () => {
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
-                                        ${info.price}
+                                        ${info.final_price}
                                     </h2>
                                     {!!Number(info.discount) && (
                                         <>
@@ -104,6 +129,7 @@ const DetailProduct = () => {
                                         values={values}
                                     />
                                 </div>
+                                {noAvailability ? <p>{noAvailability}</p>: null}
                                 <div className={styles.purchaseFilter}>
                                     <div
                                         className={stylesCard.cartQuantity}
@@ -136,6 +162,7 @@ const DetailProduct = () => {
                                         type="submit"
                                         text="Add to cart"
                                         style={styleBlack}
+                                        
                                     />
                                 </div>
                             </div>

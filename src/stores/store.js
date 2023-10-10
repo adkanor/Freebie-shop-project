@@ -2,16 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import getAllProductsReducer from "./reducerAllProducts";
 import newArrivalsReducer from "./getArrivals_and_getTopSelling/newArrivalsReducer/reducer";
 import topSaleReducer from "./getArrivals_and_getTopSelling/topSaleReducer/topSaleReducer";
-
-
+import cartReducer from "./cartReducer";
 const rootReducer = combineReducers({
-    getAllProductsReducer: getAllProductsReducer,newArrivalsReducer,topSaleReducer
-    // here will be our reducers (each in his own folder) ex:
-    //   modalReducer: modalReducer,
-    //   cartReducer: cartReducer,
+    newArrivalsReducer,topSaleReducer, cartReducer
+
 });
 
 const store = configureStore({
