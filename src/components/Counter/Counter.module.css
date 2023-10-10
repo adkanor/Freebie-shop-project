@@ -1,0 +1,32 @@
+.quantityNumber {
+    padding: 0px 4px;
+    user-select: none;
+}
+.quantityBtnDown {
+    border-top-left-radius: 62px;
+    border-bottom-left-radius: 62px;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.quantityBtnUp {
+    border-top-right-radius: 62px;
+    border-bottom-right-radius: 62px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+@media (min-width: 766px) {
+    .quantityNumber {
+        display: inline-block;
+        padding: 8px 15px;
+    }
+    .quantityBtnDown {
+        padding-left: 15px;
+    }
+    .quantityBtnUp {
+        padding-right: 15px;
+    }
+}

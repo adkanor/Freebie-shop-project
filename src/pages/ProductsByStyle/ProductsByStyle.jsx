@@ -90,7 +90,6 @@ const ProductsByStyle = () => {
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
-                    filteredProducts={filteredProducts}
                     setFilteredProducts={setFilteredProducts}
                 />
                 {filteredProducts.length > 0 ? (
