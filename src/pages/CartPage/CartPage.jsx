@@ -5,7 +5,15 @@ import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import Button from "../../components/Button/Button.jsx";
 import promo from "../../assets/icons/Cart/Promo.svg";
 import CartItem from "../../components/CartItem/CartItem.jsx";
+import { Formik, Form, Field } from "formik";
+
 const CartPage = () => {
+    const initialValues = {
+        promoCode: "",
+    };
+    const onSubmit = (values) => {
+        console.log("Form values", values);
+    };
     return (
         <>
             <section className="section">
@@ -46,70 +54,90 @@ const CartPage = () => {
                         <CartItem />
                     </ul>
                     <div className={styles.cartSummary}>
-                        <h3 className={styles.cartSummaryTitle}>
-                            OrderSummary
-                        </h3>
-                        <div className={styles.cartSummaryInfo}>
-                            <div className={styles.cartSummaryContent}>
-                                <h5 className={styles.cartSummaryText}>
-                                    Subtotal
-                                </h5>
-                                <p className={styles.cartSummaryPrice}>$565</p>
-                            </div>
-                            <div className={styles.cartSummaryContent}>
-                                <h5 className={styles.cartSummaryText}>
-                                    Discount
-                                </h5>
-
-                                <p className={styles.cartSummaryDiscount}>
-                                    $113
-                                </p>
-                            </div>
-                            <div className={styles.cartSummaryContent}>
-                                <h5 className={styles.cartSummaryText}>
-                                    Delivery Fee
-                                </h5>
-                                <p className={styles.cartSummaryPrice}>$15</p>
-                            </div>
-
-                            <div className={styles.cartTotal}>
-                                <h5 className={styles.cartTotalName}>Total</h5>
-                                <p className={styles.cartTotalAmount}>$467</p>
-                            </div>
-                            <form className={styles.cartSummaryContent}>
-                                <input
-                                    className={styles.cartInput}
-                                    type="text"
-                                    placeholder="Enter promo code"
-                                    id="promoCode"
-                                />
-                                <img
-                                    className={styles.cartInputLogo}
-                                    src={promo}
-                                    alt="Promo Code Logo"
-                                    width="20"
-                                    height="20"
-                                />
+                        <Formik
+                            initialValues={initialValues}
+                            onSubmit={onSubmit}
+                        >
+                            <Form>
+                                <h3 className={styles.cartSummaryTitle}>
+                                    Order Summary
+                                </h3>
+                                <div className={styles.cartSummaryInfo}>
+                                    <div className={styles.cartSummaryContent}>
+                                        <h5 className={styles.cartSummaryText}>
+                                            Subtotal
+                                        </h5>
+                                        <p className={styles.cartSummaryPrice}>
+                                            $565
+                                        </p>
+                                    </div>
+                                    <div className={styles.cartSummaryContent}>
+                                        <h5 className={styles.cartSummaryText}>
+                                            Discount
+                                        </h5>
+                                        <p
+                                            className={
+                                                styles.cartSummaryDiscount
+                                            }
+                                        >
+                                            $113
+                                        </p>
+                                    </div>
+                                    <div className={styles.cartSummaryContent}>
+                                        <h5 className={styles.cartSummaryText}>
+                                            Delivery Fee
+                                        </h5>
+                                        <p className={styles.cartSummaryPrice}>
+                                            $15
+                                        </p>
+                                    </div>
+                                    <div className={styles.cartTotal}>
+                                        <h5 className={styles.cartTotalName}>
+                                            Total
+                                        </h5>
+                                        <p className={styles.cartTotalAmount}>
+                                            $467
+                                        </p>
+                                    </div>
+                                    <div className={styles.cartSummaryContent}>
+                                        <Field
+                                            className={styles.cartInput}
+                                            type="text"
+                                            placeholder="Enter promo code"
+                                            id="promoCode"
+                                            name="promoCode"
+                                        />
+                                        <img
+                                            className={styles.cartInputLogo}
+                                            src={promo}
+                                            alt="Promo Code Logo"
+                                            width="20"
+                                            height="20"
+                                        />
+                                        <Button
+                                            text="Apply"
+                                            style={{
+                                                padding: "12px 16px",
+                                                backgroundColor:
+                                                    "var(--black--background)",
+                                            }}
+                                            type="submit"
+                                        />
+                                    </div>
+                                </div>
                                 <Button
-                                    text="Apply"
+                                    type="button"
+                                    text="Go to Checkout"
                                     style={{
-                                        padding: "12px 16px",
+                                        width: "100%",
+                                        padding: "16px 0",
+                                        margin: "0 auto",
                                         backgroundColor:
                                             "var(--black--background)",
                                     }}
-                                    type="submit"
                                 />
-                            </form>
-                        </div>
-                        <Button
-                            text="Go to Checkout"
-                            style={{
-                                width: "100%",
-                                padding: "16px 0",
-                                margin: "0 auto",
-                                backgroundColor: "var(--black--background)",
-                            }}
-                        />
+                            </Form>
+                        </Formik>
                     </div>
                 </div>
             </section>
