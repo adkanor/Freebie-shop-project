@@ -1,46 +1,57 @@
 import React from "react";
 import styles from "./CartItem.module.css";
 import deleteIcon from "../../assets/icons/Cart/Delete.svg";
-
-const CartItem = () => {
+import Counter from "../Counter/Counter";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../stores/action";
+const CartItem = ({ id, name, imageURL,final_price , selectedSize}) => {
+    const dispatch = useDispatch();
+    const deleteItem =(id,selectedSize) => {
+        dispatch(removeFromCart(id,selectedSize));
+        console.log(id,selectedSize);
+    };
     return (
         <li className={styles.cartItem}>
-            <div className={styles.cartImg}></div>
+            <img  src={imageURL}   className={styles.cartImg} alt="Cart product"></img>
             <div className={styles.cartItemContent}>
                 <div className={styles.cartItemInfo}>
                     <h5 className={styles.cartItemTitle}>
-                        Gradient Graphic T-shirt
+                        {name}
                     </h5>
                     <img
                         className={styles.cartItemDeleteIcon}
                         src={deleteIcon}
                         alt="Delete icon"
+                        onClick={() => deleteItem(id, selectedSize)}
                     />
                 </div>
                 <div className={styles.cartItemSize}>
                     <p>Size:</p>
-                    <span>Large</span>
+                    <span>{selectedSize}</span>
                 </div>
-                <div className={styles.cartItemColor}>
-                    <p>Color:</p>
-                    <span>White</span>
-                </div>
+                {/* <div className={styles.cartItemColor}>
+                    <p>Amount:</p>
+                    <span>{selectedAmount}</span>
+                </div> */}
                 <div className={styles.cartItemTotal}>
-                    <p>$240</p>
+                    <p>${final_price}</p>
                     <div className={styles.cartQuantity}>
-                        <button
-                            className={styles.quantityBtnDown}
-                            // disabled={amount === переменная}?
-                        >
-                            -
-                        </button>
-                        <span className={styles.quantityNumber}>4</span>
-                        <button className={styles.quantityBtnUp}>+</button>
+                        <Counter 
+                        
+                        />
                     </div>
                 </div>
             </div>
         </li>
     );
 };
-
+CartItem.propTypes= {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    final_price: PropTypes.number.isRequired,
+    selectedSize: PropTypes.string.isRequired,
+    // selectedAmount: PropTypes.number.isRequired,
+};
 export default CartItem;
