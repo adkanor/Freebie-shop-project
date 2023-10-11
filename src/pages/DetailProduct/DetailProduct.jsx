@@ -14,6 +14,8 @@ import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/action";
+import { toast } from "react-toastify";
+
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
@@ -24,19 +26,19 @@ const styleBlack = {
 };
 
 const DetailProduct = () => {
-
     const [noAvailability, setNoAvailability] = useState(null);
-
     const [info, setInfo] = useState(null);
     const { id } = useParams();
     const dispatch = useDispatch();
-    useEffect(() => {
 
+    useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`);
+                const response = await axios.get(
+                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
+                );
                 setInfo(response.data);
-            
+
                 console.log(response);
             } catch (error) {
                 console.error("Ошибка при получении данных:", error);
@@ -50,15 +52,24 @@ const DetailProduct = () => {
         setNoAvailability(null);
         const selectedSize = values.size;
         const selectedAmount = values.amount;
-        const selectedSizeObj = info.sizes.find((item) => item.size === selectedSize);
-        if(selectedSizeObj && selectedSizeObj.count >= selectedAmount){
-            const tryToCart = {...info, selectedAmount:selectedAmount, selectedSize:selectedSize };
+        const selectedSizeObj = info.sizes.find(
+            (item) => item.size === selectedSize
+        );
+        if (selectedSizeObj && selectedSizeObj.count >= selectedAmount) {
+            const tryToCart = {
+                ...info,
+                selectedAmount: selectedAmount,
+                selectedSize: selectedSize,
+            };
             dispatch(addToCart(tryToCart));
-
         } else {
             const errorMessage = "Not enough items available.";
             setNoAvailability(errorMessage);
-            console.log("No item is available");
+            console.warn("No item is available.Choose less amount");
+            toast.error("This quantity is  not available", {
+                position: "bottom-left",
+                autoClose: 5000,
+            });
         }
         setSubmitting(false);
     };
@@ -129,7 +140,9 @@ const DetailProduct = () => {
                                         values={values}
                                     />
                                 </div>
-                                {noAvailability ? <p>{noAvailability}</p>: null}
+                                {noAvailability ? (
+                                    <p>{noAvailability}</p>
+                                ) : null}
                                 <div className={styles.purchaseFilter}>
                                     <div
                                         className={stylesCard.cartQuantity}
@@ -162,7 +175,6 @@ const DetailProduct = () => {
                                         type="submit"
                                         text="Add to cart"
                                         style={styleBlack}
-                                        
                                     />
                                 </div>
                             </div>
