@@ -1,23 +1,30 @@
 .buttonGroup {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 24px;
+
 }
-.buttonGroupTitle {
-    font-size: 32px;
-    font-family: "Integral-CF 700";
-    color: var(--black-text);
-    max-width: 70%;
-}
+
 .carousel-item {
     width: 100%;
 }
+
 .carousel {
-    margin-bottom: 50px;
+    margin-top: 10px;
 }
-@media screen and (min-width: 766px) {
+
+.buttonGroupTitle {
+    color: var(--black-text);
+    font-family: "Integral-CF 700", Arial, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+@media screen  and (max-width: 766px) {
     .buttonGroupTitle {
-        font-size: 48px;
+        max-width: 70%;
+        font-size: 32px;
+        line-height: 32px;
     }
 }
+
