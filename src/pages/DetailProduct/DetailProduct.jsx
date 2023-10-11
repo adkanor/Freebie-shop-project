@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import styles from "./DetailProduct.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import { Formik, Form, Field } from "formik";
+import {Formik, Form, Field} from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 import axios from "axios";
@@ -12,9 +12,11 @@ import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../stores/cartProducts/action";
-import { toast } from "react-toastify";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../stores/cartProducts/action";
+import {toast} from "react-toastify";
+import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
+
 
 const styleBlack = {
     backgroundColor: "black",
@@ -27,26 +29,45 @@ const styleBlack = {
 
 const DetailProduct = () => {
     const [noAvailability, setNoAvailability] = useState(null);
+    const [recommendations, setRecommendations] = useState([]);
     const [info, setInfo] = useState(null);
-    const { id } = useParams();
+    const {id} = useParams();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
-                );
-                setInfo(response.data);
 
-                console.log(response);
-            } catch (error) {
-                console.error("Ошибка при получении данных:", error);
-            }
-        };
-        fetchData();
+    const recommendationsFilter = useCallback((arr) => {
+        const filterArr = arr.filter(item => item._id !== info._id);
+        setRecommendations(filterArr);
+    }, [info]);
+
+
+    useEffect(() => {
+        axios
+            .get(`https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`)
+            .then(res => {
+                setInfo(res.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     }, [id]);
-    const handleSubmit = (values, { setSubmitting }) => {
+
+    useEffect(() => {
+        if (info) {
+            axios.get(`https://shopcoserver-git-main-chesterfalmen.vercel.app/api/category/${info.category}`)
+                .then(response => {
+                    recommendationsFilter(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+    }, [info, recommendationsFilter]);
+
+
+    const handleSubmit = (values, {setSubmitting}) => {
         console.log("Data:", values);
         setNoAvailability(null);
         const selectedSize = values.size;
@@ -74,7 +95,7 @@ const DetailProduct = () => {
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        return <NoPage />;
+        return <NoPage/>;
     } else if (!info) {
         return <div>Loading...</div>;
     }
@@ -90,7 +111,7 @@ const DetailProduct = () => {
                 }}
             />
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={info.url_image} />
+                <DetailProductSlider imageArr={info.url_image}/>
                 <Formik
                     initialValues={{
                         size: info.sizes[0].size,
@@ -98,7 +119,7 @@ const DetailProduct = () => {
                     }}
                     onSubmit={handleSubmit}
                 >
-                    {({ values }) => (
+                    {({values}) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
@@ -151,7 +172,7 @@ const DetailProduct = () => {
                                         }}
                                     >
                                         <Field name="amount">
-                                            {({ field, form }) => (
+                                            {({field, form}) => (
                                                 <Counter
                                                     quantity={field.value}
                                                     onDecrease={() =>
@@ -181,7 +202,13 @@ const DetailProduct = () => {
                     )}
                 </Formik>
             </div>
-            <DetaiLComentsCard idGoods={id} />
+            <DetaiLComentsCard idGoods={id}/>
+            <RecommendationProducts
+                title={"You might also like"}
+                arrayofProducts={recommendations}
+            >
+
+            </RecommendationProducts>
         </div>
     );
 };
