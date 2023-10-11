@@ -1,0 +1,51 @@
+.navigation {
+    padding: 1rem 0 1.5rem;
+}
+
+.breadcrumbsList {
+    display: flex;
+}
+
+.breadcrumbsList .breadcrumbsLinkContainer:last-child .breadcrumbsLink {
+    color: var(--black-text);
+}
+
+.breadcrumbsList .breadcrumbsLinkContainer:last-child .breadcrumbsArrow {
+    display: none;
+}
+
+.breadcrumbsLinkContainer {
+    margin-right: 0.28rem;
+}
+
+.breadcrumbsLink {
+    font-size: 0.875rem;
+    font-family: "Satoshi 400";
+    color: var(--gray-text-primary);
+    text-transform: uppercase;
+    margin-right: 0.28rem;
+}
+
+.breadcrumbsArrow {
+    margin-bottom: -0.14rem;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+@media (min-width: 765px) {
+    .navigation {
+        padding: 1.3rem 0 1.7rem;
+    }
+    .breadcrumbsLinkContainer {
+        margin-right: 0.32rem;
+    }
+    .breadcrumbsLink {
+        font-size: 1rem;
+        margin-right: 0.32rem;
+    }
+    .breadcrumbsArrow {
+        margin-bottom: -0.13rem;
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+}

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { fetchProducts } from "./stores/action";
 import Header from "./pages/Header/Header";
 import DetailProduct from "./pages/DetailProduct/DetailProduct";
 import CartPage from "./pages/CartPage/CartPage";
@@ -12,17 +11,13 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
-
     return (
         <>
             <Header />
+            <ToastContainer />
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/:style" element={<ProductsByStyle />} />

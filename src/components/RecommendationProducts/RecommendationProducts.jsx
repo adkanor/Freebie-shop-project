@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
 const RecommendationProducts = ({ title, arrayofProducts, children }) => {
-    const littleArr = arrayofProducts.length ? arrayofProducts.slice(0,4) : [];
+    const littleArr = arrayofProducts.length ? arrayofProducts.slice(0, 4) : [];
     return (
         <div className={styles.recommendationProducts}>
             <h2>{title}</h2>
@@ -14,6 +14,7 @@ const RecommendationProducts = ({ title, arrayofProducts, children }) => {
                         key={product._id}
                         id={product._id}
                         name={product.name}
+                        final_price={Number(product.final_price)}
                         price={Number(product.price)}
                         imageURL={product.url_image[0]}
                         rating={Number(product.rating)}

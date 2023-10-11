@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styles from "./DetailProduct.module.css";
-import { Link } from "react-router-dom";
-import stylesCartPage from "../CartPage/CartPage.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
 import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import { Formik, Form } from "formik";
-import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
+import { Formik, Form, Field } from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
-import DetailProductColors from "../../components/DetailProductColors/DetailProductColors";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
-import { useSelector } from "react-redux";
+import axios from "axios";
 import NoPage from "../NoPage/NoPage";
+import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
+import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
+import Counter from "../../components/Counter/Counter";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../stores/cartProducts/action";
+import { toast } from "react-toastify";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -24,19 +26,51 @@ const styleBlack = {
 };
 
 const DetailProduct = () => {
-    const products = useSelector(
-        (state) => state.getAllProductsReducer.allProducts
-    );
+    const [noAvailability, setNoAvailability] = useState(null);
     const [info, setInfo] = useState(null);
     const { id } = useParams();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const productInfo = products.find((item) => item._id === id);
-        productInfo && setInfo(productInfo);
-    }, [id, products]);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
+                );
+                setInfo(response.data);
 
-    const handleSubmit = (values) => {
+                console.log(response);
+            } catch (error) {
+                console.error("Ошибка при получении данных:", error);
+            }
+        };
+        fetchData();
+    }, [id]);
+    const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
+        setNoAvailability(null);
+        const selectedSize = values.size;
+        const selectedAmount = values.amount;
+        const selectedSizeObj = info.sizes.find(
+            (item) => item.size === selectedSize
+        );
+        if (selectedSizeObj && selectedSizeObj.count >= selectedAmount) {
+            const tryToCart = {
+                ...info,
+                selectedAmount: selectedAmount,
+                selectedSize: selectedSize,
+            };
+            dispatch(addToCart(tryToCart));
+        } else {
+            const errorMessage = "Not enough items available.";
+            setNoAvailability(errorMessage);
+            console.warn("No item is available.Choose less amount");
+            toast.error("This quantity is  not available", {
+                position: "bottom-left",
+                autoClose: 5000,
+            });
+        }
+        setSubmitting(false);
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
@@ -47,59 +81,24 @@ const DetailProduct = () => {
 
     return (
         <div className={"section"}>
-            <nav className={stylesCartPage.sectionNav}>
-                <ul className={stylesCartPage.breadcrumbsList}>
-                    <li>
-                        <Link
-                            to="/"
-                            className={stylesCartPage.breadcrumbsLinkToHome}
-                        >
-                            Home
-                        </Link>
-                    </li>
-                    <img
-                        className={stylesCartPage.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrowLeft"
-                        width="14"
-                        height="14"
-                    />
-                    <li>
-                        <Link
-                            to="/"
-                            style={{ textTransform: "capitalize" }}
-                            className={stylesCartPage.breadcrumbsLinkToCart}
-                        >
-                            {info.sex}
-                        </Link>
-                    </li>
-                    <img
-                        className={stylesCartPage.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrowLeft"
-                        width="14"
-                        height="14"
-                    />
-                    <Link
-                        to="/"
-                        style={{ textTransform: "capitalize" }}
-                        className={stylesCartPage.breadcrumbsLinkToCart}
-                    >
-                        {info.category}
-                    </Link>
-                </ul>
-            </nav>
+            <AdaptiveNav
+                linksObj={{
+                    home: "/",
+                    [info.style]: `/${info.style}`,
+                    [info.sex]: `/${info.style}/${info.sex}`,
+                    [info.category]: `/${info.style}/${info.sex}/${info.category}`,
+                }}
+            />
             <div className={styles.productWrapper}>
                 <DetailProductSlider imageArr={info.url_image} />
                 <Formik
                     initialValues={{
-                        color: "#ffffff",
                         size: info.sizes[0].size,
-                        amount: 1,
+                        amount: Number(1),
                     }}
                     onSubmit={handleSubmit}
                 >
-                    {({ values, isValid, dirty }) => (
+                    {({ values }) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
@@ -116,7 +115,7 @@ const DetailProduct = () => {
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
-                                        ${info.price}
+                                        ${info.final_price}${info.final_price}
                                     </h2>
                                     {!!Number(info.discount) && (
                                         <>
@@ -132,23 +131,6 @@ const DetailProduct = () => {
                                 <p className={styles.productText}>
                                     {info.description}
                                 </p>
-
-                                <div className={styles.colorFilter}>
-                                    <p className={styles.filterTitle}>
-                                        Select Colors
-                                    </p>
-                                    <div className={styles.colors}>
-                                        <DetailProductColors
-                                            colorList={[
-                                                "#ffffff",
-                                                "#000000",
-                                                "#ff0000",
-                                                "#ffee00",
-                                            ]}
-                                            values={values}
-                                        />
-                                    </div>
-                                </div>
                                 <div className={styles.sizeFilter}>
                                     <DetailProductButtonGroup
                                         sizes={info.sizes.map(
@@ -157,6 +139,9 @@ const DetailProduct = () => {
                                         values={values}
                                     />
                                 </div>
+                                {noAvailability ? (
+                                    <p>{noAvailability}</p>
+                                ) : null}
                                 <div className={styles.purchaseFilter}>
                                     <div
                                         className={stylesCard.cartQuantity}
@@ -165,31 +150,30 @@ const DetailProduct = () => {
                                             alignItems: "center",
                                         }}
                                     >
-                                        <button
-                                            className={
-                                                stylesCard.quantityBtnDown
-                                            }
-                                        >
-                                            -
-                                        </button>
-                                        <span
-                                            className={
-                                                stylesCard.quantityNumber
-                                            }
-                                        >
-                                            1
-                                        </span>
-                                        <button
-                                            className={stylesCard.quantityBtnUp}
-                                        >
-                                            +
-                                        </button>
+                                        <Field name="amount">
+                                            {({ field, form }) => (
+                                                <Counter
+                                                    quantity={field.value}
+                                                    onDecrease={() =>
+                                                        form.setFieldValue(
+                                                            "amount",
+                                                            field.value - 1
+                                                        )
+                                                    }
+                                                    onIncrease={() =>
+                                                        form.setFieldValue(
+                                                            "amount",
+                                                            field.value + 1
+                                                        )
+                                                    }
+                                                />
+                                            )}
+                                        </Field>
                                     </div>
                                     <BlackButton
-                                        type={"submit"}
+                                        type="submit"
                                         text="Add to cart"
                                         style={styleBlack}
-                                        disabled={!isValid || !dirty}
                                     />
                                 </div>
                             </div>
@@ -197,6 +181,7 @@ const DetailProduct = () => {
                     )}
                 </Formik>
             </div>
+            <DetaiLComentsCard idGoods={id} />
         </div>
     );
 };

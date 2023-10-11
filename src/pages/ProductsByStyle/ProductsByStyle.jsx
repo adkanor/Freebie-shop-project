@@ -90,7 +90,6 @@ const ProductsByStyle = () => {
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
-                    filteredProducts={filteredProducts}
                     setFilteredProducts={setFilteredProducts}
                 />
                 {filteredProducts.length > 0 ? (
@@ -117,6 +116,7 @@ const ProductsByStyle = () => {
                                     id={product._id}
                                     name={product.name}
                                     price={Number(product.price)}
+                                    final_price={Number(product.final_price)}
                                     imageURL={product.url_image[0]}
                                     rating={Number(product.rating)}
                                     sale={Number(product.discount)}
