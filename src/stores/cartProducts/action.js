@@ -12,3 +12,13 @@ export const removeFromCart = (id, selectedSize) => ({
     type: REMOVE_FROM_CART,
     payload: { id, selectedSize },
 });
+
+export const incrementItemQuantity = (id, selectedSize) => ({
+    type: INCREMENT_ITEM_QUANTITY,
+    payload: { id, selectedSize },
+});
+
+export const decrementItemQuantity = (id, selectedSize) => ({
+    type: DECREMENT_ITEM_QUANTITY,
+    payload: { id, selectedSize },
+});
