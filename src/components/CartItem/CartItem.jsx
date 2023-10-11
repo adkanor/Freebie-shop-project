@@ -4,9 +4,9 @@ import deleteIcon from "../../assets/icons/Cart/Delete.svg";
 import Counter from "../Counter/Counter";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../stores/action";
-import { incrementItemQuantity } from "../../stores/action";
-import { decrementItemQuantity } from "../../stores/action";
+import { removeFromCart } from "../../stores/cartProducts/action";
+import { incrementItemQuantity } from "../../stores/cartProducts/action";
+import { decrementItemQuantity } from "../../stores/cartProducts/action";
 const CartItem = ({
     id,
     name,
@@ -50,6 +50,7 @@ const CartItem = ({
                     <span>{selectedSize}</span>
                 </div>
                 <div className={styles.cartItemTotal}>
+                    <p>${final_price}</p>
                     <p>${final_price}</p>
                     <div className={styles.cartQuantity}>
                         <Counter

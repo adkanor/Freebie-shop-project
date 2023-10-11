@@ -13,7 +13,7 @@ import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsC
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../stores/action";
+import { addToCart } from "../../stores/cartProducts/action";
 import { toast } from "react-toastify";
 
 const styleBlack = {
@@ -46,7 +46,6 @@ const DetailProduct = () => {
         };
         fetchData();
     }, [id]);
-
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
         setNoAvailability(null);
@@ -116,7 +115,7 @@ const DetailProduct = () => {
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
-                                        ${info.final_price}
+                                        ${info.final_price}${info.final_price}
                                     </h2>
                                     {!!Number(info.discount) && (
                                         <>

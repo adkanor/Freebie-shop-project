@@ -228,3 +228,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+/* eslint-disable */
