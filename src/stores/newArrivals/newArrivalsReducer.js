@@ -1,10 +1,10 @@
-import * as itemsTypes from "../types/type";
+import {GET_NEW_ARRIVALS_LIST} from "./actions";
 
 const initialState = [];
 
-const newArrivalsReducer = (state = initialState, actions) =>{
+const newArrivalsReducer = (state = initialState, actions) => {
     switch (actions.type) {
-    case itemsTypes.GET_NEW_ARRIVALS_LIST:{
+    case GET_NEW_ARRIVALS_LIST: {
         return actions.payload;
     }
     default:
