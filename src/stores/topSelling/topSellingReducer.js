@@ -1,10 +1,10 @@
-import * as itemsTypes from "../types/type";
+import {GET_TOP_SALE_LIST} from "./actions";
 
 const initialState = [];
 
-const topSellingReducer = (state = initialState, actions) =>{
+const topSellingReducer = (state = initialState, actions) => {
     switch (actions.type) {
-    case itemsTypes.GET_TOP_SALE_LIST:{
+    case GET_TOP_SALE_LIST: {
         return actions.payload;
     }
     default:
