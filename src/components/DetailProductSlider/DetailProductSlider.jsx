@@ -23,7 +23,9 @@ const DetailProductSlider = ({ imageArr }) => {
                     <div
                         key={index}
                         className={`${styles.smallSquare} ${
-                            selectedImageIndex === index ? styles.choosenSquare : ""
+                            selectedImageIndex === index
+                                ? styles.choosenSquare
+                                : ""
                         }`}
                     >
                         <img

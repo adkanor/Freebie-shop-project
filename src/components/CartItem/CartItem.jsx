@@ -51,7 +51,6 @@ const CartItem = ({
                 </div>
                 <div className={styles.cartItemTotal}>
                     <p>${final_price}</p>
-                    <p>${final_price}</p>
                     <div className={styles.cartQuantity}>
                         <Counter
                             onDecrease={handleDecrease}

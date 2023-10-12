@@ -8,6 +8,8 @@ import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 const Filters = ({
     productByStyle,
     setFilteredProducts,
@@ -26,8 +28,7 @@ const Filters = ({
         "skirts",
         "shorts",
         "dresses",
-        "joggers"
-
+        "joggers",
     ];
     const [noFiltersMatch, seNoFiltersMatch] = useState(false);
     let productsNotFiltered = useMemo(
@@ -86,6 +87,10 @@ const Filters = ({
             closeFilters();
         } else {
             seNoFiltersMatch(true);
+            toast.error("No filters match", {
+                position: "bottom-left",
+                autoClose: 2500,
+            });
         }
     };
 
