@@ -10,14 +10,20 @@ import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
-let PageSize = 9; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
+import { useMediaQuery } from "@react-hook/media-query";
 
 const ProductsByStyle = () => {
+
+    const isMobile = useMediaQuery("(max-width: 1298px)");
+    const PageSize = isMobile ? 6 : 9;
+
     const [productByStyle, setProductByStyle] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
+
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,7 +56,7 @@ const ProductsByStyle = () => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return filteredProducts.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, filteredProducts]);
+    }, [currentPage, filteredProducts, PageSize]);
 
     // Function to toogle Filters
     const toogleFilters = () => {
