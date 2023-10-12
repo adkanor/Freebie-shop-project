@@ -7,10 +7,9 @@ import { useFormik } from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
-
+import { useState } from "react";
 const Filters = ({
     productByStyle,
-    filteredProducts,
     setFilteredProducts,
     setFiltresVisible,
     filtersAreVisible,
@@ -25,13 +24,12 @@ const Filters = ({
         "t-shirts",
         "jeans",
         "skirts",
-        "shorts and Dresses",
-    ];
-    // let filteredByCategories = useMemo(
-    //     () => [...filteredProducts],
-    //     [filteredProducts]
-    // );
+        "shorts",
+        "dresses",
+        "joggers"
 
+    ];
+    const [noFiltersMatch, seNoFiltersMatch] = useState(false);
     let productsNotFiltered = useMemo(
         () => [...productByStyle],
         [productByStyle]
@@ -58,7 +56,6 @@ const Filters = ({
         e.preventDefault();
         let filteredProductsCopy = [...productsNotFiltered];
 
-        console.log(filteredProductsCopy);
         if (formik.values.category !== "") {
             filteredProductsCopy = filteredProductsCopy.filter(
                 (product) => product.category === formik.values.category
@@ -79,15 +76,16 @@ const Filters = ({
         if (formik.values.minPrice && formik.values.maxPrice) {
             filteredProductsCopy = filteredProductsCopy.filter(
                 (product) =>
-                    product.price >= formik.values.minPrice &&
-                    product.price <= formik.values.maxPrice
+                    product.final_price >= formik.values.minPrice &&
+                    product.final_price <= formik.values.maxPrice
             );
         }
         if (filteredProductsCopy.length > 0) {
-            console.log(filteredProductsCopy);
             setFilteredProducts(filteredProductsCopy);
+            seNoFiltersMatch(false);
+            closeFilters();
         } else {
-            console.log("Нет отфильтрованных продуктов.");
+            seNoFiltersMatch(true);
         }
     };
 
@@ -95,12 +93,13 @@ const Filters = ({
     const resetFilters = () => {
         setFilteredProducts(productsNotFiltered);
         formik.resetForm();
+        setFiltresVisible(false);
     };
 
     // Function to close filters
     const closeFilters = () => {
         setFiltresVisible(false);
-        console.log(filtersAreVisible);
+        seNoFiltersMatch(false);
     };
 
     return (
@@ -128,7 +127,7 @@ const Filters = ({
             <form onSubmit={applyFilters}>
                 <div className={styles.filterSex}>
                     <h3 className={styles.filterTitle}>Gender</h3>
-                    <label>
+                    <label className={styles.filterLabel}>
                         <input
                             className={styles.radioInput}
                             type="radio"
@@ -139,7 +138,7 @@ const Filters = ({
                         />
                         male
                     </label>
-                    <label>
+                    <label className={styles.filterLabel}>
                         <input
                             className={styles.radioInput}
                             type="radio"
@@ -154,7 +153,7 @@ const Filters = ({
                 <div className={styles.filterCategory}>
                     <h3 className={styles.filterTitle}>Categories</h3>
                     {categories.map((category) => (
-                        <label key={category}>
+                        <label className={styles.filterLabel} key={category}>
                             <input
                                 className={styles.radioInput}
                                 type="radio"
@@ -201,7 +200,7 @@ const Filters = ({
                 <div className={styles.filterSize}>
                     <h3 className={styles.filterTitle}>Sizes</h3>
                     {sizes.map((size) => (
-                        <label key={size}>
+                        <label key={size} className={styles.filterLabel}>
                             <input
                                 className={styles.radioInput}
                                 type="radio"
@@ -214,6 +213,11 @@ const Filters = ({
                         </label>
                     ))}
                 </div>
+                {noFiltersMatch ? (
+                    <p className={styles.filterError}>
+                        No matching filters found
+                    </p>
+                ) : null}
 
                 <Button
                     type={"submit"}
@@ -224,7 +228,6 @@ const Filters = ({
                         padding: "7px 0",
                         margin: "20px 0",
                     }}
-                    onClick={closeFilters}
                 />
                 <Button
                     type={"text"}
@@ -243,7 +246,6 @@ const Filters = ({
 
 Filters.propTypes = {
     productByStyle: PropTypes.array.isRequired,
-    filteredProducts: PropTypes.array.isRequired,
     setFilteredProducts: PropTypes.func.isRequired,
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,

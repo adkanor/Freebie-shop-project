@@ -1,46 +1,75 @@
 import React from "react";
 import styles from "./CartItem.module.css";
 import deleteIcon from "../../assets/icons/Cart/Delete.svg";
-
-const CartItem = () => {
+import Counter from "../Counter/Counter";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../stores/cartProducts/action";
+import { incrementItemQuantity } from "../../stores/cartProducts/action";
+import { decrementItemQuantity } from "../../stores/cartProducts/action";
+const CartItem = ({
+    id,
+    name,
+    imageURL,
+    final_price,
+    selectedSize,
+    selectedAmount,
+}) => {
+    const dispatch = useDispatch();
+    const deleteItem = (id, selectedSize) => {
+        dispatch(removeFromCart(id, selectedSize));
+        console.log(id, selectedSize);
+    };
+    const handleDecrease = () => {
+        dispatch(decrementItemQuantity(id, selectedSize));
+        console.log(selectedAmount, "should - 1");
+    };
+    const handleIncrease = () => {
+        dispatch(incrementItemQuantity(id, selectedSize));
+        console.log(selectedAmount, "should + 1");
+    };
     return (
         <li className={styles.cartItem}>
-            <div className={styles.cartImg}></div>
+            <img
+                src={imageURL}
+                className={styles.cartImg}
+                alt="Cart product"
+            ></img>
             <div className={styles.cartItemContent}>
                 <div className={styles.cartItemInfo}>
-                    <h5 className={styles.cartItemTitle}>
-                        Gradient Graphic T-shirt
-                    </h5>
+                    <h5 className={styles.cartItemTitle}>{name}</h5>
                     <img
                         className={styles.cartItemDeleteIcon}
                         src={deleteIcon}
                         alt="Delete icon"
+                        onClick={() => deleteItem(id, selectedSize)}
                     />
                 </div>
                 <div className={styles.cartItemSize}>
                     <p>Size:</p>
-                    <span>Large</span>
-                </div>
-                <div className={styles.cartItemColor}>
-                    <p>Color:</p>
-                    <span>White</span>
+                    <span>{selectedSize}</span>
                 </div>
                 <div className={styles.cartItemTotal}>
-                    <p>$240</p>
+                    <p>${final_price}</p>
+                    <p>${final_price}</p>
                     <div className={styles.cartQuantity}>
-                        <button
-                            className={styles.quantityBtnDown}
-                            // disabled={amount === переменная}?
-                        >
-                            -
-                        </button>
-                        <span className={styles.quantityNumber}>4</span>
-                        <button className={styles.quantityBtnUp}>+</button>
+                        <Counter
+                            onDecrease={handleDecrease}
+                            quantity={selectedAmount}
+                            onIncrease={handleIncrease}
+                        />
                     </div>
                 </div>
             </div>
         </li>
     );
 };
-
+CartItem.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    final_price: PropTypes.number.isRequired,
+    selectedSize: PropTypes.string.isRequired,
+    selectedAmount: PropTypes.number.isRequired,
+};
 export default CartItem;
