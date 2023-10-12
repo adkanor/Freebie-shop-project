@@ -1,10 +1,10 @@
-// import PropTypes from "prop-types";
 import style from "./FavouriteIcon.module.css";
 import React from "react";
 import PropTypes from "prop-types";
 import { addProductToFavorites } from "../../stores/favoritesProducts/action";
 import { deleteProductFromFavorites } from "../../stores/favoritesProducts/action";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const FavoriteIcon = ({ thisCard }) => {
     const dispatch = useDispatch();
@@ -12,16 +12,31 @@ const FavoriteIcon = ({ thisCard }) => {
         (state) => state.favoritesReducer.favorites
     );
 
+    // Function to add the product to favorites
     const addToFavs = (thisCard) => {
         dispatch(addProductToFavorites(thisCard));
+        toast.success("Add to favourites", {
+            position: "bottom-left",
+            autoClose: 2500,
+        });
     };
+
+    // Function to remove the product from favorites
     const removeFromFavs = (id) => {
         dispatch(deleteProductFromFavorites(id));
+        toast.success("Remove from favourites", {
+            position: "bottom-left",
+            autoClose: 2500,
+        });
     };
+
+    // Check if the current product is in favorites
     const favoritesChecker = (id) => {
         const boolean = favoritesProducts.some((product) => product.id === id);
         return boolean;
     };
+
+    // Handle the click on the favorite icon
     const handleIconClick = (event) => {
         event.preventDefault();
         favoritesChecker(thisCard.id)

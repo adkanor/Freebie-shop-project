@@ -11,6 +11,7 @@ const favoritesReducer = (state = initState, action) => {
     let newStateOfFav;
 
     switch (action.type) {
+        // Add a product to favorites and update the state
         case ADD_TO_FAVORITES:
             newStateOfFav = {
                 ...state,
@@ -22,6 +23,7 @@ const favoritesReducer = (state = initState, action) => {
             );
             return newStateOfFav;
 
+        // Remove a product from favorites and update the state
         case REMOVE_FROM_FAVORITES:
             newStateOfFav = {
                 ...state,

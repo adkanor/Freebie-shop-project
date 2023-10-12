@@ -21,6 +21,7 @@ const cartReducer = (state = initialState, action) => {
     let id;
     let selectedSize;
     let updatedState;
+
     if (action.payload) {
         id = action.payload.id;
         selectedSize = action.payload.selectedSize;
@@ -35,6 +36,7 @@ const cartReducer = (state = initialState, action) => {
                     item._id === newItem._id &&
                     item.selectedSize === newItem.selectedSize
             );
+
             // If already in cart
             if (existingItemIndex !== -1) {
                 toast.error("Already in cart!", {
@@ -67,8 +69,8 @@ const cartReducer = (state = initialState, action) => {
 
                 return updatedState;
             }
-        // Removing from cart
 
+        // Removing from cart
         case REMOVE_FROM_CART:
             const removedItem = state.cartItems.find(
                 (item) => item._id === id && item.selectedSize === selectedSize
@@ -111,6 +113,7 @@ const cartReducer = (state = initialState, action) => {
                 const selectedSizeObj = updatedItems[
                     incrementItemIndex
                 ].sizes.find((size) => size.size === selectedSize);
+
                 // Checking for item quantity is not bigger than real count of this item
                 if (
                     selectedSizeObj &&
@@ -148,8 +151,8 @@ const cartReducer = (state = initialState, action) => {
                 }
             }
             return state;
-        // Decrement item for 1 in the cart
 
+        // Decrement item for 1 in the cart
         case DECREMENT_ITEM_QUANTITY:
             const decrementItemIndex = state.cartItems.findIndex(
                 (item) => item._id === id && item.selectedSize === selectedSize
