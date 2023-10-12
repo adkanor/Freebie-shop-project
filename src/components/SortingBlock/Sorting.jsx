@@ -14,10 +14,10 @@ const SortFilter = ({ filteredProducts, setFilteredProducts }) => {
                 productsToSort.sort((a, b) => b.name.localeCompare(a.name));
                 break;
             case "price-asc":
-                productsToSort.sort((a, b) => a.price - b.price);
+                productsToSort.sort((a, b) => a.final_price - b.final_price);
                 break;
             case "price-desc":
-                productsToSort.sort((a, b) => b.price - a.price);
+                productsToSort.sort((a, b) => b.final_price - a.final_price);
                 break;
             default:
                 break;
