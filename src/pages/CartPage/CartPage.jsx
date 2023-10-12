@@ -14,7 +14,7 @@ const CartPage = () => {
     const cartTotalAmount = useSelector(
         (state) => state.cartReducer.cartTotalAmount
     );
-
+    console.log(cartTotalAmount);
     const initialValues = {
         subtotal: cartTotalAmount,
         promoCode: "",
@@ -23,7 +23,8 @@ const CartPage = () => {
         deliveryFee: 15,
     };
     const onSubmit = (values) => {
-        console.log("Form values", values);
+        const updatedValues = { ...values, subtotal: cartTotalAmount };
+        console.log("Form values", updatedValues);
     };
 
     return (
