@@ -12,6 +12,8 @@ import MastercardIcon from "../../assets/icons/Payment/Mastercard.svg";
 import PayPalIcon from "../../assets/icons/Payment/PayPal.svg";
 import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 
+import MailIcon from "../../assets/icons/Header/Mail.svg";
+
 import BlackButton from "../Button/Button";
 
 const Footer = () => {
@@ -41,11 +43,14 @@ const Footer = () => {
                 <section className={styles.EmailContainer}>
                     <h2 className={styles.EmailContainerTitle}>Stay Up to Date About Our Latest Offers</h2>
                     <div className={styles.EmailForm}>
-                        <input
-                            className={styles.EmailFormArea}
-                            type="text"
-                            placeholder="Enter your email address"
-                        />
+                        <div className={styles.MailFormBox}>
+                            <img src={MailIcon} alt="MailIcon" />
+                            <input
+                                className={styles.EmailFormArea}
+                                type="text"
+                                placeholder="Enter your email address"
+                            />
+                        </div>
                         <BlackButton
                             text="Subscribe to newsletter"
                             style={{ 

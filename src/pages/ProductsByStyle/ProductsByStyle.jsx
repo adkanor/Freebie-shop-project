@@ -21,12 +21,18 @@ const ProductsByStyle = () => {
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
+
+
+    
+
+
     let url;
     if (style === "female" || style === "male") {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
     } else {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
     }
+
     useEffect(() => {
         axios
             .get(url)
