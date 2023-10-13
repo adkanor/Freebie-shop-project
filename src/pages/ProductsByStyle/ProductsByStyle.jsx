@@ -22,29 +22,28 @@ const ProductsByStyle = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
 
+
     
 
+
+    let url;
+    if (style === "female" || style === "male") {
+        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
+    } else {
+        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
+    }
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`,
-                    {
-                        params: {
-                            style: `${style}`,
-                        },
-                    }
-                );
+        axios
+            .get(url)
+            .then((response) => {
                 setProductByStyle(response.data);
                 setFilteredProducts(response.data);
-            } catch (error) {
+            })
+            .catch((error) => {
                 console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, [style]);
-
+            });
+    }, [style, url]);
     // Function to setCurrentPage
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -74,6 +73,7 @@ const ProductsByStyle = () => {
             {/* Main section */}
             <div className={styles.stylePage}>
                 <Filters
+                    style={style}
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
