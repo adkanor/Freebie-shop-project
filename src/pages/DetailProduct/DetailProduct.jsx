@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/cartProducts/action";
 import { toast } from "react-toastify";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
+
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
