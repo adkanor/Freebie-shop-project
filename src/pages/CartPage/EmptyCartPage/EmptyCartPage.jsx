@@ -3,6 +3,7 @@ import EmptyCart from "../../../assets/icons/Header/Cart.svg";
 import styles from "./EmptyCartPage.module.css";
 import { Link } from "react-router-dom";
 import arrow from "../../../assets/icons/Cart/arrow-right-bold.svg";
+
 const EmptyCartPage = () => {
     return (
         <div className={styles.emptyCartSection}>

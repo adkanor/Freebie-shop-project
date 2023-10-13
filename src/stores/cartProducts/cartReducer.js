@@ -7,9 +7,12 @@ import {
 } from "./action";
 import { toast } from "react-toastify";
 
+const cartItems = localStorage.getItem("cartItems");
+const cartTotalAmount = localStorage.getItem("cartTotalAmount");
+
 const initialState = {
-    cartItems: [],
-    cartTotalAmount: 0,
+    cartItems: cartItems ? JSON.parse(cartItems) : [],
+    cartTotalAmount: cartTotalAmount ? JSON.parse(cartTotalAmount) : 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -17,6 +20,7 @@ const cartReducer = (state = initialState, action) => {
     let existingItemIndex;
     let id;
     let selectedSize;
+    let updatedState;
 
     if (action.payload) {
         id = action.payload.id;
@@ -32,6 +36,7 @@ const cartReducer = (state = initialState, action) => {
                     item._id === newItem._id &&
                     item.selectedSize === newItem.selectedSize
             );
+
             // If already in cart
             if (existingItemIndex !== -1) {
                 toast.error("Already in cart!", {
@@ -48,14 +53,24 @@ const cartReducer = (state = initialState, action) => {
                     position: "bottom-left",
                     autoClose: 2500,
                 });
-                return {
+                updatedState = {
                     ...state,
                     cartItems: [...state.cartItems, newItem],
                     cartTotalAmount: updatedTotalAmount,
                 };
-            }
-        // Removing from cart
+                localStorage.setItem(
+                    "cartItems",
+                    JSON.stringify(updatedState.cartItems)
+                );
+                localStorage.setItem(
+                    "cartTotalAmount",
+                    updatedTotalAmount.toString()
+                );
 
+                return updatedState;
+            }
+
+        // Removing from cart
         case REMOVE_FROM_CART:
             const removedItem = state.cartItems.find(
                 (item) => item._id === id && item.selectedSize === selectedSize
@@ -71,11 +86,20 @@ const cartReducer = (state = initialState, action) => {
                 position: "bottom-left",
                 autoClose: 2500,
             });
-            return {
+            updatedState = {
                 ...state,
                 cartItems: updatedCartItems,
                 cartTotalAmount: updatedTotalAmount,
             };
+            localStorage.setItem(
+                "cartItems",
+                JSON.stringify(updatedState.cartItems)
+            );
+            localStorage.setItem(
+                "cartTotalAmount",
+                updatedTotalAmount.toString()
+            );
+            return updatedState;
 
         // Increment item quantity(already in cart)
         case INCREMENT_ITEM_QUANTITY:
@@ -89,6 +113,7 @@ const cartReducer = (state = initialState, action) => {
                 const selectedSizeObj = updatedItems[
                     incrementItemIndex
                 ].sizes.find((size) => size.size === selectedSize);
+
                 // Checking for item quantity is not bigger than real count of this item
                 if (
                     selectedSizeObj &&
@@ -104,11 +129,20 @@ const cartReducer = (state = initialState, action) => {
                         position: "bottom-left",
                         autoClose: 2500,
                     });
-                    return {
+                    updatedState = {
                         ...state,
                         cartItems: updatedItems,
                         cartTotalAmount: updatedTotalAmount,
                     };
+                    localStorage.setItem(
+                        "cartItems",
+                        JSON.stringify(updatedState.cartItems)
+                    );
+                    localStorage.setItem(
+                        "cartTotalAmount",
+                        updatedTotalAmount.toString()
+                    );
+                    return updatedState;
                 } else {
                     toast.error("Maximum available quantity", {
                         position: "bottom-left",
@@ -117,8 +151,8 @@ const cartReducer = (state = initialState, action) => {
                 }
             }
             return state;
-        // Decrement item for 1 in the cart
 
+        // Decrement item for 1 in the cart
         case DECREMENT_ITEM_QUANTITY:
             const decrementItemIndex = state.cartItems.findIndex(
                 (item) => item._id === id && item.selectedSize === selectedSize
@@ -137,11 +171,20 @@ const cartReducer = (state = initialState, action) => {
                     position: "bottom-left",
                     autoClose: 2500,
                 });
-                return {
+                updatedState = {
                     ...state,
                     cartItems: updatedItems,
                     cartTotalAmount: updatedTotalAmount,
                 };
+                localStorage.setItem(
+                    "cartItems",
+                    JSON.stringify(updatedState.cartItems)
+                );
+                localStorage.setItem(
+                    "cartTotalAmount",
+                    updatedTotalAmount.toString()
+                );
+                return updatedState;
             }
             return state;
         default:
@@ -152,22 +195,3 @@ const cartReducer = (state = initialState, action) => {
 export default cartReducer;
 
 /* eslint-disable */
-
-// Logic for increasing the number of items in the cart (needs additional tests)
-//  if (existingItemIndex !== -1) {
-
-// const updatedItems = [...state.cartItems];
-// updatedItems[existingItemIndex].selectedAmount +=
-//     newItem.selectedAmount;
-// const updatedTotalAmount =
-//     state.cartTotalAmount +
-//     newItem.selectedAmount * newItem.final_price;
-// toast.info("Increased quantity", {
-//     position: "bottom-left",
-//     autoClose: 2500,
-// });
-// return {
-//     ...state,
-//     cartItems: updatedItems,
-//     cartTotalAmount: updatedTotalAmount,
-// };
