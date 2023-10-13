@@ -1,0 +1,31 @@
+.emptyFavSection {
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 24px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.emptyFavSection p,
+.emptyFavSection h1 {
+    text-align: center;
+    color: var(--gray-text-secondary);
+}
+.emptyFavIcon {
+    width: 100px;
+    height: 100px;
+    margin: 25px auto;
+}
+.emptyFavLink {
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.emptyFavLink img {
+    margin-left: 8px;
+    margin-top: 5px;
+}
+.emptyFavLink p {
+    color: inherit;
+}
