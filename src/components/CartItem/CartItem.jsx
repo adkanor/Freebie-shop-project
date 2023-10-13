@@ -18,15 +18,12 @@ const CartItem = ({
     const dispatch = useDispatch();
     const deleteItem = (id, selectedSize) => {
         dispatch(removeFromCart(id, selectedSize));
-        console.log(id, selectedSize);
     };
     const handleDecrease = () => {
         dispatch(decrementItemQuantity(id, selectedSize));
-        console.log(selectedAmount, "should - 1");
     };
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
-        console.log(selectedAmount, "should + 1");
     };
     return (
         <li className={styles.cartItem}>
@@ -50,7 +47,6 @@ const CartItem = ({
                     <span>{selectedSize}</span>
                 </div>
                 <div className={styles.cartItemTotal}>
-                    <p>${final_price}</p>
                     <p>${final_price}</p>
                     <div className={styles.cartQuantity}>
                         <Counter

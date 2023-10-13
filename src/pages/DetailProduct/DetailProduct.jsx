@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./DetailProduct.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ import Counter from "../../components/Counter/Counter";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/cartProducts/action";
 import { toast } from "react-toastify";
-
+import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
@@ -27,25 +27,47 @@ const styleBlack = {
 
 const DetailProduct = () => {
     const [noAvailability, setNoAvailability] = useState(null);
+    const [recommendations, setRecommendations] = useState([]);
     const [info, setInfo] = useState(null);
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
-                );
-                setInfo(response.data);
+    const recommendationsFilter = useCallback(
+        (arr) => {
+            const filterArr = arr.filter((item) => item._id !== info._id);
+            setRecommendations(filterArr);
+        },
+        [info]
+    );
 
-                console.log(response);
-            } catch (error) {
-                console.error("Ошибка при получении данных:", error);
-            }
-        };
-        fetchData();
+    useEffect(() => {
+        axios
+            .get(
+                `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
+            )
+            .then((res) => {
+                setInfo(res.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, [id]);
+
+    useEffect(() => {
+        if (info) {
+            axios
+                .get(
+                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/category/${info.category}`
+                )
+                .then((response) => {
+                    recommendationsFilter(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    }, [info, recommendationsFilter]);
+
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
         setNoAvailability(null);
@@ -115,7 +137,7 @@ const DetailProduct = () => {
                                 </div>
                                 <div className={styles.productPriceContainer}>
                                     <h2 className={styles.currentPrice}>
-                                        ${info.final_price}${info.final_price}
+                                        ${info.final_price}
                                     </h2>
                                     {!!Number(info.discount) && (
                                         <>
@@ -182,6 +204,10 @@ const DetailProduct = () => {
                 </Formik>
             </div>
             <DetaiLComentsCard idGoods={id} />
+            <RecommendationProducts
+                title={"You might also like"}
+                arrayofProducts={recommendations}
+            ></RecommendationProducts>
         </div>
     );
 };

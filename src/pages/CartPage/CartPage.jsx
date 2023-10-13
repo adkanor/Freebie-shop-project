@@ -1,20 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styles from "./CartPage.module.css";
-import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import Button from "../../components/Button/Button.jsx";
 import promo from "../../assets/icons/Cart/Promo.svg";
 import CartItem from "../../components/CartItem/CartItem.jsx";
 import { Formik, Form, Field } from "formik";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
-
+import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 const CartPage = () => {
     const cartProducts = useSelector((state) => state.cartReducer.cartItems);
     const cartTotalAmount = useSelector(
         (state) => state.cartReducer.cartTotalAmount
     );
-
+    console.log(cartTotalAmount);
     const initialValues = {
         subtotal: cartTotalAmount,
         promoCode: "",
@@ -23,39 +21,19 @@ const CartPage = () => {
         deliveryFee: 15,
     };
     const onSubmit = (values) => {
-        console.log("Form values", values);
+        const updatedValues = { ...values, subtotal: cartTotalAmount };
+        console.log("Form values", updatedValues);
     };
 
     return (
         <>
             <section className="section">
-                <nav className={styles.sectionNav}>
-                    <ul className={styles.breadcrumbsList}>
-                        <li>
-                            <Link
-                                to="/"
-                                className={styles.breadcrumbsLinkToHome}
-                            >
-                                Home
-                            </Link>
-                        </li>
-                        <img
-                            className={styles.breadcrumbsArrow}
-                            src={arrow}
-                            alt="arrowLeft"
-                            width="14"
-                            height="14"
-                        />
-                        <li>
-                            <Link
-                                to="/cart"
-                                className={styles.breadcrumbsLinkToCart}
-                            >
-                                Cart
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
+                <AdaptiveNav
+                    linksObj={{
+                        home: "/",
+                        cart: "/cart",
+                    }}
+                />
 
                 {cartProducts.length > 0 ? (
                     <>
