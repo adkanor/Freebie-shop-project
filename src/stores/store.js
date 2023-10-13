@@ -5,10 +5,12 @@ import logger from "redux-logger";
 import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
 import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
+import favoritesReducer from "./favoritesProducts/favoritesReducer";
 const rootReducer = combineReducers({
     newArrivalsReducer,
     topSaleReducer,
     cartReducer,
+    favoritesReducer,
 });
 
 const store = configureStore({

@@ -158,7 +158,7 @@ const Header = () => {
                                 <Link to="cart" onClick={hideAll}>
                                     <img src={CartSVG} alt="Cart SVG" />
                                 </Link>
-                                <Link to="test" onClick={hideAll}>
+                                <Link to="favourites" onClick={hideAll}>
                                     <img src={HeartSVG} alt="Heart SVG" />
                                 </Link>
                             </div>
