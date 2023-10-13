@@ -1,0 +1,25 @@
+.favList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+}
+.favList li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+@media (min-width: 866px) {
+    .favList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1300px) {
+    .favList {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

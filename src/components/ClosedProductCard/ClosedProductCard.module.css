@@ -14,6 +14,7 @@
     height: 296px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .imgWrapper > img {
@@ -75,12 +76,12 @@
     border-radius: 3.875rem;
 }
 
-@media screen and (max-width: 991px){
+@media screen and (max-width: 991px) {
     .cardWrapper {
         width: 250px;
     }
     .imgWrapper {
-        padding: .6rem;
+        padding: 0.6rem;
         height: 250px;
     }
     .productName {
@@ -91,7 +92,7 @@
     }
     .ratingSpan {
         padding-bottom: 0;
-        padding-left: .5rem;
+        padding-left: 0.5rem;
         font-size: 0.75rem;
     }
     .salePriceContainer {
@@ -109,12 +110,12 @@
     }
 }
 
-@media screen and (max-width: 765px){
+@media screen and (max-width: 765px) {
     .cardWrapper {
         width: 170px;
     }
     .imgWrapper {
-        padding: .6rem;
+        padding: 0.6rem;
         height: 170px;
     }
     .productName {
@@ -137,12 +138,12 @@
     }
 }
 
-@media screen and (max-width: 392px){
+@media screen and (max-width: 392px) {
     .cardWrapper {
         width: 150px;
     }
     .imgWrapper {
-        padding: .45rem;
+        padding: 0.45rem;
         height: 150px;
     }
     .productName {
@@ -153,7 +154,7 @@
     }
     .ratingSpan {
         padding-bottom: 0;
-        padding-left: .4rem;
+        padding-left: 0.4rem;
         font-size: 0.6rem;
     }
     .defaultPriceSpan {

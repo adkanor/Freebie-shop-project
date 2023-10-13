@@ -3,13 +3,23 @@ import StarRating from "../StarRating/StarRating";
 import PropTypes from "prop-types";
 import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
+import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
 
-function ClosedProductCard({ id, name, imageURL, rating, sale,price,final_price }) {
-
+function ClosedProductCard({
+    id,
+    name,
+    imageURL,
+    rating,
+    sale,
+    price,
+    final_price,
+}) {
+    const thisCard = { id, name, imageURL, rating, sale, price, final_price };
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`/products/${id}`}>
                 <div className={style.imgWrapper}>
+                    <FavoriteIcon thisCard={thisCard} />
                     <img src={imageURL} alt="productImg" />
                 </div>
                 <h6 className={style.productName}>{name}</h6>
@@ -28,7 +38,9 @@ function ClosedProductCard({ id, name, imageURL, rating, sale,price,final_price 
                         <span className={style.saleValue}>-{sale}%</span>
                     </div>
                 ) : (
-                    <span className={style.defaultPriceSpan}>${final_price}</span>
+                    <span className={style.defaultPriceSpan}>
+                        ${final_price}
+                    </span>
                 )}
             </Link>
         </li>
@@ -39,7 +51,7 @@ ClosedProductCard.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    final_price:PropTypes.number.isRequired,
+    final_price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     sale: PropTypes.number,
