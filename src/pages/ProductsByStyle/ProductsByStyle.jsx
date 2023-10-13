@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import axios from "axios";
-import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import styles from "./ProductsByStyle.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
@@ -11,9 +10,9 @@ import Sorting from "../../components/SortingBlock/Sorting";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
 import { useMediaQuery } from "@react-hook/media-query";
+import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 
 const ProductsByStyle = () => {
-
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
 
@@ -22,8 +21,6 @@ const ProductsByStyle = () => {
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
-
-    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,30 +63,12 @@ const ProductsByStyle = () => {
     return (
         <section className="section">
             {/* Navigation above page */}
-            <nav className={styles.sectionNav}>
-                <ul className={styles.breadcrumbsList}>
-                    <li>
-                        <Link to="/" className={styles.breadcrumbsLinkToHome}>
-                            Home
-                        </Link>
-                    </li>
-                    <img
-                        className={styles.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrow to left in navigation"
-                        width="14"
-                        height="14"
-                    />
-                    <li>
-                        <Link
-                            to={`/${style}`}
-                            className={styles.breadcrumbsLinkToCart}
-                        >
-                            {style}
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            <AdaptiveNav
+                linksObj={{
+                    home: "/",
+                    [style]: `/${style}`,
+                }}
+            />
             {/* Main section */}
             <div className={styles.stylePage}>
                 <Filters
