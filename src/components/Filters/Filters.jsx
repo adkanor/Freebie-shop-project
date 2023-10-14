@@ -8,11 +8,14 @@ import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 const Filters = ({
     productByStyle,
     setFilteredProducts,
     setFiltresVisible,
     filtersAreVisible,
+    style,
 }) => {
     const MIN_PRICE = 10;
     const MAX_PRICE = 1000;
@@ -26,8 +29,7 @@ const Filters = ({
         "skirts",
         "shorts",
         "dresses",
-        "joggers"
-
+        "joggers",
     ];
     const [noFiltersMatch, seNoFiltersMatch] = useState(false);
     let productsNotFiltered = useMemo(
@@ -86,6 +88,10 @@ const Filters = ({
             closeFilters();
         } else {
             seNoFiltersMatch(true);
+            toast.error("No filters match", {
+                position: "bottom-left",
+                autoClose: 2500,
+            });
         }
     };
 
@@ -125,31 +131,34 @@ const Filters = ({
                 />
             </div>
             <form onSubmit={applyFilters}>
-                <div className={styles.filterSex}>
-                    <h3 className={styles.filterTitle}>Gender</h3>
-                    <label className={styles.filterLabel}>
-                        <input
-                            className={styles.radioInput}
-                            type="radio"
-                            name="sex"
-                            value="male"
-                            onChange={formik.handleChange}
-                            checked={formik.values.sex === "male"}
-                        />
-                        male
-                    </label>
-                    <label className={styles.filterLabel}>
-                        <input
-                            className={styles.radioInput}
-                            type="radio"
-                            name="sex"
-                            value="female"
-                            onChange={formik.handleChange}
-                            checked={formik.values.sex === "female"}
-                        />
-                        female
-                    </label>
-                </div>
+                {style !== "female" && style !== "male" ? (
+                    <div className={styles.filterSex}>
+                        <h3 className={styles.filterTitle}>Gender</h3>
+                        <label className={styles.filterLabel}>
+                            <input
+                                className={styles.radioInput}
+                                type="radio"
+                                name="sex"
+                                value="male"
+                                onChange={formik.handleChange}
+                                checked={formik.values.sex === "male"}
+                            />
+                            male
+                        </label>
+                        <label className={styles.filterLabel}>
+                            <input
+                                className={styles.radioInput}
+                                type="radio"
+                                name="sex"
+                                value="female"
+                                onChange={formik.handleChange}
+                                checked={formik.values.sex === "female"}
+                            />
+                            female
+                        </label>
+                    </div>
+                ) : null}
+
                 <div className={styles.filterCategory}>
                     <h3 className={styles.filterTitle}>Categories</h3>
                     {categories.map((category) => (
@@ -249,6 +258,7 @@ Filters.propTypes = {
     setFilteredProducts: PropTypes.func.isRequired,
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
+    style: PropTypes.string,
 };
 
 export default Filters;

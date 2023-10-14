@@ -3,8 +3,10 @@ import styles from "./RecomendationProducts.module.css";
 import PropTypes from "prop-types";
 
 import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
-const RecommendationProducts = ({ title, arrayofProducts, children }) => {
-    const littleArr = arrayofProducts.length ? arrayofProducts.slice(0,4) : [];
+
+const RecommendationProducts = ({title, arrayofProducts, children}) => {
+    const littleArr = arrayofProducts.length ? arrayofProducts.slice(0, 4) : [];
+
     return (
         <div className={styles.recommendationProducts}>
             <h2>{title}</h2>

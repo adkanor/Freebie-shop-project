@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import axios from "axios";
-import arrow from "../../assets/icons/Cart/arrow-right-bold.svg";
 import styles from "./ProductsByStyle.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
@@ -10,36 +9,41 @@ import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
-let PageSize = 9; // тут можно менять количество отображаемих на странице карточек (по дефолту 9)
+import { useMediaQuery } from "@react-hook/media-query";
+import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 
 const ProductsByStyle = () => {
+    const isMobile = useMediaQuery("(max-width: 1298px)");
+    const PageSize = isMobile ? 6 : 9;
+
     const [productByStyle, setProductByStyle] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
 
+
+    
+
+
+    let url;
+    if (style === "female" || style === "male") {
+        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
+    } else {
+        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
+    }
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`,
-                    {
-                        params: {
-                            style: `${style}`,
-                        },
-                    }
-                );
+        axios
+            .get(url)
+            .then((response) => {
                 setProductByStyle(response.data);
                 setFilteredProducts(response.data);
-            } catch (error) {
+            })
+            .catch((error) => {
                 console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, [style]);
-
+            });
+    }, [style, url]);
     // Function to setCurrentPage
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -50,7 +54,7 @@ const ProductsByStyle = () => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return filteredProducts.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, filteredProducts]);
+    }, [currentPage, filteredProducts, PageSize]);
 
     // Function to toogle Filters
     const toogleFilters = () => {
@@ -60,33 +64,16 @@ const ProductsByStyle = () => {
     return (
         <section className="section">
             {/* Navigation above page */}
-            <nav className={styles.sectionNav}>
-                <ul className={styles.breadcrumbsList}>
-                    <li>
-                        <Link to="/" className={styles.breadcrumbsLinkToHome}>
-                            Home
-                        </Link>
-                    </li>
-                    <img
-                        className={styles.breadcrumbsArrow}
-                        src={arrow}
-                        alt="arrow to left in navigation"
-                        width="14"
-                        height="14"
-                    />
-                    <li>
-                        <Link
-                            to={`/${style}`}
-                            className={styles.breadcrumbsLinkToCart}
-                        >
-                            {style}
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            <AdaptiveNav
+                linksObj={{
+                    home: "/",
+                    [style]: `/${style}`,
+                }}
+            />
             {/* Main section */}
             <div className={styles.stylePage}>
                 <Filters
+                    style={style}
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
