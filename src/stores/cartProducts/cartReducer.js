@@ -9,10 +9,11 @@ import { toast } from "react-toastify";
 
 const cartItems = localStorage.getItem("cartItems");
 const cartTotalAmount = localStorage.getItem("cartTotalAmount");
-
+const cartTotalQuant = localStorage.getItem("cartTotalQuantity");
 const initialState = {
     cartItems: cartItems ? JSON.parse(cartItems) : [],
     cartTotalAmount: cartTotalAmount ? JSON.parse(cartTotalAmount) : 0,
+    cartQuantity: cartTotalQuant? JSON.parse(cartTotalQuant) : 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -57,6 +58,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     cartItems: [...state.cartItems, newItem],
                     cartTotalAmount: updatedTotalAmount,
+                    cartQuantity: state.cartQuantity + newItem.selectedAmount
                 };
                 localStorage.setItem(
                     "cartItems",
@@ -64,7 +66,11 @@ const cartReducer = (state = initialState, action) => {
                 );
                 localStorage.setItem(
                     "cartTotalAmount",
-                    updatedTotalAmount.toString()
+                    JSON.stringify(updatedState.cartTotalAmount)
+                );
+                localStorage.setItem(
+                    "cartTotalQuantity",
+                    JSON.stringify(updatedState.cartQuantity)
                 );
 
                 return updatedState;
@@ -90,6 +96,7 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: updatedCartItems,
                 cartTotalAmount: updatedTotalAmount,
+                cartQuantity: state.cartQuantity - removedItem.selectedAmount
             };
             localStorage.setItem(
                 "cartItems",
@@ -97,7 +104,11 @@ const cartReducer = (state = initialState, action) => {
             );
             localStorage.setItem(
                 "cartTotalAmount",
-                updatedTotalAmount.toString()
+                JSON.stringify(updatedState.cartTotalAmount)
+            );
+            localStorage.setItem(
+                "cartTotalQuantity",
+                JSON.stringify(updatedState.cartQuantity)
             );
             return updatedState;
 
@@ -133,6 +144,8 @@ const cartReducer = (state = initialState, action) => {
                         ...state,
                         cartItems: updatedItems,
                         cartTotalAmount: updatedTotalAmount,
+                        cartQuantity: state.cartQuantity + 1,
+
                     };
                     localStorage.setItem(
                         "cartItems",
@@ -140,7 +153,11 @@ const cartReducer = (state = initialState, action) => {
                     );
                     localStorage.setItem(
                         "cartTotalAmount",
-                        updatedTotalAmount.toString()
+                        JSON.stringify(updatedState.cartTotalAmount)
+                    );
+                    localStorage.setItem(
+                        "cartTotalQuantity",
+                        JSON.stringify(updatedState.cartQuantity)
                     );
                     return updatedState;
                 } else {
@@ -175,6 +192,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     cartItems: updatedItems,
                     cartTotalAmount: updatedTotalAmount,
+                    cartQuantity: state.cartQuantity - 1,
                 };
                 localStorage.setItem(
                     "cartItems",
@@ -182,7 +200,11 @@ const cartReducer = (state = initialState, action) => {
                 );
                 localStorage.setItem(
                     "cartTotalAmount",
-                    updatedTotalAmount.toString()
+                    JSON.stringify(updatedState.cartTotalAmount)
+                );
+                localStorage.setItem(
+                    "cartTotalQuantity",
+                    JSON.stringify(updatedState.cartQuantity)
                 );
                 return updatedState;
             }

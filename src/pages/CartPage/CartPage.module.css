@@ -4,27 +4,7 @@
     font-family: "Satoshi 400", Arial, sans-serif;
     font-size: 14px;
 }
-/* Navigation Home > Cart */
-.breadcrumbsList {
-    text-transform: uppercase;
-    display: flex;
-    justify-content: flex-start;
-}
-.breadcrumbsList li {
-    margin-right: 5px;
-}
-.breadcrumbsLinkToHome {
-    color: var(--gray-text-primary);
-}
-.breadcrumbsArrow {
-    width: 14px;
-    height: 14px;
-    margin-right: 5px;
-    margin-top: 2px;
-}
-.breadcrumbsLinkToCart {
-    color: var(--black-text);
-}
+
 /* Cart Title */
 .cartPageTitle {
     font-size: 32px;
@@ -118,11 +98,6 @@
         margin-bottom: 25px;
         font-size: 16px;
     }
-    .breadcrumbsArrow {
-        /* margin-right: 10px; */
-        width: 16px;
-        height: 16px;
-    }
     .cartPageTitle {
         font-size: 40px;
         margin-bottom: 24px;
@@ -147,4 +122,49 @@
     .cartSummary {
         flex: 1;
     }
+}
+/* 
+скидка
+*/
+.discountSection{
+    margin: 20px auto;
+    padding: 30px 20px;
+    background-color: var(--gray-primary);
+    display: flex;
+    flex-direction: column;
+}
+.discountSection p {
+    text-align: center;
+    font-family: "Satoshi 400", Arial, sans-serif;
+    color: var(--black-text);
+    margin: 10px;
+
+}
+.discountScale {
+    background-color: #ddd;
+    height: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative;
+    text-align: right;
+}
+
+.discountScaleFill {
+    background-color: var(--red-text); 
+    height: 100%;
+    border-radius: 5px;
+    width: 0%; 
+}
+
+/* Классы для разных скидок */
+.discountScaleFill12 {
+    width: 25%; 
+}
+
+.discountScaleFill20 {
+    width: 50%; 
+}
+
+.discountScaleFill25 {
+    width: 100%; 
 }
