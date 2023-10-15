@@ -4,6 +4,7 @@ import { usePagination, DOTS } from "./usePagination";
 import styles from "./Pagination.module.css";
 import LeftArrow from "../../assets/icons/ArrowsSlider/arrowLeft.svg";
 import RightArrow from "../../assets/icons/ArrowsSlider/arrowRight.svg";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Pagination = props => {
     const {
@@ -39,7 +40,10 @@ const Pagination = props => {
         <ul className={`${styles["PaginationContainer"]} ${className || ""}`}>
             <li
                 className={`${styles["PaginationItem"]} ${currentPage === 1 ? styles["disabled"] : ""}`}
-                onClick={onPrevious}
+                onClick={() => {
+                    scrollToTop();
+                    onPrevious();
+                }}
             >
                 <div
                     className={styles.ArrowBox}
@@ -61,7 +65,10 @@ const Pagination = props => {
                     <li
                         key={pageNumber}
                         className={`${styles["PaginationItem"]} ${pageNumber === currentPage ? styles["selected"] : ""}`}
-                        onClick={() => onPageChange(pageNumber)}
+                        onClick={() => {
+                            scrollToTop();
+                            onPageChange(pageNumber);
+                        }}
                     >
                         {pageNumber}
                     </li>
@@ -69,7 +76,10 @@ const Pagination = props => {
             })}
             <li
                 className={`${styles["PaginationItem"]} ${currentPage === lastPage ? styles["disabled"] : ""}`}
-                onClick={onNext}
+                onClick={() => {
+                    onNext();
+                    scrollToTop();
+                }}
             >
                 <div
                     className={styles.ArrowBox}

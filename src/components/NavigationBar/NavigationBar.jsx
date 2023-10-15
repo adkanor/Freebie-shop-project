@@ -7,13 +7,13 @@ const NavigationBar = ({ classList, clickFunc }) => {
     return (
         <ul className={classList}>
             <li className={styles.desktopItem}>
-                <Link to="test" onClick={() => clickFunc()}>
-                    <p className={styles.desktopItemText}>Women</p>
+                <Link to="/female" onClick={() => clickFunc()}>
+                    <p className={styles.desktopItemText}>Female</p>
                 </Link>
             </li>
             <li className={styles.desktopItem}>
-                <Link to="test" onClick={() => clickFunc()}>
-                    <p className={styles.desktopItemText}>Men</p>
+                <Link to="/male" onClick={() => clickFunc()}>
+                    <p className={styles.desktopItemText}>Male</p>
                 </Link>
             </li>
             <li className={styles.desktopItem}>
