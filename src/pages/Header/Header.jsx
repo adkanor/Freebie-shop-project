@@ -152,7 +152,7 @@ const Header = () => {
                                     />
                                 )}
 
-                                <Link to="test" onClick={hideAll}>
+                                <Link to="/EditProfile" onClick={hideAll}>
                                     <img src={AccountSVG} alt="Account SVG" />
                                 </Link>
                                 <Link to="cart" onClick={hideAll}>
