@@ -1,29 +1,44 @@
 import React from "react";
 import styles from "./CartPage.module.css";
-import Button from "../../components/Button/Button.jsx";
-import promo from "../../assets/icons/Cart/Promo.svg";
+// import Button from "../../components/Button/Button.jsx";
 import CartItem from "../../components/CartItem/CartItem.jsx";
-import { Formik, Form, Field } from "formik";
+// import { Formik, Form } from "formik";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useState, useEffect } from "react";
 import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
+import CartSummary from "../../components/CartSummary/CartSummary";
+import DiscountCounter from "../../components/DiscountCounter/DiscountCounter";
 const CartPage = () => {
-    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
-    const cartTotalAmount = useSelector(
-        (state) => state.cartReducer.cartTotalAmount
-    );
-    console.log(cartTotalAmount);
-    const initialValues = {
-        subtotal: cartTotalAmount,
-        promoCode: "",
-        discountPercentage: 0,
-        calculatedDiscount: 0,
-        deliveryFee: 15,
-    };
-    const onSubmit = (values) => {
-        const updatedValues = { ...values, subtotal: cartTotalAmount };
-        console.log("Form values", updatedValues);
-    };
+    const [discountMessage, setDiscountMessage] = useState("");
+    const [discount, setDiscount] = useState(0);
+    const cartReducer = useSelector((state) => state.cartReducer);
+    const cartProducts = cartReducer.cartItems;
+    const cartTotalAmount = cartReducer.cartTotalAmount;
+    const cartTotalQuantity = cartReducer.cartQuantity;
+
+    useEffect(() => {
+        if (cartTotalQuantity === 1) {
+            setDiscountMessage("Add 1 more to unlock 12% off");
+            setDiscount(0);
+        } else if (cartTotalQuantity === 2) {
+            setDiscountMessage(
+                "🎉 Congratulations! You've unlocked 12% off! Add 1 more to unlock 20% off"
+            );
+            setDiscount(12);
+        } else if (cartTotalQuantity === 3) {
+            setDiscountMessage(
+                "🎉 Congratulations! You've unlocked 20% off! Add more 1 to unlock 25% off"
+            );
+            setDiscount(20);
+        } else if (cartTotalQuantity >= 4) {
+            setDiscountMessage("🎉 Congratulations! You've unlocked 25% off!");
+            setDiscount(25);
+        } else {
+            setDiscountMessage("");
+            setDiscount(0);
+        }
+    }, [cartTotalQuantity]);
 
     return (
         <>
@@ -38,6 +53,10 @@ const CartPage = () => {
                 {cartProducts.length > 0 ? (
                     <>
                         <h1 className={styles.cartPageTitle}>Your cart</h1>
+                        <DiscountCounter
+                            discount={discount}
+                            discountMessage={discountMessage}
+                        />
                         <div className={styles.cartContainer}>
                             <ul className={styles.cartContent}>
                                 {cartProducts.map((product) => (
@@ -56,145 +75,10 @@ const CartPage = () => {
                                     />
                                 ))}
                             </ul>
-                            <div className={styles.cartSummary}>
-                                <Formik
-                                    initialValues={initialValues}
-                                    onSubmit={onSubmit}
-                                >
-                                    <Form>
-                                        <h3 className={styles.cartSummaryTitle}>
-                                            Order Summary
-                                        </h3>
-                                        <div className={styles.cartSummaryInfo}>
-                                            <div
-                                                className={
-                                                    styles.cartSummaryContent
-                                                }
-                                            >
-                                                <h5
-                                                    className={
-                                                        styles.cartSummaryText
-                                                    }
-                                                >
-                                                    Subtotal
-                                                </h5>
-                                                <p
-                                                    className={
-                                                        styles.cartSummaryPrice
-                                                    }
-                                                >
-                                                    $
-                                                    {initialValues.subtotal.toFixed(
-                                                        2
-                                                    )}
-                                                </p>
-                                            </div>
-                                            <div
-                                                className={
-                                                    styles.cartSummaryContent
-                                                }
-                                            >
-                                                <h5
-                                                    className={
-                                                        styles.cartSummaryText
-                                                    }
-                                                >
-                                                    Discount
-                                                </h5>
-                                                <p
-                                                    className={
-                                                        styles.cartSummaryDiscount
-                                                    }
-                                                >
-                                                    0
-                                                </p>
-                                            </div>
-                                            <div
-                                                className={
-                                                    styles.cartSummaryContent
-                                                }
-                                            >
-                                                <h5
-                                                    className={
-                                                        styles.cartSummaryText
-                                                    }
-                                                >
-                                                    Delivery Fee
-                                                </h5>
-                                                <p
-                                                    className={
-                                                        styles.cartSummaryPrice
-                                                    }
-                                                >
-                                                    ${initialValues.deliveryFee}
-                                                </p>
-                                            </div>
-                                            <div className={styles.cartTotal}>
-                                                <h5
-                                                    className={
-                                                        styles.cartTotalName
-                                                    }
-                                                >
-                                                    Total
-                                                </h5>
-                                                <p
-                                                    className={
-                                                        styles.cartTotalAmount
-                                                    }
-                                                >
-                                                    $
-                                                    {(
-                                                        initialValues.subtotal +
-                                                        initialValues.deliveryFee
-                                                    ).toFixed(2)}
-                                                </p>
-                                            </div>
-                                            <div
-                                                className={
-                                                    styles.cartSummaryContent
-                                                }
-                                            >
-                                                <Field
-                                                    className={styles.cartInput}
-                                                    type="text"
-                                                    placeholder="Enter promo code"
-                                                    id="promoCode"
-                                                    name="promoCode"
-                                                />
-                                                <img
-                                                    className={
-                                                        styles.cartInputLogo
-                                                    }
-                                                    src={promo}
-                                                    alt="Promo Code Logo"
-                                                    width="20"
-                                                    height="20"
-                                                />
-                                                <Button
-                                                    text="Apply"
-                                                    style={{
-                                                        padding: "12px 16px",
-                                                        backgroundColor:
-                                                            "var(--black--background)",
-                                                    }}
-                                                    type="button"
-                                                />
-                                            </div>
-                                        </div>
-                                        <Button
-                                            type="submit"
-                                            text="Go to Checkout"
-                                            style={{
-                                                width: "100%",
-                                                padding: "16px 0",
-                                                margin: "0 auto",
-                                                backgroundColor:
-                                                    "var(--black--background)",
-                                            }}
-                                        />
-                                    </Form>
-                                </Formik>
-                            </div>
+                            <CartSummary
+                                discount={discount}
+                                cartTotalAmount={cartTotalAmount}
+                            />
                         </div>
                     </>
                 ) : (

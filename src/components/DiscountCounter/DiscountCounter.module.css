@@ -1,0 +1,65 @@
+.discountSection {
+    margin-bottom: 30px;
+    padding: 20px 10px;
+    background-color: var(--gray-primary);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px var(--gray-text-secondary);
+}
+.discountSection p {
+    text-align: center;
+    font-family: "Satoshi 400", Arial, sans-serif;
+    color: var(--black-text);
+    font-size: 14px;
+    margin: 8px;
+    animation: fadeInText 1s ease-in-out forwards;
+}
+.discountScale {
+    background-color: var(--red-background-discount);
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative;
+    text-align: right;
+}
+
+.discountScaleFill {
+    background-color: var(--login-btn);
+    height: 100%;
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.5s;
+}
+
+.discountScaleFill12 {
+    width: 25%;
+}
+
+.discountScaleFill20 {
+    width: 50%;
+}
+
+.discountScaleFill25 {
+    width: 100%;
+}
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media (min-width: 766px) {
+    .discountSection {
+        margin: 0 auto;
+        padding: 30px 20px;
+        margin-bottom: 30px;
+    }
+    .discountSection p {
+        font-size: 18px;
+        margin: 10px;
+    }
+}

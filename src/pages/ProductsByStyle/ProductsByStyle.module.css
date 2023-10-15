@@ -1,9 +1,3 @@
-.sectionNav {
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-family: "Satoshi 400", Arial, sans-serif;
-    font-size: 14px;
-}
 .styleSorting {
     display: flex;
     justify-content: space-between;
@@ -14,26 +8,6 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-}
-.breadcrumbsList {
-    display: flex;
-    justify-content: flex-start;
-    text-transform: uppercase;
-}
-.breadcrumbsList li {
-    margin-right: 5px;
-}
-.breadcrumbsLinkToHome {
-    color: var(--gray-text-primary);
-}
-.breadcrumbsArrow {
-    width: 14px;
-    height: 14px;
-    margin-right: 5px;
-    margin-top: 2px;
-}
-.breadcrumbsLinkToCart {
-    color: var(--black-text);
 }
 .stylePage {
     width: 100%;
@@ -87,10 +61,6 @@
 @media (min-width: 766px) {
     .filterIcon {
         display: none;
-    }
-    .sectionNav {
-        margin-bottom: 25px;
-        font-size: 16px;
     }
     .styleTitle {
         margin-left: 15px;
