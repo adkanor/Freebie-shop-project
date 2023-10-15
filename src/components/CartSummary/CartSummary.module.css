@@ -1,0 +1,68 @@
+/* Cart Summary section */
+.cartSummary {
+    display: block;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 50px;
+}
+.cartSummaryTitle {
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.cartSummaryInfo {
+    display: flex;
+    flex-direction: column;
+}
+.cartSummaryContent {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+}
+.cartSummaryText {
+    font-family: "Satoshi 400", Arial, sans-serif;
+    color: var(--gray-text-primary);
+    font-size: 16px;
+}
+.cartSummaryPrice {
+    font-family: "Satoshi 700", Arial, sans-serif;
+    color: var(--black-text);
+}
+.cartSummaryDiscountPresentage {
+    font-family: "Satoshi 700", Arial, sans-serif;
+    color: var(--red-text);
+    font-size: 10px;
+    position: absolute;
+    top: -13px;
+    right: -10px;
+}
+.cartSummaryDiscount {
+    font-family: "Satoshi 400", Arial, sans-serif;
+    color: var(--red-text);
+}
+.cartTotal {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.cartTotalAmount {
+    font-family: "Satoshi 700", Arial, sans-serif;
+    font-size: 20px;
+}
+
+@media (min-width: 766px) {
+    .cartSummaryTitle {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+    .cartSummary {
+        margin-bottom: 80px;
+    }
+    .cartSummary {
+        flex: 1;
+    }
+}
