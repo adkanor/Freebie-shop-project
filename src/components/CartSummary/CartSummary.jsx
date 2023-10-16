@@ -3,6 +3,7 @@ import styles from "./CartSummary.module.css";
 import Button from "../Button/Button";
 import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const CartSummary = ({ discount, cartTotalAmount }) => {
     const deliveryFee = 15;
@@ -64,16 +65,18 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
                             </p>
                         </div>
                     </div>
-                    <Button
-                        type="submit"
-                        text="Go to Checkout"
-                        style={{
-                            width: "100%",
-                            padding: "16px 0",
-                            margin: "0 auto",
-                            backgroundColor: "var(--black--background)",
-                        }}
-                    />
+                    <Link to="checkout">
+                        <Button
+                            type="submit"
+                            text="Go to Checkout"
+                            style={{
+                                width: "100%",
+                                padding: "16px 0",
+                                margin: "0 auto",
+                                backgroundColor: "var(--black--background)",
+                            }}
+                        />
+                    </Link>
                 </Form>
             </Formik>
         </div>

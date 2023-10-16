@@ -16,10 +16,32 @@ object-fit: cover;
 .productDetails{
     display: flex;
     align-items: center;
+    position: relative;
 }
 .productTitle{
     padding-left: 40px;
+    text-overflow:ellipsis;
+    width: 150px; 
+  overflow: hidden;
+  text-wrap: nowrap;
 }
+
+.tooltip {
+    position: absolute;
+    opacity: 0.9;
+    top: 0;
+    left: 97px;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none;
+    pointer-events: none;
+    width: 199px;
+  }
+  .productDetails:hover .tooltip {
+    display: block;
+  }
 
 .productTitle, .productPrice{
     color: #000;
@@ -116,6 +138,6 @@ line-height: 24px;
 
 @media screen and (min-width: 766px) {
     .formContent>button{
-        margin-top: 28px;
+        margin-top: 15px;
     }
 }
