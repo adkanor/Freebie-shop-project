@@ -8,16 +8,17 @@ import EmptyCartPage from "../CartPage/EmptyCartPage/EmptyCartPage";
 import FormContent from "./formContent/FormContent";
 import InputCheckout from "../../components/InputCheckout/InputCheckout";
 import validationSchemaCheckout from "./validationSchemaCheckout";
-import PaymentForm from "../../components/PaymentForm/PaymentForm";
+// import PaymentForm from "../../components/PaymentForm/PaymentForm";
 import { scrollToTop } from "../../utils/scrollToTop";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
-
+import { clearCart } from "../../stores/cartProducts/action";
+import { useDispatch } from "react-redux";
 const CheckOut = () => {
     const [modal, setModal] = useState(false);
     const cartProducts = useSelector((state) => state.cartReducer.cartItems);
 
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const toggleModal = () => {
         setModal(!modal);
     };
@@ -25,7 +26,7 @@ const CheckOut = () => {
         <>
             {cartProducts.length > 0 ? (
                 <div className="section">
-                    <PaymentForm toggle={modal} toggleFunc={toggleModal} />
+                    {/* <PaymentForm toggle={modal} toggleFunc={toggleModal} /> */}
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{
@@ -47,12 +48,15 @@ const CheckOut = () => {
                             email: "",
                         }}
                         validationSchema={validationSchemaCheckout}
-                        onSubmit={async (values) => {
+                        onSubmit={(values) => {
                             if (values.payment === "Bank") {
                                 toggleModal();
+                                console.log("bank");
                             } else {
-                                localStorage.removeItem("cartItems");
-                                localStorage.removeItem("cartTotalAmount");
+                                // localStorage.removeItem("cartItems");
+                                // localStorage.removeItem("cartTotalAmount");
+                                console.log("clearCart");
+                                dispatch(clearCart());
                                 navigate("/");
                                 scrollToTop();
                             }

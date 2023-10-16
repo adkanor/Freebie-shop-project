@@ -108,7 +108,7 @@ const DetailProduct = () => {
                 linksObj={{
                     home: "/",
                     [info.style]: `/${info.style}`,
-                    [info.sex]: `/${info.style}/${info.sex}`,
+                    [info.sex]: `/${info.sex}`,
                     [info.category]: `/${info.style}/${info.sex}/${info.category}`,
                 }}
             />

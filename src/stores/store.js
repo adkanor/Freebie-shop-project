@@ -6,17 +6,25 @@ import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
 import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
+import {
+    createStateSyncMiddleware,
+    initStateWithPrevTab,
+} from "redux-state-sync";
 const rootReducer = combineReducers({
     newArrivalsReducer,
     topSaleReducer,
     cartReducer,
     favoritesReducer,
 });
+const config = {
+    channel: "my_channel",
+};
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware: [thunk, logger],
+    middleware: [thunk, logger, createStateSyncMiddleware(config)],
     devTools: true,
 });
+initStateWithPrevTab(store);
 
 export default store;
