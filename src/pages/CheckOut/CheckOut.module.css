@@ -26,7 +26,11 @@ padding-bottom: 35px;
     border-radius: 4px;
 background: var(--Secondary, #F5F5F5);
 width: 100%;
+box-sizing: border-box;
+padding-left: 15px;
 height: 50px;
+font-family: "Satoshi 400";
+font-size:20px;
 }
 
 .formLabel{

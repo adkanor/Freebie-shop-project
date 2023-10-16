@@ -13,6 +13,8 @@ import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import EditProfile from "./pages/EditProfile/EditProfile";
+
 const App = () => {
     return (
         <>
@@ -23,9 +25,10 @@ const App = () => {
                 <Route path="/:style" element={<ProductsByStyle />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
-                <Route path="/checkout" element={<CheckOut />} />
+                <Route path="/cart/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
+                <Route path="/EditProfile" element={<EditProfile />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/footer" element={<Footer />} />
