@@ -25,6 +25,9 @@ const ProductsByStyle = () => {
     let url;
     if (style === "female" || style === "male") {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
+    } else if (style === "sale") {
+        url =
+            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getSaleGoods";
     } else {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
     }
