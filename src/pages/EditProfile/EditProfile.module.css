@@ -1,128 +1,39 @@
-.profileContainer {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 20px;
-    text-align: center;
-    margin: 0 auto;
-    padding: 20px;
-    width: 90%;
-}
-
-.leftColumn {
-    flex: 1;
-}
-
-.rightColumn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 20px;
-}
-
-.manageAccountHeading {
-    font-family: "Satoshi 700";
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 15px;
-    font-weight: bold;
-
-}
-
-.accountLink {
-    font-family: "Satoshi 400";
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 15px;
-    margin-left: 20px;
-    font-size: 0.9rem;
-    text-decoration: none;
-}
-
-.boldText {
-    font-family: "Satoshi 700";
-    font-weight: bold;
-}
-
-.profileHeading {
-    color: var(--text-black);
-    font-size: 28px;
-    line-height: 36px;
-    text-transform: uppercase;
-    font-family: "Satoshi 700", Arial, sans-serif;
-    margin-bottom: 20px;
-}
-
-.columnContainer {
+.accountNav {
     display: flex;
     justify-content: space-between;
-    gap: 50px;
-}
-
-.column {
-    flex: 1;
-}
-
-.formGroup {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.profileChangesHeading {
-    color: var(--text-black);
-    font-size: 20px;
-    font-family: "Satoshi 700", Arial, sans-serif;
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: rgba(240, 240, 240, 1);
-    border: none;
-    color: rgba(0, 0, 0, 0.6);
-    font-family: "Satoshi 400";
-}
-
-.passwordToggle {
-    cursor: pointer;
-}
-
-.errorMessage {
-    color: red;
+    font-family: "Satoshi 400", Arial, sans-serif;
     font-size: 14px;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--separator-line);
 }
-
-.passwordIcon {
-    font-size: 20px;
-    margin-left: 10px;
+.accountNav p {
+    cursor: pointer;
+    font-size: 15px;
 }
-.passwordInputGroup {
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumbsList {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 40px;
-}
-.breadcrumbsList li {
-    margin-right: 5px;
-}
-.breadcrumbsLinkToHome {
+.accountNavLink {
+    margin-right: 16px;
+    text-decoration: none;
     color: var(--gray-text-primary);
 }
-.breadcrumbsArrow {
-    width: 14px;
-    height: 14px;
-    margin-right: 5px;
-    margin-top: 2px;
-}
-.breadcrumbsLinkToCart {
+.accountNavLink:focus {
+    padding: 18px 0;
+    font-family: "Satoshi 700", Arial, sans-serif;
+
     color: var(--black-text);
+}
+.accountNavList {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (min-width: 766px) {
+    .accountNav {
+        font-size: 20px;
+
+        margin-bottom: 10px;
+    }
+    .accountNavLink {
+        margin-right: 36px;
+    }
 }
