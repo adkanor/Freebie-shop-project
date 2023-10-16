@@ -1,3 +1,9 @@
+.pageContainer {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+}
 .profileContainer {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -5,7 +11,7 @@
     text-align: center;
     margin: 0 auto;
     padding: 20px;
-    width: 90%;
+    width: 100%;
 }
 
 .leftColumn {
@@ -75,9 +81,7 @@
     margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.customInput {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -101,6 +105,7 @@ input[type="password"] {
     font-size: 20px;
     margin-left: 10px;
 }
+
 .passwordInputGroup {
     display: flex;
     align-items: center;
@@ -125,4 +130,47 @@ input[type="password"] {
 }
 .breadcrumbsLinkToCart {
     color: var(--black-text);
+}
+
+@media (max-width: 991px) {
+
+    .profileContainer {
+        grid-template-columns: 1fr; /* Одна колонка */
+        text-align: center;
+    }
+
+    .rightColumn {
+        flex: none; /* Отменяет flex, чтобы элементы не были в одной строке */
+        margin-left: 0; /* Убирает левый отступ */
+        align-items: center; /* Выравнивает элементы по центру */
+    }
+
+    .columnContainer {
+        gap: 20px;
+    }
+
+    .formGroup {
+        width: 90%; /* Занимать 90% ширины страницы */
+        text-align: center; /* Выравнивать текст по центру */
+        margin: 0 auto; /* Центрировать в горизонтальной плоскости */
+        margin-bottom: 10px; /* Добавить отступ снизу */
+    }
+
+    .profileChangesHeading {
+        font-size: 18px; /* Уменьшить размер шрифта надписей */
+    }
+    .breadcrumbsList {
+        justify-content: center; /* Выравнивать по центру */
+    }
+    .passwordInputGroup{
+        padding-bottom: 10px;
+    }
+    
+}
+
+/* При разрешении экрана более 991px (для десктопной версии) */
+@media (min-width: 992px) {
+    .columnContainer {
+        flex-direction: row; /* Отображать поля в строке на десктопных устройствах */
+    }
 }
