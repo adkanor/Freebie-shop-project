@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StarRating from "../StarRating/StarRating";
 import PropTypes from "prop-types";
 import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
+import Preloader from "../Preloader/Preloader";
 
 function ClosedProductCard({
     id,
@@ -15,12 +16,24 @@ function ClosedProductCard({
     final_price,
 }) {
     const thisCard = { id, name, imageURL, rating, sale, price, final_price };
+    const [imageLoading, setImageLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setImageLoading(false);
+        }, 500);
+    }, []);
+
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`/products/${id}`}>
                 <div className={style.imgWrapper}>
                     <FavoriteIcon thisCard={thisCard} />
-                    <img src={imageURL} alt="productImg" />
+                    {imageLoading ? (
+                        <Preloader />
+                    ) : (
+                        <img src={imageURL} alt="productImg" />
+                    )}
                 </div>
                 <h6 className={style.productName}>{name}</h6>
                 <div className={style.grade}>

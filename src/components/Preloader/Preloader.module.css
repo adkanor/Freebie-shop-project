@@ -1,14 +1,11 @@
 .PreloaderWrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--gray-text-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .Preloader {
