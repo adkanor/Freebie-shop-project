@@ -4,6 +4,7 @@ import {
     REMOVE_FROM_CART,
     INCREMENT_ITEM_QUANTITY,
     DECREMENT_ITEM_QUANTITY,
+    CLEAR_CART,
 } from "./action";
 import { toast } from "react-toastify";
 
@@ -189,6 +190,15 @@ const cartReducer = (state = initialState, action) => {
                 return updatedState;
             }
             return state;
+        case CLEAR_CART:
+            localStorage.clear();
+            updatedState = {
+                ...state,
+                cartItems: [],
+                cartTotalAmount: 0,
+                cartQuantity: 0,
+            };
+            return updatedState;
         default:
             return state;
     }
