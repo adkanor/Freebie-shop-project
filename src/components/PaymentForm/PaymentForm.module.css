@@ -1,0 +1,61 @@
+.modal, .overlay{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 500;
+}
+.overlay{
+    background-color: rgba(49, 49, 49, 0.8);
+    
+}
+
+.modalContent{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    padding: 35px 47px;
+    border-radius: 30px;
+    max-width: 600px;
+    min-width: 300px;
+    z-index: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+}
+
+.modalInputs{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+.formInput{
+    border: 0;
+    border-radius: 4px;
+background: var(--Secondary, #F5F5F5);
+width: 100%;
+height: 50px;
+font-size: 15px;
+padding-left: 15px;
+box-sizing: border-box;
+}
+
+@media screen and (min-width: 766px) {
+
+    .modalContent{
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .formInput{
+        width: 100%;
+    }
+    .modalForm{
+        width: 100%;
+    }
+}

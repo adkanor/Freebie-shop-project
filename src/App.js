@@ -13,6 +13,10 @@ import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import PersonalInfo from "./components/PersonalInfo/PersonalInfo";
+import ContactUs from "./components/ContactUs/ContactUs";
+import ListOrders from "./components/ListOrders/ListOrders";
 const App = () => {
     return (
         <>
@@ -23,9 +27,15 @@ const App = () => {
                 <Route path="/:style" element={<ProductsByStyle />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
-                <Route path="/checkout" element={<CheckOut />} />
+                <Route path="/cart/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />
                 {/* <Route path="/footer" element={<Footer />} /> */}
+                <Route path="/account" element={<EditProfile />}>
+                    <Route index element={<PersonalInfo />} />
+                    <Route path="info" element={<PersonalInfo />} />
+                    <Route path="contact" element={<ContactUs />} />
+                    <Route path="orders" element={<ListOrders />} />
+                </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/footer" element={<Footer />} />
