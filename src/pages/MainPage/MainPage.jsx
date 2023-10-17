@@ -67,7 +67,7 @@ const MainPage = () => {
                 arrayofProducts={newArrivals}
                 title={"New Arrivals"}
             >
-                <Link to="search/new-arrivals">
+                <Link to="search/new-arrivals" onClick={scrollToTop}>
                     <Button
                         text="View all"
                         style={{
@@ -86,7 +86,7 @@ const MainPage = () => {
                 title={"Top Selling"}
                 arrayofProducts={topSaleList}
             >
-                <Link to="search/top-selling">
+                <Link to="search/top-selling" onClick={scrollToTop}>
                     <Button
                         text="View all"
                         style={{
