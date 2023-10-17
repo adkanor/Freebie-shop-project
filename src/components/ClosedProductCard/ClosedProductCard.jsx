@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import StarRating from "../StarRating/StarRating";
 import PropTypes from "prop-types";
 import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../../components/Preloader/Preloader";
 
 function ClosedProductCard({
     id,
@@ -15,25 +15,25 @@ function ClosedProductCard({
     price,
     final_price,
 }) {
+    const [imageLoading, setImageLoading] = useState(false);
     const thisCard = { id, name, imageURL, rating, sale, price, final_price };
-    const [imageLoading, setImageLoading] = useState(true);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setImageLoading(false);
-        }, 500);
-    }, []);
+    const handleImageLoad = () => {
+        setImageLoading(true);
+    };
 
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`/products/${id}`}>
                 <div className={style.imgWrapper}>
                     <FavoriteIcon thisCard={thisCard} />
-                    {imageLoading ? (
-                        <Preloader />
-                    ) : (
-                        <img src={imageURL} alt="productImg" />
-                    )}
+                    {imageLoading ? null : <Preloader />}
+                    <img
+                        src={imageURL}
+                        alt="productImg"
+                        style={{ display: imageLoading ? "block" : "none" }}
+                        onLoad={handleImageLoad}
+                    />
                 </div>
                 <h6 className={style.productName}>{name}</h6>
                 <div className={style.grade}>
