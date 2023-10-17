@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { getAllProducts } from "../../stores/allProducts/actions";
+import {
+    getAllProducts,
+    getFilteredProducts,
+} from "../../stores/searchProducts/actions";
 import stylesSearch from "./SearchResult.module.css";
 import { useParams } from "react-router-dom";
 import styles from "../FavouritesPage/FavouritesPage.module.css";
@@ -11,56 +13,38 @@ import { useMediaQuery } from "@react-hook/media-query";
 
 const SearchResult = () => {
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.allProducts);
+    const allProducts = useSelector(
+        (state) => state.searchProductsReducer.filteredData
+    );
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
-    const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+
     const { value } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
-    const url =
-        "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods";
-
     const handlePageChange = (page) => {
         setCurrentPage(page);
+        console.log(value);
     };
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
-        return searchResults.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, searchResults, PageSize]);
+        return allProducts.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, allProducts, PageSize]);
 
     useEffect(() => {
-        axios
-            .get(url)
-            .then((response) => {
-                dispatch(getAllProducts(response.data));
-
-                const results = allProducts.filter((item) => {
-                    return (
-                        item.style
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase()) ||
-                        item.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                    );
-                });
-
-                setSearchResults(results);
-                setSearchTerm(value);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-            });
-    }, [url, value, searchTerm]);
+        dispatch(getAllProducts());
+    }, [dispatch]);
+    useEffect(() => {
+        dispatch(getFilteredProducts(value));
+    }, [value, dispatch]);
 
     return (
         <div className="section">
             <h1 className={stylesSearch.searchAmount}>
-                {searchResults.length} Results
+                {allProducts.length} Results
             </h1>
-            {Number(searchResults.length) > 0 && (
+            {Number(allProducts.length) > 0 && (
                 <ul className={styles.favList}>
                     {currentTableData.map((fav) => (
                         <ClosedProductCard
@@ -79,7 +63,7 @@ const SearchResult = () => {
             <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={searchResults.length}
+                totalCount={allProducts.length}
                 pageSize={PageSize}
                 onPageChange={handlePageChange}
             />
