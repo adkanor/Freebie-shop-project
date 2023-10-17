@@ -5,6 +5,7 @@ import logger from "redux-logger";
 import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
 import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
+import allProducts from "./allProducts/allProductsReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import {
     createStateSyncMiddleware,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     topSaleReducer,
     cartReducer,
     favoritesReducer,
+    allProducts,
 });
 const config = {
     channel: "my_channel",
