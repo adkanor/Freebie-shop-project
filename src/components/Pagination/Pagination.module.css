@@ -15,7 +15,8 @@
     height: 20px;
     text-align: center;
     margin: auto 1px;
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     color: var(--gray-text-secondary);
     display: flex;
     box-sizing: border-box;
@@ -43,7 +44,8 @@
     padding: 4px 7px;
     border: 1px solid var(--separator-line);
     border-radius: 8px;
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 10px;
     user-select: none;
 }
@@ -85,7 +87,8 @@
     .ArrowBox {
         gap: .5rem;
         font-size: 14px;
-        font-family: "Satoshi 500";
+        font-family: "Satoshi";
+        font-weight: 400;
         padding: 8px 14px;
     }
     .Arrow {

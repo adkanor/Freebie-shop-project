@@ -9,7 +9,8 @@
     .SortContainerLabel {
         font-size: 16px;
         margin-right: 10px;
-        font-family: "Satoshi 500";
+        font-family: "Satoshi";
+        font-weight: 500;
         color: var(--black-text);
     }
     .SortSelect {
@@ -20,7 +21,8 @@
         border-radius: 5px;
         background-color: var(--gray-primary);
         color: var(--black-text);
-        font-family: "Satoshi 400";
+        font-family: "Satoshi";
+        font-weight: 400;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
     .SortSelect option {

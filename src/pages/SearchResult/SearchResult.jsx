@@ -13,7 +13,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 
 const SearchResult = () => {
     const dispatch = useDispatch();
-    const allProducts = useSelector(
+    let allProducts = useSelector(
         (state) => state.searchProductsReducer.filteredData
     );
     const isMobile = useMediaQuery("(max-width: 1298px)");
@@ -35,6 +35,7 @@ const SearchResult = () => {
     useEffect(() => {
         dispatch(getAllProducts());
     }, [dispatch]);
+
     useEffect(() => {
         dispatch(getFilteredProducts(value));
     }, [value, dispatch]);

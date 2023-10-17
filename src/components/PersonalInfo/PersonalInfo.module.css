@@ -12,11 +12,13 @@
     box-sizing: border-box;
     padding-left: 15px;
     height: 50px;
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 20px;
 }
 .profileHeading {
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 28px;
     font-style: normal;
     padding-bottom: 35px;
@@ -39,7 +41,7 @@
 }
 .profileChangesHeading {
     color: var(--gray-text-primary);
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
     font-size: 18px;
     font-style: normal;
     font-weight: 400;

@@ -19,13 +19,15 @@
 }
 
 .registrationTitle {
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     font-size: 36px;
 
 }
 
 .registrationSubTitle {
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     font-size: 16px;
     margin: 16px 0;
 }
@@ -48,14 +50,16 @@
     align-items: center;
     justify-content: space-around;
     max-width: 500px;
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     font-size: 20px;
     color: var(--gray-text-primary);
 
 }
 
 .redirectLogin {
-    font-family: "Satoshi 600", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 600;
     text-decoration: underline;
 }
 

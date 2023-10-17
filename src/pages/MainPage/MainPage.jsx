@@ -67,35 +67,39 @@ const MainPage = () => {
                 arrayofProducts={newArrivals}
                 title={"New Arrivals"}
             >
-                <Button
-                    text="View all"
-                    style={{
-                        margin: "0px auto",
-                        display: "block",
-                        color: "var(--black-text)",
-                        width: "30%",
-                        padding: "16px 0px",
-                        backgroundColor: "var(--gray-secondary)",
-                    }}
-                    type="text"
-                />
+                <Link to="search/new-arrivals">
+                    <Button
+                        text="View all"
+                        style={{
+                            margin: "0px auto",
+                            display: "block",
+                            color: "var(--black-text)",
+                            width: "30%",
+                            padding: "16px 0px",
+                            backgroundColor: "var(--gray-secondary)",
+                        }}
+                        type="text"
+                    />
+                </Link>
             </RecommendationProducts>
             <RecommendationProducts
                 title={"Top Selling"}
                 arrayofProducts={topSaleList}
             >
-                <Button
-                    text="View all"
-                    style={{
-                        margin: "0px auto",
-                        display: "block",
-                        color: "var(--black-text)",
-                        width: "30%",
-                        padding: "16px 0px",
-                        backgroundColor: "var(--gray-secondary)",
-                    }}
-                    type="text"
-                />
+                <Link to="search/top-selling">
+                    <Button
+                        text="View all"
+                        style={{
+                            margin: "0px auto",
+                            display: "block",
+                            color: "var(--black-text)",
+                            width: "30%",
+                            padding: "16px 0px",
+                            backgroundColor: "var(--gray-secondary)",
+                        }}
+                        type="text"
+                    />
+                </Link>
             </RecommendationProducts>
             <div className={styles.browseContainer}>
                 <div className={styles.title}>BROWSE BY DRESS STYLE</div>
