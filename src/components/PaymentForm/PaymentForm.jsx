@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styles from "./PaymentForm.module.css";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import Cards from "react-credit-cards-2";
-import "react-credit-cards-2/dist/es/styles-compiled.css";
+// import Cards from "react-credit-cards-2";
+// import "react-credit-cards-2/dist/es/styles-compiled.css";
 import BlackButton from "../Button/Button";
 import { scrollToTop } from "../../utils/scrollToTop";
 
@@ -19,6 +19,7 @@ const PaymentForm = ({ toggle, toggleFunc }) => {
     });
 
     useEffect(() => {
+        console.log(state);
         if (!toggle) {
             document.body.style.overflow = "visible";
         } else {
@@ -55,13 +56,13 @@ const PaymentForm = ({ toggle, toggleFunc }) => {
                     ></div>
                     <div className={styles.modalContent}>
                         <div className={styles.modalCard}>
-                            <Cards
+                            {/* <Cards
                                 number={state.number}
                                 expiry={state.expiry}
                                 cvc={state.cvc}
                                 name={state.name}
                                 focused={state.focus}
-                            />
+                            /> */}
                         </div>
 
                         <form

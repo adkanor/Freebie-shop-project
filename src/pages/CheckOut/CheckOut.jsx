@@ -8,7 +8,7 @@ import EmptyCartPage from "../CartPage/EmptyCartPage/EmptyCartPage";
 import FormContent from "./formContent/FormContent";
 import InputCheckout from "../../components/InputCheckout/InputCheckout";
 import validationSchemaCheckout from "./validationSchemaCheckout";
-import PaymentForm from "../../components/PaymentForm/PaymentForm";
+// import PaymentForm from "../../components/PaymentForm/PaymentForm";
 import { scrollToTop } from "../../utils/scrollToTop";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import { clearCart } from "../../stores/cartProducts/action";
@@ -26,7 +26,7 @@ const CheckOut = () => {
         <>
             {cartProducts.length > 0 ? (
                 <div className="section">
-                    <PaymentForm toggle={modal} toggleFunc={toggleModal} />
+                    {/* <PaymentForm toggle={modal} toggleFunc={toggleModal} /> */}
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{
