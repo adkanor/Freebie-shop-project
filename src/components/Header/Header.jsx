@@ -9,8 +9,8 @@ import VscChromeClose from "../../assets/icons/Filter/Close.svg";
 import AccountSVG from "../../assets/icons/Header/Account.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import NavigationBar from "../NavigationBar/NavigationBar";
+import SearchBar from "../SearchBar/SearchBar";
 import { scrollToTop } from "../../utils/scrollToTop";
 
 const Header = () => {
@@ -80,7 +80,7 @@ const Header = () => {
             <div className={styles.notification}>
                 <span className={styles.info}>
                     <p>
-                        Sign up and get 20% off to your first order.
+                        Sign up and get promo code for order.
                         <Link
                             to="login"
                             onClick={() => {
