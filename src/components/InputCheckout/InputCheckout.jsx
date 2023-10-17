@@ -39,7 +39,7 @@ const InputCheckout = ({ name, text, type, isError, errorText }) => {
 InputCheckout.propTypes = {
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    isError: PropTypes.bool.isRequired,
+    isError: PropTypes.bool,
     errorText: PropTypes.string,
     type: PropTypes.string,
 };
