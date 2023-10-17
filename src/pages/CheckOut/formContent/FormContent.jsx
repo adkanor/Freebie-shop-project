@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./FormContent.module.css";
 import { Field } from "formik";
 import BlackButton from "../../../components/Button/Button";
@@ -8,7 +8,7 @@ const FormContent = () => {
     let cartItems = JSON.parse(localStorage.getItem("cartItems"));
     let totalAmount = JSON.parse(localStorage.getItem("cartTotalAmount"));
 
-    const [paymentType, setPaymentType] = useState("Place Order");
+    // const [paymentType, setPaymentType] = useState("Place Order");
 
     return (
         <div className={styles.formContent}>
@@ -42,7 +42,7 @@ const FormContent = () => {
             </div>
             <div className={styles.shippingContainer}>
                 <p className={styles.title}>Shipping</p>
-                <p className={styles.price}>FREE</p>
+                <p className={styles.price}>$15</p>
             </div>
             <div className={styles.totalContainer}>
                 <p className={styles.title}>Total</p>
@@ -57,7 +57,7 @@ const FormContent = () => {
                             className={styles.radioInput}
                             name="payment"
                             value="Bank"
-                            onClick={() => setPaymentType("Pay to Card")}
+                            // onClick={() => setPaymentType("Pay to Card")}
                         />
                         <p className={styles.paymentTitle}>Bank</p>
                     </div>
@@ -73,7 +73,7 @@ const FormContent = () => {
                         type="radio"
                         name="payment"
                         value="Cash"
-                        onClick={() => setPaymentType("Place Order")}
+                        // onClick={() => setPaymentType("Place Order")}
                     />
                     <p className={styles.paymentTitle}>Cash on delivery</p>
                 </div>
@@ -96,7 +96,7 @@ const FormContent = () => {
 
             <BlackButton
                 type={"submit"}
-                text={paymentType}
+                text={"Place Order"}
                 style={{
                     width: "100%",
                     backgroundColor: "var(--black-text)",
