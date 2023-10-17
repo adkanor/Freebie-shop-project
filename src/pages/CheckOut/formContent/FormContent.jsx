@@ -25,10 +25,11 @@ const FormContent = () => {
                                 <p className={styles.productTitle}>
                                     {data.name}
                                 </p>
-
-                                <div className={styles.tooltip}>
-                                    {data.name}
-                                </div>
+                                {data.name.length > 16 && (
+                                    <div className={styles.tooltip}>
+                                        {data.name}
+                                    </div>
+                                )}
                             </div>
                             <p className={styles.productPrice}>
                                 ${data.final_price}
