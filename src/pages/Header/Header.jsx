@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-
 import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
 import HiOutlineSearchBlack from "../../assets/icons/Header/Search-balck.svg";
 import VscChromeClose from "../../assets/icons/Filter/Close.svg";
 import AccountSVG from "../../assets/icons/Header/Account.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
-
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Header = () => {
     const [query, setQuery] = useState("");
+    const [cartAmount, setCartAmount] = useState(0);
+    const [favoriteAmount, setFavoriteAmount] = useState(0);
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const navigate = useNavigate();
+
+    const favoriteProducts = useSelector(
+        (state) => state.favoritesReducer.favorites
+    );
+
+    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
 
     useEffect(() => {
         if (!showNav && !showSearch) {
@@ -26,6 +34,14 @@ const Header = () => {
             document.body.style.overflow = "hidden";
         }
     }, [showNav, showSearch]);
+
+    useEffect(() => {
+        setCartAmount(cartProducts.length);
+    }, [cartProducts]);
+
+    useEffect(() => {
+        setFavoriteAmount(favoriteProducts.length);
+    }, [favoriteProducts]);
 
     const toggleNav = () => {
         setShowNav(!showNav);
@@ -65,7 +81,13 @@ const Header = () => {
                 <span className={styles.info}>
                     <p>
                         Sign up and get 20% off to your first order.
-                        <Link to="login" onClick={hideAll}>
+                        <Link
+                            to="login"
+                            onClick={() => {
+                                hideAll();
+                                scrollToTop();
+                            }}
+                        >
                             <span>Sign Up Now</span>
                         </Link>
                     </p>
@@ -152,14 +174,37 @@ const Header = () => {
                                     />
                                 )}
 
-                                <Link to="test" onClick={hideAll}>
+                                <Link to="/EditProfile" onClick={hideAll}>
                                     <img src={AccountSVG} alt="Account SVG" />
+                                    <span className={styles.notAbs}></span>
                                 </Link>
-                                <Link to="cart" onClick={hideAll}>
+                                <Link
+                                    to="cart"
+                                    className={styles.svgRel}
+                                    onClick={hideAll}
+                                >
                                     <img src={CartSVG} alt="Cart SVG" />
+                                    {cartAmount > 0 && (
+                                        <span id={styles["abs"]}>
+                                            <p className={styles.new}>
+                                                {cartAmount}
+                                            </p>
+                                        </span>
+                                    )}
                                 </Link>
-                                <Link to="favourites" onClick={hideAll}>
+                                <Link
+                                    to="favourites"
+                                    onClick={hideAll}
+                                    className={styles.svgRel}
+                                >
                                     <img src={HeartSVG} alt="Heart SVG" />
+                                    {favoriteAmount > 0 ? (
+                                        <span id={styles["abs"]}>
+                                            <p className={styles.new}>
+                                                {favoriteAmount}
+                                            </p>
+                                        </span>
+                                    ) : null}
                                 </Link>
                             </div>
                         </div>

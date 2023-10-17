@@ -4,15 +4,23 @@ import {
     REMOVE_FROM_CART,
     INCREMENT_ITEM_QUANTITY,
     DECREMENT_ITEM_QUANTITY,
+    CLEAR_CART,
 } from "./action";
 import { toast } from "react-toastify";
 
 const cartItems = localStorage.getItem("cartItems");
 const cartTotalAmount = localStorage.getItem("cartTotalAmount");
-
+const cartTotalQuant = localStorage.getItem("cartTotalQuantity");
 const initialState = {
     cartItems: cartItems ? JSON.parse(cartItems) : [],
     cartTotalAmount: cartTotalAmount ? JSON.parse(cartTotalAmount) : 0,
+    cartQuantity: cartTotalQuant ? JSON.parse(cartTotalQuant) : 0,
+};
+
+const updateLocalStorage = (cartItems, cartTotalAmount, cartQuantity) => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("cartTotalAmount", JSON.stringify(cartTotalAmount));
+    localStorage.setItem("cartTotalQuantity", JSON.stringify(cartQuantity));
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -57,14 +65,12 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     cartItems: [...state.cartItems, newItem],
                     cartTotalAmount: updatedTotalAmount,
+                    cartQuantity: state.cartQuantity + newItem.selectedAmount,
                 };
-                localStorage.setItem(
-                    "cartItems",
-                    JSON.stringify(updatedState.cartItems)
-                );
-                localStorage.setItem(
-                    "cartTotalAmount",
-                    updatedTotalAmount.toString()
+                updateLocalStorage(
+                    updatedState.cartItems,
+                    updatedState.cartTotalAmount,
+                    updatedState.cartQuantity
                 );
 
                 return updatedState;
@@ -90,15 +96,14 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: updatedCartItems,
                 cartTotalAmount: updatedTotalAmount,
+                cartQuantity: state.cartQuantity - removedItem.selectedAmount,
             };
-            localStorage.setItem(
-                "cartItems",
-                JSON.stringify(updatedState.cartItems)
+            updateLocalStorage(
+                updatedState.cartItems,
+                updatedState.cartTotalAmount,
+                updatedState.cartQuantity
             );
-            localStorage.setItem(
-                "cartTotalAmount",
-                updatedTotalAmount.toString()
-            );
+
             return updatedState;
 
         // Increment item quantity(already in cart)
@@ -133,15 +138,14 @@ const cartReducer = (state = initialState, action) => {
                         ...state,
                         cartItems: updatedItems,
                         cartTotalAmount: updatedTotalAmount,
+                        cartQuantity: state.cartQuantity + 1,
                     };
-                    localStorage.setItem(
-                        "cartItems",
-                        JSON.stringify(updatedState.cartItems)
+                    updateLocalStorage(
+                        updatedState.cartItems,
+                        updatedState.cartTotalAmount,
+                        updatedState.cartQuantity
                     );
-                    localStorage.setItem(
-                        "cartTotalAmount",
-                        updatedTotalAmount.toString()
-                    );
+
                     return updatedState;
                 } else {
                     toast.error("Maximum available quantity", {
@@ -175,18 +179,26 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     cartItems: updatedItems,
                     cartTotalAmount: updatedTotalAmount,
+                    cartQuantity: state.cartQuantity - 1,
                 };
-                localStorage.setItem(
-                    "cartItems",
-                    JSON.stringify(updatedState.cartItems)
+                updateLocalStorage(
+                    updatedState.cartItems,
+                    updatedState.cartTotalAmount,
+                    updatedState.cartQuantity
                 );
-                localStorage.setItem(
-                    "cartTotalAmount",
-                    updatedTotalAmount.toString()
-                );
+
                 return updatedState;
             }
             return state;
+        case CLEAR_CART:
+            localStorage.clear();
+            updatedState = {
+                ...state,
+                cartItems: [],
+                cartTotalAmount: 0,
+                cartQuantity: 0,
+            };
+            return updatedState;
         default:
             return state;
     }

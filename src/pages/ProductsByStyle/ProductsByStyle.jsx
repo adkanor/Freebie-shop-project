@@ -22,13 +22,12 @@ const ProductsByStyle = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
 
-
-    
-
-
     let url;
     if (style === "female" || style === "male") {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
+    } else if (style === "sale") {
+        url =
+            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getSaleGoods";
     } else {
         url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
     }
@@ -78,6 +77,7 @@ const ProductsByStyle = () => {
                     filtersAreVisible={filtersAreVisible}
                     productByStyle={productByStyle}
                     setFilteredProducts={setFilteredProducts}
+                    setCurrentPage={setCurrentPage}
                 />
                 {filteredProducts.length > 0 ? (
                     <div className={styles.styleContent}>

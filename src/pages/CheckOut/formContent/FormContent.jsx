@@ -3,66 +3,50 @@ import styles from "./FormContent.module.css";
 import { Field } from "formik";
 import BlackButton from "../../../components/Button/Button";
 import svgBank from "../../../assets/icons/Payment/PaymentsBank.svg";
-const products = [
-    {
-        title: "LCD Monitor",
-        img: "https://impress.biz.ua/wp-content/uploads/2022/02/wide-desktop4-optimized.jpg",
-        price: 700,
-    },
-    {
-        title: "Gaming PC",
-        img: "https://robbreport.com/wp-content/uploads/2022/08/AS_GettyImages-1241614702.jpg",
-        price: 350,
-    },
-    {
-        title: "Gaming PC",
-        img: "https://robbreport.com/wp-content/uploads/2022/08/AS_GettyImages-1241614702.jpg",
-        price: 350,
-    },
-];
-
-const TotalPrice = () => {
-    let totalPrice = 0;
-
-    for (let i = 0; i < products.length; i++) {
-        const product = products[i];
-        if (product.price && typeof product.price === "number") {
-            totalPrice += product.price;
-        }
-    }
-
-    return totalPrice;
-};
 
 const FormContent = () => {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    let totalAmount = JSON.parse(localStorage.getItem("cartTotalAmount"));
+
+    // const [paymentType, setPaymentType] = useState("Place Order");
+
     return (
         <div className={styles.formContent}>
             <div className={styles.productsWrapper}>
-                {products.map((data, index) => (
-                    <div key={index} className={styles.productContainer}>
-                        <div className={styles.productDetails}>
-                            <img
-                                src={data.img}
-                                alt="Product Img"
-                                className={styles.productImg}
-                            />
-                            <p className={styles.productTitle}>{data.title}</p>
+                {cartItems &&
+                    cartItems.map((data, index) => (
+                        <div key={index} className={styles.productContainer}>
+                            <div className={styles.productDetails}>
+                                <img
+                                    src={data.url_image[0]}
+                                    alt="Product Img"
+                                    className={styles.productImg}
+                                />
+                                <p className={styles.productTitle}>
+                                    {data.name}
+                                </p>
+
+                                <div className={styles.tooltip}>
+                                    {data.name}
+                                </div>
+                            </div>
+                            <p className={styles.productPrice}>
+                                ${data.final_price}
+                            </p>
                         </div>
-                        <p className={styles.productPrice}>${data.price}</p>
-                    </div>
-                ))}
+                    ))}
             </div>
             <div className={styles.subtotalContainer}>
                 <p className={styles.title}>Subtotal</p>
-                <p className={styles.price}>${TotalPrice()}</p>
+                <p className={styles.price}>${totalAmount}</p>
             </div>
             <div className={styles.shippingContainer}>
                 <p className={styles.title}>Shipping</p>
-                <p className={styles.price}>FREE</p>
+                <p className={styles.price}>$15</p>
             </div>
             <div className={styles.totalContainer}>
                 <p className={styles.title}>Total</p>
-                <p className={styles.price}>${TotalPrice()}</p>
+                <p className={styles.price}>${totalAmount}</p>
             </div>
 
             <div className={styles.payment}>
@@ -73,6 +57,7 @@ const FormContent = () => {
                             className={styles.radioInput}
                             name="payment"
                             value="Bank"
+                            // onClick={() => setPaymentType("Pay to Card")}
                         />
                         <p className={styles.paymentTitle}>Bank</p>
                     </div>
@@ -88,6 +73,7 @@ const FormContent = () => {
                         type="radio"
                         name="payment"
                         value="Cash"
+                        // onClick={() => setPaymentType("Place Order")}
                     />
                     <p className={styles.paymentTitle}>Cash on delivery</p>
                 </div>

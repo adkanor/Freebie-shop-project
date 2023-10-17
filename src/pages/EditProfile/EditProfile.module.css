@@ -1,0 +1,39 @@
+.accountNav {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Satoshi 400", Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--separator-line);
+}
+.accountNav p {
+    cursor: pointer;
+    font-size: 15px;
+}
+.accountNavLink {
+    margin-right: 16px;
+    text-decoration: none;
+    color: var(--gray-text-primary);
+}
+.accountNavLink:focus {
+    padding: 18px 0;
+    font-family: "Satoshi 700", Arial, sans-serif;
+
+    color: var(--black-text);
+}
+.accountNavList {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (min-width: 766px) {
+    .accountNav {
+        font-size: 20px;
+
+        margin-bottom: 10px;
+    }
+    .accountNavLink {
+        margin-right: 36px;
+    }
+}

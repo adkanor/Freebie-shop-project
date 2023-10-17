@@ -1,0 +1,44 @@
+.contactUsContainer {
+    position: relative;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    width: 100%;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 90vw;
+    padding: 0px 10px;
+    width: 100%;
+}
+
+.messageTextarea {
+    height: 250px;
+    width: 100%;
+    max-width: 100vw;
+    resize: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px var(--gray-text-secondary);
+    outline: none;
+}
+
+.errorText {
+    color: var(--login-btn);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+@media (min-width: 766px) {
+    .contactForm {
+        padding: 0px 30px;
+    }
+}

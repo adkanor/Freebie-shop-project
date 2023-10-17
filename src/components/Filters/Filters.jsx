@@ -16,6 +16,7 @@ const Filters = ({
     setFiltresVisible,
     filtersAreVisible,
     style,
+    setCurrentPage,
 }) => {
     const MIN_PRICE = 10;
     const MAX_PRICE = 1000;
@@ -55,6 +56,7 @@ const Filters = ({
 
     // Function for applying filters
     const applyFilters = (e) => {
+        setCurrentPage(1);
         e.preventDefault();
         let filteredProductsCopy = [...productsNotFiltered];
 
@@ -97,6 +99,7 @@ const Filters = ({
 
     // Function to reset filters
     const resetFilters = () => {
+        setCurrentPage(1);
         setFilteredProducts(productsNotFiltered);
         formik.resetForm();
         setFiltresVisible(false);
@@ -259,6 +262,7 @@ Filters.propTypes = {
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
     style: PropTypes.string,
+    setCurrentPage: PropTypes.func.isRequired,
 };
 
 export default Filters;
