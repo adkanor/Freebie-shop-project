@@ -23,7 +23,8 @@
   display: block;
   color: var(--white-text);
   font-size: 32px;
-  font-family: "Integral-CF 700";
+  font-family: "Integral-CF";
+  font-weight: 700;
   margin-bottom: 32px;
 }
 
@@ -47,7 +48,8 @@
   outline: none;
   width: 100%;
   padding: 0;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
 }
 
 .EmailSendBtn {
@@ -57,7 +59,8 @@
   text-align: center;
   color: #000000;
   background-color: #fff;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
   font-size: 14px;
   padding: 12px 16px;
   transition: 0.3s ease all;
@@ -86,7 +89,8 @@
 }
 
 .Logo {
-  font-family: "Integral-CF 700";
+  font-family: "Integral-CF";
+  font-weight: 700;
   color: #000000;
   font-size: 28px;
 }
@@ -94,7 +98,8 @@
 .LogoSubtitle {
   font-size: 14px;
   line-height: 20px;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
   margin:14px 0 20px 0;
 }
 
@@ -109,7 +114,8 @@
   line-height: 18px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
   color: var(--black-text);
   margin-bottom: 16px;
 }
@@ -126,7 +132,8 @@
 .FooterListLink {
   font-size: 14px;
   line-height: 14px;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
   color: var(--gray-text-primary);
 }
 
@@ -143,7 +150,8 @@
   font-size: 14px;
   color: var(--gray-text-primary);
   margin-bottom: 16px;
-  font-family: "Satoshi 400";
+  font-family: "Satoshi";
+  font-weight: 400;
 }
 
 
