@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import InputCheckout from "../../components/InputCheckout/InputCheckout";
 import FormContent from "../../pages/CheckOut/formContent/FormContent";
-
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
 import styles from "./CheckOut.module.css";
@@ -23,6 +22,13 @@ const CheckOut = () => {
     const dispatch = useDispatch();
     const toggleModal = () => {
         setModal(!modal);
+    };
+
+    let obj = {
+        token: "",
+        user: "",
+        personalInfo: [],
+        goods: [],
     };
     return (
         <>
@@ -54,6 +60,9 @@ const CheckOut = () => {
                             if (values.payment === "Bank") {
                                 toggleModal();
                             } else {
+                                obj.personalInfo = values;
+                                obj.goods = cartProducts;
+                                console.log(JSON.stringify(obj, null, 2));
                                 dispatch(clearCart());
                                 navigate("/");
                                 scrollToTop();

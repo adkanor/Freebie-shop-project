@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./CartSummary.module.css";
 import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
+import { checkAuthorization } from "../../stores/authorization/actions";
 import { Link } from "react-router-dom";
 
 const CartSummary = ({ discount, cartTotalAmount }) => {
     const deliveryFee = 15;
     const amountOfDiscount = discount ? (cartTotalAmount * discount) / 100 : 0;
     const total = cartTotalAmount + deliveryFee - amountOfDiscount;
+
+    const dispatch = useDispatch();
+    let authData = useSelector((state) => state.authorizationReducer);
 
     const initialValues = {
         subtotal: cartTotalAmount,
@@ -27,6 +32,11 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
         };
         console.log("Form values", updateValues);
     };
+    const token = localStorage.getItem("token");
+
+    useEffect(() => {
+        dispatch(checkAuthorization(token));
+    }, [dispatch, token]);
 
     return (
         <div className={styles.cartSummary}>
@@ -65,7 +75,8 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
                             </p>
                         </div>
                     </div>
-                    <Link to="checkout">
+
+                    <Link to={authData.status === 200 ? "checkout" : "/login"}>
                         <Button
                             type="submit"
                             text="Go to Checkout"

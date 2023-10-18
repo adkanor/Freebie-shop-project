@@ -13,6 +13,14 @@ import axios from "axios";
 
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
+    const [errorMessageServer, setErrorMessageServer] = useState();
+    const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
+
+    const memoryUser = (data) => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", data.email);
+    };
+
 
     useEffect(() => {
         axios
@@ -23,31 +31,46 @@ const Login = () => {
             .catch(error => {
                 console.error(error);
             });
-
-
     }, []);
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
             const decoded = jwt_decode(credentialResponse.credential);
-            // console.log(decoded);
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
             };
             apiServerLogin(value);
-
         },
         onError: () => {
-            console.log("Login Failed");
+            setErrorMessageServer("Login Failed");
         },
     });
 
-    ///apis
     const apiServerLogin = (values) => {
-        console.log(values);
-    };
+        const user = {
+            email: values.email,
+            password: values.password
+        };
 
+
+        axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/login", user)
+            .then(response => {
+
+                if (response.data.status === 200) {
+                    memoryUser(response.data.info);
+                }
+                if (response.data.status === 400) {
+                    setErrorMessageServer(response.data.error);
+                    setIsErrorMessageServer(true);
+                }
+            })
+            .catch(error => {
+                console.log("error", error);
+                setErrorMessageServer("Sorry! Try later");
+                setIsErrorMessageServer(true);
+            });
+    };
 
     return (
         <div className={`section ${style.loginContainer}`}>
@@ -66,6 +89,7 @@ const Login = () => {
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
                             apiServerLogin(values);
+                            setIsErrorMessageServer(false);
 
                         }}
                     >
@@ -84,6 +108,8 @@ const Login = () => {
                                     isError={errors.password && touched.password}
                                     errorText={errors.password}
                                     type={"password"}
+                                    errorMessageOther={errorMessageServer}
+                                    isErrorMessageServer={isErrorMessageServer}
                                 />
                                 <div className={style.loginBtn}>
                                     <Button type={"submit"} text={"Log In"} style={{
@@ -93,11 +119,13 @@ const Login = () => {
                                         color: "var(--white-text)",
                                         border: "none",
                                     }}/>
-                                    <Link className={style.ForgetPassword} to="/registration"> Forget Password?</Link>
+                                    <Link className={style.ForgetPassword} to="/registration"> Create account?</Link>
                                 </div>
+
 
                             </Form>
                         )}
+
 
                     </Formik>
                 </div>
