@@ -73,7 +73,6 @@
     color: var(--login-btn);
 }
 
-
 @media screen and (max-width: 920px ) {
     .loginWrapper {
         width: 50%;
