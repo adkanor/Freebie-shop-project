@@ -90,10 +90,7 @@ const Filters = ({
             closeFilters();
         } else {
             seNoFiltersMatch(true);
-            toast.error("No filters match", {
-                position: "bottom-left",
-                autoClose: 2500,
-            });
+            toast.error("No filters match");
         }
     };
 

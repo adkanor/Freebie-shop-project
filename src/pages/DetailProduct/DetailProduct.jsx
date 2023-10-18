@@ -88,10 +88,7 @@ const DetailProduct = () => {
             const errorMessage = "Not enough items available.";
             setNoAvailability(errorMessage);
             console.warn("No item is available.Choose less amount");
-            toast.error("This quantity is  not available", {
-                position: "bottom-left",
-                autoClose: 5000,
-            });
+            toast.error("This quantity is  not available");
         }
         setSubmitting(false);
     };
