@@ -62,7 +62,6 @@ const CheckOut = () => {
                             } else {
                                 obj.personalInfo = values;
                                 obj.goods = cartProducts;
-                                console.log(JSON.stringify(obj, null, 2));
                                 dispatch(clearCart());
                                 navigate("/");
                                 scrollToTop();
