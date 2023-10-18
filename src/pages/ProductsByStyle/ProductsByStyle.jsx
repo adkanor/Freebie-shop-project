@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
-import axios from "axios";
+import { fetchProductsByStyle } from "../../stores/pageWithFiltersProducts/action";
 import styles from "./ProductsByStyle.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
@@ -11,38 +11,33 @@ import filters from "../../assets/icons/Filter/Edit.svg";
 import Button from "../../components/Button/Button";
 import { useMediaQuery } from "@react-hook/media-query";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
-
+import { useDispatch, useSelector } from "react-redux";
 const ProductsByStyle = () => {
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
-
-    const [productByStyle, setProductByStyle] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const dispatch = useDispatch();
+    // const [productByStyle, setProductByStyle] = useState([]);
+    // const [filteredProducts, setFilteredProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
-
-    let url;
-    if (style === "female" || style === "male") {
-        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
-    } else if (style === "sale") {
-        url =
-            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getSaleGoods";
-    } else {
-        url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
-    }
+    const filteredProducts = useSelector(
+        (state) => state.getAllProductsByStyleReducer.filteredProducts
+    );
 
     useEffect(() => {
-        axios
-            .get(url)
-            .then((response) => {
-                setProductByStyle(response.data);
-                setFilteredProducts(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-            });
-    }, [style, url]);
+        let url;
+        if (style === "female" || style === "male") {
+            url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/sex/${style}`;
+        } else if (style === "sale") {
+            url =
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getSaleGoods";
+        } else {
+            url = `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/styles/${style}`;
+        }
+        dispatch(fetchProductsByStyle(url));
+    }, [style, dispatch]);
+
     // Function to setCurrentPage
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -75,8 +70,6 @@ const ProductsByStyle = () => {
                     style={style}
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
-                    productByStyle={productByStyle}
-                    setFilteredProducts={setFilteredProducts}
                     setCurrentPage={setCurrentPage}
                 />
                 {filteredProducts.length > 0 ? (
@@ -91,10 +84,7 @@ const ProductsByStyle = () => {
                                 height="30"
                                 onClick={toogleFilters}
                             />
-                            <Sorting
-                                filteredProducts={filteredProducts}
-                                setFilteredProducts={setFilteredProducts}
-                            />
+                            <Sorting setCurrentPage={setCurrentPage} />
                         </div>
                         <ul className={styles.productslist}>
                             {currentTableData.map((product) => (

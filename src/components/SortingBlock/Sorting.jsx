@@ -1,8 +1,15 @@
 /* eslint-disable */
 import React from "react";
 import style from "./Sorting.module.css";
-import PropTypes from "prop-types";
-const SortFilter = ({ filteredProducts, setFilteredProducts }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { sortProducts } from "../../stores/pageWithFiltersProducts/action";
+const SortFilter = ({ setCurrentPage }) => {
+    const filteredProducts = useSelector(
+        (state) => state.getAllProductsByStyleReducer.filteredProducts
+    );
+
+    const dispatch = useDispatch();
+
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
         let productsToSort = [...filteredProducts];
@@ -22,7 +29,9 @@ const SortFilter = ({ filteredProducts, setFilteredProducts }) => {
             default:
                 break;
         }
-        setFilteredProducts(productsToSort);
+
+        dispatch(sortProducts(productsToSort));
+        setCurrentPage(1);
     };
 
     return (
@@ -44,8 +53,5 @@ const SortFilter = ({ filteredProducts, setFilteredProducts }) => {
         </div>
     );
 };
-SortFilter.propTypes = {
-    filteredProducts: PropTypes.array.isRequired,
-    setFilteredProducts: PropTypes.func.isRequired,
-};
+
 export default SortFilter;
