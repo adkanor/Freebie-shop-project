@@ -92,7 +92,6 @@ const Filters = ({
             dispatch(setFilters(filteredProductsCopy));
             seNoFiltersMatch(false);
             closeFilters();
-            formik.resetForm();
         } else {
             seNoFiltersMatch(true);
             toast.error("No filters match");
