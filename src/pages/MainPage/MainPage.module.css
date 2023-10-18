@@ -5,7 +5,8 @@
 .newArrivalsContainer h2,
 .topSellingContainer h2 {
     text-align: center;
-    font-family: "Integral-CF 700";
+    font-family: "Integral-CF";
+  font-weight: 700;
     font-size: 32px;
     margin-top: 50px;
     margin-bottom: 32px;
@@ -31,7 +32,8 @@
     font-size: 32px;
     line-height: 36px;
     text-transform: uppercase;
-    font-family: "Integral-CF 700";
+    font-family: "Integral-CF";
+  font-weight: 700;
     margin-bottom: 20px;
 }
 .gridContainer {
@@ -53,7 +55,8 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
     font-size: 24px;
     color: var(--black-text);
 }

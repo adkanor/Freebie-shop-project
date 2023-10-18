@@ -38,7 +38,8 @@
     margin-top: 14px;
     color: var(--black-text);
     font-size: 16px;
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     line-height: 24px;
     word-wrap: break-word
 }
