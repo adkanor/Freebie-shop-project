@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import styles from "./MainPage.module.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
 import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
@@ -9,9 +9,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-import { addArrivalsList } from "../../stores/newArrivals/actions";
-import { addTopSellingList } from "../../stores/topSelling/actions";
-import { scrollToTop } from "../../utils/scrollToTop";
+import {addArrivalsList} from "../../stores/newArrivals/actions";
+import {addTopSellingList} from "../../stores/topSelling/actions";
+import {scrollToTop} from "../../utils/scrollToTop";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -61,8 +61,8 @@ const MainPage = () => {
 
     return (
         <section className="section">
-            <Slider />
-            <BrandBox />
+            <Slider/>
+            <BrandBox/>
             <RecommendationProducts
                 arrayofProducts={newArrivals}
                 title={"New Arrivals"}
@@ -116,7 +116,7 @@ const MainPage = () => {
                     ))}
                 </div>
             </div>
-            <CommentsSlider />
+            <CommentsSlider/>
         </section>
     );
 };
