@@ -20,7 +20,8 @@
 
 .breadcrumbsLink {
     font-size: 0.875rem;
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     color: var(--gray-text-primary);
     text-transform: uppercase;
     margin-right: 0.28rem;
