@@ -10,7 +10,8 @@
 }
 .discountSection p {
     text-align: center;
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     color: var(--black-text);
     font-size: 14px;
     margin: 8px;

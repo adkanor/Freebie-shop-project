@@ -82,7 +82,8 @@
     padding-top: 24px;
 }
 .productTitle {
-    font-family: "Integral-CF 700";
+    font-family: "Integral-CF";
+  font-weight: 700;
     font-size: 24px;
 }
 
@@ -111,7 +112,8 @@
 .currentPrice,
 .oldPrice,
 .discount {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
     font-size: 24px;
 }
 
@@ -121,7 +123,8 @@
 }
 
 .productText {
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
     border-bottom: 1px var(--separator-line) solid;
@@ -129,7 +132,8 @@
 }
 .filterTitle,
 .filterSize {
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 14px;
 }
 .color {
@@ -146,7 +150,8 @@
 
 .ratingValue {
     color: rgba(0, 0, 0, 0.6);
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 14px;
 }
 
@@ -156,7 +161,8 @@
     border-radius: 62px;
     background: rgba(255, 51, 51, 0.1);
     color: #f33;
-    font-family: "Satoshi 500";
+    font-family: "Satoshi";
+    font-weight: 500;
     font-size: 14px;
     padding: 6px 12px;
 }
