@@ -1,7 +1,7 @@
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "./pages/Header/Header";
+import Header from "./components/Header/Header";
 import DetailProduct from "./pages/DetailProduct/DetailProduct";
 import CartPage from "./pages/CartPage/CartPage";
 import Footer from "./components/Footer/Footer";
@@ -14,6 +14,7 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import SearchResult from "./pages/SearchResult/SearchResult";
 import PersonalInfo from "./components/PersonalInfo/PersonalInfo";
 import ContactUs from "./components/ContactUs/ContactUs";
 import ListOrders from "./components/ListOrders/ListOrders";
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="/" element={<MainSection />} />
                 <Route path="/:style" element={<ProductsByStyle />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/search/:value" element={<SearchResult />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
                 <Route path="/cart/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />
