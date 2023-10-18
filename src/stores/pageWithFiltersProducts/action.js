@@ -11,10 +11,10 @@ export const fetchProductsByStyle = (url) => async (dispatch, getState) => {
     });
 };
 
-export const sortProducts = (sortedProducts) => {
+export const sortProducts = (sortType) => {
     return {
         type: SORT_PRODUCTS,
-        payload: sortedProducts,
+        payload: sortType,
     };
 };
 

@@ -19,9 +19,33 @@ const getAllProductsByStyleReducer = (state = initState, action) => {
                 filteredProducts: action.payload,
             };
         case SORT_PRODUCTS:
+            const sortType = action.payload;
+            let sortedProducts = [...state.filteredProducts];
+
+            switch (sortType) {
+                case "az":
+                    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case "za":
+                    sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case "price-asc":
+                    sortedProducts.sort(
+                        (a, b) => a.final_price - b.final_price
+                    );
+                    break;
+                case "price-desc":
+                    sortedProducts.sort(
+                        (a, b) => b.final_price - a.final_price
+                    );
+                    break;
+                default:
+                    break;
+            }
+
             return {
                 ...state,
-                filteredProducts: action.payload,
+                filteredProducts: sortedProducts,
             };
         case SET_FILTERS:
             return {

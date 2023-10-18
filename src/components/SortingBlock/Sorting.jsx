@@ -4,33 +4,10 @@ import style from "./Sorting.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { sortProducts } from "../../stores/pageWithFiltersProducts/action";
 const SortFilter = ({ setCurrentPage }) => {
-    const filteredProducts = useSelector(
-        (state) => state.getAllProductsByStyleReducer.filteredProducts
-    );
-
     const dispatch = useDispatch();
-
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
-        let productsToSort = [...filteredProducts];
-        switch (selectedValue) {
-            case "az":
-                productsToSort.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case "za":
-                productsToSort.sort((a, b) => b.name.localeCompare(a.name));
-                break;
-            case "price-asc":
-                productsToSort.sort((a, b) => a.final_price - b.final_price);
-                break;
-            case "price-desc":
-                productsToSort.sort((a, b) => b.final_price - a.final_price);
-                break;
-            default:
-                break;
-        }
-
-        dispatch(sortProducts(productsToSort));
+        dispatch(sortProducts(selectedValue));
         setCurrentPage(1);
     };
 

@@ -16,8 +16,7 @@ const ProductsByStyle = () => {
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
     const dispatch = useDispatch();
-    // const [productByStyle, setProductByStyle] = useState([]);
-    // const [filteredProducts, setFilteredProducts] = useState([]);
+
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const { style } = useParams();
