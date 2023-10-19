@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import style from "./Login.module.css";
-
 import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -15,6 +14,7 @@ const Login = () => {
     const [bannerLog, setBannerLog] = useState();
     const [errorMessageServer, setErrorMessageServer] = useState();
     const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
+    const navigate = useNavigate();
 
     const memoryUser = (data) => {
         localStorage.setItem("token", data.token);
@@ -43,9 +43,11 @@ const Login = () => {
             apiServerLogin(value);
         },
         onError: () => {
-            setErrorMessageServer("Login Failed");
+            setErrorMessageServer("Login failed");
         },
     });
+
+    const redirectAccount = () => navigate("/account");
 
     const apiServerLogin = (values) => {
         const user = {
@@ -59,6 +61,8 @@ const Login = () => {
 
                 if (response.data.status === 200) {
                     memoryUser(response.data.info);
+                    redirectAccount();
+
                 }
                 if (response.data.status === 400) {
                     setErrorMessageServer(response.data.error);
@@ -122,11 +126,8 @@ const Login = () => {
                                     <Link className={style.ForgetPassword} to="/registration"> Create account?</Link>
                                 </div>
 
-
                             </Form>
                         )}
-
-
                     </Formik>
                 </div>
             </div>
