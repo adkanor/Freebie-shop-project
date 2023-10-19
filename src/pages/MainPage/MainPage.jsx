@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
 import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
-import axios from "axios";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
@@ -36,27 +35,9 @@ const MainPage = () => {
         },
     ];
     useEffect(() => {
-        axios
-            .get(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/goods/10"
-            )
-            .then((response) => {
-                dispatch(addArrivalsList(response.data));
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        dispatch(addTopSellingList());
+        dispatch(addArrivalsList());
 
-        axios
-            .get(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getRatingGoods/10"
-            )
-            .then((response) => {
-                dispatch(addTopSellingList(response.data));
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     }, [dispatch]);
 
     return (
