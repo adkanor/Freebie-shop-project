@@ -4,6 +4,8 @@ import deleteIcon from "../../assets/icons/Cart/Delete.svg";
 import Counter from "../Counter/Counter";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { removeFromCart } from "../../stores/cartProducts/action";
 import { incrementItemQuantity } from "../../stores/cartProducts/action";
 import { decrementItemQuantity } from "../../stores/cartProducts/action";
@@ -32,9 +34,15 @@ const CartItem = ({
                 className={styles.cartImg}
                 alt="Cart product"
             ></img>
+
             <div className={styles.cartItemContent}>
                 <div className={styles.cartItemInfo}>
-                    <h5 className={styles.cartItemTitle}>{name}</h5>
+                    <Link
+                        className={styles.cartItemLink}
+                        to={`/products/${id}`}
+                    >
+                        <h5 className={styles.cartItemTitle}>{name}</h5>{" "}
+                    </Link>
                     <img
                         className={styles.cartItemDeleteIcon}
                         src={deleteIcon}

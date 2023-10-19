@@ -1,5 +1,6 @@
 .emptyCartSection {
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     font-size: 24px;
     margin: 40px auto;
     display: flex;

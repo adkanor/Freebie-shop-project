@@ -15,7 +15,8 @@
 
 .buttonGroupTitle {
     color: var(--black-text);
-    font-family: "Integral-CF 700", Arial, sans-serif;
+    font-family: "Integral-CF", Arial, sans-serif;
+    font-weight: 700;
     font-size: 40px;
     line-height: 40px;
 }

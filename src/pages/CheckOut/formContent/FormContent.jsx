@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./FormContent.module.css";
 import { Field } from "formik";
 import BlackButton from "../../../components/Button/Button";
@@ -8,7 +8,7 @@ const FormContent = () => {
     let cartItems = JSON.parse(localStorage.getItem("cartItems"));
     let totalAmount = JSON.parse(localStorage.getItem("cartTotalAmount"));
 
-    // const [paymentType, setPaymentType] = useState("Place Order");
+    const [paymentType, setPaymentType] = useState("Place Order");
 
     return (
         <div className={styles.formContent}>
@@ -58,7 +58,8 @@ const FormContent = () => {
                             className={styles.radioInput}
                             name="payment"
                             value="Bank"
-                            // onClick={() => setPaymentType("Pay to Card")}
+                            required
+                            onClick={() => setPaymentType("Pay to Card")}
                         />
                         <p className={styles.paymentTitle}>Bank</p>
                     </div>
@@ -74,7 +75,8 @@ const FormContent = () => {
                         type="radio"
                         name="payment"
                         value="Cash"
-                        // onClick={() => setPaymentType("Place Order")}
+                        required
+                        onClick={() => setPaymentType("Place Order")}
                     />
                     <p className={styles.paymentTitle}>Cash on delivery</p>
                 </div>
@@ -97,7 +99,7 @@ const FormContent = () => {
 
             <BlackButton
                 type={"submit"}
-                text={"Place Order"}
+                text={paymentType}
                 style={{
                     width: "100%",
                     backgroundColor: "var(--black-text)",

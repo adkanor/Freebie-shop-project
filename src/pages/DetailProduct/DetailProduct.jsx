@@ -17,6 +17,7 @@ import { addToCart } from "../../stores/cartProducts/action";
 import { toast } from "react-toastify";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Preloader from "../../components/Preloader/Preloader";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -43,6 +44,7 @@ const DetailProduct = () => {
     );
 
     useEffect(() => {
+        scrollToTop();
         axios
             .get(
                 `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
@@ -89,10 +91,7 @@ const DetailProduct = () => {
             const errorMessage = "Not enough items available.";
             setNoAvailability(errorMessage);
             console.warn("No item is available.Choose less amount");
-            toast.error("This quantity is  not available", {
-                position: "bottom-left",
-                autoClose: 5000,
-            });
+            toast.error("This quantity is  not available");
         }
         setSubmitting(false);
     };
