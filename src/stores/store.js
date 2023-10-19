@@ -7,6 +7,8 @@ import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
 import searchProductsReducer from "./searchProducts/searchProductsReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
+import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
+import authorizationReducer from "./authorization/authorizationReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
     cartReducer,
     favoritesReducer,
     searchProductsReducer,
+    authorizationReducer,
+    getAllProductsByStyleReducer,
 });
 const config = {
     channel: "my_channel",

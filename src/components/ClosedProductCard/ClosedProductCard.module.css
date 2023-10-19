@@ -28,7 +28,8 @@
 }
 
 .productName {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
 }
 
 .grade {
@@ -37,7 +38,8 @@
 }
 
 .ratingSpan {
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 0.875rem;
     padding-bottom: 0.14rem;
     padding-left: 0.5rem;
@@ -45,12 +47,14 @@
 }
 
 .ratingSpan > span {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
     color: black;
 }
 
 .defaultPriceSpan {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
     font-size: 1.5rem;
 }
 
@@ -61,7 +65,8 @@
 }
 
 .onSalePriceSpan {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
+    font-weight: 700;
     font-size: 1.5rem;
     text-decoration: line-through;
     color: var(--gray-text-primary);
@@ -69,7 +74,8 @@
 
 .saleValue {
     background-color: var(--red-background-discount);
-    font-family: "Satoshi 500";
+    font-family: "Satoshi";
+    font-weight: 500;
     font-size: 0.75rem;
     color: var(--red-text);
     padding: 6px 14px 6px 14px;

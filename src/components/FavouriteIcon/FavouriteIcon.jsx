@@ -15,19 +15,13 @@ const FavoriteIcon = ({ thisCard }) => {
     // Function to add the product to favorites
     const addToFavs = (thisCard) => {
         dispatch(addProductToFavorites(thisCard));
-        toast.success("Add to favourites", {
-            position: "bottom-left",
-            autoClose: 2500,
-        });
+        toast.success("Add to favourites");
     };
 
     // Function to remove the product from favorites
     const removeFromFavs = (id) => {
         dispatch(deleteProductFromFavorites(id));
-        toast.success("Remove from favourites", {
-            position: "bottom-left",
-            autoClose: 2500,
-        });
+        toast.success("Remove from favourites");
     };
 
     // Check if the current product is in favorites

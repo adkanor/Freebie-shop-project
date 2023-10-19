@@ -32,9 +32,13 @@
 }
 .cartItemTitle {
     max-width: 170px;
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     font-size: 16px;
     margin: 4px 0;
+}
+.cartItemLink {
+    color: var(--black-text);
 }
 .cartItemContent {
     flex: 1;
@@ -43,7 +47,8 @@
 .cartItemColor {
     display: flex;
     font-size: 12px;
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
 }
 .cartItemSize p,
 .cartItemColor p {
@@ -65,7 +70,8 @@
 
 .cartItemTotal p {
     font-size: 24px;
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
 }
 .cartQuantity {
     background-color: var(--separator-line);

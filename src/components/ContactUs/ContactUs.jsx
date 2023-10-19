@@ -7,23 +7,14 @@ const ContactUs = () => {
     const email = "katya162157@gmail.com";
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         if (!values.message.trim()) {
-            toast.error("Message cannot be empty", {
-                position: "bottom-left",
-                autoClose: 2500,
-            });
+            toast.error("Message cannot be empty");
         } else {
             try {
-                toast.success("Message sent successfully!", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                toast.success("Message sent successfully!");
                 console.log("Sending to server:", values.message);
                 resetForm();
             } catch (error) {
-                toast.error("Failed to send the message. Please try again.", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                toast.error("Failed to send the message. Please try again.");
             } finally {
                 setSubmitting(false);
             }
