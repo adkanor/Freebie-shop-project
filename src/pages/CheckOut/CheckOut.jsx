@@ -48,11 +48,13 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
+                            firstName: "",
                             companyName: "",
                             streetAddress: "",
                             apartmentInfo: "",
                             city: "",
                             phoneNumber: "",
+                            email: "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={(values) => {

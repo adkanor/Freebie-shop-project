@@ -9,23 +9,12 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
     return (
         <Form className={styles.form}>
             <div className={styles.formSection}>
-                {!isCheckOut && (
-                    <>
-                        <InputCheckout
-                            name="email"
-                            type="email"
-                            text="Email Address"
-                            isError={errors.email && touched.email}
-                            errorText={errors.email}
-                        />
-                        <InputCheckout
-                            name="firstName"
-                            text="First Name"
-                            isError={errors.firstName && touched.firstName}
-                            errorText={errors.firstName}
-                        />
-                    </>
-                )}
+                <InputCheckout
+                    name="firstName"
+                    text="First Name"
+                    isError={errors.firstName && touched.firstName}
+                    errorText={errors.firstName}
+                />
                 <InputCheckout
                     name="companyName"
                     text="Company Name"
@@ -57,7 +46,13 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
                     isError={errors.phoneNumber && touched.phoneNumber}
                     errorText={errors.phoneNumber}
                 />
-
+                <InputCheckout
+                    name="email"
+                    type="email"
+                    text="Email Address"
+                    isError={errors.email && touched.email}
+                    errorText={errors.email}
+                />
                 {children}
             </div>
             {isCheckOut && (
