@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import styles from "./FormContent.module.css";
+import { useSelector } from "react-redux";
 import { Field } from "formik";
 import BlackButton from "../../../components/Button/Button";
 import svgBank from "../../../assets/icons/Payment/PaymentsBank.svg";
 
 const FormContent = () => {
-    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
-    let totalAmount = JSON.parse(localStorage.getItem("cartTotalAmount"));
+    const cartReducer = useSelector((state) => state.cartReducer);
+    const cartItems = cartReducer.cartItems;
+    const subtotalAmount = cartReducer.cartTotalAmount;
+    const shipping = cartReducer.deliveryFee;
+    const totalAmount = cartReducer.final_total;
+    const amountOfDiscount = cartReducer.amountOfDiscount;
 
     const [paymentType, setPaymentType] = useState("Place Order");
 
@@ -32,22 +37,29 @@ const FormContent = () => {
                                 )}
                             </div>
                             <p className={styles.productPrice}>
-                                ${data.final_price}
+                                ${data.selectedAmount * data.price}
                             </p>
                         </div>
                     ))}
             </div>
             <div className={styles.subtotalContainer}>
                 <p className={styles.title}>Subtotal</p>
-                <p className={styles.price}>${totalAmount}</p>
+                <p className={styles.price}>${subtotalAmount}</p>
             </div>
             <div className={styles.shippingContainer}>
                 <p className={styles.title}>Shipping</p>
-                <p className={styles.price}>$15</p>
+                <p className={styles.price}>${shipping}</p>
             </div>
             <div className={styles.totalContainer}>
                 <p className={styles.title}>Total</p>
-                <p className={styles.price}>${totalAmount}</p>
+                {amountOfDiscount > 0 ? (
+                    <div className={styles.titleDiscountContainer}>
+                        <p className={styles.discount}>-{amountOfDiscount}</p>
+                        <p className={styles.price}>${totalAmount}</p>
+                    </div>
+                ) : (
+                    <p className={styles.price}>${totalAmount}</p>
+                )}
             </div>
 
             <div className={styles.payment}>
