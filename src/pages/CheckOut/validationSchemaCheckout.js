@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 const validateSchemaCheckout = Yup.object().shape({
-    firstName: Yup.string().max(40).required("This field is required"),
+    userName: Yup.string().max(40).required("This field is required"),
     companyName: Yup.string().max(40).required("This field is required"),
     streetAddress: Yup.string().max(40).required("This field is required"),
     apartmentInfo: Yup.string().max(40),
