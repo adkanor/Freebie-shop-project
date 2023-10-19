@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import styles from "./Header.module.css";
 import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
 import HiOutlineSearchBlack from "../../assets/icons/Header/Search-balck.svg";
@@ -11,7 +11,8 @@ import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
-import { scrollToTop } from "../../utils/scrollToTop";
+import {scrollToTop} from "../../utils/scrollToTop";
+import axios from "axios";
 
 const Header = () => {
     const [query, setQuery] = useState("");
@@ -42,6 +43,26 @@ const Header = () => {
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts]);
+
+    const isUserAuth = () => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                Authorization: `${token}`
+            }
+        };
+        axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth", "", config)
+            .then(res => {
+                if (res.data.status === 200) {
+                    redirectAccount();
+                }
+                if (res.data.status === 400) {
+                    redirectLogin();
+                }
+            });
+    };
+    const redirectAccount = () => navigate("/account");
+    const redirectLogin = () => navigate("/login");
 
     const toggleNav = () => {
         setShowNav(!showNav);
@@ -174,8 +195,13 @@ const Header = () => {
                                     />
                                 )}
 
-                                <Link to="/EditProfile" onClick={hideAll}>
-                                    <img src={AccountSVG} alt="Account SVG" />
+                                <Link
+                                    onClick={() => {
+                                        hideAll();
+                                        isUserAuth();
+                                    }}
+                                >
+                                    <img src={AccountSVG} alt="Account SVG"/>
                                     <span className={styles.notAbs}></span>
                                 </Link>
                                 <Link
@@ -183,7 +209,7 @@ const Header = () => {
                                     className={styles.svgRel}
                                     onClick={hideAll}
                                 >
-                                    <img src={CartSVG} alt="Cart SVG" />
+                                    <img src={CartSVG} alt="Cart SVG"/>
                                     {cartAmount > 0 && (
                                         <span id={styles["abs"]}>
                                             <p className={styles.new}>
@@ -197,7 +223,7 @@ const Header = () => {
                                     onClick={hideAll}
                                     className={styles.svgRel}
                                 >
-                                    <img src={HeartSVG} alt="Heart SVG" />
+                                    <img src={HeartSVG} alt="Heart SVG"/>
                                     {favoriteAmount > 0 ? (
                                         <span id={styles["abs"]}>
                                             <p className={styles.new}>

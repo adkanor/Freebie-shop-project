@@ -4,7 +4,7 @@ import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import Button from "../../components/Button/Button";
 import style from "./Registration.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -14,7 +14,9 @@ const Registration = () => {
     const [bannerReg, setBannerReg] = useState();
     const [errorMessageServer, setErrorMessageServer] = useState();
     const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
+    const navigate = useNavigate();
 
+    const redirect = () => navigate("/");
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
@@ -55,6 +57,7 @@ const Registration = () => {
             .then(response => {
                 if (response.data.status === 200) {
                     console.log("+++", response.data);
+                    redirect();
 
                 }
                 if (response.data.status === 400) {
