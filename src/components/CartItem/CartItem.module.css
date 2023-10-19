@@ -37,6 +37,9 @@
     font-size: 16px;
     margin: 4px 0;
 }
+.cartItemLink {
+    color: var(--black-text);
+}
 .cartItemContent {
     flex: 1;
 }

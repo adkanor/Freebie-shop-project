@@ -5,13 +5,15 @@ import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const CartSummary = ({ discount, cartTotalAmount }) => {
-    const deliveryFee = 15;
-    const amountOfDiscount = discount ? (cartTotalAmount * discount) / 100 : 0;
-    const total = cartTotalAmount + deliveryFee - amountOfDiscount;
-
+const CartSummary = ({
+    discount,
+    cartSubtotal,
+    deliveryFee,
+    amountOfDiscount,
+    total,
+}) => {
     const initialValues = {
-        subtotal: cartTotalAmount,
+        subtotal: cartSubtotal,
         discount,
         amountOfDiscount,
         deliveryFee,
@@ -19,7 +21,7 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
     };
     const onSubmit = () => {
         const updateValues = {
-            cartTotalAmount,
+            cartSubtotal,
             discount,
             amountOfDiscount,
             deliveryFee,
@@ -60,7 +62,7 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
                         </div>
                         <div className={styles.cartTotal}>
                             <h5 className={styles.cartTotalName}>Total</h5>
-                            <p className={styles.cartTotalAmount}>
+                            <p className={styles.cartSummaryPrice}>
                                 ${initialValues.total.toFixed(2)}
                             </p>
                         </div>
@@ -84,7 +86,10 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
 };
 
 CartSummary.propTypes = {
-    cartTotalAmount: PropTypes.number.isRequired,
+    cartSubtotal: PropTypes.number.isRequired,
     discount: PropTypes.number.isRequired,
+    deliveryFee: PropTypes.number.isRequired,
+    amountOfDiscount: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
 };
 export default CartSummary;

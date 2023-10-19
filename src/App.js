@@ -22,7 +22,7 @@ const App = () => {
     return (
         <>
             <Header />
-            <ToastContainer />
+            <ToastContainer limit={3} autoClose={1500} position="bottom-left" />
             <Routes>
                 <Route path="/" element={<MainSection />} />
                 <Route path="/:style" element={<ProductsByStyle />} />
