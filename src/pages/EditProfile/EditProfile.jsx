@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./EditProfile.module.css";
 import { Link, Outlet } from "react-router-dom";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
-
 function EditProfile() {
     return (
         <>
