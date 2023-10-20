@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
     getAllProducts,
     getFilteredProducts,
 } from "../../stores/searchProducts/actions";
 import { useParams } from "react-router-dom";
+
+import { addArrivalsList } from "../../stores/newArrivals/actions";
+import { addTopSellingList } from "../../stores/topSelling/actions";
 import RenderComponent from "./RenderComponent/RenderComponent";
 
 const SearchResult = () => {
@@ -13,8 +16,13 @@ const SearchResult = () => {
     let allProducts = useSelector(
         (state) => state.searchProductsReducer.filteredData
     );
-    let allArrivals = useSelector((state) => state.newArrivalsReducer);
-    let allTopSelling = useSelector((state) => state.topSaleReducer);
+    const allArrivals = useSelector((state) => state.newArrivalsReducer);
+    const allTopSelling = useSelector((state) => state.topSaleReducer);
+
+    useEffect(() => {
+        dispatch(addTopSellingList());
+        dispatch(addArrivalsList());
+    }, [dispatch]);
 
     useEffect(() => {
         const fetchData = async () => {

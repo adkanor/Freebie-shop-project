@@ -9,6 +9,7 @@ import searchProductsReducer from "./searchProducts/searchProductsReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
 import authorizationReducer from "./authorization/authorizationReducer";
+import personalInfoReducer from "./personalInfo/personalInfoReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     searchProductsReducer,
     authorizationReducer,
     getAllProductsByStyleReducer,
+    personalInfoReducer,
 });
 const config = {
     channel: "my_channel",

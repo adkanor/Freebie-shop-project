@@ -138,6 +138,20 @@ line-height: 24px;
     background-color: var(--black-text);
 }
 
+.titleDiscountContainer{
+    display: flex;
+    align-items: center;
+}
+
+.discount{
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
+    color: var(--red-text);
+    font-size: 10px;
+    padding-right: 10px;
+
+}
+
 @media screen and (min-width: 766px) {
     .formContent>button{
         margin-top: 15px;

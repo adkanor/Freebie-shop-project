@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import style from "./Sorting.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { sortProducts } from "../../stores/pageWithFiltersProducts/action";
 const SortFilter = ({ setCurrentPage }) => {
     const dispatch = useDispatch();
