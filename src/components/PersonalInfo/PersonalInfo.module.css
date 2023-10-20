@@ -9,6 +9,13 @@
     font-size: 20px;
     margin: 20px 0;
 }
+.errorMessage {
+    text-align: center;
+    font-size: 26px;
+    font-family: "Satoshi";
+    font-weight: 700;
+    margin: 50px auto;
+}
 @media screen and (min-width: 766px) {
     .formContainer {
         flex-direction: row;

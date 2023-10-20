@@ -15,6 +15,10 @@ const PersonalInfo = () => {
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const [isLoading, setIsLoading] = useState(true);
+    const errorMessage = useSelector(
+        (state) => state.personalInfoReducer.error
+    );
+    console.log(errorMessage);
     useEffect(() => {
         if (token) {
             dispatch(fetchUserData(token))
@@ -25,6 +29,12 @@ const PersonalInfo = () => {
 
     if (isLoading) {
         return <Preloader />;
+    } else if (errorMessage) {
+        return (
+            <div className={stylesInfo.errorMessage}>
+                Error: {errorMessage}. Please try later
+            </div>
+        );
     }
     return (
         <div className={stylesInfo.formContainer}>
