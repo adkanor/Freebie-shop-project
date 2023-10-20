@@ -32,10 +32,12 @@
 @media (min-width: 766px) {
     .accountNav {
         font-size: 20px;
-
         margin-bottom: 10px;
     }
+    .accountNavList {
+        flex-grow: 1;
+    }
     .accountNavLink {
-        margin-right: 36px;
+        letter-spacing: 1px;
     }
 }

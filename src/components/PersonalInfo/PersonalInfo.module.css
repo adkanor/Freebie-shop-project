@@ -1,74 +1,35 @@
-.profileContainer {
+.formContainer {
     display: flex;
-    justify-content: center;
-    margin: 50px auto;
+    flex-direction: column;
+    margin-bottom: 50px;
 }
-
-.formInput {
-    border: 0;
-    border-radius: 4px;
-    background: var(--Secondary, #f5f5f5);
-    width: 100%;
-    box-sizing: border-box;
-    padding-left: 15px;
-    height: 50px;
-    font-family: "Satoshi";
-    font-weight: 400;
+.header {
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     font-size: 20px;
-}
-.profileHeading {
-    font-family: "Satoshi";
-    font-weight: 400;
-    font-size: 28px;
-    font-style: normal;
-    padding-bottom: 35px;
     margin: 20px 0;
 }
-
-.columnContainer {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.column {
-    width: 48%;
-    margin-bottom: 20px;
-}
-
-.formGroup {
-    margin-bottom: 20px;
-}
-.profileChangesHeading {
-    color: var(--gray-text-primary);
-    font-family: "Satoshi";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    margin-bottom: 7px;
-}
-
 .errorMessage {
-    color: var(--login-btn);
-    font-size: 14px;
-    margin-top: 4px;
+    text-align: center;
+    font-size: 26px;
+    font-family: "Satoshi";
+    font-weight: 700;
+    margin: 50px auto;
 }
-
-.passwordInputGroup {
-    position: relative;
-}
-
-.passwordToggle {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+@media screen and (min-width: 766px) {
+    .formContainer {
+        flex-direction: row;
+        margin-bottom: 100px;
+    }
+    .formUserData {
+        margin-right: 70px;
+    }
+    .formUserData,
+    .formChangePassword {
+        flex-grow: 1;
+    }
+    .header {
+        font-size: 26px;
+        margin: 40px 0;
+    }
 }
