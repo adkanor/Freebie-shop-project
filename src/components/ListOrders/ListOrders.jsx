@@ -6,9 +6,9 @@ import Preloader from "../Preloader/Preloader";
 const ListOrders = () => {
     const [listOrders, setListOrders] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
-    // const token = localStorage.getItem("token");
-    const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzAyMjAzN2I1OTczNDZiODlmNzllMCIsImlhdCI6MTY5Nzc0MzgwMiwiZXhwIjoxNjk3ODMwMjAyfQ.Sz6QnK_Yr6ol472ncke0ZNBOJfy5PVDSR1149Y_Z9M8";
+
+    const token = localStorage.getItem("token");
+
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setIsLoading(true);

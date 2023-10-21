@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import validationSchemaCheckout from "../../pages/CheckOut/validationSchemaCheckout";
+
+import validationSchemaChangePassword from "./validationSchemaChangePassword";
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import Preloader from "../Preloader/Preloader";
@@ -84,7 +88,9 @@ const PersonalInfo = () => {
                         newPassword: "",
                         confirmNewPassword: "",
                     }}
-                    validationSchema={validationSchemaCheckout}
+
+                    validationSchema={validationSchemaChangePassword}
+
                     onSubmit={(values) => {
                         console.log(values);
                     }}
