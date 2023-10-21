@@ -1,69 +1,70 @@
-.formSection{
+.formSection {
     display: flex;
     flex-direction: column;
     gap: 32px;
     margin-bottom: 50px;
     width: 100%;
 }
-.form{
+.form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 140px;
+
     gap: 32px;
 }
-.formTitle{
+.formTitle {
     font-family: "Satoshi";
     font-weight: 500;
-font-size: 26px;
-/* 36 */
-font-style: normal;
-line-height: 30px; /* 83.333% */
-letter-spacing: 1.44px;
-padding-bottom: 35px;
-/* 45 */
+    font-size: 26px;
+    /* 36 */
+    font-style: normal;
+    line-height: 30px; /* 83.333% */
+    letter-spacing: 1.44px;
+    padding-bottom: 35px;
+    /* 45 */
 }
-.formInput{
+.formInput {
     border: 0;
     border-radius: 4px;
-background: var(--Secondary, #F5F5F5);
-width: 100%;
-box-sizing: border-box;
-padding-left: 15px;
-height: 50px;
-font-family: "Satoshi";
-font-weight: 400;
-font-size:20px;
+    background: var(--Secondary, #f5f5f5);
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 15px;
+    height: 50px;
+    font-family: "Satoshi";
+    font-weight: 400;
+    font-size: 20px;
+    outline: none;
 }
 
-.formLabel{
+.formLabel {
     color: var(--gray-text-secondary);
-font-family: "Satoshi";
-font-weight: 400;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 150% */
+    font-family: "Satoshi";
+    font-weight: 400;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
 }
 
-.formContentSection{
+.formContentSection {
     width: 100%;
 }
-.formItem{
+.formItem {
     position: relative;
+    max-width: 900px;
 }
 
-.errorMessage{
+.errorMessage {
     position: absolute;
     color: var(--red-text);
 }
 
 @media screen and (min-width: 766px) {
-
-    .form{
+    .form {
         flex-direction: row;
         justify-content: space-between;
     }
-    .formContentSection{
+    .formContentSection {
         padding-top: 17px;
     }
 }

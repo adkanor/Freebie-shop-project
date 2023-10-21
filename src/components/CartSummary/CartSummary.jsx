@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./CartSummary.module.css";
 import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
+import { checkAuthorization } from "../../stores/authorization/actions";
 import { Link } from "react-router-dom";
 
-const CartSummary = ({ discount, cartTotalAmount }) => {
-    const deliveryFee = 15;
-    const amountOfDiscount = discount ? (cartTotalAmount * discount) / 100 : 0;
-    const total = cartTotalAmount + deliveryFee - amountOfDiscount;
+const CartSummary = ({
+    discount,
+    cartSubtotal,
+    deliveryFee,
+    amountOfDiscount,
+    total,
+}) => {
+    const dispatch = useDispatch();
+    let authData = useSelector((state) => state.authorizationReducer);
 
     const initialValues = {
-        subtotal: cartTotalAmount,
+        subtotal: cartSubtotal,
         discount,
         amountOfDiscount,
         deliveryFee,
@@ -19,7 +26,7 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
     };
     const onSubmit = () => {
         const updateValues = {
-            cartTotalAmount,
+            cartSubtotal,
             discount,
             amountOfDiscount,
             deliveryFee,
@@ -27,6 +34,11 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
         };
         console.log("Form values", updateValues);
     };
+    const token = localStorage.getItem("token");
+
+    useEffect(() => {
+        dispatch(checkAuthorization(token));
+    }, [dispatch, token]);
 
     return (
         <div className={styles.cartSummary}>
@@ -60,12 +72,13 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
                         </div>
                         <div className={styles.cartTotal}>
                             <h5 className={styles.cartTotalName}>Total</h5>
-                            <p className={styles.cartTotalAmount}>
+                            <p className={styles.cartSummaryPrice}>
                                 ${initialValues.total.toFixed(2)}
                             </p>
                         </div>
                     </div>
-                    <Link to="checkout">
+
+                    <Link to={authData.status === 200 ? "checkout" : "/login"}>
                         <Button
                             type="submit"
                             text="Go to Checkout"
@@ -84,7 +97,10 @@ const CartSummary = ({ discount, cartTotalAmount }) => {
 };
 
 CartSummary.propTypes = {
-    cartTotalAmount: PropTypes.number.isRequired,
+    cartSubtotal: PropTypes.number.isRequired,
     discount: PropTypes.number.isRequired,
+    deliveryFee: PropTypes.number.isRequired,
+    amountOfDiscount: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
 };
 export default CartSummary;

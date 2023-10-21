@@ -11,16 +11,63 @@ import { toast } from "react-toastify";
 const cartItems = localStorage.getItem("cartItems");
 const cartTotalAmount = localStorage.getItem("cartTotalAmount");
 const cartTotalQuant = localStorage.getItem("cartTotalQuantity");
+
 const initialState = {
     cartItems: cartItems ? JSON.parse(cartItems) : [],
     cartTotalAmount: cartTotalAmount ? JSON.parse(cartTotalAmount) : 0,
     cartQuantity: cartTotalQuant ? JSON.parse(cartTotalQuant) : 0,
+    discount: localStorage.getItem("discount")
+        ? JSON.parse(localStorage.getItem("discount"))
+        : 0,
+    deliveryFee: localStorage.getItem("deliveryFee")
+        ? JSON.parse(localStorage.getItem("deliveryFee"))
+        : 15,
+    amountOfDiscount: localStorage.getItem("amountOfDiscount")
+        ? JSON.parse(localStorage.getItem("amountOfDiscount"))
+        : 0,
+    final_total: localStorage.getItem("final_total")
+        ? JSON.parse(localStorage.getItem("final_total"))
+        : 0,
 };
 
-const updateLocalStorage = (cartItems, cartTotalAmount, cartQuantity) => {
+const calculateDiscount = (quantity) => {
+    if (quantity === 1) {
+        return 0;
+    } else if (quantity === 2) {
+        return 12;
+    } else if (quantity === 3) {
+        return 20;
+    } else if (quantity >= 4) {
+        return 25;
+    } else {
+        return 0;
+    }
+};
+const calculateAmountOfDiscount = (totalAmount, discount) => {
+    if (discount === 0) {
+        return 0;
+    }
+    return (totalAmount * discount) / 100;
+};
+
+const calculateFinalTotal = (totalAmount, deliveryFee, amountOfDiscount) => {
+    return totalAmount + deliveryFee - amountOfDiscount;
+};
+
+const updateLocalStorage = (
+    cartItems,
+    cartTotalAmount,
+    cartQuantity,
+    discount,
+    amountOfDiscount,
+    final_total
+) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     localStorage.setItem("cartTotalAmount", JSON.stringify(cartTotalAmount));
     localStorage.setItem("cartTotalQuantity", JSON.stringify(cartQuantity));
+    localStorage.setItem("discount", JSON.stringify(discount));
+    localStorage.setItem("amountOfDiscount", JSON.stringify(amountOfDiscount));
+    localStorage.setItem("final_total", JSON.stringify(final_total));
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -47,30 +94,42 @@ const cartReducer = (state = initialState, action) => {
 
             // If already in cart
             if (existingItemIndex !== -1) {
-                toast.error("Already in cart!", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                toast.error("Already in cart!");
                 return state;
             } else {
                 // Adding to cart functionality
                 const updatedTotalAmount =
                     state.cartTotalAmount +
                     newItem.selectedAmount * newItem.final_price;
-                toast.success("New item added to cart!", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                const updatedCartQuantity =
+                    state.cartQuantity + newItem.selectedAmount;
+                const discount = calculateDiscount(updatedCartQuantity);
+                const amountOfDiscount = calculateAmountOfDiscount(
+                    updatedTotalAmount,
+                    discount
+                );
+                const final_total = calculateFinalTotal(
+                    updatedTotalAmount,
+                    state.deliveryFee,
+                    amountOfDiscount
+                );
+                toast.success("New item added to cart!");
                 updatedState = {
                     ...state,
                     cartItems: [...state.cartItems, newItem],
                     cartTotalAmount: updatedTotalAmount,
-                    cartQuantity: state.cartQuantity + newItem.selectedAmount,
+                    cartQuantity: updatedCartQuantity,
+                    discount,
+                    amountOfDiscount,
+                    final_total,
                 };
                 updateLocalStorage(
                     updatedState.cartItems,
                     updatedState.cartTotalAmount,
-                    updatedState.cartQuantity
+                    updatedState.cartQuantity,
+                    updatedState.discount,
+                    updatedState.amountOfDiscount,
+                    updatedState.final_total
                 );
 
                 return updatedState;
@@ -88,24 +147,38 @@ const cartReducer = (state = initialState, action) => {
             const updatedTotalAmount =
                 state.cartTotalAmount -
                 removedItem.selectedAmount * removedItem.final_price;
-            toast.success("Delete item from the cart", {
-                position: "bottom-left",
-                autoClose: 2500,
-            });
+            const updatedCartQuantity =
+                state.cartQuantity - removedItem.selectedAmount;
+            const discount = calculateDiscount(updatedCartQuantity);
+            const amountOfDiscount = calculateAmountOfDiscount(
+                updatedTotalAmount,
+                discount
+            );
+            const final_total = calculateFinalTotal(
+                updatedTotalAmount,
+                state.deliveryFee,
+                amountOfDiscount
+            );
+            toast.success("Delete item from the cart");
             updatedState = {
                 ...state,
                 cartItems: updatedCartItems,
                 cartTotalAmount: updatedTotalAmount,
-                cartQuantity: state.cartQuantity - removedItem.selectedAmount,
+                cartQuantity: updatedCartQuantity,
+                discount,
+                amountOfDiscount,
+                final_total,
             };
             updateLocalStorage(
                 updatedState.cartItems,
                 updatedState.cartTotalAmount,
-                updatedState.cartQuantity
+                updatedState.cartQuantity,
+                updatedState.discount,
+                updatedState.amountOfDiscount,
+                updatedState.final_total
             );
 
             return updatedState;
-
         // Increment item quantity(already in cart)
         case INCREMENT_ITEM_QUANTITY:
             const incrementItemIndex = state.cartItems.findIndex(
@@ -130,28 +203,39 @@ const cartReducer = (state = initialState, action) => {
                     const updatedTotalAmount =
                         state.cartTotalAmount +
                         updatedItems[incrementItemIndex].final_price;
-                    toast.success("Quantity increased by 1", {
-                        position: "bottom-left",
-                        autoClose: 2500,
-                    });
+                    const updatedCartQuantity = state.cartQuantity + 1;
+                    const discount = calculateDiscount(updatedCartQuantity);
+                    const amountOfDiscount = calculateAmountOfDiscount(
+                        updatedTotalAmount,
+                        discount
+                    );
+                    const final_total = calculateFinalTotal(
+                        updatedTotalAmount,
+                        state.deliveryFee,
+                        amountOfDiscount
+                    );
+                    toast.success("Quantity increased by 1");
                     updatedState = {
                         ...state,
                         cartItems: updatedItems,
                         cartTotalAmount: updatedTotalAmount,
-                        cartQuantity: state.cartQuantity + 1,
+                        cartQuantity: updatedCartQuantity,
+                        discount,
+                        amountOfDiscount,
+                        final_total,
                     };
                     updateLocalStorage(
                         updatedState.cartItems,
                         updatedState.cartTotalAmount,
-                        updatedState.cartQuantity
+                        updatedState.cartQuantity,
+                        updatedState.discount,
+                        updatedState.amountOfDiscount,
+                        updatedState.final_total
                     );
 
                     return updatedState;
                 } else {
-                    toast.error("Maximum available quantity", {
-                        position: "bottom-left",
-                        autoClose: 2500,
-                    });
+                    toast.error("Maximum available quantity");
                 }
             }
             return state;
@@ -171,32 +255,54 @@ const cartReducer = (state = initialState, action) => {
                 const updatedTotalAmount =
                     state.cartTotalAmount -
                     updatedItems[decrementItemIndex].final_price;
-                toast.success("Quantity decreased by 1", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                const updatedCartQuantity = state.cartQuantity - 1;
+                const discount = calculateDiscount(updatedCartQuantity);
+                const amountOfDiscount = calculateAmountOfDiscount(
+                    updatedTotalAmount,
+                    discount
+                );
+                const final_total = calculateFinalTotal(
+                    updatedTotalAmount,
+                    state.deliveryFee,
+                    amountOfDiscount
+                );
+                toast.success("Quantity decreased by 1");
                 updatedState = {
                     ...state,
                     cartItems: updatedItems,
                     cartTotalAmount: updatedTotalAmount,
-                    cartQuantity: state.cartQuantity - 1,
+                    cartQuantity: updatedCartQuantity,
+                    discount,
+                    amountOfDiscount,
+                    final_total,
                 };
                 updateLocalStorage(
                     updatedState.cartItems,
                     updatedState.cartTotalAmount,
-                    updatedState.cartQuantity
+                    updatedState.cartQuantity,
+                    updatedState.discount,
+                    updatedState.amountOfDiscount,
+                    updatedState.final_total
                 );
 
                 return updatedState;
             }
             return state;
         case CLEAR_CART:
-            localStorage.clear();
+            localStorage.removeItem("cartItems");
+            localStorage.removeItem("cartTotalAmount");
+            localStorage.removeItem("cartTotalQuantity");
+            localStorage.removeItem("discount");
+            localStorage.removeItem("amountOfDiscount");
+            localStorage.removeItem("final_total");
             updatedState = {
                 ...state,
                 cartItems: [],
                 cartTotalAmount: 0,
                 cartQuantity: 0,
+                discount: 0,
+                amountOfDiscount: 0,
+                final_total: 0,
             };
             return updatedState;
         default:

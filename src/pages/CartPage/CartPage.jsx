@@ -1,42 +1,39 @@
 import React from "react";
 import styles from "./CartPage.module.css";
-// import Button from "../../components/Button/Button.jsx";
 import CartItem from "../../components/CartItem/CartItem.jsx";
-// import { Formik, Form } from "formik";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState, useEffect } from "react";
 import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import DiscountCounter from "../../components/DiscountCounter/DiscountCounter";
+
 const CartPage = () => {
     const [discountMessage, setDiscountMessage] = useState("");
-    const [discount, setDiscount] = useState(0);
     const cartReducer = useSelector((state) => state.cartReducer);
     const cartProducts = cartReducer.cartItems;
-    const cartTotalAmount = cartReducer.cartTotalAmount;
+    const cartSubtotalAmount = cartReducer.cartTotalAmount;
     const cartTotalQuantity = cartReducer.cartQuantity;
+    const cartDiscount = cartReducer.discount;
+    const amountOfDiscount = cartReducer.amountOfDiscount;
+    const deliveryFee = cartReducer.deliveryFee;
+    const finalTotal = cartReducer.final_total;
 
     useEffect(() => {
         if (cartTotalQuantity === 1) {
             setDiscountMessage("Add 1 more to unlock 12% off");
-            setDiscount(0);
         } else if (cartTotalQuantity === 2) {
             setDiscountMessage(
                 "🎉 Congratulations! You've unlocked 12% off! Add 1 more to unlock 20% off"
             );
-            setDiscount(12);
         } else if (cartTotalQuantity === 3) {
             setDiscountMessage(
                 "🎉 Congratulations! You've unlocked 20% off! Add more 1 to unlock 25% off"
             );
-            setDiscount(20);
         } else if (cartTotalQuantity >= 4) {
             setDiscountMessage("🎉 Congratulations! You've unlocked 25% off!");
-            setDiscount(25);
         } else {
             setDiscountMessage("");
-            setDiscount(0);
         }
     }, [cartTotalQuantity]);
 
@@ -54,7 +51,7 @@ const CartPage = () => {
                     <>
                         <h1 className={styles.cartPageTitle}>Your cart</h1>
                         <DiscountCounter
-                            discount={discount}
+                            discount={cartDiscount}
                             discountMessage={discountMessage}
                         />
                         <div className={styles.cartContainer}>
@@ -76,8 +73,11 @@ const CartPage = () => {
                                 ))}
                             </ul>
                             <CartSummary
-                                discount={discount}
-                                cartTotalAmount={cartTotalAmount}
+                                discount={cartDiscount}
+                                cartSubtotal={cartSubtotalAmount}
+                                deliveryFee={deliveryFee}
+                                amountOfDiscount={amountOfDiscount}
+                                total={finalTotal}
                             />
                         </div>
                     </>

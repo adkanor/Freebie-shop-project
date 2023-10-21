@@ -1,14 +1,5 @@
 import * as Yup from "yup";
-const validateSchemaCheckout = Yup.object().shape({
-    userName: Yup.string().max(40).required("This field is required"),
-    companyName: Yup.string().max(40).required("This field is required"),
-    streetAddress: Yup.string().max(40).required("This field is required"),
-    apartmentInfo: Yup.string().max(40),
-    city: Yup.string().max(40).required("This field is required"),
-    phoneNumber: Yup.string().required("This field is required"),
-    email: Yup.string()
-        .email("Please enter a valid email")
-        .required("This field is required"),
+const validationSchemaChangePassword = Yup.object().shape({
     oldPassword: Yup.string()
         .required("Old Password is required")
         .min(6, "Old Password must be at least 6 characters")
@@ -28,4 +19,4 @@ const validateSchemaCheckout = Yup.object().shape({
         .oneOf([Yup.ref("newPassword"), null], "Passwords must match"),
 });
 
-export default validateSchemaCheckout;
+export default validationSchemaChangePassword;
