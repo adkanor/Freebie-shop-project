@@ -289,7 +289,12 @@ const cartReducer = (state = initialState, action) => {
             }
             return state;
         case CLEAR_CART:
-            localStorage.clear();
+            localStorage.removeItem("cartItems");
+            localStorage.removeItem("cartTotalAmount");
+            localStorage.removeItem("cartTotalQuantity");
+            localStorage.removeItem("discount");
+            localStorage.removeItem("amountOfDiscount");
+            localStorage.removeItem("final_total");
             updatedState = {
                 ...state,
                 cartItems: [],

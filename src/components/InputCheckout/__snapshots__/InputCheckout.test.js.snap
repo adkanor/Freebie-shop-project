@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputCheckout Component should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="formItem"
+  >
+    <label
+      class="formLabel"
+      for="testName"
+    >
+      Test Label
+    </label>
+    <input
+      class="formInput"
+      id="testName"
+      name="testName"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -1,40 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
-import InputCheckout from "../../components/InputCheckout/InputCheckout";
-import FormContent from "../../pages/CheckOut/formContent/FormContent";
+import axios from "axios";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
 import styles from "./CheckOut.module.css";
 import stylesCart from "../CartPage/CartPage.module.css";
 import EmptyCartPage from "../CartPage/EmptyCartPage/EmptyCartPage";
+import stylesInfo from "../../components/PersonalInfo/PersonalInfo.module.css";
 import validationSchemaCheckout from "./validationSchemaCheckout";
-import PaymentForm from "../../components/PaymentForm/PaymentForm";
+import Preloader from "../../components/Preloader/Preloader";
 import { scrollToTop } from "../../utils/scrollToTop";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import { clearCart } from "../../stores/cartProducts/action";
 import { useDispatch } from "react-redux";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
+import { fetchUserData } from "../../stores/personalInfo/action";
 const CheckOut = () => {
-    const [modal, setModal] = useState(false);
-    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
+    const cartProducts = useSelector((state) => state.cartReducer);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const toggleModal = () => {
-        setModal(!modal);
-    };
 
-    let obj = {
+    const token = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState(true);
+    const userData = useSelector((state) => state.personalInfoReducer.userData);
+    const errorMessage = useSelector(
+        (state) => state.personalInfoReducer.error
+    );
+    useEffect(() => {
+        if (token) {
+            dispatch(fetchUserData(token))
+                .then(() => setIsLoading(false))
+                .catch(() => setIsLoading(false));
+        }
+    }, [dispatch, token]);
+
+    const [data, setData] = useState({
         token: "",
-        user: "",
+        orderDate: "",
+        payment: "",
+        email: "",
         personalInfo: [],
         goods: [],
-    };
+        totalValue: 0,
+    });
+    useEffect(() => {
+        axios
+            .post(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
+                data,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            )
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [data, token]);
+
+    if (isLoading) {
+        return <Preloader />;
+    } else if (errorMessage) {
+        return (
+            <div className={stylesInfo.errorMessage}>
+                Error: {errorMessage}. Please try later
+            </div>
+        );
+    }
+
     return (
         <>
-            {cartProducts.length > 0 ? (
+            {cartProducts.cartItems.length > 0 ? (
                 <div className="section">
-                    <PaymentForm toggle={modal} toggleFunc={toggleModal} />
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{
@@ -47,100 +89,44 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            firstName: "",
-                            companyName: "",
-                            streetAddress: "",
-                            apartmentInfo: "",
-                            city: "",
-                            phoneNumber: "",
-                            email: "",
+                            userName: userData ? userData.userName : "",
+                            companyName: userData ? userData.companyName : "",
+                            streetAddress: userData
+                                ? userData.streetAddress
+                                : "",
+                            apartmentInfo: userData
+                                ? userData.apartmentInfo
+                                : "",
+                            city: userData ? userData.city : "",
+                            phoneNumber: userData ? userData.phoneNumber : "",
+                            email: userData ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
-                        onSubmit={(values) => {
-                            if (values.payment === "Bank") {
-                                toggleModal();
-                            } else {
-                                obj.personalInfo = values;
-                                obj.goods = cartProducts;
-                                dispatch(clearCart());
-                                navigate("/");
-                                scrollToTop();
-                            }
+                        onSubmit={async (values) => {
+                            await setData({
+                                personalInfo: values,
+                                goods: cartProducts.cartItems,
+                                token: token,
+                                email: values.email,
+                                payment: values.payment,
+                                orderDate:
+                                    new Date().toLocaleDateString() +
+                                    " " +
+                                    new Date().toLocaleTimeString(),
+                                totalValue: cartProducts.final_total,
+                            });
+                            await dispatch(clearCart());
+                            await navigate("/");
+                            scrollToTop();
                         }}
                     >
                         {({ errors, touched }) => (
                             <>
-                                <ProfileForm>
-                                    <div className={styles.formSection}>
-                                        <InputCheckout
-                                            name="firstName"
-                                            text="First Name"
-                                            isError={
-                                                errors.firstName &&
-                                                touched.firstName
-                                            }
-                                            errorText={errors.firstName}
-                                        />
-                                        <InputCheckout
-                                            name="companyName"
-                                            text="Company Name"
-                                            isError={
-                                                errors.companyName &&
-                                                touched.companyName
-                                            }
-                                            errorText={errors.companyName}
-                                        />
-                                        <InputCheckout
-                                            name="streetAddress"
-                                            text="Street Address"
-                                            isError={
-                                                errors.streetAddress &&
-                                                touched.streetAddress
-                                            }
-                                            errorText={errors.streetAddress}
-                                        />
-                                        <InputCheckout
-                                            name="apartmentInfo"
-                                            text="Apartment, floor, etc. (optional)"
-                                            isError={
-                                                errors.apartmentInfo &&
-                                                touched.apartmentInfo
-                                            }
-                                            errorText={errors.apartmentInfo}
-                                        />
-                                        <InputCheckout
-                                            name="city"
-                                            text="Town/City"
-                                            isError={
-                                                errors.city && touched.city
-                                            }
-                                            errorText={errors.city}
-                                        />
-                                        <InputCheckout
-                                            name="phoneNumber"
-                                            type="phone"
-                                            text="Phone Number"
-                                            isError={
-                                                errors.phoneNumber &&
-                                                touched.phoneNumber
-                                            }
-                                            errorText={errors.phoneNumber}
-                                        />
-                                        <InputCheckout
-                                            name="email"
-                                            type="email"
-                                            text="Email Address"
-                                            isError={
-                                                errors.email && touched.email
-                                            }
-                                            errorText={errors.email}
-                                        />
-                                    </div>
-
-                                    <div className={styles.formContentSection}>
-                                        <FormContent />
-                                    </div>
-                                </ProfileForm>
+                                <ProfileForm
+                                    isCheckOut={true}
+                                    errors={errors}
+                                    touched={touched}
+                                ></ProfileForm>
                             </>
                         )}
                     </Formik>
