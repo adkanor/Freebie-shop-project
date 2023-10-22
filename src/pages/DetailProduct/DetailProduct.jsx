@@ -16,12 +16,9 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/cartProducts/action";
 import { toast } from "react-toastify";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
-<<<<<<< HEAD
 import Preloader from "../../components/Preloader/Preloader";
-
-=======
 import { scrollToTop } from "../../utils/scrollToTop";
->>>>>>> development
+
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
