@@ -4,6 +4,7 @@ import {
     getAllProducts,
     getFilteredProducts,
 } from "../../stores/searchProducts/actions";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader/Preloader";
 import { addArrivalsList } from "../../stores/newArrivals/actions";
@@ -24,6 +25,15 @@ const SearchResult = () => {
         dispatch(addTopSellingList());
         dispatch(addArrivalsList());
     }, [dispatch]);
+
+    useEffect(() => {
+        axios
+            .post(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/search",
+                { word: value }
+            )
+            .then((res) => console.log(res));
+    }, [value]);
 
     useEffect(() => {
         const fetchData = async () => {
