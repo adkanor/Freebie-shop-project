@@ -1,0 +1,9 @@
+.searchAmount{
+    font-family: "Integral-CF";
+  font-weight: 700;
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

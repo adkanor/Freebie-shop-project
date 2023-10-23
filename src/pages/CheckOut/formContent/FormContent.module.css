@@ -45,7 +45,8 @@ object-fit: cover;
 
 .productTitle, .productPrice{
     color: #000;
-font-family: "Satoshi 400";
+font-family: "Satoshi";
+font-weight: 400;
 font-size: 16px;
 font-style: normal;
 line-height: 24px;
@@ -70,7 +71,8 @@ line-height: 24px;
 
 .title, .price, .paymentTitle{
     color: #000;
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
+    font-weight: 400;
     font-size: 16px;
     font-style: normal;
     line-height: 24px;
@@ -134,6 +136,20 @@ line-height: 24px;
 
 .radioInput:checked {
     background-color: var(--black-text);
+}
+
+.titleDiscountContainer{
+    display: flex;
+    align-items: center;
+}
+
+.discount{
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
+    color: var(--red-text);
+    font-size: 10px;
+    padding-right: 10px;
+
 }
 
 @media screen and (min-width: 766px) {

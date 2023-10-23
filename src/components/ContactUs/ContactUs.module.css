@@ -1,11 +1,10 @@
 .contactUsContainer {
     position: relative;
-    margin: 50px auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 40vh;
+    align-items: flex-start;
     width: 100%;
+    margin: 50px auto;
 }
 
 .contactForm {
@@ -40,5 +39,8 @@
 @media (min-width: 766px) {
     .contactForm {
         padding: 0px 30px;
+    }
+    .contactUsContainer {
+        margin: 100px auto;
     }
 }

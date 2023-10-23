@@ -155,9 +155,9 @@ table {
 /* ---Integral CF */
 /* Bold */
 @font-face {
-    font-family: "Integral-CF 700";
+    font-family: "Integral-CF";
     font-style: normal;
-    font-weight: normal;
+    font-weight: 700;
     src:
         local("IntegralCF-Bold"),
         url("./assets/fonts/IntegralCF/IntegralCF-Bold.woff") format("woff");
@@ -166,9 +166,9 @@ table {
 /* ---Satoshi */
 /* Regular */
 @font-face {
-    font-family: "Satoshi 400";
+    font-family: "Satoshi";
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     src:
         local("Satoshi-Regular"),
         url("./assets/fonts/Satoshi/Satoshi-Regular.woff") format("woff");
@@ -176,9 +176,9 @@ table {
 
 /* Medium */
 @font-face {
-    font-family: "Satoshi 500";
+    font-family: "Satoshi";
     font-style: normal;
-    font-weight: normal;
+    font-weight: 500;
     src:
         local("Satoshi-Medium"),
         url("./assets/fonts/Satoshi/Satoshi-Medium.woff") format("woff");
@@ -186,9 +186,9 @@ table {
 
 /* Bold */
 @font-face {
-    font-family: "Satoshi 700";
+    font-family: "Satoshi";
     font-style: normal;
-    font-weight: normal;
+    font-weight: 700;
 
     src:
         local("Satoshi-Bold"),

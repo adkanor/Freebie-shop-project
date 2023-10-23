@@ -4,7 +4,7 @@ import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import Button from "../../components/Button/Button";
 import style from "./Registration.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -12,7 +12,11 @@ import axios from "axios";
 
 const Registration = () => {
     const [bannerReg, setBannerReg] = useState();
+    const [errorMessageServer, setErrorMessageServer] = useState();
+    const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
+    const navigate = useNavigate();
 
+    const redirect = () => navigate("/account");
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
@@ -33,7 +37,6 @@ const Registration = () => {
         axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/loginBanner")
             .then(res => {
                 setBannerReg(res.data.url);
-
             })
             .catch(error => {
                 console.error(error);
@@ -41,11 +44,30 @@ const Registration = () => {
     }, []);
 
 
-    // /apis
     const apiServerRegistration = (values) => {
-        console.log(values);
+        const candidate = {
+            email: values.email,
+            userName: values.name,
+            password: values.password,
+            confirmPassword: values.confirmPassword
+        };
+
+        axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/registration", candidate)
+            .then(response => {
+                if (response.data.status === 200) {
+                    localStorage.setItem("token", response.data.token);
+                    redirect();
+                }
+                if (response.data.status === 400) {
+                    setErrorMessageServer(response.data.info);
+                    setIsErrorMessageServer(true);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
- 
+
 
     return (
         <div className={`section ${style.registrationWrapper}`}>
@@ -58,10 +80,12 @@ const Registration = () => {
                 <Formik initialValues={{
                     name: "",
                     email: "",
-                    password: ""
+                    password: "",
+                    confirmPassword: ""
 
                 }} validationSchema={validationSchema} onSubmit={values => {
-                    console.log(values);
+                    apiServerRegistration(values);
+                    setIsErrorMessageServer(false);
                 }}>
                     {({errors, touched}) => (
                         <Form>
@@ -85,6 +109,15 @@ const Registration = () => {
                                 isError={errors.password && touched.password}
                                 errorText={errors.password}
                                 type={"password"}
+                            />
+                            <Input
+                                name="confirmPassword"
+                                placeholder="Confirm password"
+                                isError={errors.confirmPassword && touched.confirmPassword}
+                                errorText={errors.confirmPassword}
+                                type={"password"}
+                                errorMessageOther={errorMessageServer}
+                                isErrorMessageServer={isErrorMessageServer}
                             />
                             <Button
                                 type={"submit"}

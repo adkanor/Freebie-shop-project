@@ -31,7 +31,8 @@
         color: var(--black-text);
         font-size: 36px;
         text-align: center;
-        font-family: "Integral-CF 700";
+        font-family: "Integral-CF";
+        font-weight: 700;
         margin-bottom: 20px;
     }
 
@@ -39,7 +40,8 @@
         color: var(--gray-text-primary);
         font-size: 14px;
         text-align: center;
-        font-family: "Satoshi 400";
+        font-family: "Satoshi";
+        font-weight: 400;
         margin-bottom: 24px;
         letter-spacing: 1px;
     }
@@ -61,12 +63,14 @@
 
     .bannerInfo p {
         font-size: 24px;
-        font-family: "Satoshi 700";
+        font-family: "Satoshi";
+        font-weight: 700;
         color: var(--black-texts);
     }
 
     .bannerInfo span {
-        font-family: "Satoshi 400";
+        font-family: "Satoshi";
+        font-weight: 400;
         font-size: 12px;
         color: var(--gray-text-primary);
         margin-right: 28px;

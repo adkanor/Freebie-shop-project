@@ -1,7 +1,8 @@
 .accountNav {
     display: flex;
     justify-content: space-between;
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     font-size: 14px;
     margin-bottom: 10px;
     padding: 20px 0;
@@ -18,7 +19,8 @@
 }
 .accountNavLink:focus {
     padding: 18px 0;
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
 
     color: var(--black-text);
 }
@@ -30,10 +32,12 @@
 @media (min-width: 766px) {
     .accountNav {
         font-size: 20px;
-
         margin-bottom: 10px;
     }
+    .accountNavList {
+        flex-grow: 1;
+    }
     .accountNavLink {
-        margin-right: 36px;
+        letter-spacing: 1px;
     }
 }

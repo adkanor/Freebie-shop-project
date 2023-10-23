@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import MultiRangeSlider from "multi-range-slider-react";
@@ -9,15 +9,20 @@ import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+    setFilters,
+    resetFilters,
+} from "../../stores/pageWithFiltersProducts/action";
 const Filters = ({
-    productByStyle,
-    setFilteredProducts,
     setFiltresVisible,
     filtersAreVisible,
     style,
     setCurrentPage,
 }) => {
+    const dispatch = useDispatch();
+    // productByStyle={productByStyle}
+    // setFilteredProducts={setFilteredProducts}
     const MIN_PRICE = 10;
     const MAX_PRICE = 1000;
     const sizes = ["XS", "S", "M", "L", "XL"];
@@ -33,11 +38,10 @@ const Filters = ({
         "joggers",
     ];
     const [noFiltersMatch, seNoFiltersMatch] = useState(false);
-    let productsNotFiltered = useMemo(
-        () => [...productByStyle],
-        [productByStyle]
-    );
 
+    let productsNotFiltered = useSelector(
+        (state) => state.getAllProductsByStyleReducer.productByStyle
+    );
     const formik = useFormik({
         initialValues: {
             category: "",
@@ -85,28 +89,26 @@ const Filters = ({
             );
         }
         if (filteredProductsCopy.length > 0) {
-            setFilteredProducts(filteredProductsCopy);
+            dispatch(setFilters(filteredProductsCopy));
             seNoFiltersMatch(false);
             closeFilters();
         } else {
             seNoFiltersMatch(true);
-            toast.error("No filters match", {
-                position: "bottom-left",
-                autoClose: 2500,
-            });
+            toast.error("No filters match");
         }
     };
 
     // Function to reset filters
-    const resetFilters = () => {
+    const resetFiltersForm = () => {
         setCurrentPage(1);
-        setFilteredProducts(productsNotFiltered);
+        dispatch(resetFilters);
         formik.resetForm();
         setFiltresVisible(false);
     };
 
     // Function to close filters
     const closeFilters = () => {
+        formik.resetForm();
         setFiltresVisible(false);
         seNoFiltersMatch(false);
     };
@@ -249,7 +251,7 @@ const Filters = ({
                         width: "100%",
                         padding: "7px 0",
                     }}
-                    onClick={resetFilters}
+                    onClick={resetFiltersForm}
                 />
             </form>
         </aside>
@@ -257,8 +259,6 @@ const Filters = ({
 };
 
 Filters.propTypes = {
-    productByStyle: PropTypes.array.isRequired,
-    setFilteredProducts: PropTypes.func.isRequired,
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
     style: PropTypes.string,

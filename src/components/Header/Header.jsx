@@ -9,9 +9,10 @@ import VscChromeClose from "../../assets/icons/Filter/Close.svg";
 import AccountSVG from "../../assets/icons/Header/Account.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import NavigationBar from "../NavigationBar/NavigationBar";
+import SearchBar from "../SearchBar/SearchBar";
 import { scrollToTop } from "../../utils/scrollToTop";
+import axios from "axios";
 
 const Header = () => {
     const [query, setQuery] = useState("");
@@ -42,6 +43,31 @@ const Header = () => {
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts]);
+
+    const isUserAuth = () => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                Authorization: `${token}`,
+            },
+        };
+        axios
+            .post(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth",
+                "",
+                config
+            )
+            .then((res) => {
+                if (res.data.status === 200) {
+                    redirectAccount();
+                }
+                if (res.data.status !== 200) {
+                    redirectLogin();
+                }
+            });
+    };
+    const redirectAccount = () => navigate("/account");
+    const redirectLogin = () => navigate("/login");
 
     const toggleNav = () => {
         setShowNav(!showNav);
@@ -80,7 +106,7 @@ const Header = () => {
             <div className={styles.notification}>
                 <span className={styles.info}>
                     <p>
-                        Sign up and get 20% off to your first order.
+                        Sign up and get promo code for order.
                         <Link
                             to="login"
                             onClick={() => {
@@ -174,7 +200,12 @@ const Header = () => {
                                     />
                                 )}
 
-                                <Link to="/EditProfile" onClick={hideAll}>
+                                <Link
+                                    onClick={() => {
+                                        hideAll();
+                                        isUserAuth();
+                                    }}
+                                >
                                     <img src={AccountSVG} alt="Account SVG" />
                                     <span className={styles.notAbs}></span>
                                 </Link>

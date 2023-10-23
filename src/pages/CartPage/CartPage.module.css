@@ -1,7 +1,8 @@
 /* Cart Title */
 .cartPageTitle {
     font-size: 24px;
-    font-family: "Integral-CF 700", Arial, sans-serif;
+    font-family: "Integral-CF", Arial, sans-serif;
+  font-weight: 700;
 }
 /* cartContainer */
 .cartContainer {

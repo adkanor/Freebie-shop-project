@@ -3,27 +3,37 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./ContactUs.module.css";
 import Button from "../Button/Button";
 import { toast } from "react-toastify";
+import axios from "axios";
+
 const ContactUs = () => {
-    const email = "katya162157@gmail.com";
+    const token = localStorage.getItem("token");
+
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         if (!values.message.trim()) {
-            toast.error("Message cannot be empty", {
-                position: "bottom-left",
-                autoClose: 2500,
-            });
+            toast.error("Message cannot be empty");
         } else {
             try {
-                toast.success("Message sent successfully!", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
-                console.log("Sending to server:", values.message);
-                resetForm();
+                const response = await axios.put(
+                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUserPass",
+                    { message: values.message },
+                    {
+                        headers: {
+                            Authorization: `${token}`,
+                        },
+                    }
+                );
+
+                toast.success("Message sent successfully!");
+                console.log(
+                    "Sending to server:",
+                    values.message,
+                    "sucsess!",
+                    response.status
+                );
             } catch (error) {
-                toast.error("Failed to send the message. Please try again.", {
-                    position: "bottom-left",
-                    autoClose: 2500,
-                });
+                toast.error(
+                    "Failed to send the message. Please try again later."
+                );
             } finally {
                 setSubmitting(false);
             }
@@ -35,7 +45,6 @@ const ContactUs = () => {
             <Formik
                 initialValues={{
                     message: "",
-                    email: email,
                 }}
                 onSubmit={handleSubmit}
             >
@@ -53,7 +62,7 @@ const ContactUs = () => {
                             component="div"
                             className={styles.errorText}
                         />
-                        <Field type="hidden" name="email" />
+
                         <Button
                             text={isSubmitting ? "Sending..." : "Send"}
                             disabled={isSubmitting}

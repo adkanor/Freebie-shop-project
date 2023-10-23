@@ -7,7 +7,8 @@
     margin-bottom: 50px;
 }
 .cartSummaryTitle {
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     font-size: 20px;
     margin-bottom: 16px;
 }
@@ -22,16 +23,19 @@
     position: relative;
 }
 .cartSummaryText {
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     color: var(--gray-text-primary);
     font-size: 16px;
 }
 .cartSummaryPrice {
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     color: var(--black-text);
 }
 .cartSummaryDiscountPresentage {
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     color: var(--red-text);
     font-size: 10px;
     position: absolute;
@@ -39,7 +43,8 @@
     right: -10px;
 }
 .cartSummaryDiscount {
-    font-family: "Satoshi 400", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
     color: var(--red-text);
 }
 .cartTotal {
@@ -50,7 +55,8 @@
     margin-bottom: 16px;
 }
 .cartTotalAmount {
-    font-family: "Satoshi 700", Arial, sans-serif;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
     font-size: 20px;
 }
 

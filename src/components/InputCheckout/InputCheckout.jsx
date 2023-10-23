@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import InputMask from "react-input-mask";
 
 const InputCheckout = ({ name, text, type, isError, errorText }) => {
+    const isEmailField = name === "email";
+    const inputStyle = isEmailField
+        ? { color: "var( --gray-text-primary)" }
+        : {};
     return (
         <div className={stylesForm.formItem}>
             <label className={stylesForm.formLabel} htmlFor={name}>
@@ -16,6 +20,8 @@ const InputCheckout = ({ name, text, type, isError, errorText }) => {
                     id={name}
                     name={name}
                     className={stylesForm.formInput}
+                    readOnly={isEmailField}
+                    style={inputStyle}
                 />
             ) : (
                 <Field name={name}>
@@ -39,7 +45,7 @@ const InputCheckout = ({ name, text, type, isError, errorText }) => {
 InputCheckout.propTypes = {
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    isError: PropTypes.bool.isRequired,
+    isError: PropTypes.bool,
     errorText: PropTypes.string,
     type: PropTypes.string,
 };
