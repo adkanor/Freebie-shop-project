@@ -18,7 +18,6 @@ const Login = () => {
 
     const memoryUser = (data) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", data.email);
     };
 
 
