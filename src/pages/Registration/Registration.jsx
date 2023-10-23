@@ -16,7 +16,7 @@ const Registration = () => {
     const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
     const navigate = useNavigate();
 
-    const redirect = () => navigate("/");
+    const redirect = () => navigate("/account");
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
@@ -52,13 +52,11 @@ const Registration = () => {
             confirmPassword: values.confirmPassword
         };
 
-
         axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/registration", candidate)
             .then(response => {
                 if (response.data.status === 200) {
-                    console.log("+++", response.data);
+                    localStorage.setItem("token", response.data.token);
                     redirect();
-
                 }
                 if (response.data.status === 400) {
                     setErrorMessageServer(response.data.info);
