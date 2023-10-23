@@ -3,9 +3,6 @@ import axios from "axios";
 export const GET_NEW_ARRIVALS_LIST = "GET_NEW_ARRIVALS_LIST";
 
 export const addArrivalsList = () => async (dispatch) => {
-    // type: GET_NEW_ARRIVALS_LIST,
-    // payload: items
-
     try {
         axios
             .get(
@@ -14,7 +11,7 @@ export const addArrivalsList = () => async (dispatch) => {
             .then((response) => {
                 dispatch({
                     type: GET_NEW_ARRIVALS_LIST,
-                    payload: response.data
+                    payload: response.data,
                 });
             })
             .catch((error) => {
