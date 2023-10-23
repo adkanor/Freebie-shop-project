@@ -5,7 +5,6 @@ import logger from "redux-logger";
 import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
 import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
-import searchProductsReducer from "./searchProducts/searchProductsReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
 import authorizationReducer from "./authorization/authorizationReducer";
@@ -19,7 +18,6 @@ const rootReducer = combineReducers({
     topSaleReducer,
     cartReducer,
     favoritesReducer,
-    searchProductsReducer,
     authorizationReducer,
     getAllProductsByStyleReducer,
     personalInfoReducer,

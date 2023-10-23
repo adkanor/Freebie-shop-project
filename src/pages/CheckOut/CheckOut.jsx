@@ -35,20 +35,27 @@ const CheckOut = () => {
         }
     }, [dispatch, token]);
 
-    const [data, setData] = useState({
-        token: "",
-        orderDate: "",
-        payment: "",
-        email: "",
-        personalInfo: [],
-        goods: [],
-        totalValue: 0,
-    });
-    const sendDataToServer = async () => {
+    const sendDataToServer = async (data) => {
         try {
             const response = await axios.post(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
                 data,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+            console.log(response, data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const sendFormToServer = async (dataForm) => {
+        try {
+            const response = await axios.put(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
+                dataForm,
                 {
                     headers: {
                         Authorization: token,
@@ -62,7 +69,7 @@ const CheckOut = () => {
     };
 
     const handleSubmit = async (values) => {
-        setData({
+        const orderData = {
             personalInfo: values,
             goods: cartProducts.cartItems,
             email: values.email,
@@ -72,9 +79,10 @@ const CheckOut = () => {
                 " " +
                 new Date().toLocaleTimeString(),
             totalValue: cartProducts.final_total,
-        });
+        };
 
-        sendDataToServer().then(() => {
+        sendDataToServer(orderData).then(() => {
+            sendFormToServer(values);
             dispatch(clearCart());
             navigate("/");
             scrollToTop();
