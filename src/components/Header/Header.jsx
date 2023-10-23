@@ -61,7 +61,7 @@ const Header = () => {
                 if (res.data.status === 200) {
                     redirectAccount();
                 }
-                if (res.data.status > 200) {
+                if (res.data.status !== 200) {
                     redirectLogin();
                 }
             });
