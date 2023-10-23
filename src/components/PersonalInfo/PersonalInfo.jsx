@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import validationSchemaCheckout from "../../pages/CheckOut/validationSchemaCheckout";
+import validationSchemaChangePassword from "./validationSchemaChangePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import Preloader from "../Preloader/Preloader";
@@ -10,6 +11,9 @@ import InputCheckout from "../InputCheckout/InputCheckout";
 import styles from "../../pages/CheckOut/CheckOut.module.css";
 import stylesInfo from "./PersonalInfo.module.css";
 import BlackButton from "../Button/Button";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 const PersonalInfo = () => {
     const token = localStorage.getItem("token");
     const dispatch = useDispatch();
@@ -18,7 +22,7 @@ const PersonalInfo = () => {
     const errorMessage = useSelector(
         (state) => state.personalInfoReducer.error
     );
-    console.log(errorMessage);
+
     useEffect(() => {
         if (token) {
             dispatch(fetchUserData(token))
@@ -36,6 +40,49 @@ const PersonalInfo = () => {
             </div>
         );
     }
+    const editProfileInfo = async (values, { setSubmitting, resetForm }) => {
+        try {
+            const response = await axios.put(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
+                values,
+                {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                }
+            );
+
+            toast.success("Your personal info was changed successfully!");
+            console.log("Sending to server:", "sucsess!", response.status);
+        } catch (error) {
+            toast.error("Failed to send changes. Please try again later.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const changePassword = async (values, { setSubmitting, resetForm }) => {
+        try {
+            const response = await axios.put(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUserPass",
+                {
+                    password: values.currentPassword,
+                    newPassword: values.newPassword,
+                },
+                {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                }
+            );
+            console.log("Sending to server:", "sucsess!", response.status);
+        } catch (error) {
+            toast.error("Failed to send changes. Please try again later.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     return (
         <div className={stylesInfo.formContainer}>
             <div className={stylesInfo.formUserData}>
@@ -51,30 +98,32 @@ const PersonalInfo = () => {
                         email: userData ? userData.email : "",
                     }}
                     validationSchema={validationSchemaCheckout}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    onSubmit={editProfileInfo}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, isSubmitting }) => (
                         <>
-                            <ProfileForm
-                                errors={errors}
-                                touched={touched}
-                            ></ProfileForm>
+                            <ProfileForm errors={errors} touched={touched}>
+                                <BlackButton
+                                    text={
+                                        isSubmitting
+                                            ? "Applying..."
+                                            : "Apply Changes"
+                                    }
+                                    disabled={isSubmitting}
+                                    type="submit"
+                                    style={{
+                                        width: "100%",
+                                        padding: "16px 0",
+                                        margin: "0 auto",
+                                        backgroundColor:
+                                            "var(--black--background)",
+                                        marginBottom: "50px",
+                                    }}
+                                />
+                            </ProfileForm>
                         </>
                     )}
                 </Formik>
-                <BlackButton
-                    text="Apply Changes"
-                    type="button"
-                    style={{
-                        width: "100%",
-                        padding: "16px 0",
-                        margin: "0 auto",
-                        backgroundColor: "var(--black--background)",
-                        marginBottom: "50px",
-                    }}
-                />
             </div>
             <div className={stylesInfo.formChangePassword}>
                 <h2 className={stylesInfo.header}>Change Password</h2>
@@ -84,22 +133,20 @@ const PersonalInfo = () => {
                         newPassword: "",
                         confirmNewPassword: "",
                     }}
-                    validationSchema={validationSchemaCheckout}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    validationSchema={validationSchemaChangePassword}
+                    onSubmit={changePassword}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, isSubmitting }) => (
                         <Form className={styles.form}>
                             <div className={styles.formSection}>
                                 <InputCheckout
-                                    name="oldPassword"
+                                    name="currentPassword"
                                     text="Old Password"
                                     isError={
                                         errors.oldPassword &&
                                         touched.oldPassword
                                     }
-                                    errorText={errors.oldPassword}
+                                    errorText={errors.currentPassword}
                                 />
                                 <InputCheckout
                                     name="newPassword"
@@ -119,21 +166,27 @@ const PersonalInfo = () => {
                                     }
                                     errorText={errors.confirmNewPassword}
                                 />
+                                <BlackButton
+                                    text={
+                                        isSubmitting
+                                            ? "Applying..."
+                                            : "Apply Changes"
+                                    }
+                                    disabled={isSubmitting}
+                                    type="submit"
+                                    style={{
+                                        width: "100%",
+                                        padding: "16px 0",
+                                        margin: "0 auto",
+                                        backgroundColor:
+                                            "var(--black--background)",
+                                        marginBottom: "50px",
+                                    }}
+                                />
                             </div>
                         </Form>
                     )}
                 </Formik>
-                <BlackButton
-                    text="Apply Changes"
-                    type="button"
-                    style={{
-                        width: "100%",
-                        padding: "16px 0",
-                        margin: "0 auto",
-                        backgroundColor: "var(--black--background)",
-                        marginBottom: "50px",
-                    }}
-                />
             </div>
         </div>
     );

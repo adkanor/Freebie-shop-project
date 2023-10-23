@@ -44,9 +44,9 @@ const CheckOut = () => {
         goods: [],
         totalValue: 0,
     });
-    useEffect(() => {
-        axios
-            .post(
+    const sendDataToServer = async () => {
+        try {
+            const response = await axios.post(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
                 data,
                 {
@@ -54,14 +54,32 @@ const CheckOut = () => {
                         Authorization: token,
                     },
                 }
-            )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [data, token]);
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleSubmit = async (values) => {
+        setData({
+            personalInfo: values,
+            goods: cartProducts.cartItems,
+            email: values.email,
+            payment: values.payment,
+            orderDate:
+                new Date().toLocaleDateString() +
+                " " +
+                new Date().toLocaleTimeString(),
+            totalValue: cartProducts.final_total,
+        });
+
+        sendDataToServer().then(() => {
+            dispatch(clearCart());
+            navigate("/");
+            scrollToTop();
+        });
+    };
 
     if (isLoading) {
         return <Preloader />;
@@ -102,23 +120,7 @@ const CheckOut = () => {
                             email: userData ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
-                        onSubmit={async (values) => {
-                            await setData({
-                                personalInfo: values,
-                                goods: cartProducts.cartItems,
-                                token: token,
-                                email: values.email,
-                                payment: values.payment,
-                                orderDate:
-                                    new Date().toLocaleDateString() +
-                                    " " +
-                                    new Date().toLocaleTimeString(),
-                                totalValue: cartProducts.final_total,
-                            });
-                            await dispatch(clearCart());
-                            await navigate("/");
-                            scrollToTop();
-                        }}
+                        onSubmit={handleSubmit}
                     >
                         {({ errors, touched }) => (
                             <>
