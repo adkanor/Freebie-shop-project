@@ -1,4 +1,4 @@
-import configureStore from "redux-mock-store"; // Импортируйте библиотеку для создания мок-стора Redux
+import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import axios from "axios";
 import { addArrivalsList, GET_NEW_ARRIVALS_LIST } from "./actions";
@@ -6,19 +6,19 @@ import { addArrivalsList, GET_NEW_ARRIVALS_LIST } from "./actions";
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock("axios"); // Мокаем axios
+jest.mock("axios");
 
 describe("addArrivalsList action", () => {
     it("dispatches GET_NEW_ARRIVALS_LIST when data is fetched successfully", () => {
         const response = {
-            data: "someData", // Здесь можете указать тестовые данные, которые возвращает сервер
+            data: "someData",
         };
-        axios.get.mockResolvedValue(response); // Мокаем успешный ответ от сервера
+        axios.get.mockResolvedValue(response);
 
         const expectedActions = [
             { type: GET_NEW_ARRIVALS_LIST, payload: response.data },
         ];
-        const store = mockStore({}); // Создаем мок-стор
+        const store = mockStore({});
 
         return store.dispatch(addArrivalsList()).then(() => {
             expect(store.getActions()).toEqual(expectedActions);
@@ -26,10 +26,10 @@ describe("addArrivalsList action", () => {
     });
 
     it("dispatches an error when data fetching fails", () => {
-        const error = "Some error message"; // Тестовое сообщение об ошибке
-        axios.get.mockRejectedValue(new Error(error)); // Мокаем ошибку от сервера
+        const error = "Some error message";
+        axios.get.mockRejectedValue(new Error(error));
 
-        const expectedActions = []; // Здесь ожидается, что не будет вызвано действие GET_NEW_ARRIVALS_LIST
+        const expectedActions = [];
         const store = mockStore({});
 
         return store.dispatch(addArrivalsList()).then(() => {
