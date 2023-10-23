@@ -14,6 +14,7 @@ const RenderComponent = ({ type }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
