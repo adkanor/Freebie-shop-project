@@ -18,7 +18,6 @@ const Login = () => {
 
     const memoryUser = (data) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", data.email);
     };
 
 
@@ -101,7 +100,7 @@ const Login = () => {
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
-                                    placeholder="Email or Phone Number"
+                                    placeholder="Email"
                                     isError={errors.email && touched.email}
                                     errorText={errors.email}
                                     type={"email"}
@@ -123,8 +122,14 @@ const Login = () => {
                                         color: "var(--white-text)",
                                         border: "none",
                                     }}/>
-                                    <Link className={style.ForgetPassword} to="/registration"> Create account?</Link>
+                                    <Link className={style.createAccount} to="/registration"> Create account?</Link>
+
                                 </div>
+                                <div className={style.forgotPassword}>
+                                    <Link className={style.forgotPasswordText} to="/forgotPassword"> Forgot
+                                        password?</Link>
+                                </div>
+
 
                             </Form>
                         )}
