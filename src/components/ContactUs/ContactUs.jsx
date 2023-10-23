@@ -14,7 +14,7 @@ const ContactUs = () => {
         } else {
             try {
                 const response = await axios.put(
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUserPass",
+                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/supportUser",
                     { message: values.message },
                     {
                         headers: {

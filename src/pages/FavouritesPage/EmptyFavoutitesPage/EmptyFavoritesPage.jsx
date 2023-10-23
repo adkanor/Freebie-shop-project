@@ -17,7 +17,11 @@ function EmptyFavoritePage() {
                 width="100px"
                 height="100px"
             />
-            <Link className={styles.emptyFavLink} to="/">
+            <Link
+                className={styles.emptyFavLink}
+                to="/"
+                data-testid="empty-fav-link"
+            >
                 <p>Back to home page</p>
                 <img
                     src={arrow}
