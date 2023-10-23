@@ -47,11 +47,11 @@ const calculateAmountOfDiscount = (totalAmount, discount) => {
     if (discount === 0) {
         return 0;
     }
-    return (totalAmount * discount) / 100;
+    return (Number(totalAmount) * Number(discount)) / 100;
 };
 
 const calculateFinalTotal = (totalAmount, deliveryFee, amountOfDiscount) => {
-    return totalAmount + deliveryFee - amountOfDiscount;
+    return Number(totalAmount) + Number(deliveryFee) - Number(amountOfDiscount);
 };
 
 const updateLocalStorage = (

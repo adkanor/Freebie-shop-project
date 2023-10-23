@@ -22,7 +22,6 @@ export const fetchUserData = (token) => async (dispatch) => {
                 },
             }
         );
-        console.log(response.data.answer);
         dispatch(setUserData(response.data.answer));
     } catch (error) {
         dispatch(setUserDataError(error.message));
