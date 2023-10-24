@@ -18,7 +18,11 @@ const EmptyCartPage = () => {
                 width="100px"
                 height="100px"
             />
-            <Link className={styles.emptyCartLink} to="/">
+            <Link
+                className={styles.emptyCartLink}
+                to="/"
+                data-testid="empty-cart-link"
+            >
                 <p>Back to home page</p>
                 <img
                     src={arrow}

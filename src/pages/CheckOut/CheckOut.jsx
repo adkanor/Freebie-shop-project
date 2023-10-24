@@ -35,18 +35,9 @@ const CheckOut = () => {
         }
     }, [dispatch, token]);
 
-    const [data, setData] = useState({
-        token: "",
-        orderDate: "",
-        payment: "",
-        email: "",
-        personalInfo: [],
-        goods: [],
-        totalValue: 0,
-    });
-    useEffect(() => {
-        axios
-            .post(
+    const sendDataToServer = async (data) => {
+        try {
+            const response = await axios.post(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
                 data,
                 {
@@ -54,14 +45,49 @@ const CheckOut = () => {
                         Authorization: token,
                     },
                 }
-            )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [data, token]);
+            );
+            console.log(response, data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const sendFormToServer = async (dataForm) => {
+        try {
+            const response = await axios.put(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
+                dataForm,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleSubmit = async (values) => {
+        const orderData = {
+            personalInfo: values,
+            goods: cartProducts.cartItems,
+            email: values.email,
+            payment: values.payment,
+            orderDate:
+                new Date().toLocaleDateString() +
+                " " +
+                new Date().toLocaleTimeString(),
+            totalValue: cartProducts.final_total,
+        };
+
+        sendDataToServer(orderData).then(() => {
+            sendFormToServer(values);
+            dispatch(clearCart());
+            navigate("/");
+            scrollToTop();
+        });
+    };
 
     if (isLoading) {
         return <Preloader />;
@@ -102,23 +128,7 @@ const CheckOut = () => {
                             email: userData ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
-                        onSubmit={async (values) => {
-                            await setData({
-                                personalInfo: values,
-                                goods: cartProducts.cartItems,
-                                token: token,
-                                email: values.email,
-                                payment: values.payment,
-                                orderDate:
-                                    new Date().toLocaleDateString() +
-                                    " " +
-                                    new Date().toLocaleTimeString(),
-                                totalValue: cartProducts.final_total,
-                            });
-                            await dispatch(clearCart());
-                            await navigate("/");
-                            scrollToTop();
-                        }}
+                        onSubmit={handleSubmit}
                     >
                         {({ errors, touched }) => (
                             <>
