@@ -19,7 +19,6 @@ describe("Header Component", () => {
   });
 
   it("toggles navigation menu when menu button is clicked", () => {
-    // Установите начальные данные для cartAmount и favoriteAmount
     const cartAmount = [];
     const favoriteAmount = [];
     jest.spyOn(React, "useState").mockReturnValueOnce([cartAmount, jest.fn()]);
@@ -35,7 +34,6 @@ describe("Header Component", () => {
   });
 
   it("toggles search bar when search button is clicked", () => {
-    // Установите начальные данные для cartAmount и favoriteAmount
     const cartAmount = [];
     const favoriteAmount = [];
     jest.spyOn(React, "useState").mockReturnValueOnce([cartAmount, jest.fn()]);
