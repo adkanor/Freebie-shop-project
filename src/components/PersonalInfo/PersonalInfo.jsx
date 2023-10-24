@@ -51,8 +51,7 @@ const PersonalInfo = () => {
                     },
                 }
             );
-
-            toast.success("Your personal info was changed successfully!");
+            toast.success("Form data successfully changed");
             console.log("Sending to server:", "sucsess!", response.status);
         } catch (error) {
             toast.error("Failed to send changes. Please try again later.");
@@ -75,7 +74,14 @@ const PersonalInfo = () => {
                     },
                 }
             );
-            console.log("Sending to server:", "sucsess!", response.status);
+
+            if (response.data.status === 200) {
+                console.log("Sending to server:", "sucsess!");
+                toast.success("Password  successfully changed");
+            } else if (response.data.status === 400) {
+                console.log(response.data.error);
+                toast.error("Your old password might be incorrect. Try again ");
+            }
         } catch (error) {
             toast.error("Failed to send changes. Please try again later.");
         } finally {
