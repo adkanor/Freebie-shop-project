@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styles from "./FormContent.module.css";
 import { useSelector } from "react-redux";
 import { Field } from "formik";
-import BlackButton from "../../../components/Button/Button";
-import svgBank from "../../../assets/icons/Payment/PaymentsBank.svg";
+import BlackButton from "../Button/Button";
+import svgBank from "../../assets/icons/Payment/PaymentsBank.svg";
 
 const FormContent = () => {
     const cartReducer = useSelector((state) => state.cartReducer);
@@ -92,21 +92,6 @@ const FormContent = () => {
                     />
                     <p className={styles.paymentTitle}>Cash on delivery</p>
                 </div>
-            </div>
-
-            <div className={styles.couponContainer}>
-                <input type="text" placeholder="Coupon Code" />
-                <BlackButton
-                    type={"text"}
-                    text={"Apply Coupon"}
-                    style={{
-                        width: "100%",
-                        backgroundColor: "var(--black-text)",
-                        padding: "7px 0",
-                        height: "45px",
-                        borderRadius: "4px",
-                    }}
-                />
             </div>
 
             <BlackButton
