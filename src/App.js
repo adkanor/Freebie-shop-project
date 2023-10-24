@@ -19,9 +19,6 @@ import PersonalInfo from "./components/PersonalInfo/PersonalInfo";
 import ContactUs from "./components/ContactUs/ContactUs";
 import ListOrders from "./components/ListOrders/ListOrders";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-import About from "./pages/About/About";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
-import TermsAndConditions from "./pages/TermsAndConditions/TermsAndConditions";
 
 const App = () => {
     return (
@@ -47,9 +44,6 @@ const App = () => {
                 <Route path="/forgotPassword" element={<ForgotPassword/>}/>
                 <Route path="/registration" element={<Registration/>}/>
                 <Route path="/footer" element={<Footer/>}/>
-                <Route path="/about" element={<About />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="*" element={<NoPage/>}/>
             </Routes>
             <Footer/>

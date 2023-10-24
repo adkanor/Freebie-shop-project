@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Footer.module.css";
-import { Link } from "react-router-dom";
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -18,16 +17,20 @@ import MailIcon from "../../assets/icons/Header/Mail.svg";
 import BlackButton from "../Button/Button";
 
 const Footer = () => {
+
     const sections = [
         {
             title: "Company",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["About", "Features", "Works", "Career"]
         },
         {
             title: "Help",
-            items: ["Customer Support", "Delivery Details", "Terms and Conditions", "Privacy Policy"],
+            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy"]
         },
-
+        {
+            title: "FAQ",
+            items: ["About", "Features", "Works", "Career"]
+        },
         {
             title: "Resources",
             items: ["Account", "Manage Deliveries", "Orders", "Payments"]
@@ -50,11 +53,11 @@ const Footer = () => {
                         </div>
                         <BlackButton
                             text="Subscribe to newsletter"
-                            style={{
+                            style={{ 
                                 padding: "12px 16px",
                                 color: "black",
-                                backgroundColor: "var(--gray-primary)",
-                            }}
+                                backgroundColor: "var(--gray-primary)"
+                            }}   
                         />
                     </div>
                 </section>
@@ -70,16 +73,28 @@ const Footer = () => {
                         </div>
                         <div className={styles.IconContainer}>
                             <a href="/" className="SocialMedia">
-                                <img src={TwitterIcon} alt="TwitterIcon" />
+                                <img
+                                    src={TwitterIcon}
+                                    alt="TwitterIcon"
+                                />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={FaceBookIcon} alt="FaceBookIcon" />
+                                <img
+                                    src={FaceBookIcon}
+                                    alt="FaceBookIcon"
+                                />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={InstagramIcon} alt="InstagramIcon" />
+                                <img
+                                    src={InstagramIcon}
+                                    alt="InstagramIcon"
+                                />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={GitHubIcon} alt="GitHubIcon" />
+                                <img
+                                    src={GitHubIcon}
+                                    alt="GitHubIcon"
+                                />
                             </a>
                         </div>
                     </div>
@@ -89,17 +104,7 @@ const Footer = () => {
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
                                     <li key={i} className={styles.FooterListItem}>
-                                        <Link
-                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
-                                            style={{
-                                                fontSize: "14px",
-                                                color: "var(--gray-text-primary)",
-                                                fontFamily: "Satoshi 400",
-                                            }}
-                                        >
-                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
-                                        </Link>
-
+                                        <a className={styles.FooterListLink} href="/">{item}</a>
                                     </li>
                                 ))}
                             </ul>
@@ -107,13 +112,14 @@ const Footer = () => {
                     ))}
                 </section>
                 <section className={styles.AuthorBlock}>
+            
                     <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
                     <div className={styles.Payment}>
-                        <img src={VisaIcon} alt="VisaIcon" />
-                        <img src={MastercardIcon} alt="MastercardIcon" />
-                        <img src={PayPalIcon} alt="PayPalIcon" />
-                        <img src={ApplePayIcon} alt="ApplePayIcon" />
-                        <img src={GooglePayIcon} alt="GooglePayIcon" />
+                        <img src={VisaIcon} alt="VisaIcon"/>
+                        <img src={MastercardIcon} alt="MastercardIcon"/>
+                        <img src={PayPalIcon} alt="PayPalIcon"/>
+                        <img src={ApplePayIcon} alt="ApplePayIcon"/>
+                        <img src={GooglePayIcon} alt="GooglePayIcon"/>
                     </div>
                 </section>
             </div>
