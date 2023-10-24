@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import CommentsCard from "../CommentsCard/CommentsCard";
 import CustomButtonGroup from "../ButtonGroupSlider/ButtonGroupSlider";
 import style from "./CommentsBlock.module.css";
+import PropTypes from "prop-types";
 
 const responsive = {
     desktop: {
@@ -27,20 +28,20 @@ const responsive = {
     },
 };
 
-const CommentsSlider = () => {
+const CommentsSlider = ({title, link}) => {
     const [comments, setComments] = useState([]);
     const carouselRef = useRef(null);
 
     useEffect(() => {
         axios
-            .get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getCountComments/10")
+            .get(link)
             .then((res) => {
                 setComments(res.data);
             })
             .catch((error) => {
                 console.error("404", error);
             });
-    }, []);
+    }, [link]);
 
     const commentsBlock = comments.map((item, index) => (
         <CommentsCard
@@ -70,7 +71,7 @@ const CommentsSlider = () => {
     return (
         <>
             <div className={style.buttonGroup}>
-                <h2 className={style.buttonGroupTitle}>Our happy customers</h2>
+                <h2 className={style.buttonGroupTitle}>{title}</h2>
                 <CustomButtonGroup
                     next={handleNextClick}
                     previous={handlePrevClick}
@@ -99,6 +100,12 @@ const CommentsSlider = () => {
         </>
     );
 };
+
+CommentsSlider.propTypes = {
+    title: PropTypes.string,
+    link: PropTypes.string
+};
+
 
 export default CommentsSlider;
 
