@@ -10,7 +10,6 @@ import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productBySty
 import authorizationReducer from "./authorization/authorizationReducer";
 import personalInfoReducer from "./personalInfo/personalInfoReducer";
 import searchResultReducer from "./searchResult/searchResultReducer";
-import orderReducer from "./orders/orderReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
     newArrivalsReducer,
     topSaleReducer,
     searchResultReducer,
-    orderReducer,
     cartReducer,
     favoritesReducer,
     authorizationReducer,

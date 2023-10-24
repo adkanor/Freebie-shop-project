@@ -15,7 +15,7 @@ import { clearCart } from "../../stores/cartProducts/action";
 import { useDispatch } from "react-redux";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
-import { setOrder } from "../../stores/orders/actions";
+import ErrorModal from "../../components/ErrorModal/ErrorModal";
 
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
@@ -27,6 +27,10 @@ const CheckOut = () => {
     const errorMessage = useSelector(
         (state) => state.personalInfoReducer.error
     );
+    const [modal, setModal] = useState(false);
+    const toggleModal = () => {
+        setModal(!modal);
+    };
 
     useEffect(() => {
         if (token) {
@@ -53,6 +57,29 @@ const CheckOut = () => {
         }
     };
 
+    const funct = async (data) => {
+        try {
+            const response = await axios.post(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
+                data,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+
+            if (response.data.status === 200) {
+                dispatch(clearCart());
+                navigate("/");
+                scrollToTop();
+            } else {
+                toggleModal();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const handleSubmit = async (values) => {
         const orderData = {
             personalInfo: values,
@@ -63,14 +90,11 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: cartProducts.final_total,
+            totalValue: cartProducts.final_total.toFixed(2),
         };
-        await dispatch(setOrder(orderData, token));
 
-        sendFormToServer(values);
-        dispatch(clearCart());
-        navigate("/");
-        scrollToTop();
+        await funct(orderData);
+        await sendFormToServer(values);
     };
 
     if (isLoading) {
@@ -82,10 +106,12 @@ const CheckOut = () => {
             </div>
         );
     }
+
     return (
         <>
             {cartProducts.cartItems.length > 0 ? (
                 <div className="section">
+                    <ErrorModal toggle={modal} toggleFunc={toggleModal} />
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{

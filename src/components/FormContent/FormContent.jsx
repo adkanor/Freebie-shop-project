@@ -54,7 +54,9 @@ const FormContent = () => {
                 <p className={styles.title}>Total</p>
                 {amountOfDiscount > 0 ? (
                     <div className={styles.titleDiscountContainer}>
-                        <p className={styles.discount}>-{amountOfDiscount}</p>
+                        <p className={styles.discount}>
+                            -{amountOfDiscount.toFixed(2)}
+                        </p>
                         <p className={styles.price}>${totalAmount}</p>
                     </div>
                 ) : (

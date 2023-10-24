@@ -21,9 +21,8 @@ const SearchResult = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(getSearchResult(value)).then(() => {
-            setIsLoading(false);
-        });
+        dispatch(getSearchResult(value));
+        setIsLoading(false);
     }, [dispatch, value]);
 
     if (isLoading) {
