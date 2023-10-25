@@ -8,6 +8,12 @@
     max-width: 100%;
 }
 
+.bigSquareimg {
+    transition: transform 0.2s;
+}
+.bigSquareimg:hover {
+    transform: scale(1.3);
+}
 .smallSquare {
     width: 100%;
     flex: 1;
@@ -83,7 +89,7 @@
 }
 .productTitle {
     font-family: "Integral-CF";
-  font-weight: 700;
+    font-weight: 700;
     font-size: 24px;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CartPage.module.css";
 import CartItem from "../../components/CartItem/CartItem.jsx";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
@@ -90,4 +90,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-/* eslint-disable */
