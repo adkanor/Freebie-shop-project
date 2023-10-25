@@ -27,10 +27,14 @@ const Footer = () => {
             title: "Help",
             items: ["Customer Support", "Delivery Details", "Terms and Conditions", "Privacy Policy"],
         },
+        {
+            title: "FAQ",
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"]
+        },
 
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"]
+            items: ["Free eBooks", "Development Tutorial", "How to - Blog", "YouTube Playlist"]
         }
     ];
 
@@ -89,13 +93,8 @@ const Footer = () => {
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
                                     <li key={i} className={styles.FooterListItem}>
-                                        <Link
+                                        <Link className={styles.FooterListLink}
                                             to={`/${item.toLowerCase().replace(/ /g, "-")}`}
-                                            style={{
-                                                fontSize: "14px",
-                                                color: "var(--gray-text-primary)",
-                                                fontFamily: "Satoshi 400",
-                                            }}
                                         >
                                             {item === "Terms And Conditions" ? "Terms And Conditions" : item}
                                         </Link>
