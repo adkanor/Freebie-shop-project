@@ -75,6 +75,7 @@ const CommentsSlider = ({title, link}) => {
                 <CustomButtonGroup
                     next={handleNextClick}
                     previous={handlePrevClick}
+                    data-testid="custom-button-group"
                 />
             </div>
             <div className={style.carousel}>
