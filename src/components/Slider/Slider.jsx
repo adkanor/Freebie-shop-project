@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from "react-multi-carousel";
 import Button from "../Button/Button";
 import findClothes from "../../assets/img/BrowseByStyle/FindClothes.png";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 3000, min: 492 },
+        breakpoint: {max: 3000, min: 492},
         items: 1,
         slidesToSlide: 1,
     },
@@ -33,14 +33,17 @@ const Slider = () => {
     const pictures = banner.map((item, index) => (
         <div className={style.sliderItemWrapper} key={index}>
             <img
+
                 className={style.sliderItem}
                 src={item}
                 alt={`banner ${index}`}
-                style={{ objectFit: "cover" }}
+                style={{objectFit: "cover"}}
+
             />
         </div>
     ));
     return (
+
         <div data-testid="slider-component">
             <div className={style.sliderWrapper}>
                 <Carousel

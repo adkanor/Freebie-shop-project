@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const CustomButtonGroup = ({next, previous}) => {
     return (
         <div>
-            <BlackButton onClick={() => previous()} style={{
+            <BlackButton data-testid="prev-button" onClick={() => previous()} style={{
                 margin: "2px 2px 0",
                 backgroundColor: "transparent",
                 color: "transparent",
@@ -16,7 +16,7 @@ const CustomButtonGroup = ({next, previous}) => {
             }}>
                 <img src={leftArrow} alt={"leftArrow"}/>
             </BlackButton>
-            <BlackButton onClick={() => next()} style={{
+            <BlackButton data-testid="next-button" onClick={() => next()} style={{
                 margin: "2px 2px 0",
                 backgroundColor: "transparent",
                 color: "transparent",
