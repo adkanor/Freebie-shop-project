@@ -34,7 +34,9 @@ const Login = () => {
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
+
             const decoded = jwt_decode(credentialResponse.credential);
+            console.log(decoded);
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
@@ -44,6 +46,9 @@ const Login = () => {
         onError: () => {
             setErrorMessageServer("Login failed");
         },
+        scope: "email profile",
+        uxMode: "redirect",
+
     });
 
     const redirectAccount = () => navigate("/account");
@@ -57,6 +62,7 @@ const Login = () => {
 
         axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/login", user)
             .then(response => {
+                console.log(user);
 
                 if (response.data.status === 200) {
                     memoryUser(response.data.info);
@@ -77,6 +83,7 @@ const Login = () => {
 
     return (
         <div className={`section ${style.loginContainer}`}>
+
             <div className={style.bannerContainer}>
                 <img className={style.bannerLogin} src={bannerLog} alt={"bannerLogin"}/>
             </div>

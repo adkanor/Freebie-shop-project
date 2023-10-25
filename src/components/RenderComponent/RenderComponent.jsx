@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
-import stylesSearch from "../SearchResult.module.css";
-import styles from "../../FavouritesPage/FavouritesPage.module.css";
-import ClosedProductCard from "../../../components/ClosedProductCard/ClosedProductCard";
-import Pagination from "../../../components/Pagination/Pagination";
+import stylesSearch from "../../pages/SearchResult/SearchResult.module.css";
+import styles from "../../pages/FavouritesPage/FavouritesPage.module.css";
+import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
+import Pagination from "../Pagination/Pagination";
 import { useMediaQuery } from "@react-hook/media-query";
 
 const RenderComponent = ({ type }) => {
     const isMobile = useMediaQuery("(max-width: 1298px)");
 
-    const PageSize = isMobile ? 6 : 9;
+    const PageSize = isMobile ? 4 : 8;
     const [currentPage, setCurrentPage] = useState(1);
     const handlePageChange = (page) => {
         setCurrentPage(page);
