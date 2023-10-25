@@ -22,21 +22,18 @@ const DetaiLComentsCard = ({idGoods}) => {
 
     const commentsBlock = comments.map((item) =>
         <CommentsCard
+            data-testid="comments-card"
             key={item._id}
             firstName={item.firstName}
             lastName={item.lastName}
             commentaries={item.text}
             rating={item.rating}
             className={styles.commentsItem}
-            // style={{
-            //     width: "48%",
-            //     margin: "10px 0",
-            // }}
         />
     );
 
     return (
-        <div className={styles.commentsDetaliesWrapper}>
+        <div className={styles.commentsDetaliesWrapper} data-testid="comments-details-wrapper">
             {commentsBlock}
         </div>
     );
