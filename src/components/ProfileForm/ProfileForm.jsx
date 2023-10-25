@@ -3,7 +3,7 @@ import styles from "../../pages/CheckOut/CheckOut.module.css";
 import { Form } from "formik";
 import PropTypes from "prop-types";
 import InputCheckout from "../../components/InputCheckout/InputCheckout";
-import FormContent from "../../pages/CheckOut/formContent/FormContent";
+import FormContent from "../FormContent/FormContent";
 
 const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
     return (

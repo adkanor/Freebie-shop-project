@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import axios from "axios";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./CheckOut.module.css";
 import stylesCart from "../CartPage/CartPage.module.css";
@@ -15,18 +15,23 @@ import { clearCart } from "../../stores/cartProducts/action";
 import { useDispatch } from "react-redux";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
+import ErrorModal from "../../components/ErrorModal/ErrorModal";
+
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const token = localStorage.getItem("token");
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
         (state) => state.personalInfoReducer.error
     );
+    const [modal, setModal] = useState(false);
+    const toggleModal = () => {
+        setModal(!modal);
+    };
+
     useEffect(() => {
         if (token) {
             dispatch(fetchUserData(token))
@@ -35,22 +40,6 @@ const CheckOut = () => {
         }
     }, [dispatch, token]);
 
-    const sendDataToServer = async (data) => {
-        try {
-            const response = await axios.post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
-                data,
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
-            console.log(response, data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
     const sendFormToServer = async (dataForm) => {
         try {
             const response = await axios.put(
@@ -68,6 +57,29 @@ const CheckOut = () => {
         }
     };
 
+    const funct = async (data) => {
+        try {
+            const response = await axios.post(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
+                data,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+
+            if (response.data.status === 200) {
+                dispatch(clearCart());
+                navigate("/");
+                scrollToTop();
+            } else {
+                toggleModal();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const handleSubmit = async (values) => {
         const orderData = {
             personalInfo: values,
@@ -78,15 +90,11 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: cartProducts.final_total,
+            totalValue: cartProducts.final_total.toFixed(2),
         };
 
-        sendDataToServer(orderData).then(() => {
-            sendFormToServer(values);
-            dispatch(clearCart());
-            navigate("/");
-            scrollToTop();
-        });
+        await funct(orderData);
+        await sendFormToServer(values);
     };
 
     if (isLoading) {
@@ -103,6 +111,7 @@ const CheckOut = () => {
         <>
             {cartProducts.cartItems.length > 0 ? (
                 <div className="section">
+                    <ErrorModal toggle={modal} toggleFunc={toggleModal} />
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{
