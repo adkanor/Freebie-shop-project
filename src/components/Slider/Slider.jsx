@@ -19,7 +19,9 @@ const Slider = () => {
 
     useEffect(() => {
         axios
-            .get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners")
+            .get(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners"
+            )
             .then((res) => {
                 setBanners(res.data[0].urls);
             })
@@ -34,14 +36,16 @@ const Slider = () => {
 
                 className={style.sliderItem}
                 src={item}
-                alt={`banner${index}`}
+                alt={`banner ${index}`}
                 style={{objectFit: "cover"}}
+
             />
         </div>
     ));
     return (
-        <div>
-            <div className={style.sliderWrapper} data-testid="sliderWrapper">
+
+        <div data-testid="slider-component">
+            <div className={style.sliderWrapper}>
                 <Carousel
                     swipeable={false}
                     draggable={false}

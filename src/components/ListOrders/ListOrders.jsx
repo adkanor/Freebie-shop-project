@@ -58,14 +58,15 @@ const ListOrders = () => {
                                         Order ID: <span>{order._id}</span>
                                     </span>
                                     <span className={styles.orderDate}>
-                                        Order Date {order.orderDate}
+                                        Order Date: {order.orderDate}
                                     </span>
                                     <span className={styles.orderStatus}>
                                         Status:
                                         {order.isOpen ? "Open" : "Close"}
                                     </span>
                                     <div className={styles.orderValue}>
-                                        Total Value: $ {order.totalValue}
+                                        Total Value: ${" "}
+                                        {order.totalValue.toFixed(2)}
                                     </div>
                                 </div>
                                 <div className={styles.productsWrapper}>

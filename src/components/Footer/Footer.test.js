@@ -20,7 +20,9 @@ test("checks the presence of social media icons", () => {
 test("checks the presence and functionality of the email subscription form", () => {
     render(<Footer/>);
 
-    const emailContainerTitle = screen.getByText("Stay Up to Date About Our Latest Offers");
+    const emailContainerTitle = screen.getByText(
+        "Stay Up to Date About Our Latest Offers"
+    );
     expect(emailContainerTitle).toBeInTheDocument();
 
     const emailInput = screen.getByPlaceholderText("Enter your email address");
@@ -28,5 +30,4 @@ test("checks the presence and functionality of the email subscription form", () 
 
     const subscribeButton = screen.getByText("Subscribe to newsletter");
     expect(subscribeButton).toBeInTheDocument();
-
 });
