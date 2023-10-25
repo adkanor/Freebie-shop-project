@@ -9,13 +9,16 @@ import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
 import authorizationReducer from "./authorization/authorizationReducer";
 import personalInfoReducer from "./personalInfo/personalInfoReducer";
+import searchResultReducer from "./searchResult/searchResultReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
 } from "redux-state-sync";
+
 const rootReducer = combineReducers({
     newArrivalsReducer,
     topSaleReducer,
+    searchResultReducer,
     cartReducer,
     favoritesReducer,
     authorizationReducer,

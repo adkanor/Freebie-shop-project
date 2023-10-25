@@ -22,11 +22,11 @@ const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
     const navigate = useNavigate();
 
-    const favoriteProducts = useSelector(
-        (state) => state.favoritesReducer.favorites
-    );
+    const favoriteProducts =
+        useSelector((state) => state.favoritesReducer.favorites) || {};
 
-    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
+    const cartProducts =
+        useSelector((state) => state.cartReducer.cartItems) || {};
 
     useEffect(() => {
         if (!showNav && !showSearch) {
@@ -38,11 +38,11 @@ const Header = () => {
 
     useEffect(() => {
         setCartAmount(cartProducts.length);
-    }, [cartProducts]);
+    }, [cartProducts.length]);
 
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
-    }, [favoriteProducts]);
+    }, [favoriteProducts.length]);
 
     const isUserAuth = () => {
         const token = localStorage.getItem("token");
@@ -127,6 +127,7 @@ const Header = () => {
                                 <NavigationBar
                                     classList={`${styles.responsiveNav} ${styles.q} ${styles.desktopMenuList}`}
                                     clickFunc={hideNav}
+                                    data-testid="navigation-menu"
                                 />
                             ) : (
                                 <NavigationBar
@@ -180,6 +181,7 @@ const Header = () => {
                                         src={SlMenu}
                                         onClick={toggleNav}
                                         alt="Menu SVG"
+                                        data-testid="menu-button"
                                     />
                                 )}
                             </div>
@@ -229,13 +231,13 @@ const Header = () => {
                                     className={styles.svgRel}
                                 >
                                     <img src={HeartSVG} alt="Heart SVG" />
-                                    {favoriteAmount > 0 ? (
+                                    {favoriteAmount > 0 && (
                                         <span id={styles["abs"]}>
                                             <p className={styles.new}>
                                                 {favoriteAmount}
                                             </p>
                                         </span>
-                                    ) : null}
+                                    )}
                                 </Link>
                             </div>
                         </div>

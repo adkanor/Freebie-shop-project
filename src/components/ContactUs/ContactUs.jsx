@@ -12,10 +12,11 @@ const ContactUs = () => {
         if (!values.message.trim()) {
             toast.error("Message cannot be empty");
         } else {
+            const message = values.message;
             try {
-                const response = await axios.put(
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/supportUser",
-                    { message: values.message },
+                const response = await axios.post(
+                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/supportUser",
+                    message,
                     {
                         headers: {
                             Authorization: `${token}`,
