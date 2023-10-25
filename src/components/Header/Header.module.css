@@ -12,72 +12,6 @@ header .navBtn {
 	opacity: 0;
 	font-size: 1.8rem;
 }
-@media only screen and (max-width: 991px) {
-	header .navBtn {
-		visibility: visible;
-		opacity: 1;
-    padding-bottom:4px;
-	}
-
-	header ul {
-		position: fixed;
-		top: -90vh;
-		left: 0;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		background-color: var(--gray-primary);
-		transition: 0.5s ease-in-out;
-	}
-	header label {
-		position: fixed;
-		top: -90vh;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		background-color: var(--gray-primary);
-		transition: 0.5s;
-	}
-
-	header .responsiveNav {
-		transform: translateY(100vh);
-	}
-	header .responsiveSearch {
-		transform: translateY(100vh);
-	}
-  
-
-  ul.q.desktopMenuList::after{
-    content: " ";
-    position: fixed;  
-    left: 0;
-    top: 378px;
-    width: 100vw;
-    height: 180vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-  }
-
-  
-  label.q.desktopSearchBar::after{
-    content: " ";
-    position: fixed;  
-    left: 0;
-    top: 90px;
-    width: 100vw;
-    height: 180vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-  }
-}
 
 .mobileItems{
 	display: flex;
@@ -125,6 +59,7 @@ header .navBtn {
 .desktopSearchBar input {
   font-family: "Satoshi";
   font-weight: 400;
+  font-size: 15px;
   width: 25vw;
   max-width: 545px;
   height: 28px;
@@ -213,25 +148,6 @@ label {
   text-decoration-line: underline;
 }
 
-/* Media Queries for Screens Above 766px */
-@media only screen and (min-width: 766px) {
-  .logoText {
-    font-size: 28px;
-  }
-  .mobileMenuItems {
-    display: none;
-  }
-  
-  .desktopLogo {
-    display: block;
-  }
-  .desktopSvgs {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 12px;
-    align-items: center;
-  }
-}
 .desktopMenuList {
     display: flex;
     gap: 19px
@@ -271,6 +187,26 @@ label {
   line-height: 18px;
 }
 
+/* Media Queries for Screens Above 766px */
+@media only screen and (min-width: 766px) {
+  .logoText {
+    font-size: 28px;
+  }
+  .mobileMenuItems {
+    display: none;
+  }
+  
+  .desktopLogo {
+    display: block;
+  }
+  .desktopSvgs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
 /* Media Queries for Screens Above 1440px */
 @media screen and (min-width: 1440px) {
   .desktopItemText {
@@ -298,7 +234,7 @@ label {
   .desktopSearchBar input{
     font-family: "Satoshi";
     font-weight: 400;
-    font-size: 15px;
+    font-size: 20px;
     width: 79vw;
     height: 44px;
     border-radius: 62px;
@@ -310,5 +246,75 @@ label {
   }
   label::before{
 display: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+	header .navBtn {
+		visibility: visible;
+		opacity: 1;
+    padding-bottom:4px;
+	}
+
+	header ul {
+		position: fixed;
+		top: -88vh;
+		left: 0;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--gray-primary);
+		transition: 0.5s ease-in-out;
+	}
+	header label {
+		position: fixed;
+		top: -90vh;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--gray-primary);
+		transition: 0.5s;
+	}
+  .wrapper{
+    padding: 27px 0px;
+  }
+
+	header .responsiveNav {
+		transform: translateY(100vh);
+	}
+	header .responsiveSearch {
+		transform: translateY(100vh);
+	}
+  
+
+  ul.q.desktopMenuList::after{
+    content: " ";
+    position: fixed;  
+    left: 0;
+    top: 378px;
+    width: 100vw;
+    height: 180vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+
+  
+  label.q.desktopSearchBar::after{
+    content: " ";
+    position: fixed;  
+    left: 0;
+    top: 90px;
+    width: 100vw;
+    height: 180vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
   }
 }
