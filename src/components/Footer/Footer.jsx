@@ -17,8 +17,6 @@ import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 
 import BlackButton from "../Button/Button";
 
-// import MailIcon from "../../assets/icons/Header/Mail.svg";
-
 function Footer() {
 
     const validationSchema = Yup.object().shape({
