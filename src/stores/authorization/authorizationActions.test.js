@@ -1,94 +1,91 @@
-import {
-  checkAuthorization,
-  CHECK_AUTHORIZATION,
-} from './actions';
+import { checkAuthorization, CHECK_AUTHORIZATION } from "./actions";
 
-import authorizationReducer from './authorizationReducer';
-import axios from 'axios';
+import authorizationReducer from "./authorizationReducer";
+import axios from "axios";
 
-jest.mock('axios');
+jest.mock("axios");
 
-describe('Authorization Actions', () => {
-  it('should create an action to check authorization with success response', async () => {
-    const token = 'your-token';
-    const expectedData = { yourData: 'sample data' };
-    const dispatch = jest.fn();
-    const getState = jest.fn();
-    
-    axios.post.mockResolvedValue({ data: expectedData });
+describe("Authorization Actions", () => {
+    it("should create an action to check authorization with success response", async () => {
+        const token = "your-token";
+        const expectedData = { yourData: "sample data" };
+        const dispatch = jest.fn();
+        const getState = jest.fn();
 
-    await checkAuthorization(token)(dispatch, getState);
+        axios.post.mockResolvedValue({ data: expectedData });
 
-    const expectedAction = {
-      type: CHECK_AUTHORIZATION,
-      payload: expectedData,
-    };
+        await checkAuthorization(token)(dispatch, getState);
 
-    expect(dispatch).toHaveBeenCalledWith(expectedAction);
-  });
+        const expectedAction = {
+            type: CHECK_AUTHORIZATION,
+            payload: expectedData,
+        };
 
-  it('should create an action to check authorization with error response', async () => {
-    const token = 'your-token';
-    const errorResponse = {
-      response: {
-        status: 500,
-        data: { message: 'Server error' },
-      },
-    };
-    const dispatch = jest.fn();
-    const getState = jest.fn();
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
 
-    axios.post.mockRejectedValue(errorResponse);
+    it("should create an action to check authorization with error response", async () => {
+        const token = "your-token";
+        const errorResponse = {
+            response: {
+                status: 500,
+                data: { message: "Server error" },
+            },
+        };
+        const dispatch = jest.fn();
+        const getState = jest.fn();
 
-    await checkAuthorization(token)(dispatch, getState);
+        axios.post.mockRejectedValue(errorResponse);
 
-    const expectedAction = {
-      type: CHECK_AUTHORIZATION,
-      payload: {
-        errorCode: errorResponse.response.status,
-        errorMsg: errorResponse.response.data.message,
-      },
-    };
+        await checkAuthorization(token)(dispatch, getState);
 
-    expect(dispatch).toHaveBeenCalledWith(expectedAction);
-  });
+        const expectedAction = {
+            type: CHECK_AUTHORIZATION,
+            payload: {
+                errorCode: errorResponse.response.status,
+                errorMsg: errorResponse.response.data.message,
+            },
+        };
+
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
 });
 
-describe('Authorization Reducer', () => {
-  it('should handle CHECK_AUTHORIZATION action with data correctly', () => {
-    const initialState = [];
-    const action = {
-      type: CHECK_AUTHORIZATION,
-      payload: { yourData: 'sample data' },
-    };
+describe("Authorization Reducer", () => {
+    it("should handle CHECK_AUTHORIZATION action with data correctly", () => {
+        const initialState = [];
+        const action = {
+            type: CHECK_AUTHORIZATION,
+            payload: { yourData: "sample data" },
+        };
 
-    const state = authorizationReducer(initialState, action);
+        const state = authorizationReducer(initialState, action);
 
-    expect(state).toEqual(action.payload);
-  });
+        expect(state).toEqual(action.payload);
+    });
 
-  it('should handle CHECK_AUTHORIZATION action with error information correctly', () => {
-    const initialState = [];
-    const errorResponse = { errorCode: 500, errorMsg: 'Server error' };
-    const action = {
-      type: CHECK_AUTHORIZATION,
-      payload: errorResponse,
-    };
+    it("should handle CHECK_AUTHORIZATION action with error information correctly", () => {
+        const initialState = [];
+        const errorResponse = { errorCode: 500, errorMsg: "Server error" };
+        const action = {
+            type: CHECK_AUTHORIZATION,
+            payload: errorResponse,
+        };
 
-    const state = authorizationReducer(initialState, action);
+        const state = authorizationReducer(initialState, action);
 
-    expect(state).toEqual(action.payload);
-  });
+        expect(state).toEqual(action.payload);
+    });
 
-  it('should return the initial state for other actions', () => {
-    const initialState = [];
-    const action = {
-      type: 'OTHER_ACTION_TYPE',
-      payload: { someData: 'data' },
-    };
+    it("should return the initial state for other actions", () => {
+        const initialState = [];
+        const action = {
+            type: "OTHER_ACTION_TYPE",
+            payload: { someData: "data" },
+        };
 
-    const state = authorizationReducer(initialState, action);
+        const state = authorizationReducer(initialState, action);
 
-    expect(state).toEqual(initialState);
-  });
+        expect(state).toEqual(initialState);
+    });
 });

@@ -97,7 +97,10 @@ const MainPage = () => {
                     ))}
                 </div>
             </div>
-            <CommentsSlider/>
+            <CommentsSlider
+                title={"Our happy customers"}
+                link={"https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getCountComments/10"}
+            />
         </section>
     );
 };

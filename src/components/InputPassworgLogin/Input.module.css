@@ -1,31 +1,31 @@
-.container{
+.container {
     position: relative;
     padding-bottom: 10px;
 }
 
-.input{
-    max-width: 500px;
+.input {
+    max-width: 600px;
     width: 100%;
     margin: 5px 0 16px;
     padding: 0;
     height: 32px;
     border: none;
-    border-bottom: 3px solid var(--gray-text-secondary) ;
+    border-bottom: 3px solid var(--gray-text-secondary);
 
 }
 
 
-.input::placeholder{
+.input::placeholder {
     color: var(--gray-text-secondary);
 
 }
 
-.input:focus{
-    outline:none;
+.input:focus {
+    outline: none;
     border-bottom: 3px solid var(--gray-text-secondary);
 }
 
-.errorText{
+.errorText {
     position: absolute;
     bottom: 0;
     margin: 0 0 5px 0;

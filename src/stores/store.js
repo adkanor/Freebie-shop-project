@@ -5,21 +5,22 @@ import logger from "redux-logger";
 import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
 import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
-import searchProductsReducer from "./searchProducts/searchProductsReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
 import authorizationReducer from "./authorization/authorizationReducer";
 import personalInfoReducer from "./personalInfo/personalInfoReducer";
+import searchResultReducer from "./searchResult/searchResultReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
 } from "redux-state-sync";
+
 const rootReducer = combineReducers({
     newArrivalsReducer,
     topSaleReducer,
+    searchResultReducer,
     cartReducer,
     favoritesReducer,
-    searchProductsReducer,
     authorizationReducer,
     getAllProductsByStyleReducer,
     personalInfoReducer,

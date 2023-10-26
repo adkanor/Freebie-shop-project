@@ -40,6 +40,7 @@ const getAllProductsByStyleReducer = (state = initState, action) => {
                     );
                     break;
                 default:
+                    sortedProducts = state.filteredProducts;
                     break;
             }
 

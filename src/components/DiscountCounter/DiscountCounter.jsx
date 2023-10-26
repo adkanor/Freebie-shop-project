@@ -10,6 +10,7 @@ const DiscountCounter = ({ discountMessage, discount }) => {
             )}
             <div className={styles.discountScale}>
                 <div
+                    data-testid={`discount-scale-fill-${discount}`}
                     className={`${styles.discountScaleFill} ${
                         discount === 12
                             ? styles.discountScaleFill12
