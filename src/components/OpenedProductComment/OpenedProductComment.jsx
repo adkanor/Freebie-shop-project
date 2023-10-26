@@ -10,12 +10,12 @@ function OpenedProductComment({ mark, username, text, date }) {
             <StarRating rating={mark} starSize={"1.4rem"} />
             <h6 className={style.username}>{username}</h6>
             <p className={style.commentP}>{text}</p>
-            <p className={style.commentDate}>
-                Posted on
-                <time dateTime={date}>
-                    {" " + formatDate(date)}
-                </time>
-            </p>
+            {date && (
+                <p className={style.commentDate}>
+                    Posted on
+                    <time dateTime={date}>{" " + formatDate(date)}</time>
+                </p>
+            )}
         </article>
     );
 }
@@ -24,7 +24,7 @@ OpenedProductComment.propTypes = {
     mark: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
+    date: PropTypes.string,
 };
 
 export default OpenedProductComment;

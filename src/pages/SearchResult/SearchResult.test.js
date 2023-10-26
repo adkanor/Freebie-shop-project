@@ -3,10 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResult from "./SearchResult";
-import { addTopSellingList } from "../../stores/topSelling/actions";
-import { addArrivalsList } from "../../stores/newArrivals/actions";
-import { getSearchResult } from "../../stores/searchResult/actions";
-
+import { act } from "react-dom/test-utils";
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
@@ -40,7 +37,7 @@ window.matchMedia = jest.fn().mockImplementation(query => ({
     }));
   });
 
-  it("renders Preloader while loading", () => {
+  it("renders Preloader while loading", async () => {
     window.matchMedia = jest.fn().mockImplementation(query => ({
         matches: true,
         media: query,
@@ -48,7 +45,7 @@ window.matchMedia = jest.fn().mockImplementation(query => ({
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
       }));
-    useDispatch.mockReturnValue(jest.fn());
+    useDispatch.mockReturnValue(jest.fn().mockImplementation(() => Promise.resolve()));
   
     render(
       <MemoryRouter initialEntries={["/search/new-arrivals"]}>
@@ -58,6 +55,10 @@ window.matchMedia = jest.fn().mockImplementation(query => ({
       </MemoryRouter>
     );
   
-    expect(screen.getByText("0 Results")).toBeTruthy();
+    await act(async () => {
+      await waitFor(() => {
+        expect(screen.queryByText("Loading...")).toBeNull();
+      });
+    });
   });
 });

@@ -145,14 +145,13 @@ function Footer() {
                     ))}
                 </section>
                 <section className={styles.AuthorBlock}>
-
                     <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
                     <div className={styles.Payment}>
-                        <img src={VisaIcon} alt="VisaIcon" />
-                        <img src={MastercardIcon} alt="MastercardIcon" />
-                        <img src={PayPalIcon} alt="PayPalIcon" />
-                        <img src={ApplePayIcon} alt="ApplePayIcon" />
-                        <img src={GooglePayIcon} alt="GooglePayIcon" />
+                        <img src={VisaIcon} alt="VisaIcon"/>
+                        <img src={MastercardIcon} alt="MastercardIcon"/>
+                        <img src={PayPalIcon} alt="PayPalIcon"/>
+                        <img src={ApplePayIcon} alt="ApplePayIcon"/>
+                        <img src={GooglePayIcon} alt="GooglePayIcon"/>
                     </div>
                 </section>
             </div>
