@@ -169,7 +169,6 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                     </div>
                 )}
             </div>
-        </div>
     );
 };
 

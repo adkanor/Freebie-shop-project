@@ -3,6 +3,7 @@ import EmptyCart from "../../../assets/icons/Header/Cart.svg";
 import styles from "./EmptyCartPage.module.css";
 import { Link } from "react-router-dom";
 import arrow from "../../../assets/icons/Cart/arrow-right-bold.svg";
+import { scrollToTop } from "../../../utils/scrollToTop";
 
 const EmptyCartPage = () => {
     return (
@@ -18,7 +19,14 @@ const EmptyCartPage = () => {
                 width="100px"
                 height="100px"
             />
-            <Link className={styles.emptyCartLink} to="/">
+            <Link
+                onClick={() => {
+                    scrollToTop();
+                }}
+                className={styles.emptyCartLink}
+                to="/"
+                data-testid="empty-cart-link"
+            >
                 <p>Back to home page</p>
                 <img
                     src={arrow}

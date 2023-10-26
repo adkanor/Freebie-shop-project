@@ -30,7 +30,7 @@ const initialState = {
         : 0,
 };
 
-const calculateDiscount = (quantity) => {
+export const calculateDiscount = (quantity) => {
     if (quantity === 1) {
         return 0;
     } else if (quantity === 2) {
@@ -43,18 +43,22 @@ const calculateDiscount = (quantity) => {
         return 0;
     }
 };
-const calculateAmountOfDiscount = (totalAmount, discount) => {
+export const calculateAmountOfDiscount = (totalAmount, discount) => {
     if (discount === 0) {
         return 0;
     }
-    return (totalAmount * discount) / 100;
+    return (Number(totalAmount) * Number(discount)) / 100;
 };
 
-const calculateFinalTotal = (totalAmount, deliveryFee, amountOfDiscount) => {
-    return totalAmount + deliveryFee - amountOfDiscount;
+export const calculateFinalTotal = (
+    totalAmount,
+    deliveryFee,
+    amountOfDiscount
+) => {
+    return Number(totalAmount) + Number(deliveryFee) - Number(amountOfDiscount);
 };
 
-const updateLocalStorage = (
+export const updateLocalStorage = (
     cartItems,
     cartTotalAmount,
     cartQuantity,

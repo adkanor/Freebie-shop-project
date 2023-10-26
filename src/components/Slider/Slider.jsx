@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from "react-multi-carousel";
 import Button from "../Button/Button";
 import findClothes from "../../assets/img/BrowseByStyle/FindClothes.png";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 3000, min: 492 },
+        breakpoint: {max: 3000, min: 492},
         items: 1,
         slidesToSlide: 1,
     },
@@ -19,7 +19,9 @@ const Slider = () => {
 
     useEffect(() => {
         axios
-            .get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners")
+            .get(
+                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners"
+            )
             .then((res) => {
                 setBanners(res.data[0].urls);
             })
@@ -31,15 +33,18 @@ const Slider = () => {
     const pictures = banner.map((item, index) => (
         <div className={style.sliderItemWrapper} key={index}>
             <img
+
                 className={style.sliderItem}
                 src={item}
                 alt={`banner ${index}`}
                 style={{objectFit: "cover"}}
+
             />
         </div>
     ));
     return (
-        <div>
+
+        <div data-testid="slider-component">
             <div className={style.sliderWrapper}>
                 <Carousel
                     swipeable={false}

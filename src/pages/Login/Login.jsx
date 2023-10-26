@@ -18,7 +18,6 @@ const Login = () => {
 
     const memoryUser = (data) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", data.email);
     };
 
 
@@ -35,7 +34,9 @@ const Login = () => {
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
+
             const decoded = jwt_decode(credentialResponse.credential);
+            console.log(decoded);
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
@@ -45,6 +46,9 @@ const Login = () => {
         onError: () => {
             setErrorMessageServer("Login failed");
         },
+        scope: "email profile",
+        uxMode: "redirect",
+
     });
 
     const redirectAccount = () => navigate("/account");
@@ -58,6 +62,7 @@ const Login = () => {
 
         axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/login", user)
             .then(response => {
+                console.log(user);
 
                 if (response.data.status === 200) {
                     memoryUser(response.data.info);
@@ -78,6 +83,7 @@ const Login = () => {
 
     return (
         <div className={`section ${style.loginContainer}`}>
+
             <div className={style.bannerContainer}>
                 <img className={style.bannerLogin} src={bannerLog} alt={"bannerLogin"}/>
             </div>
@@ -101,7 +107,7 @@ const Login = () => {
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
-                                    placeholder="Email or Phone Number"
+                                    placeholder="Email"
                                     isError={errors.email && touched.email}
                                     errorText={errors.email}
                                     type={"email"}
@@ -123,8 +129,14 @@ const Login = () => {
                                         color: "var(--white-text)",
                                         border: "none",
                                     }}/>
-                                    <Link className={style.ForgetPassword} to="/registration"> Create account?</Link>
+                                    <Link className={style.createAccount} to="/registration"> Create account?</Link>
+
                                 </div>
+                                <div className={style.forgotPassword}>
+                                    <Link className={style.forgotPasswordText} to="/forgotPassword"> Forgot
+                                        password?</Link>
+                                </div>
+
 
                             </Form>
                         )}
