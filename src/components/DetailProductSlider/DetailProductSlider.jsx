@@ -8,6 +8,7 @@ const DetailProductSlider = ({ imageArr }) => {
 
     useEffect(() => {
         setLargeImage(imageArr[0]);
+        setSelectedImageIndex(0);
     }, [imageArr]);
 
     const handleImageClick = (e, index) => {
