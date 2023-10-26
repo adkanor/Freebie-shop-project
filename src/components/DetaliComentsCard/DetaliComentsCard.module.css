@@ -1,25 +1,111 @@
-.commentsDetaliesWrapper {
+.tabsWrapper {
     display: flex;
-    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+.tab {
+    display: flex;
+    flex: 1;
+}
+
+.tab button {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    font-size: 20px;
+    font-family: "Satoshi";
+    color: var(--gray-text-primary);
+    cursor: pointer;
+    border: 0;
+    border-bottom: 1px solid var(--separator-line);
+    padding: 0;
+    padding-bottom: 1rem;
+    background-color: transparent;
+}
+
+.tab.active button {
+    color: var(--black-text);
+    font-weight: 500;
+    border-bottom: 2px solid black;
+}
+
+.commentsHeader {
+    display: flex;
     justify-content: space-between;
+    padding-bottom: 1.5rem;
+    align-items: center;
 }
 
-.commentsItem {
-    width: 48%;
-    margin: 10px 0;
+.commentsH {
+    font-family: "Satoshi";
+    font-weight: 700;
+    color: var(--black-text);
+    font-size: 24px;
+    align-items: center;
 }
 
+.commentsH span {
+    font-weight: 400;
+    color: var(--gray-text-primary);
+    font-size: 16px;
+}
+
+.commentsDetaliesWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.commentBtnWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.selectWrapper {
+    position: relative;
+}
+
+.commentsFilter {
+    position: relative;
+    padding: 16px 40px 16px 20px;
+    font-family: "Satoshi";
+    border-radius: 62px;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: var(--gray-primary);
+    appearance: none;
+}
+
+.selectWrapper::after {
+    content: "▼";
+    font-size: 0.75rem;
+    color: black;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-45%);
+}
 
 @media screen and (max-width: 765px ) {
-    .commentsDetaliesWrapper {
-        justify-content: center;
+    .tab button {
+        font-size: 16px;
+        padding-bottom: 0.6rem;
+    }
+    .commentsH {
+        font-size: 20px;
+    }
+    .commentsH span {
+        font-size: 14px;
+    }
+    .commentsHeader {
+        align-items: flex-start;
+    }
+    .commentBtnWrapper {
         flex-direction: column;
-        align-items: center;
-        flex-wrap: nowrap;
     }
-
-    .commentsItem {
-        width: 90%;
+    .commentsDetaliesWrapper {
+        grid-template-columns: 1fr;
     }
-
 }
