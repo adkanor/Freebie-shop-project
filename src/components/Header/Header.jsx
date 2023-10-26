@@ -7,6 +7,7 @@ import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
 import HiOutlineSearchBlack from "../../assets/icons/Header/Search-balck.svg";
 import VscChromeClose from "../../assets/icons/Filter/Close.svg";
 import AccountSVG from "../../assets/icons/Header/Account.svg";
+import AccountNotAuth from "../../assets/icons/Header/AccountNotAuth.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
@@ -43,9 +44,8 @@ const Header = () => {
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts.length]);
-
+    const token = localStorage.getItem("token");
     const isUserAuth = () => {
-        const token = localStorage.getItem("token");
         const config = {
             headers: {
                 Authorization: `${token}`,
@@ -208,8 +208,17 @@ const Header = () => {
                                         isUserAuth();
                                     }}
                                 >
-                                    <img src={AccountSVG} alt="Account SVG" />
-                                    <span className={styles.notAbs}></span>
+                                    {token ? (
+                                        <img
+                                            src={AccountSVG}
+                                            alt="Account SVG"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={AccountNotAuth}
+                                            alt="Account SVG"
+                                        />
+                                    )}
                                 </Link>
                                 <Link
                                     to="cart"
