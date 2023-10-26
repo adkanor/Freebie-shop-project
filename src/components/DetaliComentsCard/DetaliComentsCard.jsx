@@ -31,6 +31,8 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
         case "low":
             setComments([...comments].sort((a, b) => a.rating - b.rating));
             break;
+        default:
+            break;
         }
     }
 
