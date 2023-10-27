@@ -22,6 +22,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import About from "./pages/About/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions/TermsAndConditions";
+import Brands from "./pages/Brands/Brands";
 
 const App = () => {
     return (
@@ -49,7 +50,8 @@ const App = () => {
                 <Route path="/footer" element={<Footer/>}/>
                 <Route path="/about" element={<About />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                <Route path="/terms-&-conditions" element={<TermsAndConditions />} />
+                <Route path="/brands" element={<Brands />} />
                 <Route path="*" element={<NoPage/>}/>
             </Routes>
             <Footer/>

@@ -4,6 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -32,12 +34,14 @@ function Footer() {
         },
         {
             title: "Help",
+
             items: [
                 "Customer Support",
                 "Delivery Details",
                 "Terms & Conditions",
                 "Privacy Policy",
             ],
+
         },
         {
             title: "FAQ",
@@ -46,7 +50,11 @@ function Footer() {
         {
             title: "Resources",
             items: ["Account", "Manage Deliveries", "Orders", "Payments"],
+
         },
+
+ 
+
     ];
 
     return (
@@ -65,6 +73,7 @@ function Footer() {
                                     const apiUrl =
                                         "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
+
                                     const response = await axios.post(
                                         apiUrl,
                                         values
@@ -73,6 +82,7 @@ function Footer() {
                                         toast.success(
                                             "Successful subscription to the newsletter!"
                                         );
+
                                     } else if (response.status === 400) {
                                         if (
                                             response.data.message ===
@@ -175,16 +185,15 @@ function Footer() {
                             </h3>
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
-                                    <li
-                                        key={i}
-                                        className={styles.FooterListItem}
-                                    >
-                                        <a
-                                            className={styles.FooterListLink}
-                                            href="/"
+
+                                    <li key={i} className={styles.FooterListItem}>
+                                        <Link className={styles.FooterListLink}
+                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
                                         >
-                                            {item}
-                                        </a>
+                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
+                                        </Link>
+
+
                                     </li>
                                 ))}
                             </ul>
