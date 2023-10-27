@@ -90,8 +90,9 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: cartProducts.final_total.toFixed(2),
+            totalValue: Number(cartProducts.final_total.toFixed(2)),
         };
+        console.log(orderData);
 
         await funct(orderData);
         await sendFormToServer(values);
