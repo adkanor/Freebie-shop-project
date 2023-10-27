@@ -3,6 +3,9 @@ import styles from "./Footer.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -18,64 +21,110 @@ import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 import BlackButton from "../Button/Button";
 
 function Footer() {
-
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email("Invalid email address").required("Email is required"),
+        email: Yup.string()
+            .email("Invalid email address")
+            .required("Email is required"),
     });
 
     const sections = [
         {
             title: "Company",
-            items: ["About", "Features", "Works", "Career"]
+            items: ["About", "Features", "Works", "Career"],
         },
         {
             title: "Help",
-            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy"]
+
+            items: [
+                "Customer Support",
+                "Delivery Details",
+                "Terms & Conditions",
+                "Privacy Policy",
+            ],
+
         },
         {
             title: "FAQ",
-            items: ["About", "Features", "Works", "Career"]
+            items: ["About", "Features", "Works", "Career"],
         },
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"]
-        }
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
+
+        },
+
+ 
+
     ];
 
     return (
         <footer className={styles.FooterContainer}>
             <div className={styles.FooterSectionWrapper}>
                 <section className={styles.EmailContainer}>
-                    <h2 className={styles.EmailContainerTitle}>Stay Up to Date About Our Latest Offers</h2>
+                    <h2 className={styles.EmailContainerTitle}>
+                        Stay Up to Date About Our Latest Offers
+                    </h2>
                     <div className={styles.EmailForm}>
                         <Formik
                             validationSchema={validationSchema}
                             initialValues={{ email: "" }}
                             onSubmit={async (values, actions) => {
                                 try {
-                                    const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
+                                    const apiUrl =
+                                        "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
-                                    const response = await axios.post(apiUrl, values);
-                                    if (response.status === 200){
-                                        // positive response
+                                    const response = await axios.post(
+                                        apiUrl,
+                                        values
+                                    );
+                                    if (response.status === 200) {
+                                        toast.success(
+                                            "Successful subscription to the newsletter!"
+                                        );
+
                                     } else if (response.status === 400) {
-                                        if (response.data.message === "The user is already subscribed to the store") {
-                                            console.error("User is already subscribed:", response.data.message);
+                                        if (
+                                            response.data.message ===
+                                            "The user is already subscribed to the store"
+                                        ) {
+                                            console.error(
+                                                "User is already subscribed:",
+                                                response.data.message
+                                            );
                                         } else {
-                                            console.error("Error:", response.data);
+                                            console.error(
+                                                "Error:",
+                                                response.data
+                                            );
                                         }
                                     } else {
-                                        console.error("Server error: Server Error");
+                                        console.error(
+                                            "Server error: Server Error"
+                                        );
                                     }
                                     actions.resetForm();
                                 } catch (error) {
                                     console.error("Error sending data", error);
                                 }
-                            } }
+                            }}
                         >
-                            {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
-                                <Form className={styles.MailFormBox} onSubmit={handleSubmit}>
-                                    <ErrorMessage name="email" component="div" className={styles.BugEmail} />
+                            {({
+                                values,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit,
+                                errors,
+                                touched,
+                            }) => (
+                                <Form
+                                    className={styles.MailFormBox}
+                                    onSubmit={handleSubmit}
+                                >
+                                    <ErrorMessage
+                                        name="email"
+                                        component="div"
+                                        className={styles.BugEmail}
+                                    />
                                     <Field
                                         name="email"
                                         placeholder="Enter your email address"
@@ -91,9 +140,11 @@ function Footer() {
                                             style={{
                                                 padding: "12px 16px",
                                                 color: "black",
-                                                backgroundColor: "var(--gray-primary)",
+                                                backgroundColor:
+                                                    "var(--gray-primary)",
                                                 width: "100%",
-                                            }} />
+                                            }}
+                                        />
                                     </div>
                                 </Form>
                             )}
@@ -107,39 +158,41 @@ function Footer() {
                         </div>
                         <div className={styles.LogoSubtitleBox}>
                             <p className={styles.LogoSubtitle}>
-                                We have clothes that suit your style and which you’re proud to wear. From women to men.
+                                We have clothes that suit your style and which
+                                you’re proud to wear. From women to men.
                             </p>
                         </div>
                         <div className={styles.IconContainer}>
                             <a href="/" className="SocialMedia">
-                                <img
-                                    src={TwitterIcon}
-                                    alt="TwitterIcon" />
+                                <img src={TwitterIcon} alt="TwitterIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img
-                                    src={FaceBookIcon}
-                                    alt="FaceBookIcon" />
+                                <img src={FaceBookIcon} alt="FaceBookIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img
-                                    src={InstagramIcon}
-                                    alt="InstagramIcon" />
+                                <img src={InstagramIcon} alt="InstagramIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img
-                                    src={GitHubIcon}
-                                    alt="GitHubIcon" />
+                                <img src={GitHubIcon} alt="GitHubIcon" />
                             </a>
                         </div>
                     </div>
                     {sections.map((section, index) => (
                         <div key={index} className={styles.FooterListBox}>
-                            <h3 className={styles.ListBoxTitle}>{section.title}</h3>
+                            <h3 className={styles.ListBoxTitle}>
+                                {section.title}
+                            </h3>
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
+
                                     <li key={i} className={styles.FooterListItem}>
-                                        <a className={styles.FooterListLink} href="/">{item}</a>
+                                        <Link className={styles.FooterListLink}
+                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                                        >
+                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
+                                        </Link>
+
+
                                     </li>
                                 ))}
                             </ul>
@@ -147,13 +200,15 @@ function Footer() {
                     ))}
                 </section>
                 <section className={styles.AuthorBlock}>
-                    <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
+                    <div className={styles.AuthorMark}>
+                        Shop.co © 2000-2023, All Rights Reserved
+                    </div>
                     <div className={styles.Payment}>
-                        <img src={VisaIcon} alt="VisaIcon"/>
-                        <img src={MastercardIcon} alt="MastercardIcon"/>
-                        <img src={PayPalIcon} alt="PayPalIcon"/>
-                        <img src={ApplePayIcon} alt="ApplePayIcon"/>
-                        <img src={GooglePayIcon} alt="GooglePayIcon"/>
+                        <img src={VisaIcon} alt="VisaIcon" />
+                        <img src={MastercardIcon} alt="MastercardIcon" />
+                        <img src={PayPalIcon} alt="PayPalIcon" />
+                        <img src={ApplePayIcon} alt="ApplePayIcon" />
+                        <img src={GooglePayIcon} alt="GooglePayIcon" />
                     </div>
                 </section>
             </div>

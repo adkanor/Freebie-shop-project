@@ -14,7 +14,7 @@ const ContactUs = () => {
         } else {
             const message = values.message;
             try {
-                const response = await axios.post(
+                await axios.post(
                     "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/supportUser",
                     message,
                     {
@@ -25,12 +25,7 @@ const ContactUs = () => {
                 );
 
                 toast.success("Message sent successfully!");
-                console.log(
-                    "Sending to server:",
-                    values.message,
-                    "sucsess!",
-                    response.status
-                );
+                resetForm();
             } catch (error) {
                 toast.error(
                     "Failed to send the message. Please try again later."

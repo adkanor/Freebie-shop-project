@@ -52,8 +52,14 @@
 .formItem {
     position: relative;
     max-width: 900px;
+    user-select: none;
 }
-
+.visibilityIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
 .errorMessage {
     position: absolute;
     color: var(--red-text);
