@@ -29,7 +29,7 @@ const Registration = () => {
             apiServerRegistration(value);
         },
         onError: () => {
-            console.log("Login Failed");
+            console.error("Login Failed");
         },
     });
 

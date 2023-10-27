@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
+import { toast } from "react-toastify";
 
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
@@ -42,7 +43,7 @@ const CheckOut = () => {
 
     const sendFormToServer = async (dataForm) => {
         try {
-            const response = await axios.put(
+            await axios.put(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
                 dataForm,
                 {
@@ -51,9 +52,8 @@ const CheckOut = () => {
                     },
                 }
             );
-            console.log(response);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -73,11 +73,12 @@ const CheckOut = () => {
                 dispatch(clearCart());
                 navigate("/");
                 scrollToTop();
+                toast.success("The order was placed successfully!");
             } else {
                 toggleModal();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
     const handleSubmit = async (values) => {
@@ -90,9 +91,8 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: cartProducts.final_total.toFixed(2),
+            totalValue: Number(cartProducts.final_total.toFixed(2)),
         };
-
         await funct(orderData);
         await sendFormToServer(values);
     };

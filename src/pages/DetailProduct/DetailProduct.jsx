@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import styles from "./DetailProduct.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import { Formik, Form, Field } from "formik";
+import {Formik, Form, Field} from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 import axios from "axios";
@@ -12,12 +12,12 @@ import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../stores/cartProducts/action";
-import { toast } from "react-toastify";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../stores/cartProducts/action";
+import {toast} from "react-toastify";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Preloader from "../../components/Preloader/Preloader";
-import { scrollToTop } from "../../utils/scrollToTop";
+import {scrollToTop} from "../../utils/scrollToTop";
 
 const styleBlack = {
     backgroundColor: "black",
@@ -37,7 +37,7 @@ const styleDisabled = {
 const DetailProduct = () => {
     const [recommendations, setRecommendations] = useState([]);
     const [info, setInfo] = useState(null);
-    const { id } = useParams();
+    const {id} = useParams();
     const dispatch = useDispatch();
 
     const recommendationsFilter = useCallback(
@@ -100,7 +100,7 @@ const DetailProduct = () => {
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        return <NoPage />;
+        return <NoPage/>;
     } else if (!info) {
         return <Preloader />;
     }
@@ -126,7 +126,7 @@ const DetailProduct = () => {
                     }}
                     onSubmit={handleSubmit}
                 >
-                    {({ values }) => (
+                    {({values}) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
