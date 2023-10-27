@@ -3,6 +3,8 @@ import styles from "./Footer.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -26,19 +28,19 @@ function Footer() {
     const sections = [
         {
             title: "Company",
-            items: ["About", "Features", "Works", "Career"]
+            items: ["About", "Features", "Works", "Career"],
         },
         {
             title: "Help",
-            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy"]
+            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy"],
         },
         {
             title: "FAQ",
-            items: ["About", "Features", "Works", "Career"]
+            items: ["About", "Features", "Works", "Career"],
         },
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"]
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
         }
     ];
 
@@ -56,7 +58,7 @@ function Footer() {
                                     const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
                                     const response = await axios.post(apiUrl, values);
-                                    if (response.status === 200){
+                                    if (response.status === 200) {
                                         // positive response
                                     } else if (response.status === 400) {
                                         if (response.data.message === "The user is already subscribed to the store") {
@@ -71,7 +73,7 @@ function Footer() {
                                 } catch (error) {
                                     console.error("Error sending data", error);
                                 }
-                            } }
+                            }}
                         >
                             {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                                 <Form className={styles.MailFormBox} onSubmit={handleSubmit}>
@@ -139,7 +141,12 @@ function Footer() {
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
                                     <li key={i} className={styles.FooterListItem}>
-                                        <a className={styles.FooterListLink} href="/">{item}</a>
+                                        <Link className={styles.FooterListLink}
+                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                                        >
+                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
+                                        </Link>
+
                                     </li>
                                 ))}
                             </ul>
@@ -149,11 +156,11 @@ function Footer() {
                 <section className={styles.AuthorBlock}>
                     <div className={styles.AuthorMark}>Shop.co © 2000-2023, All Rights Reserved</div>
                     <div className={styles.Payment}>
-                        <img src={VisaIcon} alt="VisaIcon"/>
-                        <img src={MastercardIcon} alt="MastercardIcon"/>
-                        <img src={PayPalIcon} alt="PayPalIcon"/>
-                        <img src={ApplePayIcon} alt="ApplePayIcon"/>
-                        <img src={GooglePayIcon} alt="GooglePayIcon"/>
+                        <img src={VisaIcon} alt="VisaIcon" />
+                        <img src={MastercardIcon} alt="MastercardIcon" />
+                        <img src={PayPalIcon} alt="PayPalIcon" />
+                        <img src={ApplePayIcon} alt="ApplePayIcon" />
+                        <img src={GooglePayIcon} alt="GooglePayIcon" />
                     </div>
                 </section>
             </div>
