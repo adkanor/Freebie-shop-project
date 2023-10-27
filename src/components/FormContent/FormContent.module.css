@@ -55,7 +55,7 @@ line-height: 24px;
 .formContent, .productsWrapper{
     display: flex;
     flex-direction: column;
-    gap: 32px; 
+    gap: 50.5px; 
 }
 
 .productsWrapper{
@@ -150,10 +150,4 @@ line-height: 24px;
     font-size: 10px;
     padding-right: 10px;
 
-}
-
-@media screen and (min-width: 766px) {
-    .formContent>button{
-        margin-top: 15px;
-    }
 }

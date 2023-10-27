@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 import { Link } from "react-router-dom";
+
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -13,11 +17,14 @@ import MastercardIcon from "../../assets/icons/Payment/Mastercard.svg";
 import PayPalIcon from "../../assets/icons/Payment/PayPal.svg";
 import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 
-import MailIcon from "../../assets/icons/Header/Mail.svg";
-
 import BlackButton from "../Button/Button";
 
-const Footer = () => {
+function Footer() {
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email("Invalid email address").required("Email is required"),
+    });
+
     const sections = [
         {
             title: "Company",
@@ -25,16 +32,15 @@ const Footer = () => {
         },
         {
             title: "Help",
-            items: ["Customer Support", "Delivery Details", "Terms and Conditions", "Privacy Policy"],
+            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy"],
         },
         {
             title: "FAQ",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"]
+            items: ["About", "Features", "Works", "Career"],
         },
-
         {
             title: "Resources",
-            items: ["Free eBooks", "Development Tutorial", "How to - Blog", "YouTube Playlist"]
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
         }
     ];
 
@@ -44,22 +50,56 @@ const Footer = () => {
                 <section className={styles.EmailContainer}>
                     <h2 className={styles.EmailContainerTitle}>Stay Up to Date About Our Latest Offers</h2>
                     <div className={styles.EmailForm}>
-                        <div className={styles.MailFormBox}>
-                            <img src={MailIcon} alt="MailIcon" />
-                            <input
-                                className={styles.EmailFormArea}
-                                type="text"
-                                placeholder="Enter your email address"
-                            />
-                        </div>
-                        <BlackButton
-                            text="Subscribe to newsletter"
-                            style={{
-                                padding: "12px 16px",
-                                color: "black",
-                                backgroundColor: "var(--gray-primary)",
+                        <Formik
+                            validationSchema={validationSchema}
+                            initialValues={{ email: "" }}
+                            onSubmit={async (values, actions) => {
+                                try {
+                                    const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
+                                    await axios.post(apiUrl, values);
+                                    const response = await axios.post(apiUrl, values);
+                                    if (response.status === 200) {
+                                        // positive response
+                                    } else if (response.status === 400) {
+                                        if (response.data.message === "The user is already subscribed to the store") {
+                                            console.error("User is already subscribed:", response.data.message);
+                                        } else {
+                                            console.error("Error:", response.data);
+                                        }
+                                    } else {
+                                        console.error("Server error: Server Error");
+                                    }
+                                    actions.resetForm();
+                                } catch (error) {
+                                    console.error("Error sending data", error);
+                                }
                             }}
-                        />
+                        >
+                            {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
+                                <Form className={styles.MailFormBox} onSubmit={handleSubmit}>
+                                    <ErrorMessage name="email" component="div" className={styles.BugEmail} />
+                                    <Field
+                                        name="email"
+                                        placeholder="Enter your email address"
+                                        iserror={errors.email && touched.email}
+                                        errortext={errors.email}
+                                        type={"email"}
+                                        className={styles.Input}
+                                    />
+                                    <div className={styles.SubscribeBtn}>
+                                        <BlackButton
+                                            text="Subscribe to newsletter"
+                                            type="submit"
+                                            style={{
+                                                padding: "12px 16px",
+                                                color: "black",
+                                                backgroundColor: "var(--gray-primary)",
+                                                width: "100%",
+                                            }} />
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                 </section>
                 <section className={styles.FooterWrapper}>
@@ -74,16 +114,24 @@ const Footer = () => {
                         </div>
                         <div className={styles.IconContainer}>
                             <a href="/" className="SocialMedia">
-                                <img src={TwitterIcon} alt="TwitterIcon" />
+                                <img
+                                    src={TwitterIcon}
+                                    alt="TwitterIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={FaceBookIcon} alt="FaceBookIcon" />
+                                <img
+                                    src={FaceBookIcon}
+                                    alt="FaceBookIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={InstagramIcon} alt="InstagramIcon" />
+                                <img
+                                    src={InstagramIcon}
+                                    alt="InstagramIcon" />
                             </a>
                             <a href="/" className="SocialMedia">
-                                <img src={GitHubIcon} alt="GitHubIcon" />
+                                <img
+                                    src={GitHubIcon}
+                                    alt="GitHubIcon" />
                             </a>
                         </div>
                     </div>
@@ -118,6 +166,6 @@ const Footer = () => {
             </div>
         </footer>
     );
-};
+}
 
 export default Footer;

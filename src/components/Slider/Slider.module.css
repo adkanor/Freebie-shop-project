@@ -15,7 +15,7 @@
     display: none;
 }
 
-@media screen and (max-width: 921px) {
+@media screen and (max-width: 991px) {
     .sliderWrapper {
         display: none;
     }

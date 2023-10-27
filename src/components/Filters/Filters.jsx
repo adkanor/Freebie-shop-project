@@ -1,5 +1,5 @@
 import React from "react";
-// import { useMemo } from "react";
+
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import MultiRangeSlider from "multi-range-slider-react";
@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
-import { useState } from "react";
+
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,8 +21,7 @@ const Filters = ({
     setCurrentPage,
 }) => {
     const dispatch = useDispatch();
-    // productByStyle={productByStyle}
-    // setFilteredProducts={setFilteredProducts}
+
     const MIN_PRICE = 10;
     const MAX_PRICE = 1000;
     const sizes = ["XS", "S", "M", "L", "XL"];
@@ -37,7 +36,6 @@ const Filters = ({
         "dresses",
         "joggers",
     ];
-    const [noFiltersMatch, seNoFiltersMatch] = useState(false);
 
     let productsNotFiltered = useSelector(
         (state) => state.getAllProductsByStyleReducer.productByStyle
@@ -90,10 +88,9 @@ const Filters = ({
         }
         if (filteredProductsCopy.length > 0) {
             dispatch(setFilters(filteredProductsCopy));
-            seNoFiltersMatch(false);
+
             closeFilters();
         } else {
-            seNoFiltersMatch(true);
             toast.error("No filters match");
         }
     };
@@ -110,7 +107,6 @@ const Filters = ({
     const closeFilters = () => {
         formik.resetForm();
         setFiltresVisible(false);
-        seNoFiltersMatch(false);
     };
 
     return (
@@ -227,11 +223,6 @@ const Filters = ({
                         </label>
                     ))}
                 </div>
-                {noFiltersMatch ? (
-                    <p className={styles.filterError}>
-                        No matching filters found
-                    </p>
-                ) : null}
 
                 <Button
                     type={"submit"}

@@ -8,6 +8,7 @@ const DetailProductSlider = ({ imageArr }) => {
 
     useEffect(() => {
         setLargeImage(imageArr[0]);
+        setSelectedImageIndex(0);
     }, [imageArr]);
 
     const handleImageClick = (e, index) => {
@@ -19,7 +20,11 @@ const DetailProductSlider = ({ imageArr }) => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <img src={largeImage} alt="Big square" />
+                    <img
+                        className={styles.bigSquareimg}
+                        src={largeImage}
+                        alt="Big square"
+                    />
                 </div>
             </div>
             <div className={styles.smallSquareContainer}>

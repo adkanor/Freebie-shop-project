@@ -17,7 +17,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
                 </Link>
             </li>
             <li className={styles.desktopItem}>
-                <Link to="brands" onClick={() => clickFunc()}>
+                <Link to="/brands" onClick={() => clickFunc()}>
                     <p className={styles.desktopItemText}>Brands</p>
                 </Link>
             </li>

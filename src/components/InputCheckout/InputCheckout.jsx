@@ -4,7 +4,7 @@ import stylesForm from "../../pages/CheckOut/CheckOut.module.css";
 import PropTypes from "prop-types";
 import InputMask from "react-input-mask";
 
-const InputCheckout = ({ name, text, type, isError, errorText }) => {
+const InputCheckout = ({ name, text, type, isError, errorText, children }) => {
     const isEmailField = name === "email";
     const inputStyle = isEmailField
         ? { color: "var( --gray-text-primary)" }
@@ -15,14 +15,17 @@ const InputCheckout = ({ name, text, type, isError, errorText }) => {
                 {text}
             </label>
             {type !== "phone" ? (
-                <Field
-                    type={type}
-                    id={name}
-                    name={name}
-                    className={stylesForm.formInput}
-                    readOnly={isEmailField}
-                    style={inputStyle}
-                />
+                <>
+                    <Field
+                        type={type}
+                        id={name}
+                        name={name}
+                        className={stylesForm.formInput}
+                        readOnly={isEmailField}
+                        style={inputStyle}
+                    />
+                    {children}
+                </>
             ) : (
                 <Field name={name}>
                     {({ field }) => (
@@ -43,6 +46,7 @@ const InputCheckout = ({ name, text, type, isError, errorText }) => {
 };
 
 InputCheckout.propTypes = {
+    children: PropTypes.node,
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     isError: PropTypes.bool,
