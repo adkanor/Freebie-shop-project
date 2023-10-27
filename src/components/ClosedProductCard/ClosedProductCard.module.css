@@ -7,7 +7,8 @@
 }
 
 .imgWrapper {
-    background-color: var(--gray-primary);
+    background-color: transparent;
+    border: 1px solid var(--gray-primary);
     padding: 1.5rem;
     border-radius: 1rem;
     margin-bottom: 0.5rem;
@@ -131,16 +132,17 @@
         font-size: 0.7rem;
     }
     .salePriceContainer {
-        column-gap: 0.5rem;
+        column-gap: 0.35rem;
     }
     .defaultPriceSpan {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
     }
     .onSalePriceSpan {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
     .saleValue {
-        font-size: 0.6rem;
+        padding: 6px 8px 6px 8px;
+        font-size: 0.55rem;
     }
 }
 
@@ -167,10 +169,10 @@
         font-size: 1rem;
     }
     .onSalePriceSpan {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     .saleValue {
-        padding: 4px 9px 4px 9px;
-        font-size: 0.52rem;
+        padding: 4px 6px 4px 6px;
+        font-size: 0.5rem;
     }
 }

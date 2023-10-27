@@ -6,6 +6,12 @@
     overflow: hidden;
     padding: 1rem;
     max-width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--gray-primary);
+}
+
+.bigSquareContainer {
+    position: relative;
 }
 
 .bigSquareimg {
@@ -21,6 +27,7 @@
     background-color: var(--gray-primary);
     cursor: pointer;
     overflow: hidden;
+    max-height: 230px;
 }
 
 .smallSquare img {
@@ -182,6 +189,34 @@
     padding-bottom: 24px;
 }
 
+.PreloaderWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Preloader {
+    border: 4px solid var(--separator-line);
+    border-radius: 50%;
+    border-top: 4px solid var(--gray-text-primary);
+    width: 45px;
+    height: 45px;
+    animation: spin 2s linear infinite;
+    user-select: none;
+    pointer-events: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 @media screen and (min-width: 991px) {
     .smallSquareContainer {
         flex-direction: column;
@@ -204,6 +239,8 @@
         order: 2;
         margin-left: 0.5rem;
         max-height: 100%;
+        display: flex;
+        flex: 1;
     }
     .smallSquare {
         width: 100%;
