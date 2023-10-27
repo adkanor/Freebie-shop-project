@@ -77,10 +77,12 @@ function Footer() {
                                 <Form className={styles.MailFormBox} onSubmit={handleSubmit}>
                                     <ErrorMessage name="email" component="div" className={styles.BugEmail} />
                                     <Field
-                                        type="text"
                                         name="email"
                                         placeholder="Enter your email address"
-                                        className={`${styles.Input} ${touched.email && errors.email ? styles.BugEmail : ""}`}
+                                        isError={errors.email && touched.email}
+                                        errorText={errors.email}
+                                        type={"email"}
+                                        className={styles.Input}
                                     />
                                     <div className={styles.SubscribeBtn}>
                                         <BlackButton
