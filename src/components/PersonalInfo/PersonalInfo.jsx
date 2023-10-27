@@ -1,17 +1,17 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, {useEffect, useState} from "react";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import validationSchemaCheckout from "../../pages/CheckOut/validationSchemaCheckout";
 import validationSchemaChangePassword from "./validationSchemaChangePassword";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserData } from "../../stores/personalInfo/action";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserData} from "../../stores/personalInfo/action";
 import Preloader from "../Preloader/Preloader";
 import InputCheckout from "../InputCheckout/InputCheckout";
 import styles from "../../pages/CheckOut/CheckOut.module.css";
 import stylesInfo from "./PersonalInfo.module.css";
 import BlackButton from "../Button/Button";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import axios from "axios";
 
 const PersonalInfo = () => {
@@ -32,7 +32,7 @@ const PersonalInfo = () => {
     }, [dispatch, token]);
 
     if (isLoading) {
-        return <Preloader />;
+        return <Preloader/>;
     } else if (errorMessage) {
         return (
             <div className={stylesInfo.errorMessage}>
@@ -40,7 +40,7 @@ const PersonalInfo = () => {
             </div>
         );
     }
-    const editProfileInfo = async (values, { setSubmitting, resetForm }) => {
+    const editProfileInfo = async (values, {setSubmitting, resetForm}) => {
         try {
             const response = await axios.put(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
@@ -52,7 +52,6 @@ const PersonalInfo = () => {
                 }
             );
             toast.success("Form data successfully changed");
-            console.log("Sending to server:", "sucsess!", response.status);
         } catch (error) {
             toast.error("Failed to send changes. Please try again later.");
         } finally {
@@ -60,7 +59,7 @@ const PersonalInfo = () => {
         }
     };
 
-    const changePassword = async (values, { setSubmitting, resetForm }) => {
+    const changePassword = async (values, {setSubmitting, resetForm}) => {
         try {
             const response = await axios.put(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUserPass",
@@ -76,10 +75,9 @@ const PersonalInfo = () => {
             );
 
             if (response.data.status === 200) {
-                console.log("Sending to server:", "sucsess!");
                 toast.success("Password  successfully changed");
             } else if (response.data.status === 400) {
-                console.log(response.data.error);
+                console.error(response.data.error);
                 toast.error("Your old password might be incorrect. Try again ");
             }
         } catch (error) {
@@ -106,7 +104,7 @@ const PersonalInfo = () => {
                     validationSchema={validationSchemaCheckout}
                     onSubmit={editProfileInfo}
                 >
-                    {({ errors, touched, isSubmitting }) => (
+                    {({errors, touched, isSubmitting}) => (
                         <>
                             <ProfileForm errors={errors} touched={touched}>
                                 <BlackButton
@@ -142,7 +140,7 @@ const PersonalInfo = () => {
                     validationSchema={validationSchemaChangePassword}
                     onSubmit={changePassword}
                 >
-                    {({ errors, touched, isSubmitting }) => (
+                    {({errors, touched, isSubmitting}) => (
                         <Form className={styles.form}>
                             <div className={styles.formSection}>
                                 <InputCheckout
