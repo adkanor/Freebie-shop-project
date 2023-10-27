@@ -1,19 +1,19 @@
 import * as Yup from "yup";
+
+const passwordRegExp =
+    /^(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@#$%^&(){}[\]:;<>,.?/~_+\-|=])\S{8,55}$/;
+
 const validationSchemaChangePassword = Yup.object().shape({
     currentPassword: Yup.string()
-        .required("Old Password is required")
-        .min(6, "Old Password must be at least 6 characters")
-        .matches(
-            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/,
-            "Old Password must contain at least one uppercase letter, one lowercase letter, and one number"
-        ),
+        .matches(passwordRegExp, "Min length 8, one special character")
+        .max(55, "Max length 65 symbol!")
+        .min(8, "Min length 8 symbol")
+        .required("Password is required"),
     newPassword: Yup.string()
         .required("New Password is required")
-        .min(6, "New Password must be at least 6 characters")
-        .matches(
-            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/,
-            "New Password must contain at least one uppercase letter, one lowercase letter, and one number"
-        )
+        .matches(passwordRegExp, "Min length 8, one special character")
+        .max(55, "Max length 65 symbol!")
+        .min(8, "Min length 8 symbol")
         .test(
             "not-same-as-old",
             "New Password must be different from Old Password",
