@@ -59,14 +59,6 @@
   background-color: #fff;
 }
 
-.Input:focus {
-  padding: 12px 16px 12px 35px;
-}
-
-.Input:checked {
-  padding: 12px 16px 12px 35px;
-}
-
 .BugEmail {
   color: rgb(255, 0, 0);
   font-family: "Satoshi";
@@ -87,7 +79,6 @@
 }
 
 .LogoContainer {
-
   flex: auto;
   max-width: 100%;
 }
