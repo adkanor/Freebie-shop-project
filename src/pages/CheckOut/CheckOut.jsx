@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Formik } from "formik";
+import React, {useState, useEffect} from "react";
+import {Formik} from "formik";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import styles from "./CheckOut.module.css";
 import stylesCart from "../CartPage/CartPage.module.css";
 import EmptyCartPage from "../CartPage/EmptyCartPage/EmptyCartPage";
 import stylesInfo from "../../components/PersonalInfo/PersonalInfo.module.css";
 import validationSchemaCheckout from "./validationSchemaCheckout";
 import Preloader from "../../components/Preloader/Preloader";
-import { scrollToTop } from "../../utils/scrollToTop";
+import {scrollToTop} from "../../utils/scrollToTop";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
-import { clearCart } from "../../stores/cartProducts/action";
-import { useDispatch } from "react-redux";
+import {clearCart} from "../../stores/cartProducts/action";
+import {useDispatch} from "react-redux";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import { fetchUserData } from "../../stores/personalInfo/action";
+import {fetchUserData} from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
 
 const CheckOut = () => {
@@ -42,7 +42,7 @@ const CheckOut = () => {
 
     const sendFormToServer = async (dataForm) => {
         try {
-            const response = await axios.put(
+            await axios.put(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
                 dataForm,
                 {
@@ -51,9 +51,8 @@ const CheckOut = () => {
                     },
                 }
             );
-            console.log(response);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -77,7 +76,7 @@ const CheckOut = () => {
                 toggleModal();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
     const handleSubmit = async (values) => {
@@ -92,14 +91,12 @@ const CheckOut = () => {
                 new Date().toLocaleTimeString(),
             totalValue: Number(cartProducts.final_total.toFixed(2)),
         };
-        console.log(orderData);
-
         await funct(orderData);
         await sendFormToServer(values);
     };
 
     if (isLoading) {
-        return <Preloader />;
+        return <Preloader/>;
     } else if (errorMessage) {
         return (
             <div className={stylesInfo.errorMessage}>
@@ -112,7 +109,7 @@ const CheckOut = () => {
         <>
             {cartProducts.cartItems.length > 0 ? (
                 <div className="section">
-                    <ErrorModal toggle={modal} toggleFunc={toggleModal} />
+                    <ErrorModal toggle={modal} toggleFunc={toggleModal}/>
                     <nav className={stylesCart.sectionNav}>
                         <AdaptiveNav
                             linksObj={{
@@ -140,7 +137,7 @@ const CheckOut = () => {
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
                     >
-                        {({ errors, touched }) => (
+                        {({errors, touched}) => (
                             <>
                                 <ProfileForm
                                     isCheckOut={true}
@@ -152,7 +149,7 @@ const CheckOut = () => {
                     </Formik>
                 </div>
             ) : (
-                <EmptyCartPage />
+                <EmptyCartPage/>
             )}
         </>
     );

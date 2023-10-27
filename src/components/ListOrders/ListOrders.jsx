@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./ListOrders.module.css";
 import axios from "axios";
 import Preloader from "../Preloader/Preloader";
@@ -17,7 +17,7 @@ const ListOrders = () => {
             axios
                 .post(
                     "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/userOrders",
-                    { token: token },
+                    {token: token},
                     {
                         headers: {
                             Authorization: token,
@@ -25,7 +25,6 @@ const ListOrders = () => {
                     }
                 )
                 .then((response) => {
-                    console.log(response.data);
                     setListOrders(response.data.orders);
                     setIsLoading(false);
                 })
@@ -36,7 +35,7 @@ const ListOrders = () => {
         }
     }, [token]);
     if (isLoading) {
-        return <Preloader />;
+        return <Preloader/>;
     } else if (errorMessage) {
         return (
             <div className={styles.errorMessage}>

@@ -34,9 +34,7 @@ const Login = () => {
 
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
-
             const decoded = jwt_decode(credentialResponse.credential);
-            console.log(decoded);
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
@@ -62,12 +60,9 @@ const Login = () => {
 
         axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/login", user)
             .then(response => {
-                console.log(user);
-
                 if (response.data.status === 200) {
                     memoryUser(response.data.info);
                     redirectAccount();
-
                 }
                 if (response.data.status === 400) {
                     setErrorMessageServer(response.data.error);
@@ -75,7 +70,7 @@ const Login = () => {
                 }
             })
             .catch(error => {
-                console.log("error", error);
+                console.error("error", error);
                 setErrorMessageServer("Sorry! Try later");
                 setIsErrorMessageServer(true);
             });
@@ -98,8 +93,9 @@ const Login = () => {
                         }}
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
-                            apiServerLogin(values);
                             setIsErrorMessageServer(false);
+                            apiServerLogin(values);
+
 
                         }}
                     >
@@ -136,8 +132,6 @@ const Login = () => {
                                     <Link className={style.forgotPasswordText} to="/forgotPassword"> Forgot
                                         password?</Link>
                                 </div>
-
-
                             </Form>
                         )}
                     </Formik>
