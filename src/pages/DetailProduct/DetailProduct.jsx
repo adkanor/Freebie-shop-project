@@ -120,7 +120,7 @@ const DetailProduct = () => {
                 <Formik
                     initialValues={{
                         size:
-                            info.sizes.find((size) => size.count != 0)?.size ||
+                            info.sizes.find((size) => size.count !== 0)?.size ||
                             null,
                         amount: Number(1),
                     }}
