@@ -1,0 +1,40 @@
+.modal, .overlay{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 500;
+}
+.overlay{
+    background-color: rgba(49, 49, 49, 0.8);
+    cursor: pointer;
+    
+}
+
+.modalContent{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--gray-primary);
+    padding: 35px 47px;
+    border-radius: 30px;
+    max-width: 600px;
+    min-width: 300px;
+    z-index: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 31px;
+}
+
+.modalContent>h1,.modalContent>span{
+    font-size: 22px;
+    font-family: "Satoshi";
+    font-weight: 400;
+}
+.modalContent>span{
+    cursor: pointer;
+}

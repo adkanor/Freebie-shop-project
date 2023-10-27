@@ -7,6 +7,7 @@ import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
 import HiOutlineSearchBlack from "../../assets/icons/Header/Search-balck.svg";
 import VscChromeClose from "../../assets/icons/Filter/Close.svg";
 import AccountSVG from "../../assets/icons/Header/Account.svg";
+import AccountNotAuth from "../../assets/icons/Header/AccountNotAuth.svg";
 import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
@@ -22,11 +23,11 @@ const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
     const navigate = useNavigate();
 
-    const favoriteProducts = useSelector(
-        (state) => state.favoritesReducer.favorites
-    );
+    const favoriteProducts =
+        useSelector((state) => state.favoritesReducer.favorites) || {};
 
-    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
+    const cartProducts =
+        useSelector((state) => state.cartReducer.cartItems) || {};
 
     useEffect(() => {
         if (!showNav && !showSearch) {
@@ -38,14 +39,13 @@ const Header = () => {
 
     useEffect(() => {
         setCartAmount(cartProducts.length);
-    }, [cartProducts]);
+    }, [cartProducts.length]);
 
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
-    }, [favoriteProducts]);
-
+    }, [favoriteProducts.length]);
+    const token = localStorage.getItem("token");
     const isUserAuth = () => {
-        const token = localStorage.getItem("token");
         const config = {
             headers: {
                 Authorization: `${token}`,
@@ -127,6 +127,7 @@ const Header = () => {
                                 <NavigationBar
                                     classList={`${styles.responsiveNav} ${styles.q} ${styles.desktopMenuList}`}
                                     clickFunc={hideNav}
+                                    data-testid="navigation-menu"
                                 />
                             ) : (
                                 <NavigationBar
@@ -180,6 +181,7 @@ const Header = () => {
                                         src={SlMenu}
                                         onClick={toggleNav}
                                         alt="Menu SVG"
+                                        data-testid="menu-button"
                                     />
                                 )}
                             </div>
@@ -206,8 +208,17 @@ const Header = () => {
                                         isUserAuth();
                                     }}
                                 >
-                                    <img src={AccountSVG} alt="Account SVG" />
-                                    <span className={styles.notAbs}></span>
+                                    {token ? (
+                                        <img
+                                            src={AccountSVG}
+                                            alt="Account SVG"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={AccountNotAuth}
+                                            alt="Account SVG"
+                                        />
+                                    )}
                                 </Link>
                                 <Link
                                     to="cart"
@@ -229,13 +240,13 @@ const Header = () => {
                                     className={styles.svgRel}
                                 >
                                     <img src={HeartSVG} alt="Heart SVG" />
-                                    {favoriteAmount > 0 ? (
+                                    {favoriteAmount > 0 && (
                                         <span id={styles["abs"]}>
                                             <p className={styles.new}>
                                                 {favoriteAmount}
                                             </p>
                                         </span>
-                                    ) : null}
+                                    )}
                                 </Link>
                             </div>
                         </div>

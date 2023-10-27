@@ -3,6 +3,8 @@ import styles from "./EmptyFavouritesPage.module.css";
 import { Link } from "react-router-dom";
 import arrow from "../../../assets/icons/Cart/arrow-right-bold.svg";
 import heart from "../../../assets/icons/Header/Heart.svg";
+import { scrollToTop } from "../../../utils/scrollToTop";
+
 function EmptyFavoritePage() {
     return (
         <div className={styles.emptyFavSection}>
@@ -18,6 +20,9 @@ function EmptyFavoritePage() {
                 height="100px"
             />
             <Link
+                onClick={() => {
+                    scrollToTop();
+                }}
                 className={styles.emptyFavLink}
                 to="/"
                 data-testid="empty-fav-link"
