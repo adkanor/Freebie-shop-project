@@ -77,7 +77,6 @@
     background-color: var(--gray-primary);
     appearance: none;
 }
-
 .selectWrapper::after {
     content: "▼";
     font-size: 0.75rem;

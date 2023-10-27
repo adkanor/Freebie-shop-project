@@ -57,10 +57,12 @@ const FormContent = () => {
                         <p className={styles.discount}>
                             -{amountOfDiscount.toFixed(2)}
                         </p>
-                        <p className={styles.price}>${totalAmount}</p>
+                        <p className={styles.price}>
+                            ${totalAmount.toFixed(2)}
+                        </p>
                     </div>
                 ) : (
-                    <p className={styles.price}>${totalAmount}</p>
+                    <p className={styles.price}>${totalAmount.toFixed(2)}</p>
                 )}
             </div>
 
