@@ -22,7 +22,7 @@ const PersonalInfo = () => {
     const errorMessage = useSelector(
         (state) => state.personalInfoReducer.error
     );
-
+    const [showPasswords, setShowPasswords] = useState({});
     useEffect(() => {
         if (token) {
             dispatch(fetchUserData(token))
@@ -31,6 +31,12 @@ const PersonalInfo = () => {
         }
     }, [dispatch, token]);
 
+    const togglePasswordVisibility = (inputName) => {
+        setShowPasswords((prevShowPasswords) => ({
+            ...prevShowPasswords,
+            [inputName]: !prevShowPasswords[inputName],
+        }));
+    };
     if (isLoading) {
         return <Preloader/>;
     } else if (errorMessage) {
@@ -144,6 +150,11 @@ const PersonalInfo = () => {
                         <Form className={styles.form}>
                             <div className={styles.formSection}>
                                 <InputCheckout
+                                    type={
+                                        showPasswords.currentPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="currentPassword"
                                     text="Old Password"
                                     isError={
@@ -151,8 +162,27 @@ const PersonalInfo = () => {
                                         touched.oldPassword
                                     }
                                     errorText={errors.currentPassword}
-                                />
+                                >
+                                    <span
+                                        className={styles.visibilityIcon}
+                                        onClick={() =>
+                                            togglePasswordVisibility(
+                                                "currentPassword"
+                                            )
+                                        }
+                                    >
+                                        {showPasswords.currentPassword
+                                            ? "\u{1F513}"
+                                            : "\u{1F512}"}
+                                    </span>
+                                </InputCheckout>
+
                                 <InputCheckout
+                                    type={
+                                        showPasswords.newPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="newPassword"
                                     text="New Password"
                                     isError={
@@ -160,8 +190,27 @@ const PersonalInfo = () => {
                                         touched.newPassword
                                     }
                                     errorText={errors.newPassword}
-                                />
+                                >
+                                    <span
+                                        className={styles.visibilityIcon}
+                                        onClick={() =>
+                                            togglePasswordVisibility(
+                                                "newPassword"
+                                            )
+                                        }
+                                    >
+                                        {showPasswords.newPassword
+                                            ? "\u{1F513}"
+                                            : "\u{1F512}"}
+                                    </span>
+                                </InputCheckout>
+
                                 <InputCheckout
+                                    type={
+                                        showPasswords.confirmNewPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="confirmNewPassword"
                                     text="Сonfirm new Password"
                                     isError={
@@ -169,7 +218,21 @@ const PersonalInfo = () => {
                                         touched.confirmNewPassword
                                     }
                                     errorText={errors.confirmNewPassword}
-                                />
+                                >
+                                    <span
+                                        className={styles.visibilityIcon}
+                                        onClick={() =>
+                                            togglePasswordVisibility(
+                                                "confirmNewPassword"
+                                            )
+                                        }
+                                    >
+                                        {showPasswords.confirmNewPassword
+                                            ? "\u{1F513}"
+                                            : "\u{1F512}"}
+                                    </span>
+                                </InputCheckout>
+
                                 <BlackButton
                                     text={
                                         isSubmitting

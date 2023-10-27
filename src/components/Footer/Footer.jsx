@@ -56,8 +56,8 @@ function Footer() {
                                     const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
                                     const response = await axios.post(apiUrl, values);
-                                    if (response.status === 200) {
-                                        console.log("Positive response: Done");
+                                    if (response.status === 200){
+                                        // positive response
                                     } else if (response.status === 400) {
                                         if (response.data.message === "The user is already subscribed to the store") {
                                             console.error("User is already subscribed:", response.data.message);
@@ -77,10 +77,12 @@ function Footer() {
                                 <Form className={styles.MailFormBox} onSubmit={handleSubmit}>
                                     <ErrorMessage name="email" component="div" className={styles.BugEmail} />
                                     <Field
-                                        type="text"
                                         name="email"
                                         placeholder="Enter your email address"
-                                        className={`${styles.Input} ${touched.email && errors.email ? styles.BugEmail : ""}`}
+                                        iserror={errors.email && touched.email}
+                                        errortext={errors.email}
+                                        type={"email"}
+                                        className={styles.Input}
                                     />
                                     <div className={styles.SubscribeBtn}>
                                         <BlackButton
