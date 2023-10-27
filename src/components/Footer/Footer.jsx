@@ -79,8 +79,8 @@ function Footer() {
                                     <Field
                                         name="email"
                                         placeholder="Enter your email address"
-                                        isError={errors.email && touched.email}
-                                        errorText={errors.email}
+                                        iserror={errors.email && touched.email}
+                                        errortext={errors.email}
                                         type={"email"}
                                         className={styles.Input}
                                     />
