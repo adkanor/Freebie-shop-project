@@ -14,6 +14,7 @@ import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
 import { scrollToTop } from "../../utils/scrollToTop";
 import axios from "axios";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const Header = () => {
     const [query, setQuery] = useState("");
@@ -21,6 +22,8 @@ const Header = () => {
     const [favoriteAmount, setFavoriteAmount] = useState(0);
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const isDesktop = useMediaQuery("(min-width: 991px)");
+
     const navigate = useNavigate();
 
     const favoriteProducts =
@@ -30,12 +33,12 @@ const Header = () => {
         useSelector((state) => state.cartReducer.cartItems) || {};
 
     useEffect(() => {
-        if (!showNav && !showSearch) {
+        if ((!showNav && !showSearch) || isDesktop) {
             document.body.style.overflow = "visible";
         } else {
             document.body.style.overflow = "hidden";
         }
-    }, [showNav, showSearch]);
+    }, [showNav, showSearch, isDesktop]);
 
     useEffect(() => {
         setCartAmount(cartProducts.length);
@@ -44,7 +47,9 @@ const Header = () => {
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts.length]);
+
     const token = localStorage.getItem("token");
+
     const isUserAuth = () => {
         const config = {
             headers: {
@@ -66,6 +71,7 @@ const Header = () => {
                 }
             });
     };
+
     const redirectAccount = () => navigate("/account");
     const redirectLogin = () => navigate("/login");
 
@@ -97,8 +103,8 @@ const Header = () => {
             setTimeout(() => {
                 navigate(`/search/${query}`);
                 hideSearch();
-                event.target.value = "";
-            }, 1000);
+            }, 3000);
+            hideAll();
         }
     };
     return (
@@ -155,6 +161,7 @@ const Header = () => {
                                         onKeyUpFunc={(e) =>
                                             searchQueryHandler(e)
                                         }
+                                        closeTabsFunc={hideAll}
                                     />
                                 ) : (
                                     <SearchBar
