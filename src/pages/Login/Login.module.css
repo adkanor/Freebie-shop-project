@@ -84,7 +84,7 @@
 }
 
 
-@media screen and (max-width: 920px ) {
+@media screen and (max-width: 991px ) {
     .loginWrapper {
         width: 50%;
         max-width: 500px;

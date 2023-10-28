@@ -24,16 +24,7 @@ const CartSummary = ({
         deliveryFee,
         total,
     };
-    const onSubmit = () => {
-        const updateValues = {
-            cartSubtotal,
-            discount,
-            amountOfDiscount,
-            deliveryFee,
-            total,
-        };
-        console.log("Form values", updateValues);
-    };
+
     const token = localStorage.getItem("token");
 
     useEffect(() => {
@@ -42,7 +33,7 @@ const CartSummary = ({
 
     return (
         <div className={styles.cartSummary}>
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Formik initialValues={initialValues}>
                 <Form>
                     <h3 className={styles.cartSummaryTitle}>Order Summary</h3>
                     <div className={styles.cartSummaryInfo}>

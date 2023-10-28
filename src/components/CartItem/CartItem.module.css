@@ -16,7 +16,7 @@
     height: 100px;
     text-align: center;
     margin-right: 14px;
-    background-color: var(--gray-secondary);
+    object-fit: contain;
 }
 .container img {
     max-width: 100%;
