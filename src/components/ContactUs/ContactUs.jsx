@@ -1,14 +1,14 @@
 import React from "react";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./ContactUs.module.css";
 import Button from "../Button/Button";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const ContactUs = () => {
     const token = localStorage.getItem("token");
 
-    const handleSubmit = async (values, {setSubmitting, resetForm}) => {
+    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         if (!values.message.trim()) {
             toast.error("Message cannot be empty");
         } else {
@@ -25,7 +25,7 @@ const ContactUs = () => {
                 );
 
                 toast.success("Message sent successfully!");
-
+                resetForm();
             } catch (error) {
                 toast.error(
                     "Failed to send the message. Please try again later."
@@ -44,7 +44,7 @@ const ContactUs = () => {
                 }}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting}) => (
+                {({ isSubmitting }) => (
                     <Form className={styles.contactForm}>
                         <Field
                             name="message"

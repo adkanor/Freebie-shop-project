@@ -52,7 +52,7 @@ const Slider = () => {
                     autoPlay={true}
                     customTransition="transform 1000ms ease-in-out"
                     infinite={true}
-                    autoPlaySpeed={3000}
+                    autoPlaySpeed={7000}
                     keyBoardControl={false}
                     transitionDuration={1500}
                     containerClass="carousel-container"
