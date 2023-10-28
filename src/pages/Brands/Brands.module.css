@@ -1,0 +1,116 @@
+
+.imageContainer {
+  display: flex;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  width: 300px;
+  height: auto;
+  margin-right: 0px;
+  transition: transform 1s;
+}
+.introText{
+  font-family: "Satoshi 400", Arial, sans-serif;
+  font-size: 22px;
+  margin: 20px 0px;
+  text-align: center;
+}
+.brandContainer {
+  text-align: center;
+  margin: 30px 0px;
+}
+.brandList {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+}
+
+.brandLetter {
+  text-align: center;
+  font-family: "Integral-CF";
+  font-weight: 700;
+  padding-bottom: 10px;
+  color: #000;
+  font-size: 30px;
+}
+
+.brandNames {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  font-family: "Satoshi 400", Arial, sans-serif;
+  font-size: 15px;
+  margin: 20px 0px;
+}
+
+.alphabetRow {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alphabetLetter {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 15px;
+  cursor: pointer;
+  background-color: #000;
+  font-family: "Integral-CF";
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 20px ;
+}
+
+@media (max-width: 920px) {
+  .introText{
+    font-size: 20px;
+  }
+  .alphabetRow {
+    flex-wrap: wrap; 
+  }
+  
+  .alphabetLetter {
+    margin-right: 10px; 
+    margin-bottom: 10px; 
+  }
+
+.brandContainer {
+  margin: 25px 0px;
+}
+
+.brandLetter {
+  padding-bottom: 10px;
+  font-size: 26px;
+}
+
+.brandNames {
+  font-size: 15px;
+  margin: 17px 0px;
+}
+
+.alphabetRow {
+  margin-top: 17px;
+}
+
+.alphabetLetter {
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+  font-size: 17px ;
+}
+}
+
+@media (max-width: 765px) {
+  .introText{
+    font-size: 18px;
+  }
+  .brandNames {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}

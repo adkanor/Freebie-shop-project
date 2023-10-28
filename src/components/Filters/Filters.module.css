@@ -4,6 +4,7 @@
     left: 0px;
     bottom: 0px;
     width: 100vw;
+    max-height: 80vh;
     z-index: 1;
     background-color: rgb(255, 255, 255);
     padding: 20px 24px;

@@ -10,6 +10,7 @@
 }
 .overlay{
     background-color: rgba(49, 49, 49, 0.8);
+    cursor: pointer;
     
 }
 
@@ -33,4 +34,7 @@
     font-size: 22px;
     font-family: "Satoshi";
     font-weight: 400;
+}
+.modalContent>span{
+    cursor: pointer;
 }
