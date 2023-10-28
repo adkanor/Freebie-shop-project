@@ -1,37 +1,52 @@
 .pageTitle {
-    color: var(--black-text);
-    font-family: "Satoshi 700", Arial, sans-serif;
-    font-size: 30px;
-    font-style: normal;
-    line-height: 30px;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
+  color: var(--black-text);
+  font-family: "Satoshi", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  font-style: normal;
+  line-height: 30px;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+  }
+
+  .pageSubtext {
+    font-family: "Satoshi", Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;  
+    margin: 10px 0px 10px 20px;
   }
 
   .sectionText{
-    font-family: "Satoshi 400", Arial, sans-serif;
-    font-size: 22px;
-    margin: 20px 0px;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;  
+  margin: 20px 0;
   }
 
   @media screen and (max-width: 920px ) {
     .pageTitle {
-        font-size: 27px;
+        font-size: 22px;
         margin-bottom: 40px;
       }
     
       .sectionText{
-        font-size: 20px;
+        font-size: 16px;
+      }
+      .pageSubtext {
+          font-size: 14px;  
       }
 }
 
 @media screen and (max-width: 765px ) {
     .pageTitle {
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 37px;
       }
     
       .sectionText{
-        font-size: 18px;
+        font-size: 15px;
       }
+      .pageSubtext {
+        font-size: 13px;  
+    }
 }
