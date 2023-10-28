@@ -86,7 +86,12 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                                     <p className={styles.liveSearchTitle}>
                                         {options.name
                                             .split(" ")
-                                            .slice(0, 2)
+                                            .slice(-2)
+                                            .map((word) =>
+                                                word
+                                                    .replace(/&/g, "")
+                                                    .replace(/;/g, "")
+                                            )
                                             .join(" ")}
                                     </p>
                                 </Link>
