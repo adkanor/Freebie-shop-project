@@ -1,30 +1,30 @@
 .pageTitle {
-    color: var(--black-text);
-    font-family: "Satoshi 700", Arial, sans-serif;
-    font-size: 30px;
-    font-style: normal;
-    line-height: 30px;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
+  color: var(--black-text);
+  font-family: "Satoshi", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  font-style: normal;
+  line-height: 30px;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
   }
   
   .sectionTitle {
-    font-family: "Satoshi 700", Arial, sans-serif;
-    font-size: 27px;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 22px;  
     margin: 20px 0px;
   }
 
   .sectionText{
-    font-family: "Satoshi 400", Arial, sans-serif;
-    font-size: 22px;
-    margin: 20px 0px;
+  font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;  
+    padding-left: 20px;
+  margin: 20px 0;
   }
   
-  .about {
-    padding: 20px;
-    background-color: #f4f4f4;
-    font-family: "Arial", sans-serif;
-  }
+
   
   @media screen and (max-width: 920px ) {
     .pageTitle {
