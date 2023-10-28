@@ -77,7 +77,6 @@
     background-color: var(--gray-primary);
     appearance: none;
 }
-
 .selectWrapper::after {
     content: "▼";
     font-size: 0.75rem;
@@ -86,6 +85,15 @@
     right: 20px;
     top: 50%;
     transform: translateY(-45%);
+}
+
+.description {
+    font-family: "Satoshi";
+    line-height: 1.15rem;
+}
+
+.description strong {
+    font-weight: 700;
 }
 
 @media screen and (max-width: 765px ) {
@@ -107,5 +115,9 @@
     }
     .commentsDetaliesWrapper {
         grid-template-columns: 1fr;
+    }
+    .description {
+        font-size: 0.9rem;
+        line-height: 1.1rem;
     }
 }

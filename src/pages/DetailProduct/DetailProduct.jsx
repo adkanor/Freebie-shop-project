@@ -28,8 +28,13 @@ const styleBlack = {
     justifyContent: "center",
 };
 
+const styleDisabled = {
+    ...styleBlack,
+    pointerEvents: "none",
+    backgroundColor: "#dd6464",
+};
+
 const DetailProduct = () => {
-    const [noAvailability, setNoAvailability] = useState(null);
     const [recommendations, setRecommendations] = useState([]);
     const [info, setInfo] = useState(null);
     const {id} = useParams();
@@ -45,6 +50,7 @@ const DetailProduct = () => {
 
     useEffect(() => {
         scrollToTop();
+        setInfo(null);
         axios
             .get(
                 `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
@@ -72,8 +78,8 @@ const DetailProduct = () => {
         }
     }, [info, recommendationsFilter]);
 
-    const handleSubmit = (values, {setSubmitting}) => {
-        setNoAvailability(null);
+    const handleSubmit = (values, { setSubmitting }) => {
+        console.log("Data:", values);
         const selectedSize = values.size;
         const selectedAmount = values.amount;
         const selectedSizeObj = info.sizes.find(
@@ -87,8 +93,6 @@ const DetailProduct = () => {
             };
             dispatch(addToCart(tryToCart));
         } else {
-            const errorMessage = "Not enough items available.";
-            setNoAvailability(errorMessage);
             console.warn("No item is available.Choose less amount");
             toast.error("This quantity is  not available");
         }
@@ -98,7 +102,7 @@ const DetailProduct = () => {
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
         return <NoPage/>;
     } else if (!info) {
-        return (<Preloader/>);
+        return <Preloader />;
     }
 
     return (
@@ -112,10 +116,12 @@ const DetailProduct = () => {
                 }}
             />
             <div className={styles.productWrapper}>
-                <DetailProductSlider imageArr={info.url_image}/>
+                <DetailProductSlider info={info}/>
                 <Formik
                     initialValues={{
-                        size: info.sizes[0].size,
+                        size:
+                            info.sizes.find((size) => size.count !== 0)?.size ||
+                            null,
                         amount: Number(1),
                     }}
                     onSubmit={handleSubmit}
@@ -155,15 +161,10 @@ const DetailProduct = () => {
                                 </p>
                                 <div className={styles.sizeFilter}>
                                     <DetailProductButtonGroup
-                                        sizes={info.sizes.map(
-                                            (item) => item.size
-                                        )}
+                                        sizes={info.sizes}
                                         values={values}
                                     />
                                 </div>
-                                {noAvailability ? (
-                                    <p>{noAvailability}</p>
-                                ) : null}
                                 <div className={styles.purchaseFilter}>
                                     <div
                                         className={stylesCard.cartQuantity}
@@ -172,30 +173,40 @@ const DetailProduct = () => {
                                             alignItems: "center",
                                         }}
                                     >
-                                        <Field name="amount">
-                                            {({field, form}) => (
-                                                <Counter
-                                                    quantity={field.value}
-                                                    onDecrease={() =>
-                                                        form.setFieldValue(
-                                                            "amount",
-                                                            field.value - 1
-                                                        )
-                                                    }
-                                                    onIncrease={() =>
-                                                        form.setFieldValue(
-                                                            "amount",
-                                                            field.value + 1
-                                                        )
-                                                    }
-                                                />
-                                            )}
-                                        </Field>
+                                        {values.size && (
+                                            <Field name="amount">
+                                                {({ field, form }) => (
+                                                    <Counter
+                                                        quantity={field.value}
+                                                        onDecrease={() =>
+                                                            form.setFieldValue(
+                                                                "amount",
+                                                                field.value - 1
+                                                            )
+                                                        }
+                                                        onIncrease={() =>
+                                                            form.setFieldValue(
+                                                                "amount",
+                                                                field.value + 1
+                                                            )
+                                                        }
+                                                    />
+                                                )}
+                                            </Field>
+                                        )}
                                     </div>
                                     <BlackButton
                                         type="submit"
-                                        text="Add to cart"
-                                        style={styleBlack}
+                                        text={
+                                            values.size
+                                                ? "Add to cart"
+                                                : "No items left"
+                                        }
+                                        style={
+                                            values.size
+                                                ? styleBlack
+                                                : styleDisabled
+                                        }
                                     />
                                 </div>
                             </div>
@@ -203,7 +214,11 @@ const DetailProduct = () => {
                     )}
                 </Formik>
             </div>
-            <DetaiLComentsCard idGoods={id}/>
+            <DetaiLComentsCard
+                idGoods={id}
+                details={info.details}
+                FAQ={info.about}
+            />
             <RecommendationProducts
                 title={"You might also like"}
                 arrayofProducts={recommendations}
