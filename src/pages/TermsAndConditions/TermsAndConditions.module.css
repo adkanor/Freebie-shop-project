@@ -1,7 +1,8 @@
 .pageTitle {
     color: var(--black-text);
-    font-family: "Satoshi 700", Arial, sans-serif;
-    font-size: 30px;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
     font-style: normal;
     line-height: 30px;
     letter-spacing: 1px;
@@ -9,22 +10,25 @@
   }
 
 .pageText {
-  font-family: "Satoshi 400", Arial, sans-serif;
-  padding-left: 20px;
-  font-size: 18px;
+  font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;  
+    padding-left: 20px;
   margin: 20px 0;
 }
 
 .pageSubtext {
-  font-family: "Satoshi 400", Arial, sans-serif;
-  font-size: 16px;
+  font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 16px;  
   margin: 10px 0;
 }
 
 
   .sectionText{
-    font-family: "Satoshi 400", Arial, sans-serif;
-    font-size: 22px;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 22px;  
     margin: 20px 0px;
   }
 
@@ -36,7 +40,7 @@
 
   @media screen and (max-width: 920px ) {
     .pageTitle {
-        font-size: 27px;
+        font-size: 22px;
         margin-bottom: 40px;
       }
     
@@ -60,7 +64,7 @@
 
 @media screen and (max-width: 765px ) {
     .pageTitle {
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 35px;
       }
     

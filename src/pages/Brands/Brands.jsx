@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./Brands.module.css";
 
-import brandImage1 from "../../assets/img/Brands/dolce.png";
-import brandImage2 from "../../assets/img/Brands/givenchy.png";
-import brandImage3 from "../../assets/img/Brands/hilfiger.png";
-import brandImage4 from "../../assets/img/Brands/kenzo.png";
-import brandImage11 from "../../assets/img/Brands/kors.png";
-import brandImage6 from "../../assets/img/Brands/lauren.png";
-import brandImage5 from "../../assets/img/Brands/northface.png";
-import brandImage8 from "../../assets/img/Brands/opolo.png";
-import brandImage9 from "../../assets/img/Brands/plein.png";
-import brandImage10 from "../../assets/img/Brands/prada.png";
-import brandImage7 from "../../assets/img/Brands/sander.png";
-import brandImage12 from "../../assets/img/Brands/valentino.png";
-import brandImage13 from "../../assets/img/Brands/versace.png";
-import brandImage14 from "../../assets/img/Brands/zara.png";
+const brandImage1 = "https://i.ibb.co/BV7y1Qr/1-Valentino.png";
+const brandImage2 = "https://i.ibb.co/8DwfTVW/1Zara.png";
+const brandImage3 = "https://i.ibb.co/ctgM0Hh/1Kenzo.png";
+const brandImage4 = "https://i.ibb.co/2kz8SPX/1-Phillip-Plein.png";
+const brandImage11 = "https://i.ibb.co/jMcppQw/1-Marc-O-Polo.png";
+const brandImage6 = "https://i.ibb.co/10QxXR1/1-Givenchy.png";
+const brandImage5 = "https://i.ibb.co/7Rm3YZT/1Versace.png";
+const brandImage8 = "https://i.ibb.co/QDwbx6S/1Prada.png";
+const brandImage9 = "https://i.ibb.co/4dcKQ2M/1-The-North-Face.png";
+const brandImage10 = "https://i.ibb.co/8NkGLTs/1-Tommy-Hilfiger.png";
+const brandImage7 = "https://i.ibb.co/fnYdVvG/1-Dolce-Gabbana.png";
+const brandImage12 = "https://i.ibb.co/Ks9crBb/1-Michael-Kors.png";
+const brandImage13 = "https://i.ibb.co/FKZC9B6/1-Ralph-Lauren.png";
+const brandImage14 = "https://i.ibb.co/tBCKSZf/1-Jil-Sander.png";
 
 const Brands = () => {
     const brandImages = [brandImage1, brandImage2, brandImage3, brandImage4, brandImage5, brandImage6, brandImage7, brandImage8, brandImage9, brandImage10, brandImage11, brandImage12, brandImage13, brandImage14];
