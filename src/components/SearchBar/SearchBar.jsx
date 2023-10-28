@@ -10,15 +10,17 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
     const isDesktop = useMediaQuery("(min-width: 991px)");
-
     const navigate = useNavigate();
     const handleInputChange = (e) => {
         onChangeFunc(e);
         const { value } = e.target;
 
         setTerm(value);
-        if (value === "") return setOptions([]);
-        search(value);
+        if (value.length === 0) return setOptions([]);
+
+        const currentValue = value;
+
+        search(currentValue);
     };
 
     const handleKeyUp = (e) => {
@@ -59,7 +61,7 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                     onChange={handleInputChange}
                     onKeyUp={handleKeyUp}
                 />
-                {options.length !== 0 && (
+                {term.length !== 0 && options.length !== 0 && (
                     <ul className={styles.liveSearchList}>
                         {options.map((options) => (
                             <li
