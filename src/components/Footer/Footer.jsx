@@ -34,27 +34,16 @@ function Footer() {
         },
         {
             title: "Help",
-
-            items: [
-                "Customer Support",
-                "Delivery Details",
-                "Terms & Conditions",
-                "Privacy Policy",
-            ],
-
+            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy",],
         },
         {
             title: "FAQ",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
         },
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
-
+            items: ["Free eBooks", "Development Tutorial", "How to - Blog", "Youtube Playlist"],
         },
-
- 
-
     ];
 
     return (
@@ -81,12 +70,12 @@ function Footer() {
                                         toast.success(
                                             "Successful subscription to the newsletter!"
                                         );
-
                                     } else if (response.status === 400) {
                                         if (
                                             response.data.message ===
                                             "The user is already subscribed to the store"
-                                        ) {
+                                        )
+                                        {
                                             console.error(
                                                 "User is already subscribed:",
                                                 response.data.message
