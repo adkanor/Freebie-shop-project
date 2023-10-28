@@ -8,6 +8,9 @@ import BlackButton from "../Button/Button";
 const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
     const [tabNum, setTabNum] = useState(0);
     const [comments, setComments] = useState([]);
+    const detailsParts = details
+        .split("&&")
+        .map((substring) => substring.split(":"));
 
     useEffect(() => {
         axios
@@ -79,7 +82,14 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                         Product details
                                     </h3>
                                 </div>
-                                <p>{details}</p>
+                                <p className={styles.description}>
+                                    {detailsParts.map((detail) => (
+                                        <>
+                                            <strong>{detail[0]}:</strong>{" "}
+                                            {detail[1]} <br /><br />
+                                        </>
+                                    ))}
+                                </p>
                             </>
                         )}
                     </div>
@@ -165,7 +175,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                 <div className={styles.commentsHeader}>
                                     <h3 className={styles.commentsH}>FAQ</h3>
                                 </div>
-                                <p>{FAQ}</p>
+                                <p className={styles.description}>{FAQ}</p>
                             </>
                         )}
                     </div>
