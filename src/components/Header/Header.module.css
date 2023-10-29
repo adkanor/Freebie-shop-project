@@ -2,7 +2,7 @@ a {
 	text-decoration: none;
 }
 
-header .navBtn {
+.header .navBtn {
 	cursor: pointer;
 	background: transparent;
 	border: none;
@@ -63,7 +63,7 @@ header .navBtn {
   width: 25vw;
   max-width: 545px;
   height: 28px;
-  border-radius: 62px;
+  border-radius: 11px;
   border: 0;
   background: var(--gray-primary);
   padding: 4px 42px;
@@ -122,12 +122,14 @@ label {
 /* Notification */
 .notification {
   width: 100%;
+  position: relative;
   min-width: 320px;
   height: 34px;
   background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 .info p {
   color: #FFF;
@@ -136,7 +138,7 @@ label {
   font-size: 12px;
   font-style: normal;
   line-height: normal;
-  width: 301px;
+  width: 100%;
 }
 .info span {
   color: #FFF;
@@ -186,6 +188,10 @@ label {
   font-weight: 400;
   line-height: 18px;
 }
+
+/* .mobileItems ul{
+  display: none;
+} */
 
 /* Media Queries for Screens Above 766px */
 @media only screen and (min-width: 766px) {
@@ -240,7 +246,7 @@ label {
     border-radius: 62px;
     border: 0;
     background: var(--gray-primary);
-    padding: 4px 48px;
+    padding: 6px 48px;
     padding-right: 20px;
     position: relative;
   }
@@ -250,48 +256,63 @@ display: none;
 }
 
 @media only screen and (max-width: 991px) {
-	header .navBtn {
+	.header .navBtn {
 		visibility: visible;
 		opacity: 1;
     padding-bottom:4px;
 	}
 
-	header ul {
+	.header ul {
 		position: fixed;
-		top: -88vh;
+		top: -460px;
 		left: 0;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 1.5rem;
 		background-color: var(--gray-primary);
 		transition: 0.5s ease-in-out;
 	}
-	header label {
+
+  .mobileItems ul{
+    position: relative;
+    top: 0;
+    gap: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-primary);
+    align-content: center;
+    align-items: center;
+    padding: 0px 0px;
+    border-top: 1px solid #e3e3e3;
+  }
+
+	.header label {
 		position: fixed;
-		top: -90vh;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		background-color: var(--gray-primary);
-		transition: 0.5s;
+    top: -541px;
+    left: 0;
+    height: 37px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 1.5rem;
+    background-color: var(--gray-primary);
+    transition: 0.5s;
+    padding: 27px 0;
 	}
   .wrapper{
     padding: 27px 0px;
   }
 
-	header .responsiveNav {
-		transform: translateY(100vh);
+	.header .responsiveNav {
+		transform: translateY(547px);
 	}
-	header .responsiveSearch {
-		transform: translateY(100vh);
+	.header .responsiveSearch {
+		transform: translateY(628px);
 	}
   
 
