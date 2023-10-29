@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Footer.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -21,6 +21,7 @@ import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 import BlackButton from "../Button/Button";
 
 function Footer() {
+
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email address")
@@ -34,28 +35,34 @@ function Footer() {
         },
         {
             title: "Help",
-
-            items: [
-                "Customer Support",
-                "Delivery Details",
-                "Terms & Conditions",
-                "Privacy Policy",
-            ],
-
+            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy",],
         },
         {
             title: "FAQ",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
         },
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
-
+            items: ["Free eBooks", "Development Tutorial", "How to - Blog", "Youtube Playlist"],
         },
-
- 
-
     ];
+
+    const [isErrorMessageVisible, setIsErrorMessageVisible] = useState(true);
+
+    const showErrorMessageAgain = () => {
+        setIsErrorMessageVisible(true);
+    };
+
+    useEffect(() => {
+        if (isErrorMessageVisible) {
+            const timeoutId = setTimeout(() => {
+                setIsErrorMessageVisible(false);
+            }, 3000);
+            return () => {
+                clearTimeout(timeoutId);
+            };
+        }
+    }, [isErrorMessageVisible]);
 
     return (
         <footer className={styles.FooterContainer}>
@@ -73,39 +80,27 @@ function Footer() {
                                     const apiUrl =
                                         "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
-
                                     const response = await axios.post(
                                         apiUrl,
                                         values
                                     );
                                     if (response.status === 200) {
-                                        toast.success(
-                                            "Successful subscription to the newsletter!"
-                                        );
-
+                                        toast.success("Successful subscription to the newsletter!");
                                     } else if (response.status === 400) {
-                                        if (
-                                            response.data.message ===
-                                            "The user is already subscribed to the store"
-                                        ) {
-                                            console.error(
-                                                "User is already subscribed:",
-                                                response.data.message
-                                            );
+                                        if (response.data.message === "The user is already subscribed to the store") {
+                                            toast.info("User is already subscribed to the store");
                                         } else {
-                                            console.error(
-                                                "Error:",
-                                                response.data
-                                            );
+                                            toast.error("Error: " + response.data);
                                         }
+                                        setIsErrorMessageVisible(true);
                                     } else {
-                                        console.error(
-                                            "Server error: Server Error"
-                                        );
+                                        toast.error("Server error: Server Error");
                                     }
+                                    setIsErrorMessageVisible(true);
                                     actions.resetForm();
                                 } catch (error) {
                                     console.error("Error sending data", error);
+                                    setIsErrorMessageVisible(true);
                                 }
                             }}
                         >
@@ -121,11 +116,13 @@ function Footer() {
                                     className={styles.MailFormBox}
                                     onSubmit={handleSubmit}
                                 >
-                                    <ErrorMessage
-                                        name="email"
-                                        component="div"
-                                        className={styles.BugEmail}
-                                    />
+                                    {isErrorMessageVisible && (
+                                        <ErrorMessage
+                                            name="email"
+                                            component="div"
+                                            className={styles.BugEmail}
+                                        />
+                                    )}
                                     <Field
                                         name="email"
                                         placeholder="Enter your email address"
@@ -145,6 +142,7 @@ function Footer() {
                                                     "var(--gray-primary)",
                                                 width: "100%",
                                             }}
+                                            onClick={showErrorMessageAgain}
                                         />
                                     </div>
                                 </Form>
