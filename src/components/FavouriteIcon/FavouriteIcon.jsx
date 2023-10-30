@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const FavoriteIcon = ({ thisCard }) => {
-    console.log(thisCard.id);
     const dispatch = useDispatch();
     const favoritesProducts = useSelector(
         (state) => state.favoritesReducer.favorites

@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import styles from "./SearchBar.module.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query";
 
 const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
+
     const isDesktop = useMediaQuery("(min-width: 991px)");
     const navigate = useNavigate();
+
     const handleInputChange = (e) => {
         onChangeFunc(e);
         const { value } = e.target;
@@ -82,19 +83,17 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                                         alt="Product detail"
                                     />
                                 </div>
-                                <Link to={`/products/${options._id}`}>
-                                    <p className={styles.liveSearchTitle}>
-                                        {options.name
-                                            .split(" ")
-                                            .slice(-2)
-                                            .map((word) =>
-                                                word
-                                                    .replace(/&/g, "")
-                                                    .replace(/;/g, "")
-                                            )
-                                            .join(" ")}
-                                    </p>
-                                </Link>
+                                <p className={styles.liveSearchTitle}>
+                                    {options.name
+                                        .split(" ")
+                                        .slice(-2)
+                                        .map((word) =>
+                                            word
+                                                .replace(/&/g, "")
+                                                .replace(/;/g, "")
+                                        )
+                                        .join(" ")}
+                                </p>
                             </li>
                         ))}
                     </ul>
