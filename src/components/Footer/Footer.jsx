@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Footer.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
 
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
@@ -30,32 +29,48 @@ function Footer() {
     const sections = [
         {
             title: "Company",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["About", "Brands", "Works", "Career"],
         },
         {
             title: "Help",
-
             items: [
                 "Customer Support",
                 "Delivery Details",
                 "Terms & Conditions",
                 "Privacy Policy",
             ],
-
         },
         {
             title: "FAQ",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["About", "Manage Deliveries", "Orders", "Payments"],
         },
         {
             title: "Resources",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
-
+            items: [
+                "Free eBooks",
+                "Development Tutorial",
+                "How to - Blog",
+                "Youtube Playlist",
+            ],
         },
-
- 
-
     ];
+
+    const [isErrorMessageVisible, setIsErrorMessageVisible] = useState(true);
+
+    const showErrorMessageAgain = () => {
+        setIsErrorMessageVisible(true);
+    };
+
+    useEffect(() => {
+        if (isErrorMessageVisible) {
+            const timeoutId = setTimeout(() => {
+                setIsErrorMessageVisible(false);
+            }, 3000);
+            return () => {
+                clearTimeout(timeoutId);
+            };
+        }
+    }, [isErrorMessageVisible]);
 
     return (
         <footer className={styles.FooterContainer}>
@@ -73,7 +88,6 @@ function Footer() {
                                     const apiUrl =
                                         "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     await axios.post(apiUrl, values);
-
                                     const response = await axios.post(
                                         apiUrl,
                                         values
@@ -82,30 +96,30 @@ function Footer() {
                                         toast.success(
                                             "Successful subscription to the newsletter!"
                                         );
-
                                     } else if (response.status === 400) {
                                         if (
                                             response.data.message ===
                                             "The user is already subscribed to the store"
                                         ) {
-                                            console.error(
-                                                "User is already subscribed:",
-                                                response.data.message
+                                            toast.info(
+                                                "User is already subscribed to the store"
                                             );
                                         } else {
-                                            console.error(
-                                                "Error:",
-                                                response.data
+                                            toast.error(
+                                                "Error: " + response.data
                                             );
                                         }
+                                        setIsErrorMessageVisible(true);
                                     } else {
-                                        console.error(
+                                        toast.error(
                                             "Server error: Server Error"
                                         );
                                     }
+                                    setIsErrorMessageVisible(true);
                                     actions.resetForm();
                                 } catch (error) {
                                     console.error("Error sending data", error);
+                                    setIsErrorMessageVisible(true);
                                 }
                             }}
                         >
@@ -121,11 +135,13 @@ function Footer() {
                                     className={styles.MailFormBox}
                                     onSubmit={handleSubmit}
                                 >
-                                    <ErrorMessage
-                                        name="email"
-                                        component="div"
-                                        className={styles.BugEmail}
-                                    />
+                                    {isErrorMessageVisible && (
+                                        <ErrorMessage
+                                            name="email"
+                                            component="div"
+                                            className={styles.BugEmail}
+                                        />
+                                    )}
                                     <Field
                                         name="email"
                                         placeholder="Enter your email address"
@@ -145,6 +161,7 @@ function Footer() {
                                                     "var(--gray-primary)",
                                                 width: "100%",
                                             }}
+                                            onClick={showErrorMessageAgain}
                                         />
                                     </div>
                                 </Form>
@@ -185,15 +202,20 @@ function Footer() {
                             </h3>
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
-
-                                    <li key={i} className={styles.FooterListItem}>
-                                        <Link className={styles.FooterListLink}
-                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                                    <li
+                                        key={i}
+                                        className={styles.FooterListItem}
+                                    >
+                                        <Link
+                                            className={styles.FooterListLink}
+                                            to={`/${item
+                                                .toLowerCase()
+                                                .replace(/ /g, "-")}`}
                                         >
-                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
+                                            {item === "Terms And Conditions"
+                                                ? "Terms And Conditions"
+                                                : item}
                                         </Link>
-
-
                                     </li>
                                 ))}
                             </ul>
