@@ -5,7 +5,6 @@ const passwordRegExp =
 
 const validationSchemaChangePassword = Yup.object().shape({
     currentPassword: Yup.string()
-        .matches(passwordRegExp, "Min length 8, one special character")
         .max(55, "Max length 65 symbol!")
         .min(8, "Min length 8 symbol")
         .required("Password is required"),

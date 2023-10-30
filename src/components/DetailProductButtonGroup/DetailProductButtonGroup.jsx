@@ -5,6 +5,7 @@ import BlackButton from "../Button/Button";
 
 const DetailProductButtonGroup = ({ sizes, values }) => {
     const [activeButton, setActiveButton] = useState(values.size);
+
     const style = {
         backgroundColor: "var(--gray-primary)",
         color: "black",
@@ -13,6 +14,13 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
         alignItems: "center",
         width: "100%",
         justifyContent: "center",
+    };
+
+    const disabledStyle = {
+        ...style,
+        pointerEvents: "none",
+        color: "white",
+        backgroundColor: "#dd6464",
     };
 
     const buttonClick = (size) => {
@@ -24,23 +32,29 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
         <>
             <p className={styles.filterSize}>Select Size</p>
             <div className={styles.size}>
-                {sizes.map((size, index) => (
+                {sizes.map((sizeObj, index) => (
                     <BlackButton
                         key={index}
-                        text={size}
+                        text={sizeObj.size}
                         type={"button"}
-                        style={{
-                            ...style,
-                            backgroundColor:
-                                size === activeButton
-                                    ? "var(--black--background)"
-                                    : "var(--gray-primary)",
-                            color:
-                                size === activeButton
-                                    ? "var(--white-text)"
-                                    : "var(--black-text)",
-                        }}
-                        onClick={() => buttonClick(size)}
+                        style={
+                            sizeObj.count === 0
+                                ? {
+                                    ...disabledStyle,
+                                }
+                                : {
+                                    ...style,
+                                    backgroundColor:
+                                        sizeObj.size === activeButton
+                                            ? "var(--black--background)"
+                                            : "var(--gray-primary)",
+                                    color:
+                                        sizeObj.size === activeButton
+                                            ? "var(--white-text)"
+                                            : "var(--black-text)",
+                                }
+                        }
+                        onClick={() => buttonClick(sizeObj.size)}
                     />
                 ))}
             </div>

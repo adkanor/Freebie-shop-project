@@ -41,19 +41,19 @@ const PrivacyPolicy = () => {
                 5. When customers use the site, we collect and process their data, namely:
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - data provided by you when registering on the website, when making online purchases, when leaving a request for a callback. In this case, we will process and use the following categories of personal data:
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - contact information, such as name, surname, date of birth, address of residence (registration), email address and telephone number,
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - payment information and payment history,
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - information about the order,
             </p>
 
@@ -61,23 +61,23 @@ const PrivacyPolicy = () => {
                 6. If you have an account we will also process your personal data provided in relation to the account, for example:
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - account identifier;
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - purchase history.
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - cookie files (if you grant permission in the site window that appears when you enter the site. If cookies are disabled, you may not be able to access important functions or distinctive features of our site and the use of the site may be limited);
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - IP addresses;
             </p>
 
-            <p className={styles.sectionText}>
+            <p className={styles.pageSubtext}>
                 - settings and settings of Internet browsers.
             </p>
 

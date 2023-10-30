@@ -13,12 +13,29 @@ jest.mock("react-redux", () => ({
 
 describe("Header Component", () => {
   it("renders the Header component", () => {
+    window.matchMedia = jest.fn().mockImplementation(query => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    }));
+    
     render(<Header />);
 
     expect(screen.getByText("SHOP.CO")).toBeInTheDocument();
   });
 
   it("toggles navigation menu when menu button is clicked", () => {
+    window.matchMedia = jest.fn().mockImplementation(query => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    }));
+    
+    
     const cartAmount = [];
     const favoriteAmount = [];
     jest.spyOn(React, "useState").mockReturnValueOnce([cartAmount, jest.fn()]);
@@ -34,6 +51,15 @@ describe("Header Component", () => {
   });
 
   it("toggles search bar when search button is clicked", () => {
+    window.matchMedia = jest.fn().mockImplementation(query => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    }));
+    
+    
     const cartAmount = [];
     const favoriteAmount = [];
     jest.spyOn(React, "useState").mockReturnValueOnce([cartAmount, jest.fn()]);

@@ -5,7 +5,7 @@ import findClothes from "../../assets/img/BrowseByStyle/FindClothes.png";
 import "react-multi-carousel/lib/styles.css";
 import style from "./Slider.module.css";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 492 },
@@ -52,7 +52,7 @@ const Slider = () => {
                     autoPlay={true}
                     customTransition="transform 1000ms ease-in-out"
                     infinite={true}
-                    autoPlaySpeed={3000}
+                    autoPlaySpeed={7000}
                     keyBoardControl={false}
                     transitionDuration={1500}
                     containerClass="carousel-container"
@@ -69,16 +69,18 @@ const Slider = () => {
                     garments, designed to bring out your individuality and cater
                     to your sense of style.
                 </p>
-                <Button
-                    text="Shop Now"
-                    style={{
-                        margin: "auto",
-                        marginBottom: "16px",
-                        padding: "16px 100px",
-                        backgroundColor: "var(--black--background)",
-                    }}
-                    type="text"
-                ></Button>
+                <Link className={style.bannerLink} to="/casual">
+                    <Button
+                        text="Shop Now"
+                        style={{
+                            margin: "auto",
+                            marginBottom: "16px",
+                            padding: "16px 100px",
+                            backgroundColor: "var(--black--background)",
+                        }}
+                        type="text"
+                    ></Button>
+                </Link>
                 <div className={style.bannerNumbers}>
                     <div className={style.bannerInfo}>
                         <p>200+</p>
