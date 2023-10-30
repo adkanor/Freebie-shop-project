@@ -14,6 +14,7 @@ import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
 import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Header = () => {
     const [query, setQuery] = useState("");
@@ -108,6 +109,22 @@ const Header = () => {
     };
     return (
         <>
+            <div className={styles.notification}>
+                <span className={styles.info}>
+                    <p>
+                        Sign up and get promo code for order.
+                        <Link
+                            to="login"
+                            onClick={() => {
+                                hideAll();
+                                scrollToTop();
+                            }}
+                        >
+                            <span>Sign Up Now</span>
+                        </Link>
+                    </p>
+                </span>
+            </div>
             <div className={styles.sectionHeader}>
                 <header className={styles.header}>
                     <div className={styles.wrapper}>
