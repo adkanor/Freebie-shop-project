@@ -103,7 +103,7 @@ const Header = () => {
             setTimeout(() => {
                 navigate(`/search/${query}`);
                 hideSearch();
-            }, 3000);
+            }, 2500);
             hideAll();
         }
     };
