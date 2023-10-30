@@ -8,7 +8,15 @@ const DetailProductSlider = ({ info }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
-
+    const thisCard = {
+        id: info._id,
+        name: info.name,
+        imageURL: info.url_image[0],
+        rating: info.rating,
+        sale: info.sale,
+        price: info.price,
+        final_price: info.final_price,
+    };
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
@@ -34,9 +42,7 @@ const DetailProductSlider = ({ info }) => {
                         alt="Big square"
                     />
                 </div>
-                <FavoriteIcon
-                    thisCard={{ ...info, url_image: imageArr[0], id: info._id }}
-                />
+                <FavoriteIcon thisCard={thisCard} />
             </div>
             <div ref={smallContainer} className={styles.smallSquareContainer}>
                 {imageArr.map((bannerImg, index) => (
