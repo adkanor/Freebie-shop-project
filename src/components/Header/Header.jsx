@@ -112,7 +112,7 @@ const Header = () => {
             <div className={styles.notification}>
                 <span className={styles.info}>
                     <p>
-                        Sign up and get promo code for order.
+                        Sign up to stay up-to-date with the news {" "}
                         <Link
                             to="login"
                             onClick={() => {

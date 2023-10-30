@@ -83,11 +83,11 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                     </h3>
                                 </div>
                                 <p className={styles.description}>
-                                    {detailsParts.map((detail) => (
-                                        <>
+                                    {detailsParts.map((detail, index) => (
+                                        <span key={index}>
                                             <strong>{detail[0]}:</strong>{" "}
                                             {detail[1]} <br /><br />
-                                        </>
+                                        </span>
                                     ))}
                                 </p>
                             </>
@@ -129,7 +129,8 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                                     styles.commentsFilter
                                                 }
                                                 name="commentsFilter"
-                                                defaultValue="No filter"
+                                                defaultValue="high"
+                                                role="commentsFilter"
                                             >
                                                 <option value="high">
                                                     High to low
@@ -175,7 +176,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                 <div className={styles.commentsHeader}>
                                     <h3 className={styles.commentsH}>FAQ</h3>
                                 </div>
-                                <p className={styles.description}>{FAQ}</p>
+                                <p role="description" className={styles.description}>{FAQ}</p>
                             </>
                         )}
                     </div>
