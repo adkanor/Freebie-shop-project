@@ -6,7 +6,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-
 import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
 import InstagramIcon from "../../assets/icons/Social/Instagram.svg";
@@ -21,7 +20,6 @@ import VisaIcon from "../../assets/icons/Payment/Visa.svg";
 import BlackButton from "../Button/Button";
 
 function Footer() {
-
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email address")
@@ -31,19 +29,29 @@ function Footer() {
     const sections = [
         {
             title: "Company",
-            items: ["About", "Features", "Works", "Career"],
+            items: ["About", "Brands", "Works", "Career"],
         },
         {
             title: "Help",
-            items: ["Customer Support", "Delivery Details", "Terms & Conditions", "Privacy Policy",],
+            items: [
+                "Customer Support",
+                "Delivery Details",
+                "Terms & Conditions",
+                "Privacy Policy",
+            ],
         },
         {
             title: "FAQ",
-            items: ["Account", "Manage Deliveries", "Orders", "Payments"],
+            items: ["About", "Manage Deliveries", "Orders", "Payments"],
         },
         {
             title: "Resources",
-            items: ["Free eBooks", "Development Tutorial", "How to - Blog", "Youtube Playlist"],
+            items: [
+                "Free eBooks",
+                "Development Tutorial",
+                "How to - Blog",
+                "Youtube Playlist",
+            ],
         },
     ];
 
@@ -85,16 +93,27 @@ function Footer() {
                                         values
                                     );
                                     if (response.status === 200) {
-                                        toast.success("Successful subscription to the newsletter!");
+                                        toast.success(
+                                            "Successful subscription to the newsletter!"
+                                        );
                                     } else if (response.status === 400) {
-                                        if (response.data.message === "The user is already subscribed to the store") {
-                                            toast.info("User is already subscribed to the store");
+                                        if (
+                                            response.data.message ===
+                                            "The user is already subscribed to the store"
+                                        ) {
+                                            toast.info(
+                                                "User is already subscribed to the store"
+                                            );
                                         } else {
-                                            toast.error("Error: " + response.data);
+                                            toast.error(
+                                                "Error: " + response.data
+                                            );
                                         }
                                         setIsErrorMessageVisible(true);
                                     } else {
-                                        toast.error("Server error: Server Error");
+                                        toast.error(
+                                            "Server error: Server Error"
+                                        );
                                     }
                                     setIsErrorMessageVisible(true);
                                     actions.resetForm();
@@ -183,15 +202,20 @@ function Footer() {
                             </h3>
                             <ul className={styles.FooterList}>
                                 {section.items.map((item, i) => (
-
-                                    <li key={i} className={styles.FooterListItem}>
-                                        <Link className={styles.FooterListLink}
-                                            to={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                                    <li
+                                        key={i}
+                                        className={styles.FooterListItem}
+                                    >
+                                        <Link
+                                            className={styles.FooterListLink}
+                                            to={`/${item
+                                                .toLowerCase()
+                                                .replace(/ /g, "-")}`}
                                         >
-                                            {item === "Terms And Conditions" ? "Terms And Conditions" : item}
+                                            {item === "Terms And Conditions"
+                                                ? "Terms And Conditions"
+                                                : item}
                                         </Link>
-
-
                                     </li>
                                 ))}
                             </ul>
