@@ -12,7 +12,6 @@ import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
-import { scrollToTop } from "../../utils/scrollToTop";
 import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
 
@@ -109,22 +108,6 @@ const Header = () => {
     };
     return (
         <>
-            <div className={styles.notification}>
-                <span className={styles.info}>
-                    <p>
-                        Sign up and get promo code for order.
-                        <Link
-                            to="login"
-                            onClick={() => {
-                                hideAll();
-                                scrollToTop();
-                            }}
-                        >
-                            <span>Sign Up Now</span>
-                        </Link>
-                    </p>
-                </span>
-            </div>
             <div className={styles.sectionHeader}>
                 <header className={styles.header}>
                     <div className={styles.wrapper}>
