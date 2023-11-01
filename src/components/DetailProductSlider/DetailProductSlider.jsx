@@ -33,12 +33,13 @@ const DetailProductSlider = ({ info }) => {
     return (
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
-                <ImageMagnifier
-                    className={styles.bigSquareimg}
-                    width={"400px"}
-                    src={largeImage}
-                />
-
+                <div className={styles.bigSquare}>
+                    <ImageMagnifier
+                        className={styles.bigSquareimg}
+                        width={"400px"}
+                        src={largeImage}
+                    />
+                </div>
                 <FavoriteIcon thisCard={thisCard} />
             </div>
             <div ref={smallContainer} className={styles.smallSquareContainer}>

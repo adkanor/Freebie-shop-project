@@ -1,7 +1,6 @@
 // ImageMagnifier.js
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 
 function ImageMagnifier({
     src,
@@ -60,7 +59,6 @@ function ImageMagnifier({
                 height: height,
                 width: width,
             }}
-            className={styles.bigSquare}
         >
             <>
                 <img
@@ -69,7 +67,6 @@ function ImageMagnifier({
                     style={{ height: height, width: width }}
                     alt={"img"}
                 />
-
                 <div
                     style={{
                         display: showMagnifier ? "" : "none",
