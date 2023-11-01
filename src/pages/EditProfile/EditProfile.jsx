@@ -2,12 +2,15 @@ import React from "react";
 import styles from "./EditProfile.module.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../stores/cartProducts/action";
 function EditProfile() {
-    const navigate  = useNavigate();
-    const handleSignOut = ()=>{
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleSignOut = () => {
         localStorage.removeItem("token");
+        dispatch(clearCart());
         navigate("/login");
-        
     };
     return (
         <>
@@ -45,7 +48,12 @@ function EditProfile() {
                             </Link>
                         </li>
                     </ul>
-                    <p className={styles.accountActionSignOut} onClick={handleSignOut}>Sign out</p>
+                    <p
+                        className={styles.accountActionSignOut}
+                        onClick={handleSignOut}
+                    >
+                        Sign out
+                    </p>
                 </nav>
                 <Outlet />
             </section>
