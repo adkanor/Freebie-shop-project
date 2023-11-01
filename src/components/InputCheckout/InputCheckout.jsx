@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import InputMask from "react-input-mask";
 
 const InputCheckout = ({ name, text, type, isError, errorText, children }) => {
+    const token = localStorage.getItem("token");
+
     const isEmailField = name === "email";
     const inputStyle = isEmailField
         ? { color: "var( --gray-text-primary)" }
@@ -21,7 +23,7 @@ const InputCheckout = ({ name, text, type, isError, errorText, children }) => {
                         id={name}
                         name={name}
                         className={stylesForm.formInput}
-                        readOnly={isEmailField}
+                        readOnly={token ? isEmailField : false}
                         style={inputStyle}
                     />
                     {children}

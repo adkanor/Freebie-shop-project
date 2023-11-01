@@ -10,7 +10,7 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
         <Form className={styles.form}>
             <div className={styles.formSection}>
                 <InputCheckout
-                    name="userName"
+                    name="firstName"
                     text="First Name"
                     isError={errors.firstName && touched.firstName}
                     errorText={errors.firstName}
