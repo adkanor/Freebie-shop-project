@@ -7,8 +7,7 @@ const validateSchemaCheckout = Yup.object().shape({
         .required("Username is required"),
     companyName: Yup.string()
         .min(7, "Must be at least 7 characters")
-        .max(40, "Must be less than 40 characters")
-        .matches(/^[a-zA-Z]+$/, "Username must contain only letters"),
+        .max(40, "Must be less than 40 characters"),
     streetAddress: Yup.string()
         .max(40)
         .required("This field is required"),
