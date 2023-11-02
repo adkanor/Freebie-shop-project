@@ -22,7 +22,7 @@ const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || "";
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
@@ -38,6 +38,8 @@ const CheckOut = () => {
             dispatch(fetchUserData(token))
                 .then(() => setIsLoading(false))
                 .catch(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
         }
     }, [dispatch, token]);
 
@@ -94,7 +96,9 @@ const CheckOut = () => {
             totalValue: Number(cartProducts.final_total.toFixed(2)),
         };
         await funct(orderData);
-        await sendFormToServer(values);
+        if (token) {
+            await sendFormToServer(values);
+        }
     };
 
     if (isLoading) {
@@ -124,7 +128,7 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            userName: userData ? userData.userName : "",
+                            firstName: userData ? userData.userName : "",
                             companyName: userData ? userData.companyName : "",
                             streetAddress: userData
                                 ? userData.streetAddress
