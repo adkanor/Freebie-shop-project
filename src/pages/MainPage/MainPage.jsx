@@ -11,7 +11,7 @@ import Button from "../../components/Button/Button";
 import { addArrivalsList } from "../../stores/newArrivals/actions";
 import { addTopSellingList } from "../../stores/topSelling/actions";
 import { scrollToTop } from "../../utils/scrollToTop";
-import { GMAILID } from "../../config";
+import GMAILID from "../../config";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -38,7 +38,8 @@ const MainPage = () => {
     useEffect(() => {
         dispatch(addTopSellingList());
         dispatch(addArrivalsList());
-        console.log(GMAILID);
+        console.log("тут без дужоr", GMAILID);
+        console.log({ GMAILID });
     }, [dispatch]);
 
     return (
