@@ -7,35 +7,23 @@ import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import DiscountCounter from "../../components/DiscountCounter/DiscountCounter";
-
+import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 const CartPage = () => {
-    const [discountMessage, setDiscountMessage] = useState("");
-    const cartReducer = useSelector((state) => state.cartReducer);
-    const cartProducts = cartReducer.cartItems;
-    const cartSubtotalAmount = cartReducer.cartTotalAmount;
-    const cartTotalQuantity = cartReducer.cartQuantity;
-    const cartDiscount = cartReducer.discount;
-    const amountOfDiscount = cartReducer.amountOfDiscount;
-    const deliveryFee = cartReducer.deliveryFee;
-    const finalTotal = cartReducer.final_total;
+    const cartProducts = useSelector((state) => state.cartReducer.cartItems);
+    const [cartSummary, setCartSummary] = useState({
+        deliveryFee: 15,
+        discount: 0,
+        cartSubtotalAmount: 0,
+        cartTotalQuantity: 0,
+        amountOfDiscount: 0,
+        finalTotal: 0,
+        discountMessage: "",
+    });
 
     useEffect(() => {
-        if (cartTotalQuantity === 1) {
-            setDiscountMessage("Add 1 more to unlock 12% off");
-        } else if (cartTotalQuantity === 2) {
-            setDiscountMessage(
-                "🎉 Congratulations! You've unlocked 12% off! Add 1 more to unlock 20% off"
-            );
-        } else if (cartTotalQuantity === 3) {
-            setDiscountMessage(
-                "🎉 Congratulations! You've unlocked 20% off! Add more 1 to unlock 25% off"
-            );
-        } else if (cartTotalQuantity >= 4) {
-            setDiscountMessage("🎉 Congratulations! You've unlocked 25% off!");
-        } else {
-            setDiscountMessage("");
-        }
-    }, [cartTotalQuantity]);
+        const summary = cartSummaryCalculate(cartProducts);
+        setCartSummary(summary);
+    }, [cartProducts]);
 
     return (
         <>
@@ -51,8 +39,8 @@ const CartPage = () => {
                     <>
                         <h1 className={styles.cartPageTitle}>Your cart</h1>
                         <DiscountCounter
-                            discount={cartDiscount}
-                            discountMessage={discountMessage}
+                            discount={cartSummary.discount}
+                            discountMessage={cartSummary.discountMessage}
                         />
                         <div className={styles.cartContainer}>
                             <ul className={styles.cartContent}>
@@ -73,11 +61,11 @@ const CartPage = () => {
                                 ))}
                             </ul>
                             <CartSummary
-                                discount={cartDiscount}
-                                cartSubtotal={cartSubtotalAmount}
-                                deliveryFee={deliveryFee}
-                                amountOfDiscount={amountOfDiscount}
-                                total={finalTotal}
+                                discount={cartSummary.discount}
+                                cartSubtotal={cartSummary.cartSubtotalAmount}
+                                deliveryFee={cartSummary.deliveryFee}
+                                amountOfDiscount={cartSummary.amountOfDiscount}
+                                total={cartSummary.finalTotal}
                             />
                         </div>
                     </>
