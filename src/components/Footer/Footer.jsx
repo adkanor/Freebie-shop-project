@@ -80,12 +80,11 @@ function Footer() {
                                     const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
                                     const response = await axios.post(apiUrl, values);
                                     if (response.status === 200) {
-                                        toast.success("You have successfully subscribed to the newsletter!");
-                                    } else if (response.status === 400) {
-                                        if (response.data === "The user is already subscribed to the store") {
+                                        const responseData = response.data;
+                                        if (responseData.status === 400) {
                                             toast.error("You are already subscribed to the store");
                                         } else {
-                                            toast.error("Error: " + response.data);
+                                            toast.success("You have successfully subscribed to the newsletter!");
                                         }
                                     } else {
                                         toast.error("Error: Unexpected status - " + response.status);
