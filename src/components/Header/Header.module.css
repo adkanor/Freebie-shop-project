@@ -166,6 +166,7 @@ label {
 
 .svgRel{
   position: relative;
+  z-index: 1;
 }
 
 #abs{
@@ -265,6 +266,7 @@ display: none;
 	.header ul {
 		position: fixed;
 		top: -460px;
+    z-index: 10;
 		left: 0;
 		width: 100%;
 		display: flex;
@@ -320,7 +322,7 @@ display: none;
     content: " ";
     position: fixed;  
     left: 0;
-    top: 378px;
+    top: 284px;
     width: 100vw;
     height: 180vh;
     background-color: rgba(0, 0, 0, 0.3);

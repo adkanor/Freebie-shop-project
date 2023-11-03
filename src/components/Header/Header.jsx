@@ -12,9 +12,9 @@ import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
-import { scrollToTop } from "../../utils/scrollToTop";
 import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Header = () => {
     const [query, setQuery] = useState("");
@@ -103,7 +103,7 @@ const Header = () => {
             setTimeout(() => {
                 navigate(`/search/${query}`);
                 hideSearch();
-            }, 3000);
+            }, 2500);
             hideAll();
         }
     };

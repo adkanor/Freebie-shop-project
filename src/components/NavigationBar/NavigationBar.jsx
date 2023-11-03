@@ -16,11 +16,11 @@ const NavigationBar = ({ classList, clickFunc }) => {
                     <p className={styles.desktopItemText}>Male</p>
                 </Link>
             </li>
-            <li className={styles.desktopItem}>
+            {/* <li className={styles.desktopItem}>
                 <Link to="/brands" onClick={() => clickFunc()}>
                     <p className={styles.desktopItemText}>Brands</p>
                 </Link>
-            </li>
+            </li> */}
             <li className={styles.desktopItem}>
                 <Link to="/sale" onClick={() => clickFunc()}>
                     <p className={styles.desktopItemText}>On Sale</p>
