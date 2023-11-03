@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import PropTypes from "prop-types";
 import FavoriteIcon from "../FavouriteIcon/FavouriteIcon";
-
+import ImageMagnifier from "./ImageMagnifier";
 const DetailProductSlider = ({ info }) => {
     const imageArr = info.url_image;
     const [largeImage, setLargeImage] = useState(imageArr[0]);
@@ -34,10 +34,10 @@ const DetailProductSlider = ({ info }) => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <img
+                    <ImageMagnifier
                         className={styles.bigSquareimg}
+                        width={"400px"}
                         src={largeImage}
-                        alt="Big square"
                     />
                 </div>
                 <FavoriteIcon thisCard={thisCard} />

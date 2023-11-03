@@ -2,9 +2,7 @@ import axios from "axios";
 // axios = require("axios");
 export const CHECK_AUTHORIZATION = "GET_RES";
 
-
 export const checkAuthorization = (token) => async (dispatch, getState) => {
-    
     try {
         const response = await axios.post(
             "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth",
