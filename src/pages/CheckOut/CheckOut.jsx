@@ -97,7 +97,7 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: Number(cartData.finalTotal),
+            totalValue: Number(cartData.finalTotal.toFixed(2)),
         };
         await addToOrders(orderData);
         if (token) {
