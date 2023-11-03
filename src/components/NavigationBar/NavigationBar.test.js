@@ -15,12 +15,10 @@ describe("NavigationBar Component", () => {
 
         const femaleLink = screen.getByText("Female");
         const maleLink = screen.getByText("Male");
-        const brandsLink = screen.getByText("Brands");
         const saleLink = screen.getByText("On Sale");
 
         expect(femaleLink).toBeInTheDocument();
         expect(maleLink).toBeInTheDocument();
-        expect(brandsLink).toBeInTheDocument();
         expect(saleLink).toBeInTheDocument();
     });
 

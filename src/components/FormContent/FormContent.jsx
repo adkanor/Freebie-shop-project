@@ -4,14 +4,12 @@ import { useSelector } from "react-redux";
 import { Field } from "formik";
 import BlackButton from "../Button/Button";
 import svgBank from "../../assets/icons/Payment/PaymentsBank.svg";
+import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 
 const FormContent = () => {
     const cartReducer = useSelector((state) => state.cartReducer);
     const cartItems = cartReducer.cartItems;
-    const subtotalAmount = cartReducer.cartTotalAmount;
-    const shipping = cartReducer.deliveryFee;
-    const totalAmount = cartReducer.final_total;
-    const amountOfDiscount = cartReducer.amountOfDiscount;
+    const cartData = cartSummaryCalculate(cartItems);
 
     const [paymentType, setPaymentType] = useState("Place Order");
 
@@ -37,32 +35,38 @@ const FormContent = () => {
                                 )}
                             </div>
                             <p className={styles.productPrice}>
-                                ${data.selectedAmount * data.price}
+                                ${data.final_price.toFixed(2)}
                             </p>
                         </div>
                     ))}
             </div>
             <div className={styles.subtotalContainer}>
                 <p className={styles.title}>Subtotal</p>
-                <p className={styles.price}>${subtotalAmount}</p>
+                <p className={styles.price}>
+                    ${cartData.cartSubtotalAmount.toFixed(2)}
+                </p>
             </div>
             <div className={styles.shippingContainer}>
                 <p className={styles.title}>Shipping</p>
-                <p className={styles.price}>${shipping}</p>
+                <p className={styles.price}>
+                    ${cartData.deliveryFee.toFixed(2)}
+                </p>
             </div>
             <div className={styles.totalContainer}>
                 <p className={styles.title}>Total</p>
-                {amountOfDiscount > 0 ? (
+                {cartData.amountOfDiscount > 0 ? (
                     <div className={styles.titleDiscountContainer}>
                         <p className={styles.discount}>
-                            -{amountOfDiscount.toFixed(2)}
+                            -{cartData.amountOfDiscount.toFixed(2)}
                         </p>
                         <p className={styles.price}>
-                            ${totalAmount.toFixed(2)}
+                            ${cartData.finalTotal.toFixed(2)}
                         </p>
                     </div>
                 ) : (
-                    <p className={styles.price}>${totalAmount.toFixed(2)}</p>
+                    <p className={styles.price}>
+                        ${cartData.finalTotal.toFixed(2)}
+                    </p>
                 )}
             </div>
 
