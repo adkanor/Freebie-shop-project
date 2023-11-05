@@ -17,12 +17,16 @@ import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import { toast } from "react-toastify";
+import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
+    const cartItems = cartProducts.cartItems;
+    const cartData = cartSummaryCalculate(cartItems);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || "";
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
@@ -38,6 +42,8 @@ const CheckOut = () => {
             dispatch(fetchUserData(token))
                 .then(() => setIsLoading(false))
                 .catch(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
         }
     }, [dispatch, token]);
 
@@ -57,7 +63,7 @@ const CheckOut = () => {
         }
     };
 
-    const funct = async (data) => {
+    const addToOrders = async (data) => {
         try {
             const response = await axios.post(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
@@ -91,10 +97,12 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: Number(cartProducts.final_total.toFixed(2)),
+            totalValue: Number(cartData.finalTotal.toFixed(2)),
         };
-        await funct(orderData);
-        await sendFormToServer(values);
+        await addToOrders(orderData);
+        if (token) {
+            await sendFormToServer(values);
+        }
     };
 
     if (isLoading) {
@@ -124,7 +132,7 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            userName: userData ? userData.userName : "",
+                            firstName: userData ? userData.userName : "",
                             companyName: userData ? userData.companyName : "",
                             streetAddress: userData
                                 ? userData.streetAddress

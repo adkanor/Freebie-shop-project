@@ -21,7 +21,6 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         const basket = localStorage.getItem("cartItems");
         if (basket) {
-            console.log("Enter l;ocal");
             const response = await axios.post(
                 `${URL}mergeBasket`,
                 { basket: JSON.parse(basket) },
