@@ -10,6 +10,7 @@ import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productBySty
 import authorizationReducer from "./authorization/authorizationReducer";
 import personalInfoReducer from "./personalInfo/personalInfoReducer";
 import searchResultReducer from "./searchResult/searchResultReducer";
+import queryParametreReducer from "./queryParametre/queryParametreReducer";
 import {
     createStateSyncMiddleware,
     initStateWithPrevTab,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     authorizationReducer,
     getAllProductsByStyleReducer,
     personalInfoReducer,
+    queryParametreReducer,
 });
 const config = {
     channel: "my_channel",

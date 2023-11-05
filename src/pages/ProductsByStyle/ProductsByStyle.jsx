@@ -82,7 +82,7 @@ const ProductsByStyle = () => {
                                 height="30"
                                 onClick={toogleFilters}
                             />
-                            <Sorting setCurrentPage={setCurrentPage} />
+                            <Sorting />
                         </div>
                         <ul className={styles.productslist}>
                             {currentTableData.map((product) => (

@@ -1,5 +1,4 @@
 import React from "react";
-
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import MultiRangeSlider from "multi-range-slider-react";
@@ -7,21 +6,15 @@ import { useFormik } from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
+// import { toast } from "react-toastify";
 
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    setFilters,
-    resetFilters,
-} from "../../stores/pageWithFiltersProducts/action";
 const Filters = ({
     setFiltresVisible,
     filtersAreVisible,
     style,
-    setCurrentPage,
+    setFilterSortParams,
+    filterSortParams,
 }) => {
-    const dispatch = useDispatch();
-
     const MIN_PRICE = 10;
     const MAX_PRICE = 1000;
     const sizes = ["XS", "S", "M", "L", "XL"];
@@ -37,14 +30,11 @@ const Filters = ({
         "joggers",
     ];
 
-    let productsNotFiltered = useSelector(
-        (state) => state.getAllProductsByStyleReducer.productByStyle
-    );
     const formik = useFormik({
         initialValues: {
             category: "",
-            minPrice: MIN_PRICE,
-            maxPrice: MAX_PRICE,
+            minprice: MIN_PRICE,
+            maxprice: MAX_PRICE,
             size: "",
             sex: "",
         },
@@ -52,53 +42,24 @@ const Filters = ({
 
     // Function for processing price changes
     const changePriceInput = (e) => {
-        formik.setFieldValue("minPrice", e.minValue);
-        formik.setFieldValue("maxPrice", e.maxValue);
+        formik.setFieldValue("minprice", e.minValue);
+        formik.setFieldValue("maxprice", e.maxValue);
     };
 
     // Function for applying filters
     const applyFilters = (e) => {
-        setCurrentPage(1);
+        const choosenValues = formik.values;
         e.preventDefault();
-        let filteredProductsCopy = [...productsNotFiltered];
-
-        if (formik.values.category !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) => product.category === formik.values.category
-            );
-        }
-        if (formik.values.size !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter((product) =>
-                product.sizes.some(
-                    (sizeObj) => sizeObj.size === formik.values.size
-                )
-            );
-        }
-        if (formik.values.sex !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) => product.sex === formik.values.sex
-            );
-        }
-        if (formik.values.minPrice && formik.values.maxPrice) {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) =>
-                    product.final_price >= formik.values.minPrice &&
-                    product.final_price <= formik.values.maxPrice
-            );
-        }
-        if (filteredProductsCopy.length > 0) {
-            dispatch(setFilters(filteredProductsCopy));
-
-            closeFilters();
-        } else {
-            toast.error("No filters match");
-        }
+        const updatedValues = {
+            ...filterSortParams,
+            ...choosenValues,
+        };
+        setFilterSortParams(updatedValues);
+        closeFilters();
     };
 
     // Function to reset filters
     const resetFiltersForm = () => {
-        setCurrentPage(1);
-        dispatch(resetFilters);
         formik.resetForm();
         setFiltresVisible(false);
     };
@@ -202,9 +163,9 @@ const Filters = ({
                     />
                     <p className={styles.filterPriceInfo}>
                         <span>From: $</span>
-                        {formik.values.minPrice}
+                        {formik.values.minprice}
                         <span>To: $</span>
-                        {formik.values.maxPrice}
+                        {formik.values.maxprice}
                     </p>
                 </div>
                 <div className={styles.filterSize}>
@@ -253,7 +214,8 @@ Filters.propTypes = {
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
     style: PropTypes.string,
-    setCurrentPage: PropTypes.func.isRequired,
+    setFilterSortParams: PropTypes.func.isRequired,
+    filterSortParams: PropTypes.object.isRequired,
 };
 
 export default Filters;
