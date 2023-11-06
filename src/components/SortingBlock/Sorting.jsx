@@ -2,9 +2,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import style from "./Sorting.module.css";
-const SortFilter = ({ setFilterSortParams }) => {
+
+const SortFilter = ({setFilterSortParams}) => {
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
+        console.log(selectedValue);
         setFilterSortParams((prev) => ({
             ...prev,
             sort: selectedValue,

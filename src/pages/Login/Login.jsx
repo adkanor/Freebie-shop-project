@@ -1,29 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import style from "./Login.module.css";
-import { Form, Formik } from "formik";
+import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { useGoogleOneTapLogin } from "@react-oauth/google";
+import {Link, useNavigate} from "react-router-dom";
+import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { URL } from "../../urlVariable";
-import { useDispatch } from "react-redux";
-import { refreshCart } from "../../stores/cartProducts/action";
+import {URL} from "../../urlVariable";
+import {useDispatch} from "react-redux";
+import {refreshCart} from "../../stores/cartProducts/action";
+
+
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
     const [errorMessageServer, setErrorMessageServer] = useState();
     const [isErrorMessageServer, setIsErrorMessageServer] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const memoryUser = async (data) => {
         localStorage.setItem("token", data.token);
         const basket = localStorage.getItem("cartItems");
         if (basket) {
             const response = await axios.post(
                 `${URL}mergeBasket`,
-                { basket: JSON.parse(basket) },
+                {basket: JSON.parse(basket)},
                 {
                     headers: {
                         Authorization: data.token,
@@ -120,7 +123,7 @@ const Login = () => {
                             apiServerLogin(values);
                         }}
                     >
-                        {({ errors, touched }) => (
+                        {({errors, touched}) => (
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
