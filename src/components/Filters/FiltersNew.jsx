@@ -1,35 +1,16 @@
 import React from "react";
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
-import MultiRangeSlider from "multi-range-slider-react";
+// import MultiRangeSlider from "multi-range-slider-react";
 import { useFormik } from "formik";
 import Button from "../Button/Button";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
-// import { toast } from "react-toastify";
-
-const Filters = ({
-    setFiltresVisible,
-    filtersAreVisible,
-    setFilterSortParams,
-    filterSortParams,
-}) => {
-    // const [filterState, setFilterState] = useState({});
-    // console.log(filterState);
-
-    const MemoizedMultiRangeSlider = React.memo(MultiRangeSlider);
-
-    // useEffect(() => {
-    //     setFilterState(filterSortParams);
-    // }, [filterSortParams]);
-
-    // const MIN_PRICE = 10;
-    // const MAX_PRICE = 1000;
-
-    const prises = {
-        minprice: 0,
-        maxprice: 1000,
-    };
+// import { toast } from "react-toastify";s
+// { setFiltresVisible, filtersAreVisible }
+const FiltersNew = () => {
+    const MIN_PRICE = 10;
+    const MAX_PRICE = 1000;
     const sizes = ["XS", "S", "M", "L", "XL"];
     const categories = [
         "jackets",
@@ -46,49 +27,47 @@ const Filters = ({
     const formik = useFormik({
         initialValues: {
             category: "",
-            minprice: prises.minprice,
-            maxprice: prises.maxprice,
+            minprice: MIN_PRICE,
+            maxprice: MAX_PRICE,
             size: "",
             sex: "",
         },
     });
     // console.log(filterSortParams.sex);
-    // console.log("консоль");
-    // console.log(filterSortParams);
+
+    console.log("dd");
 
     // Function for processing price changes
-
-    // const handleSliderChange = (e) => {
+    // const changePriceInput = (e) => {
     //     formik.setFieldValue("minPrice", e.minValue);
     //     formik.setFieldValue("maxPrice", e.maxValue);
     // };
-    // Function for applying filters
-    const applyFilters = (e) => {
-        e.preventDefault();
-        console.log(formik.values);
-        console.log(prises);
-        closeFilters();
-    };
-    console.log("dsf");
-    // Function to reset filters
-    const resetFiltersForm = () => {
-        formik.resetForm();
-        setFiltresVisible(false);
-    };
 
-    // Function to close filters
-    const closeFilters = () => {
-        formik.resetForm();
-        setFiltresVisible(false);
-    };
+    // Function for applying filters
+    // const applyFilters = (e) => {
+    //     e.preventDefault();
+    //     closeFilters();
+    // };
+
+    // // Function to reset filters
+    // const resetFiltersForm = () => {
+    //     formik.resetForm();
+    //     setFiltresVisible(false);
+    // };
+
+    // // Function to close filters
+    // const closeFilters = () => {
+    //     formik.resetForm();
+    //     setFiltresVisible(false);
+    // };
 
     return (
         <aside
-            className={` ${
-                filtersAreVisible
-                    ? styles.filterSection
-                    : styles.hiddenfilterSection
-            }`}
+        // className={` ${
+        //     filtersAreVisible
+        //         ? styles.filterSection
+        //         : styles.hiddenfilterSection
+        // }`}
         >
             <div className={styles.filterHeader}>
                 <h2 className={styles.filtersName}>Filters</h2>
@@ -101,10 +80,11 @@ const Filters = ({
                     className={styles.filterToClose}
                     src={closeIcon}
                     alt="Filter icons"
-                    onClick={closeFilters}
+                    // onClick={closeFilters}
                 />
             </div>
-            <form onSubmit={applyFilters}>
+            {/* onSubmit={applyFilters} */}
+            <form>
                 {/* {style !== "female" && style !== "male" ? (
                     <div className={styles.filterSex}>
                         <h3 className={styles.filterTitle}>Gender</h3>
@@ -151,7 +131,7 @@ const Filters = ({
                 </div>
                 <div className={styles.filterPrice}>
                     <h3 className={styles.filterTitle}>Price</h3>
-                    <MemoizedMultiRangeSlider
+                    {/* <MultiRangeSlider
                         style={{
                             border: "none",
                             boxShadow: "none",
@@ -159,13 +139,12 @@ const Filters = ({
                         }}
                         min={10}
                         max={1000}
-                        minValue={10}
-                        maxValue={1000}
+                        minValue={MIN_PRICE}
+                        maxValue={MAX_PRICE}
                         step={10}
                         barInnerColor="black"
-                        onChange={(e) => {
-                            prises.minprice = e.minValue;
-                            prises.maxprice = e.maxValue;
+                        onInput={(e) => {
+                            changePriceInput(e);
                         }}
                         label={false}
                         ruler={false}
@@ -173,12 +152,12 @@ const Filters = ({
                         thumbRightColor="black"
                         barLeftColor="white"
                         barRightColor="white"
-                    />
+                    /> */}
                     <p className={styles.filterPriceInfo}>
                         <span>From: $</span>
-                        {prises.minprice}
+                        {formik.values.minPrice}
                         <span>To: $</span>
-                        {prises.maxprice}
+                        {formik.values.maxPrice}
                     </p>
                 </div>
                 <div className={styles.filterSize}>
@@ -216,18 +195,18 @@ const Filters = ({
                         width: "100%",
                         padding: "7px 0",
                     }}
-                    onClick={resetFiltersForm}
+                    // onClick={resetFiltersForm}
                 />
             </form>
         </aside>
     );
 };
 
-Filters.propTypes = {
-    setFiltresVisible: PropTypes.func.isRequired,
-    filtersAreVisible: PropTypes.bool.isRequired,
-    setFilterSortParams: PropTypes.func.isRequired,
-    filterSortParams: PropTypes.object.isRequired,
-};
+// FiltersNew.propTypes = {
+//     setFiltresVisible: PropTypes.func.isRequired,
+//     filtersAreVisible: PropTypes.bool.isRequired,
+//     // setFilterSortParams: PropTypes.func.isRequired,
+//     // filterSortParams: PropTypes.object.isRequired,
+// };
 
-export default Filters;
+export default FiltersNew;

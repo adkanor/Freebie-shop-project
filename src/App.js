@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -26,20 +26,16 @@ import Brands from "./pages/Brands/Brands";
 import ProductsWithFiltersAndSorting from "./pages/ProductsWithFiltersAndSorting/ProductsWithFiltersAndSorting";
 
 const App = () => {
-    const [params, setParams] = useState();
     return (
         <>
             <Header />
             <ToastContainer limit={3} autoClose={1500} position="bottom-left" />
             <Routes>
-                <Route
-                    path="/"
-                    element={<MainSection setParams={setParams} />}
-                />
+                <Route path="/" element={<MainSection />} />
                 {/* <Route path="/:style/" element={<ProductsByStyle />} /> */}
                 <Route
-                    path="/allproducts/"
-                    element={<ProductsWithFiltersAndSorting params={params} />}
+                    path="/allproducts"
+                    element={<ProductsWithFiltersAndSorting />}
                 />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/search/:value" element={<SearchResult />} />

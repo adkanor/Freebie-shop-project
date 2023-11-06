@@ -10,25 +10,19 @@ import Filters from "../../components/Filters/Filters";
 import { useMediaQuery } from "@react-hook/media-query";
 import Button from "../../components/Button/Button";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { URL } from "../../urlVariable";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-// import { areParamsEqual } from "../../utils/areParamsEqual";
+import { areParamsEqual } from "../../utils/areParamsEqual";
 import axios from "axios";
-import { clearParametre } from "../../stores/queryParametre/action";
-import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import getQueryParams from "../../utils/getQueryParams";
+// import FiltersNew from "../../components/Filters/FiltersNew";
+// import { useSearchParams } from "react-router-dom";
 const ProductsWithFiltersAndSorting = () => {
     const location = useLocation();
-    const dispatch = useDispatch();
     // const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const firstQueryParametre = useSelector(
-        (state) => state.queryParametreReducer
-    );
+    // const [searchParams, setSearchParams] = useSearchParams();
 
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
@@ -36,120 +30,21 @@ const ProductsWithFiltersAndSorting = () => {
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [filterSortParams, setFilterSortParams] = useState({});
+    // useEffect(() => {
+    //     setSearchParams(filterSortParams);
+    // }, [filterSortParams]);
 
     useEffect(() => {
-        if (Object.keys(firstQueryParametre).length) {
-            setFilterSortParams(firstQueryParametre);
-            setSearchParams(filterSortParams);
-            dispatch(clearParametre);
-            console.log(searchParams);
+        const initialStateFilter = getQueryParams(queryParams);
+        if (!areParamsEqual(initialStateFilter, filterSortParams)) {
+            setFilterSortParams(initialStateFilter);
+
+            const queryString = stringifyParams(initialStateFilter);
+            axios.get(`${URL}product/?${queryString}`).then((responce) => {
+                setProducts(responce.data.products);
+            });
         }
-        const search = queryParams.get("search") || "";
-        const sex = queryParams.get("sex") || "";
-        const category = queryParams.get("category") || "";
-        const style = queryParams.get("style") || "";
-        const size = queryParams.get("size") || "";
-        const minprice = queryParams.get("minprice") || "";
-        const maxprice = queryParams.get("maxprice") || "";
-        const page = queryParams.get("page") || "";
-        const limit = queryParams.get("limit") || "";
-        const sort = queryParams.get("sort") || "";
-        const hasDiscount = queryParams.get("hasdiscount") || "";
-
-        const initialStateFilter = {
-            search,
-            sex,
-            category,
-            style,
-            size,
-            minprice,
-            maxprice,
-            page,
-            limit,
-            sort,
-            hasDiscount,
-        };
-        const queryParamsToSearch = stringifyParams(initialStateFilter);
-
-        axios.get(`${URL}product/?${queryParamsToSearch}`).then((responce) => {
-            setProducts(responce.data.products);
-        });
-        // else if (Object.keys(filterSortParams).length) {
-        // const queryParams = stringifyParams(filterSortParams);
-        //     setSearchParams(queryParams);
-        //     axios.get(`${URL}product/?${queryParams}`).then((responce) => {
-        //         setProducts(responce.data.products);
-        //     });
-        // } else {
-
-        //     if (!areParamsEqual(initialStateFilter, filterSortParams)) {
-        //         setFilterSortParams(initialStateFilter);
-        //         console.log("+++++");
-        //         console.log(initialStateFilter);
-        //         const queryString = stringifyParams(initialStateFilter);
-        //         axios.get(`${URL}product/?${queryString}`).then((responce) => {
-        //             setProducts(responce.data.products);
-        //         });
-        //     }
-        // }
     }, [filterSortParams]);
-
-    // useEffect(() => {
-    //     if (Object.keys(firstQueryParametre).length) {
-    //         setFilterSortParams(firstQueryParametre);
-    //         const queryParams = stringifyParams(filterSortParams);
-    //         console.log(queryParams);
-    //         navigate(`/allproducts/?${queryParams.toString()}`);
-    //         axios.get(`${URL}product/?${queryParams}`).then((responce) => {
-    //             console.log(responce.data.products);
-    //             setProducts(responce.data.products);
-    //         });
-    //         dispatch(clearParametre);
-    //     } else if (Object.keys(filterSortParams).length) {
-    //         console.log("fsg");
-    //         const queryParams = stringifyParams(filterSortParams);
-    //         navigate(`/allproducts/?${queryParams.toString()}`);
-    //         axios.get(`${URL}product/?${queryParams}`).then((responce) => {
-    //             setProducts(responce.data.products);
-    //         });
-    //     } else {
-    //         const search = queryParams.get("search") || "";
-    //         const sex = queryParams.get("sex") || "";
-    //         const category = queryParams.get("category") || "";
-    //         const style = queryParams.get("style") || "";
-    //         const size = queryParams.get("size") || "";
-    //         const minprice = queryParams.get("minprice") || "";
-    //         const maxprice = queryParams.get("maxprice") || "";
-    //         const page = queryParams.get("page") || "";
-    //         const limit = queryParams.get("limit") || "";
-    //         const sort = queryParams.get("sort") || "";
-    //         const hasDiscount = queryParams.get("hasdiscount") || "";
-
-    //         const initialStateFilter = {
-    //             search,
-    //             sex,
-    //             category,
-    //             style,
-    //             size,
-    //             minprice,
-    //             maxprice,
-    //             page,
-    //             limit,
-    //             sort,
-    //             hasDiscount,
-    //         };
-
-    //         if (!areParamsEqual(initialStateFilter, filterSortParams)) {
-    //             setFilterSortParams(initialStateFilter);
-    //             console.log("+++++");
-    //             console.log(initialStateFilter);
-    //             const queryString = stringifyParams(initialStateFilter);
-    //             axios.get(`${URL}product/?${queryString}`).then((responce) => {
-    //                 setProducts(responce.data.products);
-    //             });
-    //         }
-    //     }
-    // }, [filterSortParams]);
 
     // Function to toogle Filters
     const toogleFilters = () => {
@@ -164,32 +59,25 @@ const ProductsWithFiltersAndSorting = () => {
         home: "/",
     };
 
-    if (firstQueryParametre.value) {
-        linksObj[firstQueryParametre.value] = `/${firstQueryParametre.value}`;
-    } else if (filterSortParams.style) {
-        linksObj[filterSortParams.style] = `/${filterSortParams.style}`;
-    }
     return (
         <section className="section">
             <AdaptiveNav linksObj={linksObj} />
 
             <div className={styles.stylePage}>
                 <Filters
-                    style={firstQueryParametre.value}
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
                     setFilterSortParams={setFilterSortParams}
                     filterSortParams={filterSortParams}
                 />
-
+                {/* <FiltersNew
+                    setFiltresVisible={setFiltresVisible}
+                    filtersAreVisible={filtersAreVisible}
+                /> */}
                 {products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
-                            <h2 className={styles.styleTitle}>
-                                {firstQueryParametre.value
-                                    ? firstQueryParametre.value
-                                    : filterSortParams.style}
-                            </h2>
+                            <h2 className={styles.styleTitle}>TITLE</h2>
                             <img
                                 className={styles.filterIcon}
                                 src={filters}

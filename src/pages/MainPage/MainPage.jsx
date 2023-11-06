@@ -11,7 +11,7 @@ import Button from "../../components/Button/Button";
 import { addArrivalsList } from "../../stores/newArrivals/actions";
 import { addTopSellingList } from "../../stores/topSelling/actions";
 import { scrollToTop } from "../../utils/scrollToTop";
-import { setStyleParametre } from "../../stores/queryParametre/action";
+// import { setStyleParametre } from "../../stores/queryParametre/action";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -41,10 +41,10 @@ const MainPage = () => {
         dispatch(addArrivalsList());
     }, [dispatch]);
 
-    const setParametres = (style) => {
-        dispatch(setStyleParametre(style));
-        scrollToTop();
-    };
+    // const setParametres = (style) => {
+    //     dispatch(setStyleParametre(style));
+    //     scrollToTop();
+    // };
     return (
         <section className="section">
             <Slider />
@@ -93,9 +93,9 @@ const MainPage = () => {
                     {dressStyles.map((style) => (
                         <Link
                             key={style.to}
-                            to="/allproducts"
+                            to={`/allproducts?page=1&limit=9&style=${style.to}`}
                             onClick={() => {
-                                setParametres(style.to);
+                                scrollToTop();
                             }}
                             className={styles.gridItem}
                         >
