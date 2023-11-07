@@ -3,7 +3,7 @@ import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import styles from "./ProductsWithFiltersAndSorting.module.css";
 import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
-import {useLocation} from "react-router-dom";
+
 import {stringifyParams} from "../../utils/stringifyParams";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Filters from "../../components/Filters/Filters";
@@ -13,49 +13,58 @@ import React, {useEffect, useState} from "react";
 import {URL} from "../../urlVariable";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {areParamsEqual} from "../../utils/areParamsEqual";
-import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
 import axios from "axios";
-import getQueryParams from "../../utils/getQueryParams";
-// import FiltersNew from "../../components/Filters/FiltersNew";
+
 import {useSearchParams} from "react-router-dom";
+import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
+import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
 
 const ProductsWithFiltersAndSorting = () => {
-    const location = useLocation();
-    // const navigate = useNavigate();
-    const queryParams = new URLSearchParams(location.search);
+
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const [nedRefreshParams, setNedRefreshParams] = useState(true);
     const isMobile = useMediaQuery("(max-width: 1298px)");
     const PageSize = isMobile ? 6 : 9;
     const [products, setProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [filterSortParams, setFilterSortParams] = useState({});
+    const [resetState, setResetState] = useState(false);
 
 
     useEffect(() => {
-        const initialStateFilter = getQueryParams(queryParams);
-        console.log("---->", initialStateFilter);
-
-        if (!areParamsEqual(initialStateFilter, filterSortParams)) {
-            setFilterSortParams(initialStateFilter);
-            const queryString = stringifyParams(initialStateFilter);
+        if (!resetState) {
+            const browserStr = paramsBrouserStr(searchParams);
+            setFilterSortParams(browserStr);
+            const queryString = stringifyParams(browserStr);
             axios.get(`${URL}product/?${queryString}`).then((responce) => {
                 setProducts(responce.data.products);
             });
+        } else {
+            resetFilter({page: 1, limit: 9, minprice: 0, maxprice: 1000});
+            setResetState(false);
         }
-    }, [filterSortParams]);
+        //eslint-disable-next-line
+    }, [nedRefreshParams, searchParams]);
 
-    //
-    // useEffect(() => {
-    //     // console.log(filterSortParams);
-    //     const newobj = removeEmptyStringKeys(filterSortParams);
-    //     setFilterSortParams(newobj);
-    //     setSearchParams(newobj);
-    //     console.log(searchParams);
-    //
-    // }, [filterSortParams]);
+    const changeFilter = (obj) => {
+        const filterObj = removeEmptyStringKeys(obj);
+        const parametrsObj = {...filterSortParams, ...filterObj};
+        setFilterSortParams(parametrsObj);
+        setSearchParams(parametrsObj);
+        setNedRefreshParams(true);
+    };
+
+    const resetFilter = (obj) => {
+        const parametrsObj = removeEmptyStringKeys(obj);
+        setFilterSortParams({});
+        setSearchParams(parametrsObj);
+        setNedRefreshParams(true);
+        setResetState(true);
+
+    };
+
 
     // Function to toogle Filters
     const toogleFilters = () => {
@@ -72,18 +81,17 @@ const ProductsWithFiltersAndSorting = () => {
 
     return (
         <section className="section">
+
             <AdaptiveNav linksObj={linksObj}/>
             <div className={styles.stylePage}>
                 <Filters
                     setFiltresVisible={setFiltresVisible}
                     filtersAreVisible={filtersAreVisible}
-                    setFilterSortParams={setFilterSortParams}
                     filterSortParams={filterSortParams}
+                    changeFilter={changeFilter}
+                    resetFilter={resetFilter}
                 />
-                {/* <FiltersNew
-                    setFiltresVisible={setFiltresVisible}
-                    filtersAreVisible={filtersAreVisible}
-                /> */}
+
                 {products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
@@ -97,7 +105,8 @@ const ProductsWithFiltersAndSorting = () => {
                                 onClick={toogleFilters}
                             />
                             <Sorting
-                                setFilterSortParams={setFilterSortParams}
+                                changeFilter={changeFilter}
+                                filterSortParams={filterSortParams}
                             />
                         </div>
 

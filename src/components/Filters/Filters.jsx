@@ -1,38 +1,34 @@
 import React, {useEffect, useState} from "react";
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
-import MultiRangeSlider from "multi-range-slider-react";
 import {useFormik} from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
+import PriceSlider from "../PriceSlider/PriceSlider";
 // import { toast } from "react-toastify";
 
 const Filters = ({
     setFiltresVisible,
     filtersAreVisible,
-    setFilterSortParams,
+    changeFilter,
     filterSortParams,
+    resetFilter
+
 }) => {
 
-    const [priceFilter, setPriceFilter] = useState({
-        minprise: 0,
-        maxprice: 1000,
-        size: "",
-        category: "",
-        sex: ""
+    const [priceFilter, setPriceFilter] = useState({});
 
-    });
-
-    const MemoizedMultiRangeSlider = React.memo(MultiRangeSlider);
-
+    //eslint-disable-next-line
     useEffect(() => {
-        setPriceFilter(filterSortParams);
+        setPriceFilter({...priceFilter, ...filterSortParams});
+        //eslint-disable-next-line
     }, [filterSortParams]);
 
 
     const sizes = ["xs", "s", "m", "l", "xl"];
 
+    const style = ["casual", "formal", "party", "gym"];
 
     const categories = [
         "jackets",
@@ -50,17 +46,30 @@ const Filters = ({
         initialValues: priceFilter,
         enableReinitialize: true
     });
-    
+
+
+    let priseState = {};
+
+    const valuePriseHandler = (obj) => {
+        priseState = {...priseState, ...obj};
+    };
+
     const applyFilters = (e) => {
         e.preventDefault();
-        console.log(formik.values);
-
+        const newSerchObj = {...formik.values, ...priseState};
+        setPriceFilter(newSerchObj);
+        changeFilter(newSerchObj);
+        formik.setValues(newSerchObj);
         closeFilters();
     };
     // Function to reset filters
     const resetFiltersForm = () => {
-        formik.resetForm();
-        setFiltresVisible(false);
+        const resetObj = {page: 1, limit: 9, minprice: 0, maxprice: 1000};
+        resetFilter(resetObj);
+        setPriceFilter({});
+        setPriceFilter({});
+        formik.setValues({});
+
     };
 
     // Function to close filters
@@ -133,42 +142,23 @@ const Filters = ({
                             {category}
                         </label>
                     ))}
+                    <h3 className={styles.filterTitle}>style</h3>
+                    {style.map((style) => (
+                        <label className={styles.filterLabel} key={style}>
+                            <input
+                                className={styles.radioInput}
+                                type="radio"
+                                name="style"
+                                value={style}
+                                onChange={formik.handleChange}
+                                checked={formik.values.style === style}
+                            />
+                            {style}
+                        </label>
+                    ))}
                 </div>
-                <div className={styles.filterPrice}>
-                    <h3 className={styles.filterTitle}>Price</h3>
-                    <MemoizedMultiRangeSlider
-                        style={{
-                            border: "none",
-                            boxShadow: "none",
-                            padding: "15px 10px",
-                        }}
-                        min={10}
-                        max={1000}
-                        minValue={priceFilter.minprice}
-                        maxValue={priceFilter.maxprice}
-                        step={10}
-                        barInnerColor="black"
-                        onChange={(e) => {
-                            setPriceFilter({
-                                ...priceFilter,
-                                minprice: e.minValue,
-                                maxprice: e.maxValue
-                            });
-                        }}
-                        label={false}
-                        ruler={false}
-                        thumbLeftColor="black"
-                        thumbRightColor="black"
-                        barLeftColor="white"
-                        barRightColor="white"
-                    />
-                    <p className={styles.filterPriceInfo}>
-                        <span>From: $</span>
-                        {priceFilter.minprice}
-                        <span>To: $</span>
-                        {priceFilter.maxprice}
-                    </p>
-                </div>
+                <PriceSlider filterState={priceFilter} valuePriseHandler={valuePriseHandler}/>
+
                 <div className={styles.filterSize}>
                     <h3 className={styles.filterTitle}>Sizes</h3>
                     {sizes.map((size) => (
@@ -216,8 +206,9 @@ const Filters = ({
 Filters.propTypes = {
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
-    setFilterSortParams: PropTypes.func.isRequired,
-    filterSortParams: PropTypes.object.isRequired,
+    changeFilter: PropTypes.func.isRequired,
+    resetFilter: PropTypes.func.isRequired,
+    filterSortParams: PropTypes.object
 };
 
 export default Filters;

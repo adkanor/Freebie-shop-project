@@ -18,7 +18,6 @@ root.render(
                 <GoogleOAuthProvider
                     script-src={"https://accounts.google.com/gsi/"}
                     clientId={GMAILID}
-
                 >
                     <App/>
                 </GoogleOAuthProvider>

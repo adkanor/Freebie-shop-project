@@ -3,14 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import style from "./Sorting.module.css";
 
-const SortFilter = ({setFilterSortParams}) => {
+const SortFilter = ({changeFilter, filterSortParams}) => {
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
-        console.log(selectedValue);
-        setFilterSortParams((prev) => ({
-            ...prev,
-            sort: selectedValue,
-        }));
+        const objSort = {sort: selectedValue};
+        changeFilter(objSort);
     };
 
     return (
@@ -23,6 +20,7 @@ const SortFilter = ({setFilterSortParams}) => {
                 id="sort-select"
                 name="sortValue"
                 onChange={handleSortChange}
+                defaultValue={filterSortParams.sort}
             >
                 <option value="az">A to Z</option>
                 <option value="za">Z to A</option>
@@ -34,6 +32,6 @@ const SortFilter = ({setFilterSortParams}) => {
 };
 
 SortFilter.propTypes = {
-    setFilterSortParams: PropTypes.func.isRequired,
+    changeFilter: PropTypes.func.isRequired,
 };
 export default SortFilter;
