@@ -1,30 +1,35 @@
-import React from "react";
-
+import React, {useEffect, useState} from "react";
 import styles from "./Filters.module.css";
 import filters from "../../assets/icons/Filter/Edit.svg";
-import MultiRangeSlider from "multi-range-slider-react";
-import { useFormik } from "formik";
+import {useFormik} from "formik";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/icons/Filter/Close.svg";
+import PriceSlider from "../PriceSlider/PriceSlider";
+// import { toast } from "react-toastify";
 
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    setFilters,
-    resetFilters,
-} from "../../stores/pageWithFiltersProducts/action";
 const Filters = ({
     setFiltresVisible,
     filtersAreVisible,
-    style,
-    setCurrentPage,
-}) => {
-    const dispatch = useDispatch();
+    changeFilter,
+    filterSortParams,
+    resetFilter
 
-    const MIN_PRICE = 10;
-    const MAX_PRICE = 1000;
-    const sizes = ["XS", "S", "M", "L", "XL"];
+}) => {
+
+    const [priceFilter, setPriceFilter] = useState({});
+
+    //eslint-disable-next-line
+    useEffect(() => {
+        setPriceFilter({...priceFilter, ...filterSortParams});
+        //eslint-disable-next-line
+    }, [filterSortParams]);
+
+
+    const sizes = ["xs", "s", "m", "l", "xl"];
+
+    const style = ["casual", "formal", "party", "gym"];
+
     const categories = [
         "jackets",
         "coats",
@@ -37,70 +42,34 @@ const Filters = ({
         "joggers",
     ];
 
-    let productsNotFiltered = useSelector(
-        (state) => state.getAllProductsByStyleReducer.productByStyle
-    );
     const formik = useFormik({
-        initialValues: {
-            category: "",
-            minPrice: MIN_PRICE,
-            maxPrice: MAX_PRICE,
-            size: "",
-            sex: "",
-        },
+        initialValues: priceFilter,
+        enableReinitialize: true
     });
 
-    // Function for processing price changes
-    const changePriceInput = (e) => {
-        formik.setFieldValue("minPrice", e.minValue);
-        formik.setFieldValue("maxPrice", e.maxValue);
+
+    let priseState = {};
+
+    const valuePriseHandler = (obj) => {
+        priseState = {...priseState, ...obj};
     };
 
-    // Function for applying filters
     const applyFilters = (e) => {
-        setCurrentPage(1);
         e.preventDefault();
-        let filteredProductsCopy = [...productsNotFiltered];
-
-        if (formik.values.category !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) => product.category === formik.values.category
-            );
-        }
-        if (formik.values.size !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter((product) =>
-                product.sizes.some(
-                    (sizeObj) => sizeObj.size === formik.values.size
-                )
-            );
-        }
-        if (formik.values.sex !== "") {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) => product.sex === formik.values.sex
-            );
-        }
-        if (formik.values.minPrice && formik.values.maxPrice) {
-            filteredProductsCopy = filteredProductsCopy.filter(
-                (product) =>
-                    product.final_price >= formik.values.minPrice &&
-                    product.final_price <= formik.values.maxPrice
-            );
-        }
-        if (filteredProductsCopy.length > 0) {
-            dispatch(setFilters(filteredProductsCopy));
-
-            closeFilters();
-        } else {
-            toast.error("No filters match");
-        }
+        const newSerchObj = {...formik.values, ...priseState};
+        setPriceFilter(newSerchObj);
+        changeFilter(newSerchObj);
+        formik.setValues(newSerchObj);
+        closeFilters();
     };
-
     // Function to reset filters
     const resetFiltersForm = () => {
-        setCurrentPage(1);
-        dispatch(resetFilters);
-        formik.resetForm();
-        setFiltresVisible(false);
+        const resetObj = {page: 1, limit: 9, minprice: 0, maxprice: 1000};
+        resetFilter(resetObj);
+        setPriceFilter({});
+        setPriceFilter({});
+        formik.setValues({});
+
     };
 
     // Function to close filters
@@ -109,14 +78,13 @@ const Filters = ({
         setFiltresVisible(false);
     };
 
+
     return (
-        <aside
-            className={` ${
-                filtersAreVisible
-                    ? styles.filterSection
-                    : styles.hiddenfilterSection
-            }`}
-        >
+        <aside className={` ${
+            filtersAreVisible
+                ? styles.filterSection
+                : styles.hiddenfilterSection
+        }`}>
             <div className={styles.filterHeader}>
                 <h2 className={styles.filtersName}>Filters</h2>
                 <img
@@ -132,33 +100,32 @@ const Filters = ({
                 />
             </div>
             <form onSubmit={applyFilters}>
-                {style !== "female" && style !== "male" ? (
-                    <div className={styles.filterSex}>
-                        <h3 className={styles.filterTitle}>Gender</h3>
-                        <label className={styles.filterLabel}>
-                            <input
-                                className={styles.radioInput}
-                                type="radio"
-                                name="sex"
-                                value="male"
-                                onChange={formik.handleChange}
-                                checked={formik.values.sex === "male"}
-                            />
-                            male
-                        </label>
-                        <label className={styles.filterLabel}>
-                            <input
-                                className={styles.radioInput}
-                                type="radio"
-                                name="sex"
-                                value="female"
-                                onChange={formik.handleChange}
-                                checked={formik.values.sex === "female"}
-                            />
-                            female
-                        </label>
-                    </div>
-                ) : null}
+
+                <div className={styles.filterSex}>
+                    <h3 className={styles.filterTitle}>Gender</h3>
+                    <label className={styles.filterLabel}>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="sex"
+                            value="male"
+                            onChange={formik.handleChange}
+                            checked={formik.values.sex === "male"}
+                        />
+                        male
+                    </label>
+                    <label className={styles.filterLabel}>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="sex"
+                            value="female"
+                            onChange={formik.handleChange}
+                            checked={formik.values.sex === "female"}
+                        />
+                        female
+                    </label>
+                </div>
 
                 <div className={styles.filterCategory}>
                     <h3 className={styles.filterTitle}>Categories</h3>
@@ -175,41 +142,27 @@ const Filters = ({
                             {category}
                         </label>
                     ))}
+                    <h3 className={styles.filterTitle}>style</h3>
+                    {style.map((style) => (
+                        <label className={styles.filterLabel} key={style}>
+                            <input
+                                className={styles.radioInput}
+                                type="radio"
+                                name="style"
+                                value={style}
+                                onChange={formik.handleChange}
+                                checked={formik.values.style === style}
+                            />
+                            {style}
+                        </label>
+                    ))}
                 </div>
-                <div className={styles.filterPrice}>
-                    <h3 className={styles.filterTitle}>Price</h3>
-                    <MultiRangeSlider
-                        style={{
-                            border: "none",
-                            boxShadow: "none",
-                            padding: "15px 10px",
-                        }}
-                        min={10}
-                        max={1000}
-                        minValue={MIN_PRICE}
-                        maxValue={MAX_PRICE}
-                        step={10}
-                        barInnerColor="black"
-                        onInput={(e) => {
-                            changePriceInput(e);
-                        }}
-                        label={false}
-                        ruler={false}
-                        thumbLeftColor="black"
-                        thumbRightColor="black"
-                        barLeftColor="white"
-                        barRightColor="white"
-                    />
-                    <p className={styles.filterPriceInfo}>
-                        <span>From: $</span>
-                        {formik.values.minPrice}
-                        <span>To: $</span>
-                        {formik.values.maxPrice}
-                    </p>
-                </div>
+                <PriceSlider filterState={priceFilter} valuePriseHandler={valuePriseHandler}/>
+
                 <div className={styles.filterSize}>
                     <h3 className={styles.filterTitle}>Sizes</h3>
                     {sizes.map((size) => (
+
                         <label key={size} className={styles.filterLabel}>
                             <input
                                 className={styles.radioInput}
@@ -220,6 +173,7 @@ const Filters = ({
                                 checked={formik.values.size === size}
                             />
                             {size}
+
                         </label>
                     ))}
                 </div>
@@ -252,8 +206,9 @@ const Filters = ({
 Filters.propTypes = {
     setFiltresVisible: PropTypes.func.isRequired,
     filtersAreVisible: PropTypes.bool.isRequired,
-    style: PropTypes.string,
-    setCurrentPage: PropTypes.func.isRequired,
+    changeFilter: PropTypes.func.isRequired,
+    resetFilter: PropTypes.func.isRequired,
+    filterSortParams: PropTypes.object
 };
 
 export default Filters;
