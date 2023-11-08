@@ -1,13 +1,13 @@
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import styles from "./ProductsWithFiltersAndSorting.module.css";
-import Pagination from "../../components/Pagination/Pagination";
+// import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
 
 import {stringifyParams} from "../../utils/stringifyParams";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Filters from "../../components/Filters/Filters";
-import {useMediaQuery} from "@react-hook/media-query";
+// import {useMediaQuery} from "@react-hook/media-query";
 import Button from "../../components/Button/Button";
 import React, {useEffect, useState} from "react";
 import {URL} from "../../urlVariable";
@@ -18,19 +18,20 @@ import axios from "axios";
 import {useSearchParams} from "react-router-dom";
 import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
 import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
+import PaginationNew from "../../components/Pagination/PaginationNew";
 
 const ProductsWithFiltersAndSorting = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [nedRefreshParams, setNedRefreshParams] = useState(true);
-    const isMobile = useMediaQuery("(max-width: 1298px)");
-    const PageSize = isMobile ? 6 : 9;
+    // const isMobile = useMediaQuery("(max-width: 1298px)");
+    // const PageSize = isMobile ? 6 : 9;
     const [products, setProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
     const [filterSortParams, setFilterSortParams] = useState({});
     const [resetState, setResetState] = useState(false);
+    const [hasNextPage, setHasNextPage] = useState(true);
 
 
     useEffect(() => {
@@ -39,6 +40,7 @@ const ProductsWithFiltersAndSorting = () => {
             setFilterSortParams(browserStr);
             const queryString = stringifyParams(browserStr);
             axios.get(`${URL}product/?${queryString}`).then((responce) => {
+                setHasNextPage(responce.data.hasNextPage);
                 setProducts(responce.data.products);
             });
         } else {
@@ -72,9 +74,9 @@ const ProductsWithFiltersAndSorting = () => {
     };
     // Function to switch pages
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
+    // const handlePageChange = (page) => {
+    //     setCurrentPage(page);
+    // };
     const linksObj = {
         home: "/",
     };
@@ -124,13 +126,17 @@ const ProductsWithFiltersAndSorting = () => {
                                 />
                             ))}
                         </ul>
-                        <Pagination
-                            className="pagination-bar"
-                            currentPage={currentPage}
-                            totalCount={products.length}
-                            pageSize={PageSize}
-                            onPageChange={handlePageChange}
-                        />
+                        {/*<Pagination*/}
+                        {/*    className="pagination-bar"*/}
+                        {/*    currentPage={currentPage}*/}
+                        {/*    totalCount={products.length}*/}
+                        {/*    pageSize={PageSize}*/}
+                        {/*    onPageChange={handlePageChange}*/}
+                        {/*/>*/}
+                        <PaginationNew
+                            pageProps={parseInt(filterSortParams.page)}
+                            isAble={hasNextPage}
+                            changeFilter={changeFilter}/>
                     </div>
                 ) : (
                     <div className={styles.noProducts}>

@@ -1,19 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import styles from "./PaginationNew.module.css";
 import LeftArrow from "../../assets/icons/ArrowsSlider/arrowLeft.svg";
 import RightArrow from "../../assets/icons/ArrowsSlider/arrowRight.svg";
 import Button from "../../components/Button/Button";
 
-const PaginationNew = ({ page, isAble }) => {
+const PaginationNew = ({pageProps, isAble, changeFilter}) => {
+    const [page, setPage] = useState();
+
+    useEffect(() => {
+        const pageNum = parseInt(pageProps);
+        setPage(pageNum);
+    }, [pageProps]);
+
+
     const onPrevClick = () => {
         if (page > 1) {
-            console.log("click previous");
+            const prevPage = page - 1;
+            changeFilter({page: prevPage});
+
         }
     };
     const onNextClick = () => {
         if (isAble) {
-            console.log("click next");
+            const nextPage = page + 1;
+            changeFilter({page: nextPage});
         }
     };
     const commonButtonStyle = {
@@ -45,7 +56,7 @@ const PaginationNew = ({ page, isAble }) => {
                     boxShadow: page === 1 ? "none" : null,
                 }}
             >
-                <img src={LeftArrow} alt="LeftArrow" className={styles.arrow} />
+                <img src={LeftArrow} alt="LeftArrow" className={styles.arrow}/>
             </Button>
 
             <div className={styles.page}>{page}</div>
@@ -72,8 +83,10 @@ const PaginationNew = ({ page, isAble }) => {
 };
 
 PaginationNew.propTypes = {
-    page: PropTypes.number.isRequired,
-    isAble: PropTypes.bool.isRequired,
+    pageProps: PropTypes.number,
+    isAble: PropTypes.bool,
+    changeFilter: PropTypes.func,
+
 };
 
 export default PaginationNew;
