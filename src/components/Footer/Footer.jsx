@@ -85,35 +85,18 @@ function Footer() {
                             initialValues={{ email: "" }}
                             onSubmit={async (values, actions) => {
                                 try {
-                                    const apiUrl =
-                                        "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
-                                    await axios.post(apiUrl, values);
-                                    const response = await axios.post(
-                                        apiUrl,
-                                        values
-                                    );
+                                    const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
+                                    const response = await axios.post(apiUrl, values);
+                                    
                                     if (response.status === 200) {
-                                        toast.success(
-                                            "Successful subscription to the newsletter!"
-                                        );
-                                    } else if (response.status === 400) {
-                                        if (
-                                            response.data.message ===
-                                            "The user is already subscribed to the store"
-                                        ) {
-                                            toast.info(
-                                                "User is already subscribed to the store"
-                                            );
+                                        const responseData = response.data;
+                                        if (responseData.status === 400) {
+                                            toast.error("You are already subscribed to the store");
                                         } else {
-                                            toast.error(
-                                                "Error: " + response.data
-                                            );
+                                            toast.success("You have successfully subscribed to the newsletter!");
                                         }
-                                        setIsErrorMessageVisible(true);
                                     } else {
-                                        toast.error(
-                                            "Server error: Server Error"
-                                        );
+                                        toast.error("Error: Unexpected status - " + response.status);
                                     }
                                     setIsErrorMessageVisible(true);
                                     actions.resetForm();

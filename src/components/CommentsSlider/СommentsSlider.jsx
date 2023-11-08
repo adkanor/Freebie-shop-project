@@ -51,7 +51,7 @@ const CommentsSlider = ({title, link}) => {
             commentaries={item.text}
             rating={item.rating}
             style={{
-                width: "350px",
+                width: "330px",
                 height: "200px",
                 margin: "0 auto 10px",
 
