@@ -35,7 +35,7 @@ const styleDisabled = {
 };
 
 const DetailProduct = () => {
-    const [recomendUrl, setRecomendUrl] = useState();
+    const [recomendUrl, setRecomendUrl] = useState("");
     const [info, setInfo] = useState(null);
     const {id} = useParams();
     const dispatch = useDispatch();
