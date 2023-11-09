@@ -1,5 +1,4 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import styles from "./MainPage.module.css";
 import {Link} from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
@@ -8,15 +7,11 @@ import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-import {addArrivalsList} from "../../stores/newArrivals/actions";
-import {addTopSellingList} from "../../stores/topSelling/actions";
 import {scrollToTop} from "../../utils/scrollToTop";
-// import { setStyleParametre } from "../../stores/queryParametre/action";
+
 
 const MainPage = () => {
-    const dispatch = useDispatch();
-    const newArrivals = useSelector((state) => state.newArrivalsReducer);
-    const topSaleList = useSelector((state) => state.topSaleReducer);
+
 
     const dressStyles = [
         {
@@ -36,24 +31,14 @@ const MainPage = () => {
             label: "Gym",
         },
     ];
-    useEffect(() => {
-        dispatch(addTopSellingList());
-        dispatch(addArrivalsList());
-    }, [dispatch]);
 
-    // const setParametres = (style) => {
-    //     dispatch(setStyleParametre(style));
-    //     scrollToTop();
-    // };
     return (
         <section className="section">
             <Slider/>
             <BrandBox/>
-            <RecommendationProducts
-                arrayofProducts={newArrivals}
-                title={"New Arrivals"}
+            <RecommendationProducts urlParams={"page=1&limit=4&sort=new"} title={"New Arrivals"}
             >
-                <Link to="search/new-arrivals" onClick={scrollToTop}>
+                <Link to="/otherproduct?page=1&limit=8&sort=new" onClick={scrollToTop}>
                     <Button
                         text="View all"
                         style={{
@@ -68,11 +53,8 @@ const MainPage = () => {
                     />
                 </Link>
             </RecommendationProducts>
-            <RecommendationProducts
-                title={"Top Selling"}
-                arrayofProducts={topSaleList}
-            >
-                <Link to="search/top-selling" onClick={scrollToTop}>
+            <RecommendationProducts urlParams={"page=1&limit=4&sort=topsales"} title={"Top Selling"}>
+                <Link to="/otherproduct?page=1&limit=8&sort=topsales" onClick={scrollToTop}>
                     <Button
                         text="View all"
                         style={{
