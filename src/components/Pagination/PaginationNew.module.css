@@ -1,0 +1,51 @@
+.paginationContainer {
+    box-sizing: border-box;
+    padding: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid var(--separator-line);
+    margin-top: 25px;
+}
+.arrowBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border: 1px solid var(--separator-line);
+    border-radius: 8px;
+    font-family: "Satoshi";
+    font-weight: 400;
+    font-size: 10px;
+    user-select: none;
+}
+.arrow {
+    width: 15px;
+}
+.page {
+    padding: 0 10px;
+    height: 20px;
+    text-align: center;
+    font-family: "Satoshi";
+    font-weight: 400;
+    color: var(--gray-text-secondary);
+    font-size: 16px;
+    user-select: none;
+}
+
+@media (min-width: 766px) {
+    .arrowBox {
+        gap: 10px;
+        font-size: 18px;
+        font-family: "Satoshi";
+        font-weight: 500;
+        padding: 10px 16px;
+    }
+    .arrow {
+        width: 20px;
+    }
+    .page {
+        font-size: 22px;
+    }
+}

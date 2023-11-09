@@ -9,7 +9,7 @@ import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
-import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
+// import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
@@ -23,6 +23,7 @@ import About from "./pages/About/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions/TermsAndConditions";
 import Brands from "./pages/Brands/Brands";
+import ProductsWithFiltersAndSorting from "./pages/ProductsWithFiltersAndSorting/ProductsWithFiltersAndSorting";
 
 const App = () => {
     return (
@@ -31,9 +32,13 @@ const App = () => {
             <ToastContainer limit={3} autoClose={1500} position="bottom-left" />
             <Routes>
                 <Route path="/" element={<MainSection />} />
-                <Route path="/:style" element={<ProductsByStyle />} />
+                {/* <Route path="/:style/" element={<ProductsByStyle />} /> */}
+                <Route
+                    path="/allproducts"
+                    element={<ProductsWithFiltersAndSorting />}
+                />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/search/:value" element={<SearchResult />} />
+                <Route path="/search/:value/*" element={<SearchResult />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
                 <Route path="/cart/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />

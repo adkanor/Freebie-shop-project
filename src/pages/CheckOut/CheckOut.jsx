@@ -17,12 +17,16 @@ import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import { toast } from "react-toastify";
+import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
+    const cartItems = cartProducts.cartItems;
+    const cartData = cartSummaryCalculate(cartItems);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token") || "";
+    const token = localStorage.getItem("token") || null;
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
@@ -59,7 +63,7 @@ const CheckOut = () => {
         }
     };
 
-    const funct = async (data) => {
+    const addToOrders = async (data) => {
         try {
             const response = await axios.post(
                 "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
@@ -93,9 +97,9 @@ const CheckOut = () => {
                 new Date().toLocaleDateString() +
                 " " +
                 new Date().toLocaleTimeString(),
-            totalValue: Number(cartProducts.final_total.toFixed(2)),
+            totalValue: Number(cartData.finalTotal.toFixed(2)),
         };
-        await funct(orderData);
+        await addToOrders(orderData);
         if (token) {
             await sendFormToServer(values);
         }
@@ -128,17 +132,18 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            firstName: userData ? userData.userName : "",
-                            companyName: userData ? userData.companyName : "",
-                            streetAddress: userData
-                                ? userData.streetAddress
-                                : "",
-                            apartmentInfo: userData
-                                ? userData.apartmentInfo
-                                : "",
-                            city: userData ? userData.city : "",
-                            phoneNumber: userData ? userData.phoneNumber : "",
-                            email: userData ? userData.email : "",
+                            firstName:
+                                userData && token ? userData.userName : "",
+                            companyName:
+                                userData && token ? userData.companyName : "",
+                            streetAddress:
+                                userData && token ? userData.streetAddress : "",
+                            apartmentInfo:
+                                userData && token ? userData.apartmentInfo : "",
+                            city: userData && token ? userData.city : "",
+                            phoneNumber:
+                                userData && token ? userData.phoneNumber : "",
+                            email: userData && token ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
@@ -149,7 +154,7 @@ const CheckOut = () => {
                                     isCheckOut={true}
                                     errors={errors}
                                     touched={touched}
-                                ></ProfileForm>
+                                />
                             </>
                         )}
                     </Formik>
