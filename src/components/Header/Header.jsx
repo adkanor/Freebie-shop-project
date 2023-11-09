@@ -68,6 +68,7 @@ const Header = () => {
                 }
                 if (res.data.status !== 200) {
                     redirectLogin();
+                    localStorage.removeItem("token");
                 }
             });
     };
@@ -101,7 +102,9 @@ const Header = () => {
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
-                navigate(`/search/${query}`);
+                navigate(
+                    `/allproducts?page=1&limit=9&search=${query}&minprice=0&maxprice=1000`
+                );
                 hideSearch();
             }, 2500);
             hideAll();
