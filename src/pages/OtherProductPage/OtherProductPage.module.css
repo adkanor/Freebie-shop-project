@@ -1,0 +1,28 @@
+.noProducts {
+    width: 30%;
+    padding: 30px;
+    border: 1px solid var(--separator-line);
+    border-radius: 20px;
+
+}
+
+.noProductsMessage,
+.noProductsError {
+    color: var(--black-text);
+    font-family: "Satoshi";
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.noProductsError {
+    font-size: 30px;
+}
+
+.goHomeLink {
+    text-decoration: none;
+}
+
+.otherPageContainer {
+    margin: 0 auto;
+}

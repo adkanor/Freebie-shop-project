@@ -143,7 +143,8 @@ const ProductsWithFiltersAndSorting = () => {
                         <PaginationNew
                             pageProps={parseInt(filterSortParams.page)}
                             isAble={hasNextPage}
-                            changeFilter={changeFilter}/>
+                            changeFilter={changeFilter}
+                        />
                     </div>
                 ) : (
                     <div className={styles.noProducts}>
