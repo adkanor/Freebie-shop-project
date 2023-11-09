@@ -34,9 +34,8 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
 
     const search = (value) => {
         axios
-            .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/search",
-                { word: value }
+            .get(
+                `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/product?page=1&limit=4&search=${value}`
             )
             .then((res) => {
                 if (res.status === 200) {
@@ -46,7 +45,7 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                 }
             })
             .then((data) => {
-                setOptions(data.resultArray.slice(0, 4));
+                setOptions(data.products);
             })
             .catch((error) => {
                 console.error("Произошла ошибка при запросе:", error);
