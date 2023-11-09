@@ -4,9 +4,11 @@ import styles from "./PaginationNew.module.css";
 import LeftArrow from "../../assets/icons/ArrowsSlider/arrowLeft.svg";
 import RightArrow from "../../assets/icons/ArrowsSlider/arrowRight.svg";
 import Button from "../../components/Button/Button";
+import {scrollToTop} from "../../utils/scrollToTop";
 
 const PaginationNew = ({pageProps, isAble, changeFilter}) => {
-    const [page, setPage] = useState();
+    const [page, setPage] = useState(1);
+
 
     useEffect(() => {
         const pageNum = parseInt(pageProps);
@@ -18,6 +20,7 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
         if (page > 1) {
             const prevPage = page - 1;
             changeFilter({page: prevPage});
+            scrollToTop();
 
         }
     };
@@ -25,6 +28,7 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
         if (isAble) {
             const nextPage = page + 1;
             changeFilter({page: nextPage});
+            scrollToTop();
         }
     };
     const commonButtonStyle = {
@@ -83,9 +87,9 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
 };
 
 PaginationNew.propTypes = {
-    pageProps: PropTypes.number,
-    isAble: PropTypes.bool,
-    changeFilter: PropTypes.func,
+    pageProps: PropTypes.any,
+    isAble: PropTypes.any,
+    changeFilter: PropTypes.any,
 
 };
 

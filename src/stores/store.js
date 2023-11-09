@@ -1,9 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
+import {combineReducers} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import newArrivalsReducer from "./newArrivals/newArrivalsReducer";
-import topSaleReducer from "./topSelling/topSellingReducer";
 import cartReducer from "./cartProducts/cartReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import getAllProductsByStyleReducer from "./pageWithFiltersProducts/productByStyleReducer";
@@ -17,8 +15,6 @@ import {
 } from "redux-state-sync";
 
 const rootReducer = combineReducers({
-    newArrivalsReducer,
-    topSaleReducer,
     searchResultReducer,
     cartReducer,
     favoritesReducer,
