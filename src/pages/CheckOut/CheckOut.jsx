@@ -26,7 +26,7 @@ const CheckOut = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token") || "";
+    const token = localStorage.getItem("token") || null;
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
@@ -132,17 +132,18 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            firstName: userData ? userData.userName : "",
-                            companyName: userData ? userData.companyName : "",
-                            streetAddress: userData
-                                ? userData.streetAddress
-                                : "",
-                            apartmentInfo: userData
-                                ? userData.apartmentInfo
-                                : "",
-                            city: userData ? userData.city : "",
-                            phoneNumber: userData ? userData.phoneNumber : "",
-                            email: userData ? userData.email : "",
+                            firstName:
+                                userData && token ? userData.userName : "",
+                            companyName:
+                                userData && token ? userData.companyName : "",
+                            streetAddress:
+                                userData && token ? userData.streetAddress : "",
+                            apartmentInfo:
+                                userData && token ? userData.apartmentInfo : "",
+                            city: userData && token ? userData.city : "",
+                            phoneNumber:
+                                userData && token ? userData.phoneNumber : "",
+                            email: userData && token ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
@@ -153,7 +154,7 @@ const CheckOut = () => {
                                     isCheckOut={true}
                                     errors={errors}
                                     touched={touched}
-                                ></ProfileForm>
+                                />
                             </>
                         )}
                     </Formik>

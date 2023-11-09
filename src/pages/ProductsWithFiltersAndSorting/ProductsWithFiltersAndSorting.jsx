@@ -19,6 +19,7 @@ import {useSearchParams} from "react-router-dom";
 import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
 import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
 import PaginationNew from "../../components/Pagination/PaginationNew";
+import Preloader from "../../components/Preloader/Preloader";
 
 const ProductsWithFiltersAndSorting = () => {
 
@@ -32,20 +33,23 @@ const ProductsWithFiltersAndSorting = () => {
     const [filterSortParams, setFilterSortParams] = useState({});
     const [resetState, setResetState] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(true);
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!resetState) {
+            setLoading(true);
             const browserStr = paramsBrouserStr(searchParams);
             setFilterSortParams(browserStr);
             const queryString = stringifyParams(browserStr);
             axios.get(`${URL}product/?${queryString}`).then((responce) => {
                 setHasNextPage(responce.data.hasNextPage);
                 setProducts(responce.data.products);
+                setLoading(false);
             });
         } else {
             resetFilter({page: 1, limit: 9, minprice: 0, maxprice: 1000});
             setResetState(false);
+            setLoading(false);
         }
         //eslint-disable-next-line
     }, [nedRefreshParams, searchParams]);
@@ -93,8 +97,11 @@ const ProductsWithFiltersAndSorting = () => {
                     changeFilter={changeFilter}
                     resetFilter={resetFilter}
                 />
-
-                {products.length > 0 ? (
+                {loading ? (
+                    <div className={styles.PreloaderBox}>
+                        <Preloader />
+                    </div>
+                ) : products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
                             <h2 className={styles.styleTitle}>TITLE</h2>
@@ -136,7 +143,8 @@ const ProductsWithFiltersAndSorting = () => {
                         <PaginationNew
                             pageProps={parseInt(filterSortParams.page)}
                             isAble={hasNextPage}
-                            changeFilter={changeFilter}/>
+                            changeFilter={changeFilter}
+                        />
                     </div>
                 ) : (
                     <div className={styles.noProducts}>
