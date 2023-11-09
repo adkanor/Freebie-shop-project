@@ -61,6 +61,14 @@
     text-decoration: none;
 }
 
+.PreloaderBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
 @media (min-width: 766px) {
     .filterIcon {
         display: none;
