@@ -16,9 +16,10 @@
 
 .hiddenfilterSection {
     display: none;
-
 }
-
+.sizes {
+    text-transform: uppercase;
+}
 .filterHeader {
     display: flex;
     justify-content: space-between;
@@ -73,7 +74,16 @@
     color: var(--gray-text-primary);
     text-transform: capitalize;
 }
-
+.filterLabelSizes {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-family: "Satoshi";
+    font-weight: 400;
+    color: var(--gray-text-primary);
+    text-transform: uppercase;
+}
 .radioInput {
     appearance: none;
     width: 15px;
@@ -118,7 +128,6 @@
         min-width: 300px;
         width: 300px;
         border-radius: 20px;
-
     }
 
     .filterLabel {

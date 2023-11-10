@@ -1,5 +1,5 @@
 import axios from "axios";
-import { URL } from "../../urlVariable";
+import { URL } from "../../variables";
 
 export const getCartItems = async () => {
     const token = localStorage.getItem("token");

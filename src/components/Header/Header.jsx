@@ -16,6 +16,8 @@ import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { checkAuthorization } from "../../stores/authorization/actions";
+import { defaultParams } from "../../variables";
+
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -108,9 +110,7 @@ const Header = () => {
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
-                navigate(
-                    `/allproducts?page=1&limit=9&search=${query}&minprice=0&maxprice=1000`
-                );
+                navigate(`${defaultParams}search=${query}`);
                 hideSearch();
             }, 2500);
             hideAll();
