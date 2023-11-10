@@ -38,8 +38,7 @@ const Header = () => {
     );
     useEffect(() => {
         dispatch(checkAuthorization(token));
-        console.log(isPersonAutorised);
-    }, [token]);
+    }, [token, dispatch]);
 
     useEffect(() => {
         if ((!showNav && !showSearch) || isDesktop) {
