@@ -7,12 +7,9 @@ import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-
-import {scrollToTop} from "../../utils/scrollToTop";
-import {URL} from "../../urlVariable";
-
-
-
+import { scrollToTop } from "../../utils/scrollToTop";
+import { URL } from "../../variables";
+import { defaultParams } from "../../variables";
 const MainPage = () => {
     const dressStyles = [
         {
@@ -87,7 +84,7 @@ const MainPage = () => {
                     {dressStyles.map((style) => (
                         <Link
                             key={style.to}
-                            to={`/allproducts?page=1&limit=9&style=${style.to}&minprice=0&maxprice=1000`}
+                            to={`${defaultParams}style=${style.to}`}
                             onClick={() => {
                                 scrollToTop();
                             }}

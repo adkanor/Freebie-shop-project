@@ -2,15 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "../Header/Header.module.css";
 import { Link } from "react-router-dom";
+import { defaultParams } from "../../variables";
 
 const NavigationBar = ({ classList, clickFunc }) => {
     return (
         <ul className={classList}>
             <li className={styles.desktopItem}>
                 <Link
-                    to={
-                        "/allproducts?page=1&limit=9&sex=female&minprice=0&maxprice=1000"
-                    }
+                    to={`${defaultParams}sex=female`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>Female</p>
@@ -18,9 +17,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
             </li>
             <li className={styles.desktopItem}>
                 <Link
-                    to={
-                        "/allproducts?page=1&limit=9&sex=male&minprice=0&maxprice=1000"
-                    }
+                    to={`${defaultParams}sex=male`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>Male</p>
@@ -28,9 +25,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
             </li>
             <li className={styles.desktopItem}>
                 <Link
-                    to={
-                        "/allproducts?page=1&limit=9&hasdiscount=true&minprice=0&maxprice=1000"
-                    }
+                    to={`${defaultParams}hasdiscount=true`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>On Sale</p>
