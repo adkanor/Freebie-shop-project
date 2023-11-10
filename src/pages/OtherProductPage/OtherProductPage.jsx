@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {Link, useSearchParams} from "react-router-dom";
-import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
-import {stringifyParams} from "../../utils/stringifyParams";
+import React, { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { paramsBrouserStr } from "../../utils/paramsObjectWidthBrowserStr";
+import { stringifyParams } from "../../utils/stringifyParams";
 import axios from "axios";
-import {URL} from "../../urlVariable";
+import { URL } from "../../variables";
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import styles from "../FavouritesPage/FavouritesPage.module.css";
 import TitleOtherPage from "../../components/TitleOtherPage/TitleOtherPage";
@@ -11,7 +11,6 @@ import PaginationNew from "../../components/Pagination/PaginationNew";
 import style from "./OtherProductPage.module.css";
 import Button from "../../components/Button/Button";
 import Preloader from "../../components/Preloader/Preloader";
-
 
 const OtherProductPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -22,12 +21,10 @@ const OtherProductPage = () => {
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
 
-    
     const changePage = (object) => {
-        const newObj = {...searchParamsObj, ...object};
+        const newObj = { ...searchParamsObj, ...object };
         setSearchParams(newObj);
         setNedRefreshParams(true);
-
     };
 
     useEffect(() => {
@@ -35,7 +32,6 @@ const OtherProductPage = () => {
             setHasNextPage(false);
         }
     }, [searchParamsObj]);
-
 
     useEffect(() => {
         const browserStr = paramsBrouserStr(searchParams);
@@ -57,7 +53,7 @@ const OtherProductPage = () => {
 
     return (
         <div className={`section ${style.otherPageContainer}`}>
-            <TitleOtherPage paramsObj={searchParamsObj}/>
+            <TitleOtherPage paramsObj={searchParamsObj} />
             {loading ? (
                 <Preloader />
             ) : products.length > 0 ? (
@@ -108,4 +104,3 @@ const OtherProductPage = () => {
 };
 
 export default OtherProductPage;
-
