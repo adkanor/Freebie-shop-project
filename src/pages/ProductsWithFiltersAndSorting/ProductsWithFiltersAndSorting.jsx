@@ -1,40 +1,32 @@
 import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import styles from "./ProductsWithFiltersAndSorting.module.css";
-// import Pagination from "../../components/Pagination/Pagination";
 import Sorting from "../../components/SortingBlock/Sorting";
-
-import {stringifyParams} from "../../utils/stringifyParams";
+import { stringifyParams } from "../../utils/stringifyParams";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Filters from "../../components/Filters/Filters";
-// import {useMediaQuery} from "@react-hook/media-query";
 import Button from "../../components/Button/Button";
-import React, {useEffect, useState} from "react";
-import {URL} from "../../urlVariable";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { URL } from "../../variables";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
-
-import {useSearchParams} from "react-router-dom";
-import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
-import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
+import { useSearchParams } from "react-router-dom";
+import { paramsBrouserStr } from "../../utils/paramsObjectWidthBrowserStr";
+import { removeEmptyStringKeys } from "../../utils/removeEmptyStringKeys";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import Preloader from "../../components/Preloader/Preloader";
-
+import { getStyleValue } from "../../utils/generateTitle";
 const ProductsWithFiltersAndSorting = () => {
-
     const [searchParams, setSearchParams] = useSearchParams();
     const [nedRefreshParams, setNedRefreshParams] = useState(true);
-    // const isMobile = useMediaQuery("(max-width: 1298px)");
-    // const PageSize = isMobile ? 6 : 9;
     const [products, setProducts] = useState([]);
     const [filtersAreVisible, setFiltresVisible] = useState(false);
-    // const [currentPage, setCurrentPage] = useState(1);
     const [filterSortParams, setFilterSortParams] = useState({});
     const [resetState, setResetState] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);
-
+    const [title, setTitle] = useState("345");
     useEffect(() => {
         if (!resetState) {
             setLoading(true);
@@ -47,16 +39,20 @@ const ProductsWithFiltersAndSorting = () => {
                 setLoading(false);
             });
         } else {
-            resetFilter({page: 1, limit: 9, minprice: 0, maxprice: 1000});
+            resetFilter({ page: 1, limit: 9, minprice: 0, maxprice: 1000 });
             setResetState(false);
             setLoading(false);
         }
         //eslint-disable-next-line
     }, [nedRefreshParams, searchParams]);
-
+    useEffect(() => {
+        const titleValue = getStyleValue(filterSortParams);
+        console.log(titleValue);
+        setTitle(titleValue);
+    }, [filterSortParams]);
     const changeFilter = (obj) => {
         const filterObj = removeEmptyStringKeys(obj);
-        const parametrsObj = {...filterSortParams, ...filterObj};
+        const parametrsObj = { ...filterSortParams, ...filterObj };
         setFilterSortParams(parametrsObj);
         setSearchParams(parametrsObj);
         setNedRefreshParams(true);
@@ -68,27 +64,20 @@ const ProductsWithFiltersAndSorting = () => {
         setSearchParams(parametrsObj);
         setNedRefreshParams(true);
         setResetState(true);
-
     };
-
 
     // Function to toogle Filters
     const toogleFilters = () => {
         setFiltresVisible(true);
     };
-    // Function to switch pages
 
-    // const handlePageChange = (page) => {
-    //     setCurrentPage(page);
-    // };
     const linksObj = {
         home: "/",
     };
 
     return (
         <section className="section">
-
-            <AdaptiveNav linksObj={linksObj}/>
+            <AdaptiveNav linksObj={linksObj} />
             <div className={styles.stylePage}>
                 <Filters
                     setFiltresVisible={setFiltresVisible}
@@ -104,7 +93,7 @@ const ProductsWithFiltersAndSorting = () => {
                 ) : products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
-                            <h2 className={styles.styleTitle}>TITLE</h2>
+                            <h2 className={styles.styleTitle}>{title}</h2>
                             <img
                                 className={styles.filterIcon}
                                 src={filters}
@@ -133,13 +122,6 @@ const ProductsWithFiltersAndSorting = () => {
                                 />
                             ))}
                         </ul>
-                        {/*<Pagination*/}
-                        {/*    className="pagination-bar"*/}
-                        {/*    currentPage={currentPage}*/}
-                        {/*    totalCount={products.length}*/}
-                        {/*    pageSize={PageSize}*/}
-                        {/*    onPageChange={handlePageChange}*/}
-                        {/*/>*/}
                         <PaginationNew
                             pageProps={parseInt(filterSortParams.page)}
                             isAble={hasNextPage}

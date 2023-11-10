@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DetailProduct.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
 import { useParams } from "react-router-dom";
@@ -35,18 +35,15 @@ const styleDisabled = {
 };
 
 const DetailProduct = () => {
-    const [recommendations, setRecommendations] = useState([]);
+    const [recomendUrl, setRecomendUrl] = useState("");
     const [info, setInfo] = useState(null);
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    const recommendationsFilter = useCallback(
-        (arr) => {
-            const filterArr = arr.filter((item) => item._id !== info._id);
-            setRecommendations(filterArr);
-        },
-        [info]
-    );
+    const generatorUrl = (obj) => {
+        const url = `page=1&limit=4&sex=${obj.sex}&category=${obj.category}`;
+        setRecomendUrl(url);
+    };
 
     useEffect(() => {
         scrollToTop();
@@ -57,26 +54,12 @@ const DetailProduct = () => {
             )
             .then((res) => {
                 setInfo(res.data);
+                generatorUrl(res.data);
             })
             .catch((error) => {
                 console.error(error);
             });
     }, [id]);
-
-    useEffect(() => {
-        if (info) {
-            axios
-                .get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/category/${info.category}`
-                )
-                .then((response) => {
-                    recommendationsFilter(response.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }, [info, recommendationsFilter]);
 
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
@@ -110,9 +93,9 @@ const DetailProduct = () => {
             <AdaptiveNav
                 linksObj={{
                     home: "/",
-                    [info.style]: `/${info.style}`,
-                    [info.sex]: `/${info.sex}`,
-                    [info.category]: `/${info.style}/${info.sex}/${info.category}`,
+                    [info.style]: `/allproducts?page=1&limit=9&style=${info.style}&minprice=0&maxprice=1000`,
+                    [info.sex]: `/allproducts?page=1&limit=9&sex=${info.sex}&minprice=0&maxprice=1000`,
+                    [info.category]: `/allproducts?page=1&limit=9&category=${info.category}&minprice=0&maxprice=1000`,
                 }}
             />
             <div className={styles.productWrapper}>
@@ -221,7 +204,7 @@ const DetailProduct = () => {
             />
             <RecommendationProducts
                 title={"You might also like"}
-                arrayofProducts={recommendations}
+                urlParams={recomendUrl}
             ></RecommendationProducts>
         </div>
     );

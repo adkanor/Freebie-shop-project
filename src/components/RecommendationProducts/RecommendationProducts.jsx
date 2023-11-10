@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RecomendationProducts.module.css";
 import PropTypes from "prop-types";
 import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
 import axios from "axios";
-import {URL} from "../../urlVariable";
+import { URL } from "../../variables";
 
-const RecommendationProducts = ({title, children, urlParams}) => {
+const RecommendationProducts = ({ title, children, urlParams }) => {
     const [littleArr, setLittleArr] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,6 @@ const RecommendationProducts = ({title, children, urlParams}) => {
             setLittleArr(responce.data.products);
         });
     }, [urlParams]);
-
 
     return (
         <div className={styles.recommendationProducts}>
