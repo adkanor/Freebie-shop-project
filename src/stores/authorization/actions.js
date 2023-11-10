@@ -16,10 +16,10 @@ export const checkAuthorization = (token) => async (dispatch, getState) => {
 
         dispatch({
             type: CHECK_AUTHORIZATION,
-            payload: response.data,
+            payload: response.data.userauth,
         });
     } catch (error) {
-        console.error("Ошибка при выполнении запроса:", error);
+        console.error("Error message:", error);
         const errorResponse = {
             errorCode: error.response.status,
             errorMsg: error.response.data.message,
