@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
@@ -15,7 +15,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
 import { scrollToTop } from "../../utils/scrollToTop";
-
+import { checkAuthorization } from "../../stores/authorization/actions";
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -23,6 +23,8 @@ const Header = () => {
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 991px)");
+    const token = localStorage.getItem("token");
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -31,6 +33,13 @@ const Header = () => {
 
     const cartProducts =
         useSelector((state) => state.cartReducer.cartItems) || {};
+    const isPersonAutorised = useSelector(
+        (state) => state.authorizationReducer.isAuth
+    );
+    useEffect(() => {
+        dispatch(checkAuthorization(token));
+        console.log(isPersonAutorised);
+    }, [token]);
 
     useEffect(() => {
         if ((!showNav && !showSearch) || isDesktop) {
@@ -47,8 +56,6 @@ const Header = () => {
     useEffect(() => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts.length]);
-
-    const token = localStorage.getItem("token");
 
     const isUserAuth = () => {
         const config = {
@@ -244,20 +251,22 @@ const Header = () => {
                                         </span>
                                     )}
                                 </Link>
-                                <Link
-                                    to="favourites"
-                                    onClick={hideAll}
-                                    className={styles.svgRel}
-                                >
-                                    <img src={HeartSVG} alt="Heart SVG" />
-                                    {favoriteAmount > 0 && (
-                                        <span id={styles["abs"]}>
-                                            <p className={styles.new}>
-                                                {favoriteAmount}
-                                            </p>
-                                        </span>
-                                    )}
-                                </Link>
+                                {isPersonAutorised ? (
+                                    <Link
+                                        to="favourites"
+                                        onClick={hideAll}
+                                        className={styles.svgRel}
+                                    >
+                                        <img src={HeartSVG} alt="Heart SVG" />
+                                        {favoriteAmount > 0 && (
+                                            <span id={styles["abs"]}>
+                                                <p className={styles.new}>
+                                                    {favoriteAmount}
+                                                </p>
+                                            </span>
+                                        )}
+                                    </Link>
+                                ) : null}
                             </div>
                         </div>
                     </div>
