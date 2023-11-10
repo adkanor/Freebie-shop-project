@@ -9,12 +9,10 @@ import MainSection from "./pages/MainPage/MainPage";
 import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
-// import ProductsByStyle from "./pages/ProductsByStyle/ProductsByStyle";
 import CheckOut from "./pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
-import SearchResult from "./pages/SearchResult/SearchResult";
 import PersonalInfo from "./components/PersonalInfo/PersonalInfo";
 import ContactUs from "./components/ContactUs/ContactUs";
 import ListOrders from "./components/ListOrders/ListOrders";
@@ -24,6 +22,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions/TermsAndConditions";
 import Brands from "./pages/Brands/Brands";
 import ProductsWithFiltersAndSorting from "./pages/ProductsWithFiltersAndSorting/ProductsWithFiltersAndSorting";
+import OtherProductPage from "./pages/OtherProductPage/OtherProductPage";
 
 const App = () => {
     return (
@@ -32,13 +31,15 @@ const App = () => {
             <ToastContainer limit={3} autoClose={1500} position="bottom-left" />
             <Routes>
                 <Route path="/" element={<MainSection />} />
-                {/* <Route path="/:style/" element={<ProductsByStyle />} /> */}
+
                 <Route
                     path="/allproducts"
                     element={<ProductsWithFiltersAndSorting />}
                 />
+                <Route path="/otherproduct" element={<OtherProductPage />} />
+
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/search/:value/*" element={<SearchResult />} />
+
                 <Route path="/favourites" element={<FavouritesPage />} />
                 <Route path="/cart/checkout" element={<CheckOut />} />
                 <Route path="/products/:id" element={<DetailProduct />} />

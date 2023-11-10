@@ -1,23 +1,16 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import styles from "./MainPage.module.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
 import BrandBox from "../../components/BrandsRow/BrandsRow";
 import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-import {addArrivalsList} from "../../stores/newArrivals/actions";
-import {addTopSellingList} from "../../stores/topSelling/actions";
-import {scrollToTop} from "../../utils/scrollToTop";
-// import { setStyleParametre } from "../../stores/queryParametre/action";
-
+import { scrollToTop } from "../../utils/scrollToTop";
+import { URL } from "../../variables";
+import { defaultParams } from "../../variables";
 const MainPage = () => {
-    const dispatch = useDispatch();
-    const newArrivals = useSelector((state) => state.newArrivalsReducer);
-    const topSaleList = useSelector((state) => state.topSaleReducer);
-
     const dressStyles = [
         {
             to: "casual",
@@ -36,24 +29,19 @@ const MainPage = () => {
             label: "Gym",
         },
     ];
-    useEffect(() => {
-        dispatch(addTopSellingList());
-        dispatch(addArrivalsList());
-    }, [dispatch]);
 
-    // const setParametres = (style) => {
-    //     dispatch(setStyleParametre(style));
-    //     scrollToTop();
-    // };
     return (
         <section className="section">
-            <Slider/>
-            <BrandBox/>
+            <Slider />
+            <BrandBox />
             <RecommendationProducts
-                arrayofProducts={newArrivals}
+                urlParams={"page=1&limit=4&sort=new"}
                 title={"New Arrivals"}
             >
-                <Link to="search/new-arrivals" onClick={scrollToTop}>
+                <Link
+                    to="/otherproduct?page=1&limit=8&sort=new"
+                    onClick={scrollToTop}
+                >
                     <Button
                         text="View all"
                         style={{
@@ -69,10 +57,13 @@ const MainPage = () => {
                 </Link>
             </RecommendationProducts>
             <RecommendationProducts
+                urlParams={"page=1&limit=4&sort=topsales"}
                 title={"Top Selling"}
-                arrayofProducts={topSaleList}
             >
-                <Link to="search/top-selling" onClick={scrollToTop}>
+                <Link
+                    to="/otherproduct?page=1&limit=8&sort=topsales"
+                    onClick={scrollToTop}
+                >
                     <Button
                         text="View all"
                         style={{
@@ -93,7 +84,7 @@ const MainPage = () => {
                     {dressStyles.map((style) => (
                         <Link
                             key={style.to}
-                            to={`/allproducts?page=1&limit=9&style=${style.to}&minprice=0&maxprice=1000`}
+                            to={`${defaultParams}style=${style.to}`}
                             onClick={() => {
                                 scrollToTop();
                             }}
@@ -106,9 +97,7 @@ const MainPage = () => {
             </div>
             <CommentsSlider
                 title={"Our happy customers"}
-                link={
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getCountComments/10"
-                }
+                link={`${URL}getcomments/?page=1&limit=10&sort=new`}
             />
         </section>
     );
