@@ -10,6 +10,7 @@ import TitleOtherPage from "../../components/TitleOtherPage/TitleOtherPage";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import style from "./OtherProductPage.module.css";
 import Button from "../../components/Button/Button";
+import Preloader from "../../components/Preloader/Preloader";
 
 
 const OtherProductPage = () => {
@@ -19,6 +20,7 @@ const OtherProductPage = () => {
     const [searchParamsObj, setSearchParamsObj] = useState({});
     const [hasNextPage, setHasNextPage] = useState(true);
     const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     
     const changePage = (object) => {
@@ -39,9 +41,11 @@ const OtherProductPage = () => {
         const browserStr = paramsBrouserStr(searchParams);
         setSearchParamsObj(browserStr);
         if (parseInt(searchParamsObj.page) <= 3) {
+            setLoading(true);
             const queryString = stringifyParams(browserStr);
             axios.get(`${URL}productother/?${queryString}`).then((responce) => {
                 setProducts(responce.data.products);
+                setLoading(false);
             });
             setPage(searchParamsObj.page);
             setHasNextPage(true);
@@ -54,22 +58,31 @@ const OtherProductPage = () => {
     return (
         <div className={`section ${style.otherPageContainer}`}>
             <TitleOtherPage paramsObj={searchParamsObj}/>
-
-            {products.length > 0 ? (
-                <ul className={styles.favList}>
-                    {products.map((fav) => (
-                        <ClosedProductCard
-                            id={fav._id}
-                            key={fav._id}
-                            name={fav.name}
-                            price={fav.price}
-                            rating={fav.rating}
-                            imageURL={fav.url_image[0]}
-                            sale={fav.sale}
-                            final_price={fav.final_price}
-                        />
-                    ))}
-                </ul>
+            {loading ? (
+                <Preloader />
+            ) : products.length > 0 ? (
+                <>
+                    <ul className={styles.favList}>
+                        {products.map((fav) => (
+                            <ClosedProductCard
+                                id={fav._id}
+                                key={fav._id}
+                                name={fav.name}
+                                price={fav.price}
+                                rating={fav.rating}
+                                imageURL={fav.url_image[0]}
+                                sale={fav.sale}
+                                final_price={fav.final_price}
+                            />
+                        ))}
+                    </ul>
+                    <PaginationNew
+                        // pageProps={parseInt(searchParamsObj.page)}
+                        pageProps={page}
+                        isAble={hasNextPage}
+                        changeFilter={changePage}
+                    />
+                </>
             ) : (
                 <div className={`section ${style.noProducts}`}>
                     <h2 className={style.noProductsError}>No products found</h2>
@@ -90,13 +103,6 @@ const OtherProductPage = () => {
                     </Link>
                 </div>
             )}
-
-            <PaginationNew
-                // pageProps={parseInt(searchParamsObj.page)}
-                pageProps={page}
-                isAble={hasNextPage}
-                changeFilter={changePage}
-            />
         </div>
     );
 };
