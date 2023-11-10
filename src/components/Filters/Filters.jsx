@@ -142,7 +142,7 @@ const Filters = ({
                             {category}
                         </label>
                     ))}
-                    <h3 className={styles.filterTitle}>style</h3>
+                    <h3 className={styles.filterTitle}>Style</h3>
                     {style.map((style) => (
                         <label className={styles.filterLabel} key={style}>
                             <input

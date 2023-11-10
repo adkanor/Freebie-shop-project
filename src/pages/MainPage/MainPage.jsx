@@ -7,7 +7,11 @@ import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Button from "../../components/Button/Button";
-import { scrollToTop } from "../../utils/scrollToTop";
+
+import {scrollToTop} from "../../utils/scrollToTop";
+import {URL} from "../../urlVariable";
+
+
 
 const MainPage = () => {
     const dressStyles = [
@@ -96,9 +100,7 @@ const MainPage = () => {
             </div>
             <CommentsSlider
                 title={"Our happy customers"}
-                link={
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/getCountComments/10"
-                }
+                link={`${URL}getcomments/?page=1&limit=10&sort=new`}
             />
         </section>
     );
