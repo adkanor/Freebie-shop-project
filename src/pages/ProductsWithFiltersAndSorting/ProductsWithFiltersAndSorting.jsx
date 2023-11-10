@@ -78,9 +78,7 @@ const ProductsWithFiltersAndSorting = () => {
     };
     // Function to switch pages
 
-    // const handlePageChange = (page) => {
-    //     setCurrentPage(page);
-    // };
+
     const linksObj = {
         home: "/",
     };
@@ -99,12 +97,12 @@ const ProductsWithFiltersAndSorting = () => {
                 />
                 {loading ? (
                     <div className={styles.PreloaderBox}>
-                        <Preloader />
+                        <Preloader/>
                     </div>
                 ) : products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
-                            <h2 className={styles.styleTitle}>TITLE</h2>
+                            <h2 className={styles.styleTitle}>Our product list</h2>
                             <img
                                 className={styles.filterIcon}
                                 src={filters}
@@ -133,13 +131,6 @@ const ProductsWithFiltersAndSorting = () => {
                                 />
                             ))}
                         </ul>
-                        {/*<Pagination*/}
-                        {/*    className="pagination-bar"*/}
-                        {/*    currentPage={currentPage}*/}
-                        {/*    totalCount={products.length}*/}
-                        {/*    pageSize={PageSize}*/}
-                        {/*    onPageChange={handlePageChange}*/}
-                        {/*/>*/}
                         <PaginationNew
                             pageProps={parseInt(filterSortParams.page)}
                             isAble={hasNextPage}
