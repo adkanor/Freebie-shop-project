@@ -5,6 +5,7 @@ import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
 import Preloader from "../../components/Preloader/Preloader";
+import { useSelector } from "react-redux";
 
 function ClosedProductCard({
     id,
@@ -21,12 +22,18 @@ function ClosedProductCard({
     const handleImageLoad = () => {
         setImageLoading(true);
     };
+    const isPersonAutorised = useSelector(
+        (state) => state.authorizationReducer.isAuth
+    );
 
     return (
         <li key={id}>
             <Link className={style.cardWrapper} to={`/products/${id}`}>
                 <div className={style.imgWrapper}>
-                    <FavoriteIcon thisCard={thisCard} />
+                    {isPersonAutorised ? (
+                        <FavoriteIcon thisCard={thisCard} />
+                    ) : null}
+
                     {imageLoading ? null : <Preloader />}
                     <img
                         src={imageURL}
