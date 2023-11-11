@@ -8,14 +8,14 @@ import { Provider } from "react-redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // import GMAILID from "./config";
 const root = ReactDOM.createRoot(document.getElementById("root"));
-console.log(process.env.GMAILID);
+console.log(process.env.GMAIL_ID);
 root.render(
     <>
         <Provider store={store}>
             <BrowserRouter>
                 <GoogleOAuthProvider
                     script-src={"https://accounts.google.com/gsi/"}
-                    clientId={process.env.GMAILID}
+                    clientId={process.env.GMAIL_ID}
                 >
                     <App />
                 </GoogleOAuthProvider>
