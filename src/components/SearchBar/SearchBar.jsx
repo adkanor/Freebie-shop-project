@@ -65,7 +65,7 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                     <ul className={styles.liveSearchList}>
                         {options.map((options) => (
                             <li
-                                key={options.id}
+                                key={options._id}
                                 onClick={() => {
                                     navigate(`/products/${options._id}`);
                                     if (!isDesktop) {

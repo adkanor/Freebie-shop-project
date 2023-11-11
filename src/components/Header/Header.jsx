@@ -35,7 +35,7 @@ const Header = () => {
 
     const cartProducts =
         useSelector((state) => state.cartReducer.cartItems) || {};
-    const isPersonAutorised = useSelector(
+    const isPersonAuthorised = useSelector(
         (state) => state.authorizationReducer.isAuth
     );
     useEffect(() => {
@@ -250,7 +250,7 @@ const Header = () => {
                                         </span>
                                     )}
                                 </Link>
-                                {isPersonAutorised ? (
+                                {isPersonAuthorised ? (
                                     <Link
                                         to="favourites"
                                         onClick={hideAll}
