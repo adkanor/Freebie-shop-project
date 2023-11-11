@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import OpenedProductComment from "../OpenedProductComment/OpenedProductComment";
 import styles from "./DetaliComentsCard.module.css";
 import BlackButton from "../Button/Button";
-import {URL} from "../../urlVariable";
+import { URL } from "../../variables";
+/*eslint-disable*/
 
-const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
+const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
     const [tabNum, setTabNum] = useState(0);
     const [comments, setComments] = useState([]);
     const detailsParts = details
@@ -27,14 +28,14 @@ const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
 
     function filterComments(value) {
         switch (value) {
-        case "high":
-            setComments([...comments].sort((a, b) => b.rating - a.rating));
-            break;
-        case "low":
-            setComments([...comments].sort((a, b) => a.rating - b.rating));
-            break;
-        default:
-            break;
+            case "high":
+                setComments([...comments].sort((a, b) => b.rating - a.rating));
+                break;
+            case "low":
+                setComments([...comments].sort((a, b) => a.rating - b.rating));
+                break;
+            default:
+                break;
         }
     }
 
@@ -85,7 +86,8 @@ const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
                                     {detailsParts.map((detail) => (
                                         <>
                                             <strong>{detail[0]}:</strong>{" "}
-                                            {detail[1]} <br/><br/>
+                                            {detail[1]} <br />
+                                            <br />
                                         </>
                                     ))}
                                 </p>

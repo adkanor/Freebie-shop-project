@@ -93,9 +93,9 @@ const DetailProduct = () => {
             <AdaptiveNav
                 linksObj={{
                     home: "/",
-                    [info.style]: `/${info.style}`,
-                    [info.sex]: `/${info.sex}`,
-                    [info.category]: `/${info.style}/${info.sex}/${info.category}`,
+                    [info.style]: `/allproducts?page=1&limit=9&style=${info.style}&minprice=0&maxprice=1000`,
+                    [info.sex]: `/allproducts?page=1&limit=9&sex=${info.sex}&minprice=0&maxprice=1000`,
+                    [info.category]: `/allproducts?page=1&limit=9&category=${info.category}&minprice=0&maxprice=1000`,
                 }}
             />
             <div className={styles.productWrapper}>

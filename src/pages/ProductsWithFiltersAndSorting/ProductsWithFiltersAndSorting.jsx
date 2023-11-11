@@ -7,7 +7,7 @@ import filters from "../../assets/icons/Filter/Edit.svg";
 import Filters from "../../components/Filters/Filters";
 import Button from "../../components/Button/Button";
 import React, { useEffect, useState } from "react";
-import { URL } from "../../urlVariable";
+import { URL } from "../../variables";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -16,7 +16,7 @@ import { paramsBrouserStr } from "../../utils/paramsObjectWidthBrowserStr";
 import { removeEmptyStringKeys } from "../../utils/removeEmptyStringKeys";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import Preloader from "../../components/Preloader/Preloader";
-
+import { getStyleValue } from "../../utils/generateTitle";
 const ProductsWithFiltersAndSorting = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [nedRefreshParams, setNedRefreshParams] = useState(true);
@@ -26,7 +26,7 @@ const ProductsWithFiltersAndSorting = () => {
     const [resetState, setResetState] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);
-
+    const [title, setTitle] = useState("345");
     useEffect(() => {
         if (!resetState) {
             setLoading(true);
@@ -45,7 +45,11 @@ const ProductsWithFiltersAndSorting = () => {
         }
         //eslint-disable-next-line
     }, [nedRefreshParams, searchParams]);
-
+    useEffect(() => {
+        const titleValue = getStyleValue(filterSortParams);
+        console.log(titleValue);
+        setTitle(titleValue);
+    }, [filterSortParams]);
     const changeFilter = (obj) => {
         const filterObj = removeEmptyStringKeys(obj);
         const parametrsObj = { ...filterSortParams, ...filterObj };
@@ -67,7 +71,6 @@ const ProductsWithFiltersAndSorting = () => {
         setFiltresVisible(true);
     };
 
-
     const linksObj = {
         home: "/",
     };
@@ -85,12 +88,12 @@ const ProductsWithFiltersAndSorting = () => {
                 />
                 {loading ? (
                     <div className={styles.PreloaderBox}>
-                        <Preloader/>
+                        <Preloader />
                     </div>
                 ) : products.length > 0 ? (
                     <div className={styles.styleContent}>
                         <div className={styles.styleSorting}>
-                            <h2 className={styles.styleTitle}>Our product list</h2>
+                            <h2 className={styles.styleTitle}>{title}</h2>
                             <img
                                 className={styles.filterIcon}
                                 src={filters}
