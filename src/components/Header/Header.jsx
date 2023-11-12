@@ -140,7 +140,7 @@ const Header = () => {
                         <div className={styles.desktopMenuItems}>
                             {showNav ? (
                                 <NavigationBar
-                                    classList={`${styles.responsiveNav} ${styles.q} ${styles.desktopMenuList}`}
+                                    classList={`${styles.responsiveNav} ${styles.animationList} ${styles.desktopMenuList}`}
                                     clickFunc={hideNav}
                                     data-testid="navigation-menu"
                                 />
@@ -163,7 +163,7 @@ const Header = () => {
                                 </div>
                                 {showSearch ? (
                                     <SearchBar
-                                        classList={`${styles.responsiveSearch} ${styles.q} ${styles.desktopSearchBar}`}
+                                        classList={`${styles.responsiveSearch} ${styles.animationList} ${styles.desktopSearchBar}`}
                                         onChangeFunc={(e) =>
                                             setQuery(e.target.value)
                                         }
