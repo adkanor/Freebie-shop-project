@@ -318,7 +318,7 @@ display: none;
 	}
   
 
-  ul.q.desktopMenuList::after{
+  ul.animationList.desktopMenuList::after{
     content: " ";
     position: fixed;  
     left: 0;
@@ -330,7 +330,7 @@ display: none;
   }
 
   
-  label.q.desktopSearchBar::after{
+  label.animationList.desktopSearchBar::after{
     content: " ";
     position: fixed;  
     left: 0;
