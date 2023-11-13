@@ -20,6 +20,7 @@ const Registration = () => {
     const redirect = () => navigate("/account");
 
     useGoogleOneTapLogin({
+        cancel_on_tap_outside: false,
         onSuccess: credentialResponse => {
             const decoded = jwt_decode(credentialResponse.credential);
             const value = {
