@@ -8,7 +8,6 @@ import {Provider} from "react-redux";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 
 const GMAILID = process.env.REACT_APP_GMAILID;
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <>

@@ -133,17 +133,28 @@ const CheckOut = () => {
                     <Formik
                         initialValues={{
                             firstName:
-                                userData && token ? userData.userName : "",
+                                userData.firstName && token
+                                    ? userData.userName
+                                    : "",
                             companyName:
-                                userData && token ? userData.companyName : "",
+                                userData.companyName && token
+                                    ? userData.companyName
+                                    : "",
                             streetAddress:
-                                userData && token ? userData.streetAddress : "",
+                                userData.streetAddress && token
+                                    ? userData.streetAddress
+                                    : "",
                             apartmentInfo:
-                                userData && token ? userData.apartmentInfo : "",
-                            city: userData && token ? userData.city : "",
+                                userData.apartmentInfo && token
+                                    ? userData.apartmentInfo
+                                    : "",
+                            city: userData.city && token ? userData.city : "",
                             phoneNumber:
-                                userData && token ? userData.phoneNumber : "",
-                            email: userData && token ? userData.email : "",
+                                userData.phoneNumber && token
+                                    ? userData.phoneNumber
+                                    : "",
+                            email:
+                                userData.email && token ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
