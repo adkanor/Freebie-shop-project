@@ -13,7 +13,7 @@ import stylesInfo from "./PersonalInfo.module.css";
 import BlackButton from "../Button/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import { URL } from "../../variables";
 const PersonalInfo = () => {
     const token = localStorage.getItem("token");
     const dispatch = useDispatch();
@@ -48,15 +48,11 @@ const PersonalInfo = () => {
     }
     const editProfileInfo = async (values, { setSubmitting, resetForm }) => {
         try {
-            const response = await axios.put(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
-                values,
-                {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                }
-            );
+            await axios.put(`${URL}changeUser`, values, {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            });
             toast.success("Form data successfully changed");
         } catch (error) {
             toast.error("Failed to send changes. Please try again later.");
@@ -68,7 +64,7 @@ const PersonalInfo = () => {
     const changePassword = async (values, { setSubmitting, resetForm }) => {
         try {
             const response = await axios.put(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUserPass",
+                `${URL}changeUserPass`,
                 {
                     password: values.currentPassword,
                     newPassword: values.newPassword,

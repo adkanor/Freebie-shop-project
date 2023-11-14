@@ -10,15 +10,13 @@ import FaceBookIcon from "../../assets/icons/Social/Facebook.svg";
 import GitHubIcon from "../../assets/icons/Social/GitHub.svg";
 import InstagramIcon from "../../assets/icons/Social/Instagram.svg";
 import TwitterIcon from "../../assets/icons/Social/Twitter.svg";
-
 import ApplePayIcon from "../../assets/icons/Payment/ApplePay.svg";
 import GooglePayIcon from "../../assets/icons/Payment/GooglePay.svg";
 import MastercardIcon from "../../assets/icons/Payment/Mastercard.svg";
 import PayPalIcon from "../../assets/icons/Payment/PayPal.svg";
 import VisaIcon from "../../assets/icons/Payment/Visa.svg";
-
 import BlackButton from "../Button/Button";
-
+import { URL } from "../../variables";
 function Footer() {
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -85,18 +83,28 @@ function Footer() {
                             initialValues={{ email: "" }}
                             onSubmit={async (values, actions) => {
                                 try {
-                                    const apiUrl = "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/addNewsletter";
-                                    const response = await axios.post(apiUrl, values);
-                                    
+                                    const apiUrl = `${URL}addNewsletter`;
+                                    const response = await axios.post(
+                                        apiUrl,
+                                        values
+                                    );
+
                                     if (response.status === 200) {
                                         const responseData = response.data;
                                         if (responseData.status === 400) {
-                                            toast.error("You are already subscribed to the store");
+                                            toast.error(
+                                                "You are already subscribed to the store"
+                                            );
                                         } else {
-                                            toast.success("You have successfully subscribed to the newsletter!");
+                                            toast.success(
+                                                "You have successfully subscribed to the newsletter!"
+                                            );
                                         }
                                     } else {
-                                        toast.error("Error: Unexpected status - " + response.status);
+                                        toast.error(
+                                            "Error: Unexpected status - " +
+                                                response.status
+                                        );
                                     }
                                     setIsErrorMessageVisible(true);
                                     actions.resetForm();

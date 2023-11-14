@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../Filters/Filters.module.css";
 
 import MultiRangeSlider from "multi-range-slider-react";
 import PropTypes from "prop-types";
 
-
-const PriceSlider = ({filterState, valuePriseHandler}) => {
-
+const PriceSlider = ({ filterState, valuePriseHandler }) => {
     const [priceTitle, setPriceTitle] = useState({});
 
     useEffect(() => {
@@ -14,23 +12,21 @@ const PriceSlider = ({filterState, valuePriseHandler}) => {
         //eslint-disable-next-line
     }, [priceTitle]);
 
-
     useEffect(() => {
-        const {minprice, maxprice} = filterState;
-        setPriceTitle({...priceTitle, minprice, maxprice});
+        const { minprice, maxprice } = filterState;
+        setPriceTitle({ ...priceTitle, minprice, maxprice });
         //eslint-disable-next-line
     }, [filterState]);
-
 
     const MemoizedMultiRangeSlider = React.memo(MultiRangeSlider);
 
     return (
-        <div className={styles.filterPrice}>
+        <div className={styles.filterPrice} data-testid="multi-range-slider">
             <h3 className={styles.filterTitle}>Price</h3>
             <MemoizedMultiRangeSlider
-                onWheel={((e) => {
+                onWheel={(e) => {
                     e.preventDefault();
-                })}
+                }}
                 style={{
                     border: "none",
                     boxShadow: "none",
@@ -43,7 +39,10 @@ const PriceSlider = ({filterState, valuePriseHandler}) => {
                 step={10}
                 barInnerColor="black"
                 onChange={(e) => {
-                    setPriceTitle({minprice: e.minValue, maxprice: e.maxValue});
+                    setPriceTitle({
+                        minprice: e.minValue,
+                        maxprice: e.maxValue,
+                    });
                 }}
                 label={false}
                 ruler={false}
@@ -64,8 +63,7 @@ const PriceSlider = ({filterState, valuePriseHandler}) => {
 
 PriceSlider.propTypes = {
     valuePriseHandler: PropTypes.func,
-    filterState: PropTypes.object
+    filterState: PropTypes.object,
 };
-
 
 export default PriceSlider;
