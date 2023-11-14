@@ -18,7 +18,7 @@ import { fetchUserData } from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import { toast } from "react-toastify";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
-
+import { URL } from "../../variables";
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
     const cartItems = cartProducts.cartItems;
@@ -49,15 +49,11 @@ const CheckOut = () => {
 
     const sendFormToServer = async (dataForm) => {
         try {
-            await axios.put(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
-                dataForm,
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
+            await axios.put(`${URL}changeUser`, dataForm, {
+                headers: {
+                    Authorization: token,
+                },
+            });
         } catch (error) {
             console.error(error);
         }
@@ -65,15 +61,11 @@ const CheckOut = () => {
 
     const addToOrders = async (data) => {
         try {
-            const response = await axios.post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
-                data,
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
+            const response = await axios.post(`${URL}orders/add`, data, {
+                headers: {
+                    Authorization: token,
+                },
+            });
 
             if (response.data.status === 200) {
                 dispatch(clearCart());

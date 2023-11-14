@@ -17,7 +17,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { checkAuthorization } from "../../stores/authorization/actions";
 import { defaultParams } from "../../variables";
-
+import { URL } from "../../variables";
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -64,21 +64,15 @@ const Header = () => {
                 Authorization: `${token}`,
             },
         };
-        axios
-            .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth",
-                "",
-                config
-            )
-            .then((res) => {
-                if (res.data.status === 200) {
-                    redirectAccount();
-                }
-                if (res.data.status !== 200) {
-                    redirectLogin();
-                    localStorage.removeItem("token");
-                }
-            });
+        axios.post(`${URL}isAuth`, "", config).then((res) => {
+            if (res.data.status === 200) {
+                redirectAccount();
+            }
+            if (res.data.status !== 200) {
+                redirectLogin();
+                localStorage.removeItem("token");
+            }
+        });
     };
 
     const redirectAccount = () => navigate("/account");
