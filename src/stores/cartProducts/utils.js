@@ -64,8 +64,6 @@ export const sendCartToServer = async (updatedState) => {
             }
             if (response.data.status === 407) {
                 localStorage.setItem("cartItems", JSON.stringify(updatedState));
-            } else {
-                console.warn("Unexpected server response:", response);
             }
         } else {
             localStorage.setItem("cartItems", JSON.stringify(updatedState));

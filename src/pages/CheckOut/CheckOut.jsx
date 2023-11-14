@@ -79,24 +79,33 @@ const CheckOut = () => {
             console.error(error);
         }
     };
-    const handleSubmit = async (values) => {
-        const orderData = {
-            personalInfo: values,
-            goods: cartProducts.cartItems,
-            email: values.email,
-            payment: values.payment,
-            orderDate:
-                new Date().toLocaleDateString() +
-                " " +
-                new Date().toLocaleTimeString(),
-            totalValue: Number(cartData.finalTotal.toFixed(2)),
-        };
-        await addToOrders(orderData);
-        if (token) {
-            await sendFormToServer(values);
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+            setSubmitting(true);
+            const orderData = {
+                personalInfo: values,
+                goods: cartProducts.cartItems,
+                email: values.email,
+                payment: values.payment,
+                orderDate:
+                    new Date().toLocaleDateString() +
+                    " " +
+                    new Date().toLocaleTimeString(),
+                totalValue: Number(cartData.finalTotal.toFixed(2)),
+            };
+            await addToOrders(orderData);
+
+            if (token) {
+                await sendFormToServer(values);
+            }
+
+            setSubmitting(false);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+
+            setSubmitting(false);
         }
     };
-
     if (isLoading) {
         return <Preloader />;
     } else if (errorMessage) {
@@ -124,8 +133,8 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            firstName:
-                                userData.firstName && token
+                            userName:
+                                userData.userName && token
                                     ? userData.userName
                                     : "",
                             companyName:
