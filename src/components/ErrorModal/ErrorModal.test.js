@@ -38,7 +38,7 @@ describe("ErrorModal Component", () => {
 
     fireEvent.click(closeButton);
     fireEvent.click(overlay);
-    expect(toggleFunc).toHaveBeenCalledTimes(0);
+    expect(toggleFunc).toHaveBeenCalledTimes(2);
     expect(navigate).toHaveBeenCalledTimes(0);
   });
 });
