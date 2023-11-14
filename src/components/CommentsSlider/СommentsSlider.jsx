@@ -32,6 +32,7 @@ const CommentsSlider = ({title, link}) => {
     const [comments, setComments] = useState([]);
     const carouselRef = useRef(null);
 
+
     useEffect(() => {
         axios
             .get(link)
