@@ -5,7 +5,6 @@ export const getStyleValue = (obj) => {
 
     for (const key of keysToCheck) {
         if (obj[key] !== undefined) {
-            console.log(obj[key]);
             return obj[key];
         }
     }

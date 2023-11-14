@@ -11,7 +11,7 @@ import {
 import { toast } from "react-toastify";
 import { getCartItems } from "./utils";
 import { sendCartToServer } from "./utils";
-const cart = await getCartItems();
+const cart = getCartItems();
 const initialState = {
     cartItems: cart,
 };
