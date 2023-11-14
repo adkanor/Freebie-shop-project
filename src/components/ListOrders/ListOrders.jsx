@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ListOrders.module.css";
 import axios from "axios";
 import Preloader from "../Preloader/Preloader";
+import { URL } from "../../variables";
 /* eslint-disable */
 const ListOrders = () => {
     const [listOrders, setListOrders] = useState([]);
@@ -16,8 +17,8 @@ const ListOrders = () => {
         if (token) {
             axios
                 .post(
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/userOrders",
-                    {token: token},
+                    `${URL}userOrders`,
+                    { token: token },
                     {
                         headers: {
                             Authorization: token,
@@ -35,7 +36,7 @@ const ListOrders = () => {
         }
     }, [token]);
     if (isLoading) {
-        return <Preloader/>;
+        return <Preloader />;
     } else if (errorMessage) {
         return (
             <div className={styles.errorMessage}>

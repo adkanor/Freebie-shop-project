@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import style from "./Login.module.css";
-import { Form, Formik } from "formik";
+import {Form, Formik} from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { useGoogleOneTapLogin } from "@react-oauth/google";
+import {Link, useNavigate} from "react-router-dom";
+import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { URL } from "../../variables";
-import { useDispatch } from "react-redux";
-import { refreshCart } from "../../stores/cartProducts/action";
+import {URL} from "../../variables";
+import {useDispatch} from "react-redux";
+import {refreshCart} from "../../stores/cartProducts/action";
 
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
@@ -25,7 +25,7 @@ const Login = () => {
         if (basket) {
             const response = await axios.post(
                 `${URL}mergeBasket`,
-                { basket: JSON.parse(basket) },
+                {basket: JSON.parse(basket)},
                 {
                     headers: {
                         Authorization: data.token,
@@ -39,11 +39,10 @@ const Login = () => {
         }
     };
 
+
     useEffect(() => {
         axios
-            .get(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/loginBanner"
-            )
+            .get(`${URL}loginBanner`)
             .then((res) => {
                 setBannerLog(res.data.url);
             })
@@ -53,6 +52,7 @@ const Login = () => {
     }, []);
 
     useGoogleOneTapLogin({
+        cancel_on_tap_outside: false,
         onSuccess: (credentialResponse) => {
             const decoded = jwt_decode(credentialResponse.credential);
             const value = {
@@ -78,7 +78,7 @@ const Login = () => {
 
         axios
             .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/login",
+                `${URL}login`,
                 user
             )
             .then((response) => {
@@ -122,7 +122,7 @@ const Login = () => {
                             apiServerLogin(values);
                         }}
                     >
-                        {({ errors, touched }) => (
+                        {({errors, touched}) => (
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
@@ -162,6 +162,7 @@ const Login = () => {
                                         Create account?
                                     </Link>
                                 </div>
+                            
                                 <div className={style.forgotPassword}>
                                     <Link
                                         className={style.forgotPasswordText}

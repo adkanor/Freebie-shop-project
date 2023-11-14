@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 import cartReducer from "./cartProducts/cartReducer";
 import favoritesReducer from "./favoritesProducts/favoritesReducer";
 import authorizationReducer from "./authorization/authorizationReducer";
@@ -23,7 +22,7 @@ const config = {
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware: [thunk, logger, createStateSyncMiddleware(config)],
+    middleware: [thunk, createStateSyncMiddleware(config)],
     devTools: true,
 });
 initStateWithPrevTab(store);
