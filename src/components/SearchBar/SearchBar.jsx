@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query";
-
+import { URL } from "../../variables";
 const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
@@ -34,21 +34,19 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
 
     const search = (value) => {
         axios
-            .get(
-                `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/product?page=1&limit=4&search=${value}`
-            )
+            .get(`${URL}product?page=1&limit=4&search=${value}`)
             .then((res) => {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    throw new Error("Ошибка в ответе сервера");
+                    throw new Error("Error occur");
                 }
             })
             .then((data) => {
                 setOptions(data.products);
             })
             .catch((error) => {
-                console.error("Произошла ошибка при запросе:", error);
+                console.error("Error occur:", error);
             });
     };
     return (

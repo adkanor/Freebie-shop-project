@@ -5,11 +5,13 @@ import { Field } from "formik";
 import BlackButton from "../Button/Button";
 import svgBank from "../../assets/icons/Payment/PaymentsBank.svg";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
-
+import { useFormContext } from "../../pages/CheckOut/CheckOut";
 const FormContent = () => {
     const cartReducer = useSelector((state) => state.cartReducer);
     const cartItems = cartReducer.cartItems;
     const cartData = cartSummaryCalculate(cartItems);
+
+    const { isSubmitting } = useFormContext();
 
     const [paymentType, setPaymentType] = useState("Place Order");
 
@@ -104,7 +106,10 @@ const FormContent = () => {
 
             <BlackButton
                 type={"submit"}
-                text={paymentType}
+                text={
+                    isSubmitting ? "Payment is being processed..." : paymentType
+                }
+                disabledStatus={isSubmitting}
                 style={{
                     width: "100%",
                     backgroundColor: "var(--black-text)",
