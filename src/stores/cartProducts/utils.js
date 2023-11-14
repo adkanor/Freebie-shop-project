@@ -2,65 +2,79 @@ import axios from "axios";
 import { URL } from "../../variables";
 
 export const getCartItems = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        const response = await axios.post(`${URL}getBasket`, "", {
-            headers: {
-                Authorization: token,
-            },
-        });
+    try {
+        const token = localStorage.getItem("token");
 
-        if (response.data.status === 407) {
+        if (token) {
+            const response = await axios.post(`${URL}getBasket`, "", {
+                headers: {
+                    Authorization: token,
+                },
+            });
+
+            if (response.data.status === 407) {
+                const cartItems = localStorage.getItem("cartItems")
+                    ? JSON.parse(localStorage.getItem("cartItems"))
+                    : [];
+                return cartItems;
+            } else if (localStorage.getItem("cartItems")) {
+                const cartItemsFromLocal = JSON.parse(
+                    localStorage.getItem("cartItems")
+                );
+
+                const responseToMerge = await axios.post(
+                    `${URL}mergeBasket`,
+                    { basket: cartItemsFromLocal },
+                    {
+                        headers: {
+                            Authorization: token,
+                        },
+                    }
+                );
+                const cartItems = responseToMerge.data.basket;
+                return cartItems;
+            } else {
+                const cartItems = response.data.basket;
+                return cartItems;
+            }
+        } else {
             const cartItems = localStorage.getItem("cartItems")
                 ? JSON.parse(localStorage.getItem("cartItems"))
                 : [];
             return cartItems;
-        } else if (localStorage.getItem("cartItems")) {
-            const cartItemsFromLocal = JSON.parse(
-                localStorage.getItem("cartItems")
-            );
-            const responseToMerge = await axios.post(
-                `${URL}mergeBasket`,
-                { basket: cartItemsFromLocal },
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
-            const cartItems = responseToMerge.data.basket;
-            return cartItems;
-        } else {
-            const cartItems = response.data.basket;
-            return cartItems;
         }
-    } else {
-        const cartItems = localStorage.getItem("cartItems")
-            ? JSON.parse(localStorage.getItem("cartItems"))
-            : [];
-        return cartItems;
+    } catch (error) {
+        console.warn("Error fetching cart items:", error);
     }
 };
 
 export const sendCartToServer = async (updatedState) => {
     const token = localStorage.getItem("token");
     const basket = { basket: updatedState };
-    if (token) {
-        const response = await axios.post(`${URL}refreshBasket`, basket, {
-            headers: {
-                Authorization: token,
-            },
-        });
-        if (response.data.status === 200) {
-            localStorage.removeItem("cartItems");
-        }
-        if (response.data.status === 407) {
+
+    try {
+        if (token) {
+            const response = await axios.post(`${URL}refreshBasket`, basket, {
+                headers: {
+                    Authorization: token,
+                },
+            });
+            if (response.data.status === 200) {
+                localStorage.removeItem("cartItems");
+            }
+            if (response.data.status === 407) {
+                localStorage.setItem("cartItems", JSON.stringify(updatedState));
+            } else {
+                console.warn("Unexpected server response:", response);
+            }
+        } else {
             localStorage.setItem("cartItems", JSON.stringify(updatedState));
         }
-    } else {
-        localStorage.setItem("cartItems", JSON.stringify(updatedState));
+    } catch (error) {
+        console.warn("Error sending cart to server:", error);
     }
 };
+
 const calculateDiscount = (quantity) => {
     if (quantity === 1) {
         return 0;
@@ -74,12 +88,17 @@ const calculateDiscount = (quantity) => {
         return 0;
     }
 };
+
 const calculateAmountOfDiscount = (totalAmount, discount) => {
-    if (discount === 0) {
+    const discountValue = Number(discount);
+
+    if (discountValue <= 0) {
         return 0;
     }
-    return (Number(totalAmount) * Number(discount)) / 100;
+
+    return (totalAmount * discountValue) / 100;
 };
+
 const calculateFinalTotal = (
     cartSubtotalAmount,
     deliveryFee,
@@ -91,6 +110,7 @@ const calculateFinalTotal = (
         Number(amountOfDiscount)
     );
 };
+
 const setMessageAboutDiscount = (cartTotalQuantity) => {
     if (cartTotalQuantity === 1) {
         return "Add 1 more to unlock 12% off";
