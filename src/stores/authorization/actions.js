@@ -1,6 +1,6 @@
 import axios from "axios";
 // axios = require("axios");
-export const CHECK_AUTHORIZATION = "GET_RES";
+export const CHECK_AUTHORIZATION = "CHECK_AUTHORIZATION";
 
 export const checkAuthorization = (token) => async (dispatch, getState) => {
     try {
