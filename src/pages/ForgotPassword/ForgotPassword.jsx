@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import style from "./ForgotPassword.module.css";
-import {Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import validationSchema from "./validationSchema";
 import Input from "../../components/InputPassworgLogin/Input";
 import Button from "../../components/Button/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { URL } from "../../variables";
 const ForgotPassword = () => {
     const [isServerMassage, setIsServerMassage] = useState(false);
     const [isServerErrorMassage, setIsServerErrorMassage] = useState(false);
@@ -19,13 +19,13 @@ const ForgotPassword = () => {
     const resetErrors = () => {
         setIsServerMassage(false);
         setIsServerErrorMassage(false);
-
     };
 
     const forgotPasswordApi = (values) => {
-        const email = {email: values.email};
-        axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/resetPassword", email)
-            .then(res => {
+        const email = { email: values.email };
+        axios
+            .post(`${URL}resetPassword`, email)
+            .then((res) => {
                 if (res.data.status === 200) {
                     showMassage();
                 } else {
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
                     setServerMassage(res.data.message);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("error", error);
             });
     };
@@ -49,9 +49,11 @@ const ForgotPassword = () => {
                     forgotPasswordApi(values);
                 }}
             >
-                {({errors, touched}) => (
+                {({ errors, touched }) => (
                     <Form className={style.emailField}>
-                        <h2 className={style.forgotPasswordTitle}>Password recovery</h2>
+                        <h2 className={style.forgotPasswordTitle}>
+                            Password recovery
+                        </h2>
                         <Input
                             name="email"
                             placeholder="Email"
@@ -63,19 +65,28 @@ const ForgotPassword = () => {
                         />
 
                         <div className={style.btnBlock}>
-                            <Button type={"submit"} text={"Restore"} style={{
-                                padding: "16px 35px",
-                                fontSize: "16px",
-                                backgroundColor: "var(--login-btn)",
-                                color: "var(--white-text)",
-                                border: "none",
-                            }}/>
-                            <Link className={style.goHome} to="/"> Go Home</Link>
+                            <Button
+                                type={"submit"}
+                                text={"Restore"}
+                                style={{
+                                    padding: "16px 35px",
+                                    fontSize: "16px",
+                                    backgroundColor: "var(--login-btn)",
+                                    color: "var(--white-text)",
+                                    border: "none",
+                                }}
+                            />
+                            <Link className={style.goHome} to="/">
+                                {" "}
+                                Go Home
+                            </Link>
                         </div>
-                        {isServerMassage &&
+                        {isServerMassage && (
                             <p className={style.forgotMassage}>
-                                Password recovery instructions have been sent to your email
-                            </p>}
+                                Password recovery instructions have been sent to
+                                your email
+                            </p>
+                        )}
                     </Form>
                 )}
             </Formik>

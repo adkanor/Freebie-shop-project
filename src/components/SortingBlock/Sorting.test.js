@@ -1,58 +1,41 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import { render, screen, fireEvent } from "@testing-library/react";
 import SortFilter from "./Sorting";
-import { sortProducts } from "../../stores/pageWithFiltersProducts/action";
+import "@testing-library/jest-dom/extend-expect";
 
-describe("SortFilter", () => {
-    const mockStore = configureStore();
-    const store = mockStore({});
+test("renders SortFilter component", () => {
+    // Arrange
+    const changeFilterMock = jest.fn();
+    const filterSortParams = { sort: "az" };
 
-    it("should render the SortFilter component", () => {
-        render(
-            <Provider store={store}>
-                <SortFilter setCurrentPage={() => {}} />
-            </Provider>
-        );
+    // Act
+    render(
+        <SortFilter
+            changeFilter={changeFilterMock}
+            filterSortParams={filterSortParams}
+        />
+    );
 
-        const sortContainerLabel = screen.getByText("Sort by:");
-        expect(sortContainerLabel).toBeTruthy();
+    // Assert
+    expect(screen.getByLabelText("Sort by:")).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("A to Z")).toBeInTheDocument();
+});
 
-        const sortSelect = screen.getByRole("combobox");
-        expect(sortSelect).toBeTruthy();
-    });
+test("calls changeFilter when select value changes", () => {
+    // Arrange
+    const changeFilterMock = jest.fn();
+    const filterSortParams = { sort: "az" };
 
-    it("should dispatch the sortProducts action when a different option is selected", () => {
-        const dispatch = jest.fn();
-        store.dispatch = dispatch;
+    // Act
+    render(
+        <SortFilter
+            changeFilter={changeFilterMock}
+            filterSortParams={filterSortParams}
+        />
+    );
+    fireEvent.change(screen.getByRole("combobox"), { target: { value: "za" } });
 
-        render(
-            <Provider store={store}>
-                <SortFilter setCurrentPage={() => {}} />
-            </Provider>
-        );
-
-        const sortSelect = screen.getByRole("combobox");
-
-        fireEvent.change(sortSelect, { target: { value: "price-asc" } });
-
-        expect(dispatch).toHaveBeenCalledWith(sortProducts("price-asc"));
-    });
-
-    it("should call the setCurrentPage function when a different option is selected", () => {
-        const setCurrentPage = jest.fn();
-
-        render(
-            <Provider store={store}>
-                <SortFilter setCurrentPage={setCurrentPage} />
-            </Provider>
-        );
-
-        const sortSelect = screen.getByRole("combobox");
-
-        fireEvent.change(sortSelect, { target: { value: "za" } });
-
-        expect(setCurrentPage).toHaveBeenCalledWith(1);
-    });
+    // Assert
+    expect(changeFilterMock).toHaveBeenCalledWith({ sort: "za" });
 });
