@@ -89,8 +89,8 @@ const PaginationNew = ({ pageProps = 1, isAble, changeFilter }) => {
 
 PaginationNew.propTypes = {
     pageProps: PropTypes.any,
-    isAble: PropTypes.bool,
-    changeFilter: PropTypes.func,
+    isAble: PropTypes.any,
+    changeFilter: PropTypes.any,
 };
 
 export default PaginationNew;
