@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styles from "./FormContent.module.css";
 import stylesForm from "../../pages/CheckOut/CheckOut.module.css";
 import { useSelector } from "react-redux";
@@ -13,15 +13,20 @@ const FormContent = () => {
     const cartItems = cartReducer.cartItems;
     const cartData = cartSummaryCalculate(cartItems);
 
+    const blackButtonStyle = useMemo(
+        () => ({
+            width: "100%",
+            marginBottom: "50px",
+            backgroundColor: "var(--black-text)",
+            padding: "7px 0",
+            height: "45px",
+            borderRadius: "4px",
+        }),
+        []
+    );
+
     const [detail, setDetail] = useState({ number: "", cvv: "", expiry: "" });
-    const [buttonStyle, ButtonStyle] = useState({
-        width: "100%",
-        marginBottom: "50px",
-        backgroundColor: "var(--black-text)",
-        padding: "7px 0",
-        height: "45px",
-        borderRadius: "4px",
-    });
+    const [buttonStyle, ButtonStyle] = useState(blackButtonStyle);
 
     const [isFormFilled, setIsFormFilled] = useState(false);
     const [paymentType, setPaymentType] = useState("Place Order");
@@ -43,14 +48,7 @@ const FormContent = () => {
 
     useEffect(() => {
         if (paymentType === "Place Order") {
-            ButtonStyle({
-                width: "100%",
-                marginBottom: "50px",
-                backgroundColor: "var(--black-text)",
-                padding: "7px 0",
-                height: "45px",
-                borderRadius: "4px",
-            });
+            ButtonStyle(blackButtonStyle);
         } else {
             if (!isFormFilled) {
                 ButtonStyle({
@@ -63,17 +61,10 @@ const FormContent = () => {
                     zIndex: "-1",
                 });
             } else {
-                ButtonStyle({
-                    width: "100%",
-                    marginBottom: "50px",
-                    backgroundColor: "var(--black-text)",
-                    padding: "7px 0",
-                    height: "45px",
-                    borderRadius: "4px",
-                });
+                ButtonStyle(blackButtonStyle);
             }
         }
-    }, [paymentType, isFormFilled]);
+    }, [paymentType, isFormFilled, blackButtonStyle]);
 
     const { isSubmitting } = useFormContext();
 
