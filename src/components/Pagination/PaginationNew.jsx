@@ -1,33 +1,30 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./PaginationNew.module.css";
 import LeftArrow from "../../assets/icons/ArrowsSlider/arrowLeft.svg";
 import RightArrow from "../../assets/icons/ArrowsSlider/arrowRight.svg";
 import Button from "../../components/Button/Button";
-import {scrollToTop} from "../../utils/scrollToTop";
+import { scrollToTop } from "../../utils/scrollToTop";
 
-const PaginationNew = ({pageProps, isAble, changeFilter}) => {
+const PaginationNew = ({ pageProps, isAble, changeFilter }) => {
     const [page, setPage] = useState(1);
-
 
     useEffect(() => {
         const pageNum = parseInt(pageProps);
         setPage(pageNum);
     }, [pageProps]);
 
-
     const onPrevClick = () => {
         if (page > 1) {
             const prevPage = page - 1;
-            changeFilter({page: prevPage});
+            changeFilter({ page: prevPage });
             scrollToTop();
-
         }
     };
     const onNextClick = () => {
         if (isAble) {
             const nextPage = page + 1;
-            changeFilter({page: nextPage});
+            changeFilter({ page: nextPage });
             scrollToTop();
         }
     };
@@ -45,7 +42,6 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
         userSelect: "none",
         color: "black",
         cursor: "pointer",
-        backgroundColor: "var(--gray-primary)",
     };
     return (
         <div className={styles.paginationContainer}>
@@ -58,9 +54,11 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
                     ...commonButtonStyle,
                     color: page === 1 ? "gray" : "black",
                     boxShadow: page === 1 ? "none" : null,
+                    backgroundColor:
+                        page === 1 ? "var(--gray-primary)" : "transparent",
                 }}
             >
-                <img src={LeftArrow} alt="LeftArrow" className={styles.arrow}/>
+                <img src={LeftArrow} alt="LeftArrow" className={styles.arrow} />
             </Button>
 
             <div className={styles.page}>{page}</div>
@@ -74,6 +72,9 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
                     ...commonButtonStyle,
                     color: !isAble ? "gray" : "black",
                     boxShadow: !isAble ? "none" : null,
+                    backgroundColor: !isAble
+                        ? "var(--gray-primary)"
+                        : "transparent",
                 }}
             >
                 <img
@@ -87,10 +88,9 @@ const PaginationNew = ({pageProps, isAble, changeFilter}) => {
 };
 
 PaginationNew.propTypes = {
-    pageProps: PropTypes.any,
-    isAble: PropTypes.any,
-    changeFilter: PropTypes.any,
-
+    pageProps: PropTypes.number,
+    isAble: PropTypes.bool,
+    changeFilter: PropTypes.func,
 };
 
 export default PaginationNew;
