@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -19,10 +19,22 @@ import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import { toast } from "react-toastify";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 import { URL } from "../../variables";
+
+const FormContext = createContext();
+
+export const useFormContext = () => {
+    return useContext(FormContext);
+};
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
     const cartItems = cartProducts.cartItems;
     const cartData = cartSummaryCalculate(cartItems);
+
+    const [isSubmitting, setSubmitting] = useState(false);
+
+    const setSubmittingStatus = (status) => {
+        setSubmitting(status);
+    };
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -79,9 +91,8 @@ const CheckOut = () => {
             console.error(error);
         }
     };
-    const handleSubmit = async (values, { setSubmitting }) => {
+    const handleSubmit = async (values) => {
         try {
-            setSubmitting(true);
             const orderData = {
                 personalInfo: values,
                 goods: cartProducts.cartItems,
@@ -93,6 +104,7 @@ const CheckOut = () => {
                     new Date().toLocaleTimeString(),
                 totalValue: Number(cartData.finalTotal.toFixed(2)),
             };
+            setSubmitting(true);
             await addToOrders(orderData);
 
             if (token) {
@@ -162,11 +174,18 @@ const CheckOut = () => {
                     >
                         {({ errors, touched }) => (
                             <>
-                                <ProfileForm
-                                    isCheckOut={true}
-                                    errors={errors}
-                                    touched={touched}
-                                />
+                                <FormContext.Provider
+                                    value={{
+                                        isSubmitting,
+                                        setSubmittingStatus,
+                                    }}
+                                >
+                                    <ProfileForm
+                                        isCheckOut={true}
+                                        errors={errors}
+                                        touched={touched}
+                                    />
+                                </FormContext.Provider>
                             </>
                         )}
                     </Formik>

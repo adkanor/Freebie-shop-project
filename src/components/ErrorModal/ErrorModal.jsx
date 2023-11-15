@@ -17,6 +17,7 @@ const ErrorModal = ({ toggle, toggleFunc }) => {
     const onClickFunc = () => {
         toggleFunc();
         navigate("/cart");
+        document.body.style.overflow = "visible";
     };
 
     return (
@@ -25,12 +26,12 @@ const ErrorModal = ({ toggle, toggleFunc }) => {
                 <div className={styles.modal}>
                     <div
                         className={styles.overlay}
-                        onClick={() => onClickFunc}
+                        onClick={() => onClickFunc()}
                         data-testid="overlay"
                     ></div>
                     <div className={styles.modalContent}>
                         <h1>The product is out of stock!!!</h1>
-                        <span onClick={() => onClickFunc}>X</span>
+                        <span onClick={() => onClickFunc()}>X</span>
                     </div>
                 </div>
             )}
