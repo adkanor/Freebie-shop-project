@@ -151,3 +151,20 @@ line-height: 24px;
     padding-right: 10px;
 
 }
+
+.cardInfoSection{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.errorMessage{
+    color: red;
+    position: absolute;
+    top: 53px;
+    left: 0;
+}
+
+.cardInputContainer{
+    position: relative;
+}
