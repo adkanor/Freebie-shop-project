@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Button.module.css";
-const BlackButton = ({ text, style, type, onClick, children }) => {
+const BlackButton = ({
+    text,
+    style,
+    type,
+    onClick,
+    children,
+    disabledStatus,
+}) => {
     const buttonStyles = {
         ...style,
     };
@@ -11,6 +18,7 @@ const BlackButton = ({ text, style, type, onClick, children }) => {
             type={type}
             style={buttonStyles}
             className={styles.blackButton}
+            disabled={disabledStatus}
         >
             {children}
             {text}
@@ -23,5 +31,6 @@ BlackButton.propTypes = {
     type: PropTypes.string,
     onClick: PropTypes.func,
     children: PropTypes.node,
+    disabledStatus: PropTypes.bool,
 };
 export default BlackButton;

@@ -81,7 +81,7 @@
 
 @media screen and (max-width: 765px ) {
     .registrationFormWrapper {
-        width: 70%;
+        width: 80%;
     }
 
     .redirectLogin {

@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query";
-
+import { URL } from "../../variables";
 const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
@@ -34,22 +34,19 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
 
     const search = (value) => {
         axios
-            .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/search",
-                { word: value }
-            )
+            .get(`${URL}product?page=1&limit=4&search=${value}`)
             .then((res) => {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    throw new Error("Ошибка в ответе сервера");
+                    throw new Error("Error occur");
                 }
             })
             .then((data) => {
-                setOptions(data.resultArray.slice(0, 4));
+                setOptions(data.products);
             })
             .catch((error) => {
-                console.error("Произошла ошибка при запросе:", error);
+                console.error("Error occur:", error);
             });
     };
     return (
@@ -66,7 +63,7 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                     <ul className={styles.liveSearchList}>
                         {options.map((options) => (
                             <li
-                                key={options.id}
+                                key={options._id}
                                 onClick={() => {
                                     navigate(`/products/${options._id}`);
                                     if (!isDesktop) {

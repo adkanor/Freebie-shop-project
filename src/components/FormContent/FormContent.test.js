@@ -3,10 +3,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FormContent from "./FormContent";
 import { Provider } from "react-redux";
-import { Field, Formik, Form } from 'formik'; 
+import { Formik, Form } from 'formik'; 
 import store from "../../stores/store";
 
-test("FormContent renders correctly", () => {
+test("FormContent renders correctly",async () => {
     const initialValues = {
       };
   render(

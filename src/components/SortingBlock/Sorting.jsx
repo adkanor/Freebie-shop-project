@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React from "react";
+import PropTypes from "prop-types";
 import style from "./Sorting.module.css";
-import { useDispatch } from "react-redux";
-import { sortProducts } from "../../stores/pageWithFiltersProducts/action";
-const SortFilter = ({ setCurrentPage }) => {
-    const dispatch = useDispatch();
+
+const SortFilter = ({ changeFilter, filterSortParams }) => {
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
-        dispatch(sortProducts(selectedValue));
-        setCurrentPage(1);
+        const objSort = { sort: selectedValue, page: 1 };
+        console.log(objSort);
+        changeFilter(objSort);
     };
 
     return (
@@ -21,14 +21,18 @@ const SortFilter = ({ setCurrentPage }) => {
                 id="sort-select"
                 name="sortValue"
                 onChange={handleSortChange}
+                defaultValue={filterSortParams.sort}
             >
                 <option value="az">A to Z</option>
                 <option value="za">Z to A</option>
-                <option value="price-asc">Price Ascending</option>
-                <option value="price-desc">Price Descending</option>
+                <option value="minprice">Price Ascending</option>
+                <option value="maxprice">Price Descending</option>
             </select>
         </div>
     );
 };
 
+SortFilter.propTypes = {
+    changeFilter: PropTypes.func.isRequired,
+};
 export default SortFilter;

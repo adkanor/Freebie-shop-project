@@ -1,9 +1,10 @@
-/* eslint-disable */
 import { SET_USER_DATA_ERROR, SET_USER_DATA } from "./action";
+
 const initialState = {
     userData: null,
     error: null,
 };
+/* eslint-disable */
 
 const personalInfoReducer = (state = initialState, action) => {
     switch (action.type) {

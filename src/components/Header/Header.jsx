@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import SlMenu from "../../assets/icons/Header/Burger-Menu.svg";
@@ -12,10 +12,12 @@ import CartSVG from "../../assets/icons/Header/Cart.svg";
 import HeartSVG from "../../assets/icons/Header/Heart.svg";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
-import { scrollToTop } from "../../utils/scrollToTop";
 import axios from "axios";
 import { useMediaQuery } from "@react-hook/media-query";
-
+import { scrollToTop } from "../../utils/scrollToTop";
+import { checkAuthorization } from "../../stores/authorization/actions";
+import { defaultParams } from "../../variables";
+import { URL } from "../../variables";
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -23,6 +25,8 @@ const Header = () => {
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 991px)");
+    const token = localStorage.getItem("token");
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -31,6 +35,12 @@ const Header = () => {
 
     const cartProducts =
         useSelector((state) => state.cartReducer.cartItems) || {};
+    const isPersonAuthorised = useSelector(
+        (state) => state.authorizationReducer.isAuth
+    );
+    useEffect(() => {
+        dispatch(checkAuthorization(token));
+    }, [token, dispatch]);
 
     useEffect(() => {
         if ((!showNav && !showSearch) || isDesktop) {
@@ -48,28 +58,21 @@ const Header = () => {
         setFavoriteAmount(favoriteProducts.length);
     }, [favoriteProducts.length]);
 
-    const token = localStorage.getItem("token");
-
     const isUserAuth = () => {
         const config = {
             headers: {
                 Authorization: `${token}`,
             },
         };
-        axios
-            .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth",
-                "",
-                config
-            )
-            .then((res) => {
-                if (res.data.status === 200) {
-                    redirectAccount();
-                }
-                if (res.data.status !== 200) {
-                    redirectLogin();
-                }
-            });
+        axios.post(`${URL}isAuth`, "", config).then((res) => {
+            if (res.data.status === 200) {
+                redirectAccount();
+            }
+            if (res.data.status !== 200) {
+                redirectLogin();
+                localStorage.removeItem("token");
+            }
+        });
     };
 
     const redirectAccount = () => navigate("/account");
@@ -101,9 +104,9 @@ const Header = () => {
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
-                navigate(`/search/${query}`);
+                navigate(`${defaultParams}search=${query}`);
                 hideSearch();
-            }, 3000);
+            }, 2500);
             hideAll();
         }
     };
@@ -131,7 +134,7 @@ const Header = () => {
                         <div className={styles.desktopMenuItems}>
                             {showNav ? (
                                 <NavigationBar
-                                    classList={`${styles.responsiveNav} ${styles.q} ${styles.desktopMenuList}`}
+                                    classList={`${styles.responsiveNav} ${styles.animationList} ${styles.desktopMenuList}`}
                                     clickFunc={hideNav}
                                     data-testid="navigation-menu"
                                 />
@@ -154,7 +157,7 @@ const Header = () => {
                                 </div>
                                 {showSearch ? (
                                     <SearchBar
-                                        classList={`${styles.responsiveSearch} ${styles.q} ${styles.desktopSearchBar}`}
+                                        classList={`${styles.responsiveSearch} ${styles.animationList} ${styles.desktopSearchBar}`}
                                         onChangeFunc={(e) =>
                                             setQuery(e.target.value)
                                         }
@@ -241,20 +244,22 @@ const Header = () => {
                                         </span>
                                     )}
                                 </Link>
-                                <Link
-                                    to="favourites"
-                                    onClick={hideAll}
-                                    className={styles.svgRel}
-                                >
-                                    <img src={HeartSVG} alt="Heart SVG" />
-                                    {favoriteAmount > 0 && (
-                                        <span id={styles["abs"]}>
-                                            <p className={styles.new}>
-                                                {favoriteAmount}
-                                            </p>
-                                        </span>
-                                    )}
-                                </Link>
+                                {isPersonAuthorised ? (
+                                    <Link
+                                        to="favourites"
+                                        onClick={hideAll}
+                                        className={styles.svgRel}
+                                    >
+                                        <img src={HeartSVG} alt="Heart SVG" />
+                                        {favoriteAmount > 0 && (
+                                            <span id={styles["abs"]}>
+                                                <p className={styles.new}>
+                                                    {favoriteAmount}
+                                                </p>
+                                            </span>
+                                        )}
+                                    </Link>
+                                ) : null}
                             </div>
                         </div>
                     </div>

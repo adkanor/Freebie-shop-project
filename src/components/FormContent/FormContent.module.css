@@ -10,7 +10,7 @@
     width: 54px;
 height: 54px;
 padding: 6px 2.116px 5.778px 3px;
-object-fit: cover;
+object-fit: contain;
 }
 
 .productDetails{
@@ -150,4 +150,21 @@ line-height: 24px;
     font-size: 10px;
     padding-right: 10px;
 
+}
+
+.cardInfoSection{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.errorMessage{
+    color: red;
+    position: absolute;
+    top: 53px;
+    left: 0;
+}
+
+.cardInputContainer{
+    position: relative;
 }

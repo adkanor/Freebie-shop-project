@@ -4,7 +4,7 @@ import styles from "./ContactUs.module.css";
 import Button from "../Button/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import { URL } from "../../variables";
 const ContactUs = () => {
     const token = localStorage.getItem("token");
 
@@ -14,15 +14,11 @@ const ContactUs = () => {
         } else {
             const message = values.message;
             try {
-                await axios.post(
-                    "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/supportUser",
-                    message,
-                    {
-                        headers: {
-                            Authorization: `${token}`,
-                        },
-                    }
-                );
+                await axios.post(`${URL}supportUser`, message, {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                });
 
                 toast.success("Message sent successfully!");
                 resetForm();

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import PropTypes from "prop-types";
 import FavoriteIcon from "../FavouriteIcon/FavouriteIcon";
+import ImageMagnifier from "./ImageMagnifier";
+import { useSelector } from "react-redux";
 
 const DetailProductSlider = ({ info }) => {
     const imageArr = info.url_image;
@@ -32,17 +34,23 @@ const DetailProductSlider = ({ info }) => {
         setSelectedImageIndex(index);
     };
 
+    const isPersonAutorised = useSelector(
+        (state) => state.authorizationReducer.isAuth
+    );
+
     return (
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <img
+                    <ImageMagnifier
                         className={styles.bigSquareimg}
+                        width={"400px"}
                         src={largeImage}
-                        alt="Big square"
                     />
                 </div>
-                <FavoriteIcon thisCard={thisCard} />
+                {isPersonAutorised ? (
+                    <FavoriteIcon thisCard={thisCard} />
+                ) : null}
             </div>
             <div ref={smallContainer} className={styles.smallSquareContainer}>
                 {imageArr.map((bannerImg, index) => (

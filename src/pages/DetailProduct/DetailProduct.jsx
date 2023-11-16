@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DetailProduct.module.css";
 import stylesCard from "../../components/CartItem/CartItem.module.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating/StarRating";
 import BlackButton from "../../components/Button/Button";
-import {Formik, Form, Field} from "formik";
+import { Formik, Form, Field } from "formik";
 import DetailProductSlider from "../../components/DetailProductSlider/DetailProductSlider";
 import DetailProductButtonGroup from "../../components/DetailProductButtonGroup/DetailProductButtonGroup";
 import axios from "axios";
@@ -12,13 +12,13 @@ import NoPage from "../NoPage/NoPage";
 import DetaiLComentsCard from "../../components/DetaliComentsCard/DetaliComentsCard";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import Counter from "../../components/Counter/Counter";
-import {useDispatch} from "react-redux";
-import {addToCart} from "../../stores/cartProducts/action";
-import {toast} from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../stores/cartProducts/action";
+import { toast } from "react-toastify";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
 import Preloader from "../../components/Preloader/Preloader";
-import {scrollToTop} from "../../utils/scrollToTop";
-
+import { scrollToTop } from "../../utils/scrollToTop";
+import { URL } from "../../variables";
 const styleBlack = {
     backgroundColor: "black",
     padding: "10px 20px",
@@ -36,48 +36,29 @@ const styleDisabled = {
 };
 
 const DetailProduct = () => {
-    const [recommendations, setRecommendations] = useState([]);
+    const [recomendUrl, setRecomendUrl] = useState("");
     const [info, setInfo] = useState(null);
-    const {id} = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch();
 
-    const recommendationsFilter = useCallback(
-        (arr) => {
-            const filterArr = arr.filter((item) => item._id !== info._id);
-            setRecommendations(filterArr);
-        },
-        [info]
-    );
+    const generatorUrl = (obj) => {
+        const url = `page=1&limit=4&sex=${obj.sex}&category=${obj.category}`;
+        setRecomendUrl(url);
+    };
 
     useEffect(() => {
         scrollToTop();
         setInfo(null);
         axios
-            .get(
-                `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/oneGoods/${id}`
-            )
+            .get(`${URL}oneGoods/${id}`)
             .then((res) => {
                 setInfo(res.data);
+                generatorUrl(res.data);
             })
             .catch((error) => {
                 console.error(error);
             });
     }, [id]);
-
-    useEffect(() => {
-        if (info) {
-            axios
-                .get(
-                    `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/category/${info.category}`
-                )
-                .then((response) => {
-                    recommendationsFilter(response.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }, [info, recommendationsFilter]);
 
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("Data:", values);
@@ -101,7 +82,7 @@ const DetailProduct = () => {
     };
 
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        return <NoPage/>;
+        return <NoPage />;
     } else if (!info) {
         return <Preloader />;
     }
@@ -111,13 +92,13 @@ const DetailProduct = () => {
             <AdaptiveNav
                 linksObj={{
                     home: "/",
-                    [info.style]: `/${info.style}`,
-                    [info.sex]: `/${info.sex}`,
-                    [info.category]: `/${info.style}/${info.sex}/${info.category}`,
+                    [info.style]: `/allproducts?page=1&limit=9&style=${info.style}&minprice=0&maxprice=1000`,
+                    [info.sex]: `/allproducts?page=1&limit=9&sex=${info.sex}&minprice=0&maxprice=1000`,
+                    [info.category]: `/allproducts?page=1&limit=9&category=${info.category}&minprice=0&maxprice=1000`,
                 }}
             />
             <div className={styles.productWrapper}>
-                <DetailProductSlider info={info}/>
+                <DetailProductSlider info={info} />
                 <Formik
                     initialValues={{
                         size:
@@ -127,7 +108,7 @@ const DetailProduct = () => {
                     }}
                     onSubmit={handleSubmit}
                 >
-                    {({values}) => (
+                    {({ values }) => (
                         <Form>
                             <div className={styles.productContent}>
                                 <h1 className={styles.productTitle}>
@@ -222,7 +203,7 @@ const DetailProduct = () => {
             />
             <RecommendationProducts
                 title={"You might also like"}
-                arrayofProducts={recommendations}
+                urlParams={recomendUrl}
             ></RecommendationProducts>
         </div>
     );

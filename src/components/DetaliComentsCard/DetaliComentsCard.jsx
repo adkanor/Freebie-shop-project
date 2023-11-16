@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import OpenedProductComment from "../OpenedProductComment/OpenedProductComment";
 import styles from "./DetaliComentsCard.module.css";
 import BlackButton from "../Button/Button";
+import {URL} from "../../variables";
+/*eslint-disable*/
 
-const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
+const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
     const [tabNum, setTabNum] = useState(0);
     const [comments, setComments] = useState([]);
     const detailsParts = details
@@ -14,9 +16,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
 
     useEffect(() => {
         axios
-            .get(
-                `https://shopcoserver-git-main-chesterfalmen.vercel.app/api/comments/${idGoods}`
-            )
+            .get(`${URL}getcomments/?page=1&limit=10&sort=new&good=${idGoods}`)
             .then((res) => {
                 res.data.sort((a, b) => b.rating - a.rating);
                 setComments(res.data);
@@ -84,10 +84,16 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                 </div>
                                 <p className={styles.description}>
                                     {detailsParts.map((detail, index) => (
+<<<<<<< HEAD
                                         <span key={index}>
                                             <strong>{detail[0]}:</strong>{" "}
                                             {detail[1]} <br /><br />
                                         </span>
+=======
+                                        <React.Fragment key={index}>
+                                            <strong>{detail[0]}:</strong> {detail[1]} <br/><br/>
+                                        </React.Fragment>
+>>>>>>> development
                                     ))}
                                 </p>
                             </>

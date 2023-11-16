@@ -12,8 +12,8 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
                 <InputCheckout
                     name="userName"
                     text="First Name"
-                    isError={errors.firstName && touched.firstName}
-                    errorText={errors.firstName}
+                    isError={errors.userName && touched.userName}
+                    errorText={errors.userName}
                 />
                 <InputCheckout
                     name="companyName"
