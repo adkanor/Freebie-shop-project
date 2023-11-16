@@ -7,7 +7,6 @@ const initialState = {
 /* eslint-disable */
 
 const personalInfoReducer = (state = initialState, action) => {
-    console.log(action.payload);
     switch (action.type) {
         case SET_USER_DATA:
             return {
