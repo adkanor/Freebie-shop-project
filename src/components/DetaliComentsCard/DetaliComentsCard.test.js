@@ -63,7 +63,7 @@ describe("DetaiLComentsCard", () => {
 
             fireEvent.click(commentsTab);
 
-            const filterSelect = screen.getByRole("commentsFilter");
+            const filterSelect = screen.getByTestId("commentsFilter");
             expect(filterSelect).toBeInTheDocument();
 
             const writeReviewButton = screen.getByText("Write a Review");
@@ -86,7 +86,7 @@ describe("DetaiLComentsCard", () => {
 
           fireEvent.click(aboutTab);
 
-          const about = screen.getByRole("description");
+          const about = screen.getByTestId("description");
           expect(about).toBeInTheDocument();
       });
   });

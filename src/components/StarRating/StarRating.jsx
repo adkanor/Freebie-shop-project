@@ -11,7 +11,6 @@ const StarRating = ({ rating, starSize }) => {
                 <span
                     style={{color: "var(--yellow-star)" }}
                     key={i}
-                    role="star"
                 >
                     {"\u2605"}
                 </span>
@@ -26,7 +25,6 @@ const StarRating = ({ rating, starSize }) => {
                         color: "var(--gray-primary)",
                     }}
                     key={i}
-                    role="star"
                 >
                     <span
                         style={{
@@ -36,7 +34,6 @@ const StarRating = ({ rating, starSize }) => {
                             overflow: "hidden",
                         }}
                         key={`inner${i}`}
-                        role="star"
                     >
                         {"\u2605"}
                     </span>
@@ -48,7 +45,6 @@ const StarRating = ({ rating, starSize }) => {
                 <span
                     style={{color: "var(--gray-primary)" }}
                     key={i}
-                    role="star"
                 >
                     {"\u2606"}
                 </span>

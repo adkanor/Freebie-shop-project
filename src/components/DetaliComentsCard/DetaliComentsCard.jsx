@@ -84,16 +84,9 @@ const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
                                 </div>
                                 <p className={styles.description}>
                                     {detailsParts.map((detail, index) => (
-<<<<<<< HEAD
-                                        <span key={index}>
-                                            <strong>{detail[0]}:</strong>{" "}
-                                            {detail[1]} <br /><br />
-                                        </span>
-=======
                                         <React.Fragment key={index}>
                                             <strong>{detail[0]}:</strong> {detail[1]} <br/><br/>
                                         </React.Fragment>
->>>>>>> development
                                     ))}
                                 </p>
                             </>
@@ -136,7 +129,7 @@ const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
                                                 }
                                                 name="commentsFilter"
                                                 defaultValue="high"
-                                                role="commentsFilter"
+                                                data-testid="commentsFilter"
                                             >
                                                 <option value="high">
                                                     High to low
@@ -182,7 +175,7 @@ const DetaiLComentsCard = ({details, idGoods, FAQ}) => {
                                 <div className={styles.commentsHeader}>
                                     <h3 className={styles.commentsH}>FAQ</h3>
                                 </div>
-                                <p role="description" className={styles.description}>{FAQ}</p>
+                                <p data-testid="description" className={styles.description}>{FAQ}</p>
                             </>
                         )}
                     </div>
