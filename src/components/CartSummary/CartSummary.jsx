@@ -68,7 +68,7 @@ const CartSummary = ({
                         </div>
                     </div>
 
-                    <Link to="/checkout">
+                    <Link to="checkout">
                         <Button
                             type="submit"
                             text="Go to Checkout"
