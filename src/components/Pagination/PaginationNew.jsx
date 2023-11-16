@@ -6,8 +6,8 @@ import RightArrow from "../../assets/icons/ArrowsSlider/arrowRight.svg";
 import Button from "../../components/Button/Button";
 import { scrollToTop } from "../../utils/scrollToTop";
 
-const PaginationNew = ({ pageProps, isAble, changeFilter }) => {
-    const [page, setPage] = useState(1);
+const PaginationNew = ({ pageProps = 1, isAble, changeFilter }) => {
+    const [page, setPage] = useState(pageProps);
 
     useEffect(() => {
         const pageNum = parseInt(pageProps);
@@ -88,9 +88,9 @@ const PaginationNew = ({ pageProps, isAble, changeFilter }) => {
 };
 
 PaginationNew.propTypes = {
-    pageProps: PropTypes.number,
-    isAble: PropTypes.bool,
-    changeFilter: PropTypes.func,
+    pageProps: PropTypes.any,
+    isAble: PropTypes.any,
+    changeFilter: PropTypes.any,
 };
 
 export default PaginationNew;
