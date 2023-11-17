@@ -29,7 +29,7 @@ const Header = () => {
     const isDesktop = useMediaQuery("(min-width: 991px)");
     const token = localStorage.getItem("token");
     const dispatch = useDispatch();
-
+    const [LiveSearchOpenStatus, SetLiveSearchOpenStatus] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,6 +47,10 @@ const Header = () => {
     useEffect(() => {
         dispatch(checkAuthorization(token));
     }, [token, dispatch]);
+
+    useEffect(() => {
+        SetLiveSearchOpenStatus(false);
+    }, [LiveSearchOpenStatus]);
 
     useEffect(() => {
         if ((!showNav && !showSearch) || isDesktop) {
@@ -103,6 +107,7 @@ const Header = () => {
     };
 
     const hideAll = () => {
+        SetLiveSearchOpenStatus(true);
         setShowSearch(false);
         setShowNav(false);
     };
@@ -141,13 +146,13 @@ const Header = () => {
                             {showNav ? (
                                 <NavigationBar
                                     classList={`${styles.responsiveNav} ${styles.animationList} ${styles.desktopMenuList}`}
-                                    clickFunc={hideNav}
+                                    clickFunc={hideAll}
                                     data-testid="navigation-menu"
                                 />
                             ) : (
                                 <NavigationBar
                                     classList={styles.desktopMenuList}
-                                    clickFunc={hideNav}
+                                    clickFunc={hideAll}
                                 />
                             )}
 
@@ -171,6 +176,7 @@ const Header = () => {
                                             searchQueryHandler(e)
                                         }
                                         closeTabsFunc={hideAll}
+                                        LiveSearchStatus={LiveSearchOpenStatus}
                                     />
                                 ) : (
                                     <SearchBar
@@ -181,6 +187,8 @@ const Header = () => {
                                         onKeyUpFunc={(e) =>
                                             searchQueryHandler(e)
                                         }
+                                        closeTabsFunc={hideAll}
+                                        LiveSearchStatus={LiveSearchOpenStatus}
                                     />
                                 )}
 
@@ -239,7 +247,9 @@ const Header = () => {
                                 <Link
                                     to="cart"
                                     className={styles.svgRel}
-                                    onClick={hideAll}
+                                    onClick={() => {
+                                        hideAll();
+                                    }}
                                 >
                                     <img src={CartSVG} alt="Cart SVG" />
                                     {cartAmount > 0 && (

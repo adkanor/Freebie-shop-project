@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query";
 import { URL } from "../../variables";
-const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
+const SearchBar = ({
+    classList,
+    onChangeFunc,
+    onKeyUpFunc,
+    closeTabsFunc,
+    LiveSearchStatus,
+}) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
 
     const isDesktop = useMediaQuery("(min-width: 991px)");
     const navigate = useNavigate();
+    useEffect(() => {
+        if (LiveSearchStatus) {
+            setOptions([]);
+            setTerm("");
+        }
+    }, [LiveSearchStatus]);
 
     const handleInputChange = (e) => {
         onChangeFunc(e);
@@ -104,6 +116,7 @@ SearchBar.propTypes = {
     classList: PropTypes.string.isRequired,
     onChangeFunc: PropTypes.func.isRequired,
     onKeyUpFunc: PropTypes.func.isRequired,
+    LiveSearchStatus: PropTypes.bool,
     closeTabsFunc: PropTypes.func,
 };
 
