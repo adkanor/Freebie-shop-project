@@ -80,6 +80,7 @@ const setMessageAboutDiscount = (cartTotalQuantity) => {
 };
 
 export const cartSummaryCalculate = (cartItems) => {
+    console.log(cartItems);
     const deliveryFee = 15;
     const cartSubtotalAmount = cartItems.reduce(
         (total, item) => total + item.final_price * item.selectedAmount,

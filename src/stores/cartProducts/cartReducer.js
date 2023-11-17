@@ -16,7 +16,7 @@ import { sendCartToServer } from "./utils";
 const initialState = {
     cartItems: [],
 };
-
+console.log(initialState);
 const cartReducer = (state = initialState, action) => {
     let newItem;
     let existingItemIndex;
@@ -129,7 +129,7 @@ const cartReducer = (state = initialState, action) => {
 
                 toast.success("Quantity decreased by 1");
                 updatedState = {
-                    cartItems: updatedItems.cartItems,
+                    cartItems: updatedItems,
                 };
                 // sendCartToServer(updatedState.cartItems);
 
@@ -137,7 +137,9 @@ const cartReducer = (state = initialState, action) => {
             }
             return state;
         case SENDTOSERVER:
-            sendCartToServer(state);
+            console.log(state);
+
+            sendCartToServer(state.cartItems);
             return state;
         case CLEAR_CART:
             localStorage.removeItem("cartItems");

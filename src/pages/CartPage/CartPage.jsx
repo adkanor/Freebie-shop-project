@@ -28,6 +28,8 @@ const CartPage = () => {
 
     useEffect(() => {
         const summary = cartSummaryCalculate(cartProducts);
+        console.log(cartProducts);
+
         setCartSummary(summary);
         //eslint-disable-next-line
     }, [cartProducts]);
