@@ -126,7 +126,7 @@ const Header = () => {
             <div className={styles.notification}>
                 <span className={styles.info}>
                     <p>
-                        Sign up to stay up-to-date with the news {" "}
+                        Sign up and get promo code for order.
                         <Link
                             to="login"
                             onClick={() => {
