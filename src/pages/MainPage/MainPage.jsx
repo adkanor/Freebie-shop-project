@@ -84,7 +84,7 @@ const MainPage = () => {
                     {dressStyles.map((style) => (
                         <Link
                             key={style.to}
-                            to={`${defaultParams}style=${style.to}`}
+                            to={`${defaultParams}&style=${style.to}`}
                             onClick={() => {
                                 scrollToTop();
                             }}

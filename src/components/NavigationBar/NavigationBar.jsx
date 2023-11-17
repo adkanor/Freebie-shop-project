@@ -9,7 +9,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
         <ul className={classList}>
             <li className={styles.desktopItem}>
                 <Link
-                    to={`${defaultParams}sex=female`}
+                    to={`${defaultParams}&sex=female`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>Female</p>
@@ -17,7 +17,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
             </li>
             <li className={styles.desktopItem}>
                 <Link
-                    to={`${defaultParams}sex=male`}
+                    to={`${defaultParams}&sex=male`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>Male</p>
@@ -25,7 +25,7 @@ const NavigationBar = ({ classList, clickFunc }) => {
             </li>
             <li className={styles.desktopItem}>
                 <Link
-                    to={`${defaultParams}hasdiscount=true`}
+                    to={`${defaultParams}&hasdiscount=true`}
                     onClick={() => clickFunc()}
                 >
                     <p className={styles.desktopItemText}>On Sale</p>

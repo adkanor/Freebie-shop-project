@@ -18,12 +18,15 @@ const CartItem = ({
     selectedAmount,
 }) => {
     const dispatch = useDispatch();
+
     const deleteItem = (id, selectedSize) => {
         dispatch(removeFromCart(id, selectedSize));
     };
+
     const handleDecrease = () => {
         dispatch(decrementItemQuantity(id, selectedSize));
     };
+
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
     };
@@ -73,6 +76,7 @@ const CartItem = ({
         </li>
     );
 };
+
 CartItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
