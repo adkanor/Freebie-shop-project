@@ -10,6 +10,7 @@ export const REFRESH_CART = "REFRESH_CART";
 export const FETCH_CART_ITEMS_SUCCESS = "FETCH_CART_ITEMS_SUCCESS";
 export const FETCH_CART_ITEMS_FAILURE = "FETCH_CART_ITEMS_FAILURE";
 
+
 export const fetchCartItems = () => async (dispatch) => {
     try {
         const token = localStorage.getItem("token");
@@ -66,7 +67,9 @@ export const fetchCartItems = () => async (dispatch) => {
         dispatch({ type: FETCH_CART_ITEMS_FAILURE });
     }
 };
-
+export const sendToServerAfterUnmount = () => ({
+    type: SENDTOSERVER,
+});
 export const refreshCart = (array) => ({
     type: REFRESH_CART,
     payload: array,
