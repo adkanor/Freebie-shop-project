@@ -77,34 +77,40 @@ const setMessageAboutDiscount = (cartTotalQuantity) => {
 };
 
 export const cartSummaryCalculate = (cartItems) => {
-    const deliveryFee = 15;
-    const cartSubtotalAmount = cartItems.reduce(
-        (total, item) => total + item.final_price * item.selectedAmount,
-        0
-    );
-    const cartTotalQuantity = cartItems.reduce(
-        (total, item) => total + item.selectedAmount,
-        0
-    );
-    const discount = calculateDiscount(cartTotalQuantity);
+    if (Array.isArray(cartItems)) {
+        console.log(cartItems.cartItems);
+        const deliveryFee = 15;
+        const cartSubtotalAmount = cartItems.reduce(
+            (total, item) => total + item.final_price * item.selectedAmount,
+            0
+        );
+        const cartTotalQuantity = cartItems.reduce(
+            (total, item) => total + item.selectedAmount,
+            0
+        );
+        const discount = calculateDiscount(cartTotalQuantity);
 
-    const amountOfDiscount = calculateAmountOfDiscount(
-        cartSubtotalAmount,
-        discount
-    );
-    const finalTotal = calculateFinalTotal(
-        cartSubtotalAmount,
-        deliveryFee,
-        amountOfDiscount
-    );
-    const discountMessage = setMessageAboutDiscount(cartTotalQuantity);
-    return {
-        deliveryFee,
-        discount,
-        cartSubtotalAmount,
-        cartTotalQuantity,
-        amountOfDiscount,
-        finalTotal,
-        discountMessage,
-    };
+        const amountOfDiscount = calculateAmountOfDiscount(
+            cartSubtotalAmount,
+            discount
+        );
+        const finalTotal = calculateFinalTotal(
+            cartSubtotalAmount,
+            deliveryFee,
+            amountOfDiscount
+        );
+        const discountMessage = setMessageAboutDiscount(cartTotalQuantity);
+        return {
+            deliveryFee,
+            discount,
+            cartSubtotalAmount,
+            cartTotalQuantity,
+            amountOfDiscount,
+            finalTotal,
+            discountMessage,
+        };
+    } else {
+        console.log("NOT AN ARRAY");
+        console.log(cartItems);
+    }
 };

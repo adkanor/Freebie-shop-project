@@ -29,7 +29,7 @@ const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
     const cartItems = cartProducts.cartItems;
     const cartData = cartSummaryCalculate(cartItems);
-
+    console.log(cartItems);
     const [isSubmitting, setSubmitting] = useState(false);
 
     const setSubmittingStatus = (status) => {
