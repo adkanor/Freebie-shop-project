@@ -30,7 +30,15 @@ const CartItem = ({
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
     };
+
     useEffect(() => {
+        // const beforeUnloadHandler = () => {
+        //     dispatch(sendToServerAfterUnmount());
+        // };
+
+        // window.addEventListener("beforeunload", beforeUnloadHandler);
+        dispatch(sendToServerAfterUnmount());
+        console.log("іваіваіваівава");
         return () => {
             dispatch(sendToServerAfterUnmount());
         };

@@ -42,6 +42,7 @@ const cartReducer = (state = initialState, action) => {
         // Adding to cart
         case ADD_TO_CART:
             newItem = action.payload;
+
             existingItemIndex = state.cartItems.findIndex(
                 (item) =>
                     item._id === newItem._id &&
@@ -131,7 +132,6 @@ const cartReducer = (state = initialState, action) => {
                 updatedState = {
                     cartItems: updatedItems,
                 };
-                // sendCartToServer(updatedState.cartItems);
 
                 return updatedState;
             }
