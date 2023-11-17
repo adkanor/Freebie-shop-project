@@ -78,6 +78,7 @@ const setMessageAboutDiscount = (cartTotalQuantity) => {
 
 export const cartSummaryCalculate = (cartItems) => {
     if (Array.isArray(cartItems)) {
+
         const deliveryFee = 15;
         const cartSubtotalAmount = cartItems.reduce(
             (total, item) => total + item.final_price * item.selectedAmount,
@@ -109,6 +110,7 @@ export const cartSummaryCalculate = (cartItems) => {
             discountMessage,
         };
     } else {
+
         return {
             deliveryFee: 15,
             discount: 0,
@@ -118,5 +120,6 @@ export const cartSummaryCalculate = (cartItems) => {
             finalTotal: 0,
             discountMessage: "",
         };
+
     }
 };
