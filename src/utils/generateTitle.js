@@ -4,7 +4,6 @@ import { defaultParams } from "../variables";
 export const getStyleValue = (obj) => {
     const keysToCheck = ["style", "sex", "category", "search", "hasdiscount"];
     if (obj.hasdiscount) {
-        console.log(obj.hasdiscount);
         return "On Sale";
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./CartItem.module.css";
 import deleteIcon from "../../assets/icons/Cart/Delete.svg";
 import Counter from "../Counter/Counter";
@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { removeFromCart } from "../../stores/cartProducts/action";
 import { incrementItemQuantity } from "../../stores/cartProducts/action";
 import { decrementItemQuantity } from "../../stores/cartProducts/action";
-import { sendToServerAfterUnmount } from "../../stores/cartProducts/action";
 const CartItem = ({
     id,
     name,
@@ -31,18 +30,6 @@ const CartItem = ({
         dispatch(incrementItemQuantity(id, selectedSize));
     };
 
-    useEffect(() => {
-        // const beforeUnloadHandler = () => {
-        //     dispatch(sendToServerAfterUnmount());
-        // };
-
-        // window.addEventListener("beforeunload", beforeUnloadHandler);
-        dispatch(sendToServerAfterUnmount());
-        console.log("іваіваіваівава");
-        return () => {
-            dispatch(sendToServerAfterUnmount());
-        };
-    }, [dispatch]);
     return (
         <li className={styles.cartItem}>
             <img

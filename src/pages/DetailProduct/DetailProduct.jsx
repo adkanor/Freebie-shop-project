@@ -60,7 +60,6 @@ const DetailProduct = () => {
     }, [id]);
 
     const handleSubmit = (values, { setSubmitting }) => {
-        console.log("Data:", values);
         const selectedSize = values.size;
         const selectedAmount = values.amount;
         const selectedSizeObj = info.sizes.find(
