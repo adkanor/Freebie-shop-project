@@ -4,7 +4,10 @@ export const INCREMENT_ITEM_QUANTITY = "INCREMENT_ITEM_QUANTITY";
 export const DECREMENT_ITEM_QUANTITY = "DECREMENT_ITEM_QUANTITY";
 export const CLEAR_CART = "CLEAR_CART";
 export const REFRESH_CART = "REFRESH_CART";
-
+export const SENDTOSERVER = "SENDTOSERVER";
+export const sendToServerAfterUnmount = () => ({
+    type: SENDTOSERVER,
+});
 export const refreshCart = (array) => ({
     type: REFRESH_CART,
     payload: array,

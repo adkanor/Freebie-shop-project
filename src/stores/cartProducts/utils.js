@@ -53,6 +53,9 @@ export const sendCartToServer = async (updatedState) => {
     const basket = { basket: updatedState };
 
     try {
+        console.log("Sending cart to server:"); // Логирование
+        console.log(updatedState); // Логирование
+
         if (token) {
             const response = await axios.post(`${URL}refreshBasket`, basket, {
                 headers: {

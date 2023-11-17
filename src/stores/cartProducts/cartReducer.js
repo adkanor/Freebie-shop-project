@@ -6,6 +6,7 @@ import {
     DECREMENT_ITEM_QUANTITY,
     CLEAR_CART,
     REFRESH_CART,
+    SENDTOSERVER,
 } from "./action";
 
 import { toast } from "react-toastify";
@@ -68,7 +69,7 @@ const cartReducer = (state = initialState, action) => {
                 cartItems: updatedCartItems,
             };
 
-            sendCartToServer(updatedState.cartItems);
+            // sendCartToServer(updatedState.cartItems);
 
             return updatedState;
         // Increment item quantity(already in cart)
@@ -97,7 +98,7 @@ const cartReducer = (state = initialState, action) => {
                         cartItems: updatedItems,
                     };
 
-                    sendCartToServer(updatedState.cartItems);
+                    // sendCartToServer(updatedState.cartItems);
 
                     return updatedState;
                 } else {
@@ -120,12 +121,15 @@ const cartReducer = (state = initialState, action) => {
 
                 toast.success("Quantity decreased by 1");
                 updatedState = {
-                    cartItems: updatedItems,
+                    cartItems: updatedItems.cartItems,
                 };
-                sendCartToServer(updatedState.cartItems);
+                // sendCartToServer(updatedState.cartItems);
 
                 return updatedState;
             }
+            return state;
+        case SENDTOSERVER:
+            sendCartToServer(state);
             return state;
         case CLEAR_CART:
             localStorage.removeItem("cartItems");

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./CartItem.module.css";
 import deleteIcon from "../../assets/icons/Cart/Delete.svg";
 import Counter from "../Counter/Counter";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { removeFromCart } from "../../stores/cartProducts/action";
 import { incrementItemQuantity } from "../../stores/cartProducts/action";
 import { decrementItemQuantity } from "../../stores/cartProducts/action";
+import { sendToServerAfterUnmount } from "../../stores/cartProducts/action";
 const CartItem = ({
     id,
     name,
@@ -27,6 +27,11 @@ const CartItem = ({
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
     };
+    useEffect(() => {
+        return () => {
+            dispatch(sendToServerAfterUnmount());
+        };
+    }, [dispatch]);
     return (
         <li className={styles.cartItem}>
             <img
