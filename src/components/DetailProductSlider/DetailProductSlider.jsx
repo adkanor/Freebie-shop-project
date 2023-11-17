@@ -22,11 +22,9 @@ const DetailProductSlider = ({ info }) => {
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
-        if (smallContainer.current) {
-            smallContainer.current.scrollTo({
-                top: 0,
-            });
-        }
+        smallContainer.current.scrollTo({
+            top: 0,
+        });
     }, [imageArr]);
 
     const handleImageClick = (e, index) => {
