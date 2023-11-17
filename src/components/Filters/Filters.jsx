@@ -16,16 +16,13 @@ const Filters = ({
 }) => {
     const [priceFilter, setPriceFilter] = useState({});
 
-    //eslint-disable-next-line
     useEffect(() => {
         setPriceFilter({ ...filterSortParams });
         //eslint-disable-next-line
     }, [filterSortParams]);
 
     const sizes = ["xs", "s", "m", "l", "xl"];
-
     const style = ["casual", "formal", "party", "gym"];
-
     const categories = [
         "jackets",
         "coats",
@@ -52,8 +49,8 @@ const Filters = ({
     const applyFilters = (e) => {
         e.preventDefault();
         const newSerchObj = { ...formik.values, ...priseState };
-        setPriceFilter(newSerchObj);
-        changeFilter(newSerchObj);
+        setPriceFilter({ ...newSerchObj, page: 1 });
+        changeFilter({ ...newSerchObj, page: 1 });
         formik.setValues(newSerchObj);
         closeFilters();
         scrollToTop();

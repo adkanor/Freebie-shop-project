@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./CartPage.module.css";
 import CartItem from "../../components/CartItem/CartItem.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import EmptyCartPage from "./EmptyCartPage/EmptyCartPage";
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import DiscountCounter from "../../components/DiscountCounter/DiscountCounter";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
+import { fetchCartItems } from "../../stores/cartProducts/action";
+
 const CartPage = () => {
+    const dispatch = useDispatch();
     const cartProducts = useSelector((state) => state.cartReducer.cartItems);
     const [cartSummary, setCartSummary] = useState({
         deliveryFee: 15,
@@ -19,6 +22,9 @@ const CartPage = () => {
         finalTotal: 0,
         discountMessage: "",
     });
+    useEffect(() => {
+        dispatch(fetchCartItems());
+    }, [dispatch]);
 
     useEffect(() => {
         const summary = cartSummaryCalculate(cartProducts);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../../variables";
 export const SET_USER_DATA = "SET_USER_DATA";
 export const SET_USER_DATA_ERROR = "SET_USER_DATA_ERROR";
 export const setUserData = (data) => ({
@@ -14,7 +15,7 @@ export const setUserDataError = (error) => ({
 export const fetchUserData = (token) => async (dispatch) => {
     try {
         const response = await axios.post(
-            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/aboutUser",
+            `${URL}aboutUser`,
             { token: token },
             {
                 headers: {
