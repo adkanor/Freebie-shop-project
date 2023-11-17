@@ -104,7 +104,7 @@ const Header = () => {
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
-                navigate(`${defaultParams}search=${query}`);
+                navigate(`${defaultParams}&search=${query}`);
                 hideSearch();
             }, 2500);
             hideAll();

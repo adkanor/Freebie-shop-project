@@ -3,10 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import style from "./Sorting.module.css";
 
-const SortFilter = ({changeFilter, filterSortParams}) => {
+const SortFilter = ({ changeFilter, filterSortParams }) => {
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
-        const objSort = {sort: selectedValue};
+        const objSort = { sort: selectedValue, page: 1 };
+        console.log(objSort);
         changeFilter(objSort);
     };
 

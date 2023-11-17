@@ -146,28 +146,28 @@ const CheckOut = () => {
                     <Formik
                         initialValues={{
                             userName:
-                                userData.userName && token
+                                userData?.userName && token
                                     ? userData.userName
                                     : "",
                             companyName:
-                                userData.companyName && token
+                                userData?.companyName && token
                                     ? userData.companyName
                                     : "",
                             streetAddress:
-                                userData.streetAddress && token
+                                userData?.streetAddress && token
                                     ? userData.streetAddress
                                     : "",
                             apartmentInfo:
-                                userData.apartmentInfo && token
+                                userData?.apartmentInfo && token
                                     ? userData.apartmentInfo
                                     : "",
-                            city: userData.city && token ? userData.city : "",
+                            city: userData?.city && token ? userData.city : "",
                             phoneNumber:
-                                userData.phoneNumber && token
+                                userData?.phoneNumber && token
                                     ? userData.phoneNumber
                                     : "",
                             email:
-                                userData.email && token ? userData.email : "",
+                                userData?.email && token ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
