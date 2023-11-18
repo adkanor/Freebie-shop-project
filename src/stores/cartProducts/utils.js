@@ -78,7 +78,7 @@ const setMessageAboutDiscount = (cartTotalQuantity) => {
 
 export const cartSummaryCalculate = (cartItems) => {
     if (Array.isArray(cartItems)) {
-        console.log(cartItems.cartItems);
+
         const deliveryFee = 15;
         const cartSubtotalAmount = cartItems.reduce(
             (total, item) => total + item.final_price * item.selectedAmount,
@@ -110,7 +110,16 @@ export const cartSummaryCalculate = (cartItems) => {
             discountMessage,
         };
     } else {
-        console.log("NOT AN ARRAY");
-        console.log(cartItems);
+
+        return {
+            deliveryFee: 15,
+            discount: 0,
+            cartSubtotalAmount: 0,
+            cartTotalQuantity: 0,
+            amountOfDiscount: 0,
+            finalTotal: 0,
+            discountMessage: "",
+        };
+
     }
 };
