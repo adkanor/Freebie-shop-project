@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import stylesSearch from "../../pages/SearchResult/SearchResult.module.css";
 import styles from "../../pages/FavouritesPage/FavouritesPage.module.css";
 import ClosedProductCard from "../ClosedProductCard/ClosedProductCard";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../Pagination/PaginationNew";
 import { useMediaQuery } from "@react-hook/media-query";
 
 const RenderComponent = ({ type }) => {
