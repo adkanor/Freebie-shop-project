@@ -18,6 +18,8 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import { checkAuthorization } from "../../stores/authorization/actions";
 import { defaultParams } from "../../variables";
 import { URL } from "../../variables";
+import { fetchCartItems } from "../../stores/cartProducts/action";
+
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -29,6 +31,10 @@ const Header = () => {
     const dispatch = useDispatch();
     const [LiveSearchOpenStatus, SetLiveSearchOpenStatus] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(fetchCartItems());
+    }, [dispatch]);
 
     const favoriteProducts =
         useSelector((state) => state.favoritesReducer.favorites) || {};
