@@ -6,9 +6,9 @@
 .input {
     max-width: 600px;
     width: 100%;
-    margin: 5px 0 10px;
+    margin: 5px 0 15px;
     padding: 5px;
-    height: 32px;
+    height: 25px;
     border: none;
     border-bottom: 3px solid var(--gray-text-secondary);
     font-size: 16px;
@@ -26,7 +26,8 @@
 
 .errorText {
     position: absolute;
-    bottom: 0;
+    /*background-color: #01ab31;*/
+    bottom: -8px;
     margin: 0 0 5px 0;
     color: var(--red-text);
     font-size: 14px;
@@ -35,6 +36,6 @@
 .visibilityIcon {
     cursor: pointer;
     position: absolute;
-    top: 25px;
+    top: 15px;
     right: 10px;
 }

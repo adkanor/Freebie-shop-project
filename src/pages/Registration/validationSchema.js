@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
         .min(5, "Min length 5 symbol")
         .required("Email is required"),
     password: Yup.string()
-        .matches(passwordRegExp, "Minimum length of 8. At least one uppercase and one lowercase letter, and one special character")
+        .matches(passwordRegExp, "Min length 8. One uppercase and lowercase letter. one special character")
         .max(55, "Max length 65 symbol!")
         .min(8, "Min length 8 symbol")
         .required("Password is required"),
