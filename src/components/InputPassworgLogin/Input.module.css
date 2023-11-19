@@ -12,14 +12,11 @@
     border: none;
     border-bottom: 3px solid var(--gray-text-secondary);
     font-size: 16px;
-
-
+    position: relative;
 }
-
 
 .input::placeholder {
     color: var(--gray-text-secondary);
-
 }
 
 .input:focus {
@@ -33,4 +30,11 @@
     margin: 0 0 5px 0;
     color: var(--red-text);
     font-size: 14px;
+}
+
+.visibilityIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 10px;
 }
