@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 
+// const nameRegExp = /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєҐґ ])?[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*)*$/;
 const nameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+
 const passwordRegExp =
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@#$%^&(){}[\]:;<>,.?/~_+\-|=])\S{8,55}$/;
 
