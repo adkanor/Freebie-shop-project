@@ -2,21 +2,22 @@ import ClosedProductCard from "../../components/ClosedProductCard/ClosedProductC
 import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import styles from "./ProductsWithFiltersAndSorting.module.css";
 import Sorting from "../../components/SortingBlock/Sorting";
-import {stringifyParams} from "../../utils/stringifyParams";
+import { stringifyParams } from "../../utils/stringifyParams";
 import filters from "../../assets/icons/Filter/Edit.svg";
 import Filters from "../../components/Filters/Filters";
 import Button from "../../components/Button/Button";
-import React, {useEffect, useState} from "react";
-import {URL} from "../../variables";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { URL } from "../../variables";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
-import {useSearchParams} from "react-router-dom";
-import {paramsBrouserStr} from "../../utils/paramsObjectWidthBrowserStr";
-import {removeEmptyStringKeys} from "../../utils/removeEmptyStringKeys";
+import { useSearchParams } from "react-router-dom";
+import { paramsBrouserStr } from "../../utils/paramsObjectWidthBrowserStr";
+import { removeEmptyStringKeys } from "../../utils/removeEmptyStringKeys";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import Preloader from "../../components/Preloader/Preloader";
-import {getStyleValue} from "../../utils/generateTitle";
+import { getStyleValue } from "../../utils/generateTitle";
+import { getCategoryLinks } from "../../utils/generateTitle";
 
 const ProductsWithFiltersAndSorting = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -27,7 +28,8 @@ const ProductsWithFiltersAndSorting = () => {
     const [resetState, setResetState] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);
-    const [title, setTitle] = useState("345");
+    const [title, setTitle] = useState("All Products");
+
     useEffect(() => {
         if (!resetState) {
             setLoading(true);
@@ -40,10 +42,11 @@ const ProductsWithFiltersAndSorting = () => {
                 setLoading(false);
             });
         } else {
-            resetFilter({page: 1, limit: 9, minprice: 0, maxprice: 1000});
+            resetFilter({ page: 1, limit: 9, minprice: 0, maxprice: 1000 });
             setResetState(false);
             setLoading(false);
         }
+
         //eslint-disable-next-line
     }, [nedRefreshParams, searchParams]);
     useEffect(() => {
@@ -52,7 +55,7 @@ const ProductsWithFiltersAndSorting = () => {
     }, [filterSortParams]);
     const changeFilter = (obj) => {
         const filterObj = removeEmptyStringKeys(obj);
-        const parametrsObj = {...filterSortParams, ...filterObj};
+        const parametrsObj = { ...filterSortParams, ...filterObj };
         setFilterSortParams(parametrsObj);
         setSearchParams(parametrsObj);
         setNedRefreshParams(true);
@@ -71,13 +74,11 @@ const ProductsWithFiltersAndSorting = () => {
         setFiltresVisible(true);
     };
 
-    const linksObj = {
-        home: "/",
-    };
+    const linksObj = getCategoryLinks(title);
 
     return (
         <section className="section">
-            <AdaptiveNav linksObj={linksObj}/>
+            <AdaptiveNav linksObj={linksObj} />
             <div className={styles.stylePage}>
                 <Filters
                     setFiltresVisible={setFiltresVisible}
@@ -88,7 +89,7 @@ const ProductsWithFiltersAndSorting = () => {
                 />
                 {loading ? (
                     <div className={styles.PreloaderBox}>
-                        <Preloader/>
+                        <Preloader />
                     </div>
                 ) : products.length > 0 ? (
                     <div className={styles.styleContent}>

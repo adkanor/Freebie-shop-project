@@ -8,6 +8,7 @@ import AdaptiveNav from "../../components/AdaptiveNav/AdaptiveNav";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import DiscountCounter from "../../components/DiscountCounter/DiscountCounter";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
+
 const CartPage = () => {
     const cartProducts = useSelector((state) => state.cartReducer.cartItems);
     const [cartSummary, setCartSummary] = useState({
@@ -23,6 +24,7 @@ const CartPage = () => {
     useEffect(() => {
         const summary = cartSummaryCalculate(cartProducts);
         setCartSummary(summary);
+        //eslint-disable-next-line
     }, [cartProducts]);
 
     return (

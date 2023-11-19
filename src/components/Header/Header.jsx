@@ -18,6 +18,8 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import { checkAuthorization } from "../../stores/authorization/actions";
 import { defaultParams } from "../../variables";
 import { URL } from "../../variables";
+import { fetchCartItems } from "../../stores/cartProducts/action";
+
 const Header = () => {
     const [query, setQuery] = useState("");
     const [cartAmount, setCartAmount] = useState(0);
@@ -27,8 +29,12 @@ const Header = () => {
     const isDesktop = useMediaQuery("(min-width: 991px)");
     const token = localStorage.getItem("token");
     const dispatch = useDispatch();
-
+    const [LiveSearchOpenStatus, SetLiveSearchOpenStatus] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(fetchCartItems());
+    }, [dispatch]);
 
     const favoriteProducts =
         useSelector((state) => state.favoritesReducer.favorites) || {};
@@ -41,6 +47,10 @@ const Header = () => {
     useEffect(() => {
         dispatch(checkAuthorization(token));
     }, [token, dispatch]);
+
+    useEffect(() => {
+        SetLiveSearchOpenStatus(false);
+    }, [LiveSearchOpenStatus]);
 
     useEffect(() => {
         if ((!showNav && !showSearch) || isDesktop) {
@@ -97,6 +107,7 @@ const Header = () => {
     };
 
     const hideAll = () => {
+        SetLiveSearchOpenStatus(true);
         setShowSearch(false);
         setShowNav(false);
     };
@@ -104,7 +115,7 @@ const Header = () => {
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             setTimeout(() => {
-                navigate(`${defaultParams}search=${query}`);
+                navigate(`${defaultParams}&search=${query}`);
                 hideSearch();
             }, 2500);
             hideAll();
@@ -135,13 +146,13 @@ const Header = () => {
                             {showNav ? (
                                 <NavigationBar
                                     classList={`${styles.responsiveNav} ${styles.animationList} ${styles.desktopMenuList}`}
-                                    clickFunc={hideNav}
+                                    clickFunc={hideAll}
                                     data-testid="navigation-menu"
                                 />
                             ) : (
                                 <NavigationBar
                                     classList={styles.desktopMenuList}
-                                    clickFunc={hideNav}
+                                    clickFunc={hideAll}
                                 />
                             )}
 
@@ -165,6 +176,7 @@ const Header = () => {
                                             searchQueryHandler(e)
                                         }
                                         closeTabsFunc={hideAll}
+                                        LiveSearchStatus={LiveSearchOpenStatus}
                                     />
                                 ) : (
                                     <SearchBar
@@ -175,6 +187,8 @@ const Header = () => {
                                         onKeyUpFunc={(e) =>
                                             searchQueryHandler(e)
                                         }
+                                        closeTabsFunc={hideAll}
+                                        LiveSearchStatus={LiveSearchOpenStatus}
                                     />
                                 )}
 
@@ -233,7 +247,9 @@ const Header = () => {
                                 <Link
                                     to="cart"
                                     className={styles.svgRel}
-                                    onClick={hideAll}
+                                    onClick={() => {
+                                        hideAll();
+                                    }}
                                 >
                                     <img src={CartSVG} alt="Cart SVG" />
                                     {cartAmount > 0 && (

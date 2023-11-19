@@ -12,6 +12,7 @@ const FormContent = () => {
     const cartReducer = useSelector((state) => state.cartReducer);
     const cartItems = cartReducer.cartItems;
     const cartData = cartSummaryCalculate(cartItems);
+    console.log(cartItems);
 
     const blackButtonStyle = useMemo(
         () => ({

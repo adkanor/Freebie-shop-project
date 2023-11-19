@@ -1,53 +1,6 @@
 import axios from "axios";
 import { URL } from "../../variables";
 
-export const getCartItems = async () => {
-    try {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-            const response = await axios.post(`${URL}getBasket`, "", {
-                headers: {
-                    Authorization: token,
-                },
-            });
-
-            if (response.data.status === 407) {
-                const cartItems = localStorage.getItem("cartItems")
-                    ? JSON.parse(localStorage.getItem("cartItems"))
-                    : [];
-                return cartItems;
-            } else if (localStorage.getItem("cartItems")) {
-                const cartItemsFromLocal = JSON.parse(
-                    localStorage.getItem("cartItems")
-                );
-
-                const responseToMerge = await axios.post(
-                    `${URL}mergeBasket`,
-                    { basket: cartItemsFromLocal },
-                    {
-                        headers: {
-                            Authorization: token,
-                        },
-                    }
-                );
-                const cartItems = responseToMerge.data.basket;
-                return cartItems;
-            } else {
-                const cartItems = response.data.basket;
-                return cartItems;
-            }
-        } else {
-            const cartItems = localStorage.getItem("cartItems")
-                ? JSON.parse(localStorage.getItem("cartItems"))
-                : [];
-            return cartItems;
-        }
-    } catch (error) {
-        console.warn("Error fetching cart items:", error);
-    }
-};
-
 export const sendCartToServer = async (updatedState) => {
     const token = localStorage.getItem("token");
     const basket = { basket: updatedState };
@@ -124,34 +77,49 @@ const setMessageAboutDiscount = (cartTotalQuantity) => {
 };
 
 export const cartSummaryCalculate = (cartItems) => {
-    const deliveryFee = 15;
-    const cartSubtotalAmount = cartItems.reduce(
-        (total, item) => total + item.final_price * item.selectedAmount,
-        0
-    );
-    const cartTotalQuantity = cartItems.reduce(
-        (total, item) => total + item.selectedAmount,
-        0
-    );
-    const discount = calculateDiscount(cartTotalQuantity);
+    if (Array.isArray(cartItems)) {
 
-    const amountOfDiscount = calculateAmountOfDiscount(
-        cartSubtotalAmount,
-        discount
-    );
-    const finalTotal = calculateFinalTotal(
-        cartSubtotalAmount,
-        deliveryFee,
-        amountOfDiscount
-    );
-    const discountMessage = setMessageAboutDiscount(cartTotalQuantity);
-    return {
-        deliveryFee,
-        discount,
-        cartSubtotalAmount,
-        cartTotalQuantity,
-        amountOfDiscount,
-        finalTotal,
-        discountMessage,
-    };
+        const deliveryFee = 15;
+        const cartSubtotalAmount = cartItems.reduce(
+            (total, item) => total + item.final_price * item.selectedAmount,
+            0
+        );
+        const cartTotalQuantity = cartItems.reduce(
+            (total, item) => total + item.selectedAmount,
+            0
+        );
+        const discount = calculateDiscount(cartTotalQuantity);
+
+        const amountOfDiscount = calculateAmountOfDiscount(
+            cartSubtotalAmount,
+            discount
+        );
+        const finalTotal = calculateFinalTotal(
+            cartSubtotalAmount,
+            deliveryFee,
+            amountOfDiscount
+        );
+        const discountMessage = setMessageAboutDiscount(cartTotalQuantity);
+        return {
+            deliveryFee,
+            discount,
+            cartSubtotalAmount,
+            cartTotalQuantity,
+            amountOfDiscount,
+            finalTotal,
+            discountMessage,
+        };
+    } else {
+
+        return {
+            deliveryFee: 15,
+            discount: 0,
+            cartSubtotalAmount: 0,
+            cartTotalQuantity: 0,
+            amountOfDiscount: 0,
+            finalTotal: 0,
+            discountMessage: "",
+        };
+
+    }
 };

@@ -5,7 +5,6 @@ import Counter from "../Counter/Counter";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { removeFromCart } from "../../stores/cartProducts/action";
 import { incrementItemQuantity } from "../../stores/cartProducts/action";
 import { decrementItemQuantity } from "../../stores/cartProducts/action";
@@ -18,15 +17,19 @@ const CartItem = ({
     selectedAmount,
 }) => {
     const dispatch = useDispatch();
+
     const deleteItem = (id, selectedSize) => {
         dispatch(removeFromCart(id, selectedSize));
     };
+
     const handleDecrease = () => {
         dispatch(decrementItemQuantity(id, selectedSize));
     };
+
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
     };
+
     return (
         <li className={styles.cartItem}>
             <img
@@ -68,6 +71,7 @@ const CartItem = ({
         </li>
     );
 };
+
 CartItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

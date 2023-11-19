@@ -7,7 +7,6 @@ const SortFilter = ({ changeFilter, filterSortParams }) => {
     const handleSortChange = (event) => {
         const selectedValue = event.target.value;
         const objSort = { sort: selectedValue, page: 1 };
-        console.log(objSort);
         changeFilter(objSort);
     };
 

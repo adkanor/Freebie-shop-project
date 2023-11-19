@@ -6,23 +6,23 @@ import {
     DECREMENT_ITEM_QUANTITY,
     CLEAR_CART,
     REFRESH_CART,
+    FETCH_CART_ITEMS_SUCCESS,
+    FETCH_CART_ITEMS_FAILURE,
+    SENDTOSERVER,
 } from "./action";
-
 import { toast } from "react-toastify";
-import { getCartItems } from "./utils";
 import { sendCartToServer } from "./utils";
-const cart = await getCartItems();
-const initialState = {
-    cartItems: cart,
-};
 
+const initialState = {
+    cartItems: [],
+};
+console.log(initialState);
 const cartReducer = (state = initialState, action) => {
     let newItem;
     let existingItemIndex;
     let id;
     let selectedSize;
     let updatedState;
-    const token = localStorage.getItem("token");
 
     if (action.payload) {
         id = action.payload.id;
@@ -30,11 +30,19 @@ const cartReducer = (state = initialState, action) => {
     }
 
     switch (action.type) {
+        case FETCH_CART_ITEMS_SUCCESS:
+            return { ...state, cartItems: action.payload };
+
+        case FETCH_CART_ITEMS_FAILURE:
+            return { ...state, cartItems: [] };
+
         case REFRESH_CART:
             return { ...state, cartItems: action.payload };
+
         // Adding to cart
         case ADD_TO_CART:
             newItem = action.payload;
+
             existingItemIndex = state.cartItems.findIndex(
                 (item) =>
                     item._id === newItem._id &&
@@ -54,6 +62,7 @@ const cartReducer = (state = initialState, action) => {
 
                 return updatedState;
             }
+
         // Removing from cart
         case REMOVE_FROM_CART:
             const removedItem = state.cartItems.find(
@@ -68,9 +77,10 @@ const cartReducer = (state = initialState, action) => {
                 cartItems: updatedCartItems,
             };
 
-            sendCartToServer(updatedState.cartItems);
+            // sendCartToServer(updatedState.cartItems);
 
             return updatedState;
+
         // Increment item quantity(already in cart)
         case INCREMENT_ITEM_QUANTITY:
             const incrementItemIndex = state.cartItems.findIndex(
@@ -97,7 +107,7 @@ const cartReducer = (state = initialState, action) => {
                         cartItems: updatedItems,
                     };
 
-                    sendCartToServer(updatedState.cartItems);
+                    // sendCartToServer(updatedState.cartItems);
 
                     return updatedState;
                 } else {
@@ -122,10 +132,14 @@ const cartReducer = (state = initialState, action) => {
                 updatedState = {
                     cartItems: updatedItems,
                 };
-                sendCartToServer(updatedState.cartItems);
 
                 return updatedState;
             }
+            return state;
+        case SENDTOSERVER:
+            console.log(state);
+
+            sendCartToServer(state.cartItems);
             return state;
         case CLEAR_CART:
             localStorage.removeItem("cartItems");
