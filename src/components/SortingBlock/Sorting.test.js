@@ -3,39 +3,37 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import SortFilter from "./Sorting";
 import "@testing-library/jest-dom/extend-expect";
 
-test("renders SortFilter component", () => {
-    // Arrange
-    const changeFilterMock = jest.fn();
-    const filterSortParams = { sort: "az" };
+describe("SortFilter Component", () => {
+    it("renders SortFilter component with default sort value", () => {
+        const changeFilterMock = jest.fn();
+        const filterSortParams = { sort: "az", page: 1 };
 
-    // Act
-    render(
-        <SortFilter
-            changeFilter={changeFilterMock}
-            filterSortParams={filterSortParams}
-        />
-    );
+        render(
+            <SortFilter
+                changeFilter={changeFilterMock}
+                filterSortParams={filterSortParams}
+            />
+        );
 
-    // Assert
-    expect(screen.getByLabelText("Sort by:")).toBeInTheDocument();
-    expect(screen.getByRole("combobox")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("A to Z")).toBeInTheDocument();
-});
+        const sortSelect = screen.getByLabelText(/Sort by/);
+        expect(sortSelect).toBeInTheDocument();
+        expect(sortSelect).toHaveValue("az");
+    });
+    it("calls changeFilter function when sort value changes", () => {
+        const changeFilterMock = jest.fn();
+        const filterSortParams = { sort: "az", page: 1 };
 
-test("calls changeFilter when select value changes", () => {
-    // Arrange
-    const changeFilterMock = jest.fn();
-    const filterSortParams = { sort: "az" };
+        render(
+            <SortFilter
+                changeFilter={changeFilterMock}
+                filterSortParams={filterSortParams}
+            />
+        );
 
-    // Act
-    render(
-        <SortFilter
-            changeFilter={changeFilterMock}
-            filterSortParams={filterSortParams}
-        />
-    );
-    fireEvent.change(screen.getByRole("combobox"), { target: { value: "za" } });
+        const sortSelect = screen.getByLabelText(/Sort by/);
 
-    // Assert
-    expect(changeFilterMock).toHaveBeenCalledWith({ sort: "za" });
+        fireEvent.change(sortSelect, { target: { value: "za" } });
+
+        expect(changeFilterMock).toHaveBeenCalledWith({ sort: "za", page: 1 });
+    });
 });

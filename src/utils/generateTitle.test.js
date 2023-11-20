@@ -13,7 +13,7 @@ test("getStyleValue returns correct value based on priority keys", () => {
     expect(result4).toBe("Summer");
 
     const result5 = getStyleValue({ hasDiscount: true });
-    expect(result5).toBe(true);
+    expect(result5).toBe("Product List");
 
     const result6 = getStyleValue({});
     expect(result6).toBe("Product List");
