@@ -4,11 +4,6 @@
     row-gap: 0.5rem;
     width: 296px;
     color: var(--black-text);
-    position: relative;
-}
-
-.absoluteContainer {
-    position: relative;
 }
 
 .imgWrapper {
@@ -88,92 +83,6 @@
     border-radius: 3.875rem;
 }
 
-.sizesContainer {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    border-top-left-radius: 1rem;
-    border-bottom-right-radius: 100%;
-    padding: 0.4rem 0.9rem 0.9rem 0.4rem;
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.5);
-    z-index: 2;
-}
-
-.openSizes {
-    font-size: 1.2rem;
-    padding: 0;
-    border: 0;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.5);
-    position: absolute;
-    z-index: 3;
-}
-
-.sizesUl {
-    position: relative;
-    width: 120px;
-    height: 120px;
-}
-
-.sizesUl > li {
-    font-size: 0.9rem;
-    font-family: "Satoshi";
-    font-weight: 500;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    animation: fadeIn 0.3s ease-in-out forwards;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-}
-
-.sizesUl > li:nth-child(1) {
-    right: -15px;
-    top: 15px;
-}
-
-.sizesUl > li:nth-child(2) {
-    top: 40%;
-    right: -5%;
-    animation-delay: 0.1s;
-}
-
-.sizesUl > li:nth-child(3) {
-    top: 64%;
-    right: 11%;
-    animation-delay: 0.2s;
-}
-
-.sizesUl > li:nth-child(4) {
-    bottom: -5%;
-    left: 40%;
-    animation-delay: 0.3s;
-}
-
-.sizesUl > li:nth-child(5) {
-    bottom: -15px;
-    left: 15px;
-    animation-delay: 0.4s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @media screen and (max-width: 991px) {
     .cardWrapper {
         width: 250px;
@@ -235,55 +144,6 @@
         padding: 6px 8px 6px 8px;
         font-size: 0.55rem;
     }
-    .sizesContainer {
-        padding: 0.3rem 0.8rem 0.8rem 0.3rem;
-    }
-    .openSizes {
-        font-size: 1rem;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-    }
-    .sizesUl {
-        width: 85px;
-        height: 85px;
-    }
-    .sizesUl > li {
-        font-size: 0.75rem;
-        font-family: "Satoshi";
-        font-weight: 500;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-    }
-    .sizesUl > li:nth-child(1) {
-        right: -18px;
-        top: 9px;
-    }
-    
-    .sizesUl > li:nth-child(2) {
-        top: 40%;
-        right: -9%;
-        animation-delay: 0.1s;
-    }
-    
-    .sizesUl > li:nth-child(3) {
-        top: 65%;
-        right: 9%;
-        animation-delay: 0.2s;
-    }
-    
-    .sizesUl > li:nth-child(4) {
-        bottom: -9%;
-        left: 40%;
-        animation-delay: 0.3s;
-    }
-    
-    .sizesUl > li:nth-child(5) {
-        bottom: -18px;
-        left: 9px;
-        animation-delay: 0.4s;
-    }    
 }
 
 @media screen and (max-width: 392px) {

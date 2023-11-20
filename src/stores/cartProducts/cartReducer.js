@@ -16,7 +16,7 @@ import { sendCartToServer } from "./utils";
 const initialState = {
     cartItems: [],
 };
-console.log(initialState);
+
 const cartReducer = (state = initialState, action) => {
     let newItem;
     let existingItemIndex;

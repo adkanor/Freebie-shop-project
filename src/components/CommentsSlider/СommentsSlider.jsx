@@ -43,6 +43,8 @@ const CommentsSlider = ({ title, link }) => {
             });
     }, [link]);
 
+
+
     const commentsBlock = comments.map((item, index) => (
         <CommentsCard
             key={index}
