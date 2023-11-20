@@ -130,7 +130,8 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                                     styles.commentsFilter
                                                 }
                                                 name="commentsFilter"
-                                                defaultValue="No filter"
+                                                defaultValue="high"
+                                                data-testid="commentsFilter"
                                             >
                                                 <option value="high">
                                                     High to low
@@ -172,7 +173,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                                 <div className={styles.commentsHeader}>
                                     <h3 className={styles.commentsH}>FAQ</h3>
                                 </div>
-                                <p className={styles.description}>{FAQ}</p>
+                                <p data-testid="description" className={styles.description}>{FAQ}</p>
                             </>
                         )}
                     </div>

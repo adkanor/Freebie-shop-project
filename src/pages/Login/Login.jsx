@@ -152,6 +152,7 @@ const Login = () => {
                                             backgroundColor: "var(--login-btn)",
                                             color: "var(--white-text)",
                                             border: "none",
+
                                         }}
                                     />
                                     <Link

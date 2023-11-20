@@ -29,6 +29,7 @@ const CartItem = ({
     const handleIncrease = () => {
         dispatch(incrementItemQuantity(id, selectedSize));
     };
+
     return (
         <li className={styles.cartItem}>
             <img

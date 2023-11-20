@@ -1,12 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import {Field} from "formik";
 import style from "./Input.module.css";
 import PropTypes from "prop-types";
 
+
 const Input = ({name, placeholder, isError, errorText, type, errorMessageOther, isErrorMessageServer}) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
     return (
         <div className={style.container}>
-            <Field type={type} className={style.input} name={name} placeholder={placeholder}/>
+            <Field
+                type={showPassword ? "text" : type}
+                className={style.input}
+                name={name}
+                placeholder={placeholder}
+            />
+            {placeholder === "Password" || placeholder === "Confirm password" ? (
+                <span
+                    className={style.visibilityIcon}
+                    onClick={toggleShowPassword}
+                >
+                    {showPassword
+                        ? "\u{1F513}"
+                        : "\u{1F512}"}
+                </span>
+            ) : null}
             {isError ? (<p className={style.errorText}>{`*${errorText}`}</p>) : null}
             {isErrorMessageServer ? (<p className={style.errorText}>{`*${errorMessageOther}`}</p>) : null}
 

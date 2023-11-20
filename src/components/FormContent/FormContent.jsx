@@ -27,6 +27,7 @@ const FormContent = () => {
 
     const [detail, setDetail] = useState({ number: "", cvv: "", expiry: "" });
     const [buttonStyle, ButtonStyle] = useState(blackButtonStyle);
+    const [errorMsg, SetErrorMsg] = useState("");
 
     const [isFormFilled, setIsFormFilled] = useState(false);
     const [paymentType, setPaymentType] = useState("Place Order");
@@ -36,10 +37,26 @@ const FormContent = () => {
             return (
                 detail?.number.isValid &&
                 detail?.cvv.isValid &&
-                detail?.expiry.isValid
+                detail?.expiry.isValid &&
+                detail?.expiry.input.slice(0, 2) <= 12
             );
         };
+
         setIsFormFilled(checkFormFilled());
+    }, [detail]);
+
+    useEffect(() => {
+        if (!detail?.expiry.isValid) {
+            SetErrorMsg("The field is not filled.");
+        } else {
+            SetErrorMsg("");
+        }
+        if (
+            (detail?.expiry.parts && detail?.expiry.input.slice(0, 2) > 12) ||
+            (detail?.expiry.isValid && detail?.expiry.input.slice(0, 2) > 12)
+        ) {
+            SetErrorMsg("Incorrect credit card expiration date");
+        }
     }, [detail]);
 
     useEffect(() => {
@@ -185,9 +202,9 @@ const FormContent = () => {
                             }}
                             placeholder="MM/YY"
                         />
-                        {detail?.expiry.input && !detail.expiry.isValid && (
+                        {detail?.expiry.input && (
                             <span className={styles.errorMessage}>
-                                The field is not filled.
+                                {errorMsg}
                             </span>
                         )}
                     </div>
