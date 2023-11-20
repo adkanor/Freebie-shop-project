@@ -58,13 +58,9 @@ const FormContent = () => {
         }
         if (
             (detail?.expiry.parts && detail?.expiry.input.slice(0, 2) > 12) ||
-            (detail?.expiry.isValid && detail?.expiry.input.slice(0, 2) > 12)
-        ) {
-            SetErrorMsg("Incorrect credit card expiration date");
-        }
-        if (
-            detail?.expiry.isValid &&
-            detail?.expiry.input.slice(2) <= new Date().getYear() % 100
+            (detail?.expiry.isValid && detail?.expiry.input.slice(0, 2) > 12) ||
+            (detail?.expiry.isValid &&
+                detail?.expiry.input.slice(2) <= new Date().getYear() % 100)
         ) {
             SetErrorMsg("Incorrect credit card expiration date");
         }
