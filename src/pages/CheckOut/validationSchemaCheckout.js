@@ -1,9 +1,12 @@
 import * as Yup from "yup";
+
+const nameRegExp = /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєҐґ ])?[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*)*$/;
+
 const validateSchemaCheckout = Yup.object().shape({
     userName: Yup.string()
         .min(3, "Must be at least 3 characters")
         .max(40, "Must be less than 40 characters")
-        .matches(/^[a-zA-Z]+$/, "Username must contain only letters")
+        .matches(nameRegExp, "Username must contain only letters")
         .required("Username is required"),
     companyName: Yup.string()
         .min(3, "Must be at least 3 characters")
