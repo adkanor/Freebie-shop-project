@@ -131,7 +131,8 @@ const Registration = () => {
                                     fontSize: "20px",
                                     backgroundColor: "var(--login-btn)",
                                     color: "var(--white-text)",
-                                    border: "none"
+                                    border: "none",
+                                    marginTop:"16px"
                                 }}
                             />
                         </Form>
