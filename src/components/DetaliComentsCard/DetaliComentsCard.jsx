@@ -18,7 +18,6 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
         axios
             .get(`${URL}getcomments/?page=1&limit=10&sort=new&good=${idGoods}`)
             .then((res) => {
-                res.data.sort((a, b) => b.rating - a.rating);
                 setComments(res.data);
             })
             .catch((error) => {
