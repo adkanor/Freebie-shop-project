@@ -10,6 +10,7 @@ import GMAILID from "./config";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 console.log(GMAILID);
+console.log(process.env.REACT_APP_GMAILID);
 console.log(process.env.GMAILID);
 root.render(
     <>
