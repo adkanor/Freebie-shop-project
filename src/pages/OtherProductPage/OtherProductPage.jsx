@@ -39,7 +39,7 @@ const OtherProductPage = () => {
         if (parseInt(searchParamsObj.page) <= 3) {
             setLoading(true);
             const queryString = stringifyParams(browserStr);
-            axios.get(`${URL}productother/?${queryString}`).then((responce) => {
+            axios.get(`${URL}productOther/?${queryString}`).then((responce) => {
                 setProducts(responce.data.products);
                 setLoading(false);
             });

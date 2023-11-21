@@ -43,7 +43,7 @@ const AddComment = ({ id, closeFunc, submitFunc }) => {
             const token = localStorage.getItem("token");
             axios
                 .post(
-                    `${URL}postcomments`,
+                    `${URL}postComments`,
                     {
                         id_good: id,
                         text: commentText,
