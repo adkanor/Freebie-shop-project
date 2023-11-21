@@ -10,15 +10,6 @@ const DetailProductSlider = ({ info }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
-    const thisCard = {
-        id: info._id,
-        name: info.name,
-        imageURL: info.url_image[0],
-        rating: info.rating,
-        sale: info.sale,
-        price: info.price,
-        final_price: info.final_price,
-    };
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
@@ -49,7 +40,7 @@ const DetailProductSlider = ({ info }) => {
                     />
                 </div>
                 {isPersonAutorised ? (
-                    <FavoriteIcon thisCard={thisCard} />
+                    <FavoriteIcon thisCard={{ ...info, id: info._id }} />
                 ) : null}
             </div>
             <div ref={smallContainer} className={styles.smallSquareContainer}>

@@ -39,7 +39,7 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                         text={sizeObj.size}
                         type={"button"}
                         style={
-                            sizeObj.count === 0
+                            sizeObj.count <= 0
                                 ? {
                                     ...disabledStyle,
                                 }

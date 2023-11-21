@@ -118,48 +118,49 @@
     height: 120px;
 }
 
-.sizesUl > li {
+.sizeLi {
     font-size: 0.9rem;
     font-family: "Satoshi";
     font-weight: 500;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     position: absolute;
     box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.5);
     opacity: 0;
     animation: fadeIn 0.3s ease-in-out forwards;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    margin-bottom: 0 !important;
 }
 
-.sizesUl > li:nth-child(1) {
+.sizeLi:nth-child(1) {
     right: -15px;
     top: 15px;
 }
 
-.sizesUl > li:nth-child(2) {
+.sizeLi:nth-child(2) {
     top: 40%;
     right: -5%;
     animation-delay: 0.1s;
 }
 
-.sizesUl > li:nth-child(3) {
+.sizeLi:nth-child(3) {
     top: 64%;
     right: 11%;
     animation-delay: 0.2s;
 }
 
-.sizesUl > li:nth-child(4) {
+.sizeLi:nth-child(4) {
     bottom: -5%;
     left: 40%;
     animation-delay: 0.3s;
 }
 
-.sizesUl > li:nth-child(5) {
+.sizeLi:nth-child(5) {
     bottom: -15px;
     left: 15px;
     animation-delay: 0.4s;
@@ -248,7 +249,7 @@
         width: 85px;
         height: 85px;
     }
-    .sizesUl > li {
+    .sizeLi {
         font-size: 0.75rem;
         font-family: "Satoshi";
         font-weight: 500;
@@ -256,30 +257,30 @@
         height: 22px;
         border-radius: 50%;
     }
-    .sizesUl > li:nth-child(1) {
+    .sizeLi:nth-child(1) {
         right: -18px;
         top: 9px;
     }
     
-    .sizesUl > li:nth-child(2) {
+    .sizeLi:nth-child(2) {
         top: 40%;
         right: -9%;
         animation-delay: 0.1s;
     }
     
-    .sizesUl > li:nth-child(3) {
+    .sizeLi:nth-child(3) {
         top: 65%;
         right: 9%;
         animation-delay: 0.2s;
     }
     
-    .sizesUl > li:nth-child(4) {
+    .sizeLi:nth-child(4) {
         bottom: -9%;
         left: 40%;
         animation-delay: 0.3s;
     }
     
-    .sizesUl > li:nth-child(5) {
+    .sizeLi:nth-child(5) {
         bottom: -18px;
         left: 9px;
         animation-delay: 0.4s;

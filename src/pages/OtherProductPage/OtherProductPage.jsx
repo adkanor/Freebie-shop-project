@@ -61,14 +61,8 @@ const OtherProductPage = () => {
                     <ul className={styles.favList}>
                         {products.map((fav) => (
                             <ClosedProductCard
-                                id={fav._id}
                                 key={fav._id}
-                                name={fav.name}
-                                price={fav.price}
-                                rating={fav.rating}
-                                imageURL={fav.url_image[0]}
-                                sale={fav.sale}
-                                final_price={fav.final_price}
+                                info={fav}
                             />
                         ))}
                     </ul>

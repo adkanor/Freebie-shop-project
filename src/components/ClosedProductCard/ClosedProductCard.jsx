@@ -10,105 +10,81 @@ import { addToCart } from "../../stores/cartProducts/action";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-function ClosedProductCard({
-    id,
-    name,
-    imageURL,
-    rating,
-    sale,
-    price,
-    productSizes,
-    final_price,
-}) {
+function ClosedProductCard({ info }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [areSizesOpened, setAreSizesOpened] = useState(false);
-    const thisCard = { id, name, imageURL, rating, sale, price, final_price };
     const dispatch = useDispatch();
-    const sizes = [
-        {
-            size: "XL",
-            count: 0,
-        },
-        {
-            size: "L",
-            count: 3,
-        },
-        {
-            size: "M",
-            count: 0,
-        },
-        {
-            size: "S",
-            count: 1,
-        },
-        {
-            size: "XS",
-            count: 4,
-        },
-    ];
-
     const handleImageLoad = () => {
         setImageLoading(true);
     };
     const isPersonAutorised = useSelector(
         (state) => state.authorizationReducer.isAuth
     );
-
     function handleAdding(size) {
-        const selectedSizeObj = sizes.find((item) => item.size === size);
+        const selectedSizeObj = info.sizes.find((item) => item.size === size);
         if (selectedSizeObj && selectedSizeObj.count >= 1) {
             const tryToCart = {
-                _id: id,
-                name: name,
-                final_price: final_price,
-                url_image: [imageURL],
+                ...info,
                 selectedAmount: 1,
                 selectedSize: size,
             };
             dispatch(addToCart(tryToCart));
         } else {
             console.warn("No item is available.Choose less amount");
-            toast.error("This quantity is  not available");
+            toast.error("This quantity is not available");
         }
     }
 
     return (
-        <li key={id}>
+        <li key={info._id}>
             <div className={style.absoluteContainer}>
-                <Link className={style.cardWrapper} to={`/products/${id}`}>
+                <Link
+                    className={style.cardWrapper}
+                    to={`/products/${info._id}`}
+                >
                     <div className={style.imgWrapper}>
                         {isPersonAutorised ? (
-                            <FavoriteIcon thisCard={thisCard} />
+                            <FavoriteIcon
+                                thisCard={{
+                                    ...info,
+                                    id: info._id,
+                                }}
+                            />
                         ) : null}
 
                         {imageLoading ? null : <Preloader />}
                         <img
-                            src={imageURL}
+                            src={info.url_image[0]}
                             alt="productImg"
                             style={{ display: imageLoading ? "block" : "none" }}
                             onLoad={handleImageLoad}
                         />
                     </div>
-                    <h6 className={style.productName}>{name}</h6>
+                    <h6 className={style.productName}>{info.name}</h6>
                     <div className={style.grade}>
-                        <StarRating rating={Number(rating)} starSize="1.1rem" />
+                        <StarRating
+                            rating={Number(info.rating)}
+                            starSize="1.1rem"
+                        />
                         <span className={style.ratingSpan}>
-                            <span>{rating}</span>/5
+                            <span>{info.rating}</span>/5
                         </span>
                     </div>
-                    {sale ? (
+                    {info.discount ? (
                         <div className={style.salePriceContainer}>
                             <span className={style.defaultPriceSpan}>
-                                ${final_price}
+                                ${info.final_price}
                             </span>
                             <span className={style.onSalePriceSpan}>
-                                ${price}
+                                ${info.price}
                             </span>
-                            <span className={style.saleValue}>-{sale}%</span>
+                            <span className={style.saleValue}>
+                                -{info.discount}%
+                            </span>
                         </div>
                     ) : (
                         <span className={style.defaultPriceSpan}>
-                            ${final_price}
+                            ${info.final_price}
                         </span>
                     )}
                 </Link>
@@ -125,14 +101,15 @@ function ClosedProductCard({
                     </button>
                     {areSizesOpened && (
                         <ul className={style.sizesUl}>
-                            {sizes.map((sizeElement) => (
+                            {info.sizes.map((sizeElement) => (
                                 <li
+                                    className={style.sizeLi}
                                     onClick={() => {
                                         handleAdding(sizeElement.size);
                                     }}
                                     key={sizeElement.size}
                                     style={
-                                        !sizeElement.count
+                                        sizeElement.count <= 0
                                             ? {
                                                 boxShadow: "none",
                                                 backgroundColor:
@@ -155,14 +132,7 @@ function ClosedProductCard({
 }
 
 ClosedProductCard.propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    final_price: PropTypes.number.isRequired,
-    imageURL: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    sale: PropTypes.number,
-    productSizes: PropTypes.array,
+    info: PropTypes.object.isRequired,
 };
 
 ClosedProductCard.defaultValues = {
