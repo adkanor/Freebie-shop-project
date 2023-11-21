@@ -5,11 +5,14 @@ import style from "./ClosedProductCard.module.css";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
 import Preloader from "../../components/Preloader/Preloader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addToCart } from "../../stores/cartProducts/action";
 
 function ClosedProductCard({ info }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [areSizesOpened, setAreSizesOpened] = useState(false);
+    const dispatch = useDispatch();
     const handleImageLoad = () => {
         setImageLoading(true);
     };
