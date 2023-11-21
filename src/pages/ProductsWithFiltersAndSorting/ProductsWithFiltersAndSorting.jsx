@@ -113,13 +113,7 @@ const ProductsWithFiltersAndSorting = () => {
                             {products.map((product) => (
                                 <ClosedProductCard
                                     key={product._id}
-                                    id={product._id}
-                                    name={product.name}
-                                    price={Number(product.price)}
-                                    final_price={Number(product.final_price)}
-                                    imageURL={product.url_image[0]}
-                                    rating={Number(product.rating)}
-                                    sale={Number(product.discount)}
+                                    info={product}
                                 />
                             ))}
                         </ul>
