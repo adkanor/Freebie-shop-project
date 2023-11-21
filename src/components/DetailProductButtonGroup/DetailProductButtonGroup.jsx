@@ -20,9 +20,11 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
     const disabledStyle = {
         ...style,
         pointerEvents: "none",
-        color: "var(--separator-line)",
+
+        color: "white",
         backgroundColor: "var(--separator-line)",
-        boxShadow: "none",
+        boxShadow: "none"
+
     };
 
     const buttonClick = (size) => {
@@ -40,7 +42,7 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                         text={sizeObj.size}
                         type={"button"}
                         style={
-                            sizeObj.count === 0
+                            sizeObj.count <= 0
                                 ? {
                                       ...disabledStyle,
                                   }

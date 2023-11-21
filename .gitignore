@@ -2,6 +2,7 @@
 .idea/
 
 .env.js
+passGMAIL.js
 
 # dependencies
 /node_modules

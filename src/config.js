@@ -1,5 +1,5 @@
 export const GMAILID = process.env.GMAILID;
 
 
-// import { id } from "./gmailId";
-// export const GMAILID = id;
+// import { pass } from "./passGMAIL";
+// export const GMAILID = pass;
