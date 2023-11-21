@@ -9,7 +9,7 @@ const RecommendationProducts = ({ title, children, urlParams }) => {
     const [littleArr, setLittleArr] = useState([]);
 
     useEffect(() => {
-        axios.get(`${URL}productother/?${urlParams}`).then((responce) => {
+        axios.get(`${URL}productOther/?${urlParams}`).then((responce) => {
             setLittleArr(responce.data.products);
         });
     }, [urlParams]);

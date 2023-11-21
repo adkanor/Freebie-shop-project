@@ -27,7 +27,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios
-            .get(`${URL}getcomments/?page=1&limit=6&sort=new&good=${idGoods}`)
+            .get(`${URL}getComments/?page=1&limit=6&sort=new&good=${idGoods}`)
             .then((res) => {
                 setInitialComments(res.data);
                 setComments(res.data);
@@ -37,7 +37,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
             });
         axios
             .post(
-                `${URL}hascommentsadd`,
+                `${URL}hasCommentsAdd`,
                 {
                     id_good: idGoods,
                 },
