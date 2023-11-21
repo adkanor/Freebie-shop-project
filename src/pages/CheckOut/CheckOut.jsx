@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 import { URL } from "../../variables";
 
-const FormContext = createContext();
+export const FormContext = createContext();
 
 export const useFormContext = () => {
     return useContext(FormContext);

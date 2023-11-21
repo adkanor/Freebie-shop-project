@@ -31,8 +31,7 @@ const styleBlack = {
 const styleDisabled = {
     ...styleBlack,
     pointerEvents: "none",
-    backgroundColor: "var(--separator-line)",
-    boxShadow: "none"
+    backgroundColor: "#dd6464",
 };
 
 const DetailProduct = () => {

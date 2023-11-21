@@ -1,20 +1,24 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import TitleOtherPage from "./TitleOtherPage";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
-test("renders TitleOtherPage component with `New approval`title", () => {
-    const paramsObj = { sort: "new" };
+describe("TitleOtherPage Component", () => {
+    it("renders with 'New Arrivals' title when sort is 'new'", () => {
+        const paramsObj = { sort: "new" };
+        render(<TitleOtherPage paramsObj={paramsObj} />);
 
-    render(<TitleOtherPage paramsObj={paramsObj} />);
+        const titleElement = screen.getByText("New Arrivals");
+        expect(titleElement).toBeInTheDocument();
+    });
 
-    expect(screen.queryByText("New approval")).toBeInTheDocument();
-});
+    it("renders with 'Top Selling' title when sort is 'topsales'", () => {
+        const paramsObj = { sort: "topsales" };
+        render(<TitleOtherPage paramsObj={paramsObj} />);
 
-test("renders TitleOtherPage component with `topselling` title", () => {
-    const paramsObj = { sort: "topselling" };
+        const titleElement = screen.getByText("Top Selling");
+        expect(titleElement).toBeInTheDocument();
+    });
 
-    render(<TitleOtherPage paramsObj={paramsObj} />);
 
-    expect(screen.queryByText("topselling")).toBeInTheDocument();
 });

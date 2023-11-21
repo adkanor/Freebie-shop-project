@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 
-const nameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+const nameRegExp = /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєҐґ ])?[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*)*$/;
+
+
 const passwordRegExp =
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@#$%^&(){}[\]:;<>,.?/~_+\-|=])\S{8,55}$/;
 
@@ -11,7 +13,7 @@ const validationSchema = Yup.object().shape({
         .min(5, "Min length 5 symbol")
         .required("Email is required"),
     password: Yup.string()
-        .matches(passwordRegExp, "Min length 8, one special character")
+        .matches(passwordRegExp, "Min length 8. One uppercase and lowercase letter. one special character")
         .max(55, "Max length 65 symbol!")
         .min(8, "Min length 8 symbol")
         .required("Password is required"),

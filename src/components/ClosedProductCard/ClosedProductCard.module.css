@@ -4,11 +4,6 @@
     row-gap: 0.5rem;
     width: 296px;
     color: var(--black-text);
-    position: relative;
-}
-
-.absoluteContainer {
-    position: relative;
 }
 
 .imgWrapper {

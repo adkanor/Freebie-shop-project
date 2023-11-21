@@ -6,6 +6,7 @@ import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import { checkAuthorization } from "../../stores/authorization/actions";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const CartSummary = ({
     discount,
@@ -68,7 +69,7 @@ const CartSummary = ({
                         </div>
                     </div>
 
-                    <Link to="checkout">
+                    <Link to="checkout" onClick={scrollToTop}>
                         <Button
                             type="submit"
                             text="Go to Checkout"

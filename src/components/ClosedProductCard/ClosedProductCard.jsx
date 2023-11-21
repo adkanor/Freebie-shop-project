@@ -6,14 +6,10 @@ import { Link } from "react-router-dom";
 import FavoriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
 import Preloader from "../../components/Preloader/Preloader";
 import { useSelector } from "react-redux";
-import { addToCart } from "../../stores/cartProducts/action";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 function ClosedProductCard({ info }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [areSizesOpened, setAreSizesOpened] = useState(false);
-    const dispatch = useDispatch();
     const handleImageLoad = () => {
         setImageLoading(true);
     };

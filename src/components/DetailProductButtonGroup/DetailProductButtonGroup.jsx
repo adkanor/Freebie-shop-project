@@ -20,8 +20,7 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
         ...style,
         pointerEvents: "none",
         color: "white",
-        backgroundColor: "var(--separator-line)",
-        boxShadow: "none"
+        backgroundColor: "#dd6464",
     };
 
     const buttonClick = (size) => {
