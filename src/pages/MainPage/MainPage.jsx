@@ -97,7 +97,7 @@ const MainPage = () => {
             </div>
             <CommentsSlider
                 title={"Our happy customers"}
-                link={`${URL}getcomments/?page=1&limit=10&sort=new`}
+                link={`${URL}getComments/?page=1&limit=10&sort=new`}
             />
         </section>
     );

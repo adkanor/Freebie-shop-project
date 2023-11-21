@@ -1,5 +1,5 @@
-export const GMAILID = process.env.GMAILID;
+// const GMAILID = process.env.REACT_APP_GMAILID;
+// export default GMAILID;
 
-
-// import { id } from "./gmailId";
-// export const GMAILID = id;
+// import { pass } from "./passGMAIL";
+export const GMAIL = process.env.REACT_APP_GMAIL;

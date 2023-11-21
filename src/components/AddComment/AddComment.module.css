@@ -1,0 +1,122 @@
+.modalWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    border: 2px solid #dd6464;
+    padding: 0;
+    padding-top: 1px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+    color: #dd6464;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close:hover {
+    color: var(--gray-text-primary);
+    background-color: #dd6464;
+}
+
+.leaveCommentWrapper {
+    width: 330px;
+    background-color: var(--gray-primary);
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.ratingWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.tooltip {
+    color: var(--black-text);
+    font-family: "Satoshi";
+    background-color: var(--separator-line);
+    font-size: 14px;
+    padding: 5px 12px;
+    pointer-events: none;
+}
+
+.textAreaWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--separator-line);
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.textAreaWrapper textarea {
+    background-color: transparent;
+    resize: none;
+    outline: 0;
+    border: 0;
+    color: var(--black-text);
+    font-family: "Satoshi";
+    font-size: 0.95rem;
+}
+
+.textAreaWrapper span {
+    font-family: "Satoshi";
+    padding-top: 0.5rem;
+    text-align: end;
+    font-size: 0.75rem;
+}
+
+.submitButton {
+    display: block;
+    margin: 0 auto;
+    font-family: "Satoshi";
+    font-weight: 500;
+    background-color: var(--dark-grey-secondary);
+    outline: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0 0.7rem;
+    color: var(--white);
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    height: 2rem;
+    text-transform: uppercase;
+    border: none;
+    text-align: center;
+    box-shadow:
+        0px 3px 1px -2px rgb(0 0 0 / 20%),
+        0px 2px 2px 0px rgb(0 0 0 / 14%),
+        0px 1px 5px 0px rgb(0 0 0 / 12%);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s;
+    will-change: transform;
+    &:hover {
+        box-shadow:
+            0px 2px 4px -1px rgb(0 0 0 / 20%),
+            0px 4px 5px 0px rgb(0 0 0 / 14%),
+            0px 1px 10px 0px rgb(0 0 0 / 12%);
+    }
+    &:active {
+        transform: translateY(4px);
+        scale: 0.93;
+    }
+}

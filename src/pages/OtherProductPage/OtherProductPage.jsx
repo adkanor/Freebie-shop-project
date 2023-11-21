@@ -39,7 +39,7 @@ const OtherProductPage = () => {
         if (parseInt(searchParamsObj.page) <= 3) {
             setLoading(true);
             const queryString = stringifyParams(browserStr);
-            axios.get(`${URL}productother/?${queryString}`).then((responce) => {
+            axios.get(`${URL}productOther/?${queryString}`).then((responce) => {
                 setProducts(responce.data.products);
                 setLoading(false);
             });
@@ -61,14 +61,8 @@ const OtherProductPage = () => {
                     <ul className={styles.favList}>
                         {products.map((fav) => (
                             <ClosedProductCard
-                                id={fav._id}
                                 key={fav._id}
-                                name={fav.name}
-                                price={fav.price}
-                                rating={fav.rating}
-                                imageURL={fav.url_image[0]}
-                                sale={fav.sale}
-                                final_price={fav.final_price}
+                                info={fav}
                             />
                         ))}
                     </ul>
