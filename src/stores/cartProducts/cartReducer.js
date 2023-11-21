@@ -22,7 +22,6 @@ const cartReducer = (state = initialState, action) => {
     let id;
     let selectedSize;
     let updatedState;
-    console.log(action.payload);
     if (action.payload) {
         id = action.payload.id;
         selectedSize = action.payload.selectedSize;
