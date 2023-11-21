@@ -243,7 +243,13 @@ const FormContent = () => {
                             name="payment"
                             value="Bank"
                             required
-                            onClick={() => setPaymentType("Pay to Card")}
+                            onClick={() =>
+                                setPaymentType(
+                                    `Pay to Card ${cartData.finalTotal.toFixed(
+                                        2
+                                    )}$`
+                                )
+                            }
                         />
                         <p className={styles.paymentTitle}>Bank</p>
                     </div>
