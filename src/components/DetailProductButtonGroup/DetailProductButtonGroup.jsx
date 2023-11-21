@@ -2,6 +2,7 @@ import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import BlackButton from "../Button/Button";
+/*eslint-disable*/
 
 const DetailProductButtonGroup = ({ sizes, values }) => {
     const [activeButton, setActiveButton] = useState(values.size);
@@ -19,8 +20,9 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
     const disabledStyle = {
         ...style,
         pointerEvents: "none",
-        color: "white",
-        backgroundColor: "#dd6464",
+        color: "var(--separator-line)",
+        backgroundColor: "var(--separator-line)",
+        boxShadow: "none",
     };
 
     const buttonClick = (size) => {
@@ -40,19 +42,19 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                         style={
                             sizeObj.count === 0
                                 ? {
-                                    ...disabledStyle,
-                                }
+                                      ...disabledStyle,
+                                  }
                                 : {
-                                    ...style,
-                                    backgroundColor:
-                                        sizeObj.size === activeButton
-                                            ? "var(--black--background)"
-                                            : "var(--gray-primary)",
-                                    color:
-                                        sizeObj.size === activeButton
-                                            ? "var(--white-text)"
-                                            : "var(--black-text)",
-                                }
+                                      ...style,
+                                      backgroundColor:
+                                          sizeObj.size === activeButton
+                                              ? "var(--black--background)"
+                                              : "var(--gray-primary)",
+                                      color:
+                                          sizeObj.size === activeButton
+                                              ? "var(--white-text)"
+                                              : "var(--black-text)",
+                                  }
                         }
                         onClick={() => buttonClick(sizeObj.size)}
                     />

@@ -8,7 +8,6 @@ import {
     REFRESH_CART,
     FETCH_CART_ITEMS_SUCCESS,
     FETCH_CART_ITEMS_FAILURE,
-    SENDTOSERVER,
 } from "./action";
 import { toast } from "react-toastify";
 import { sendCartToServer } from "./utils";
@@ -23,7 +22,7 @@ const cartReducer = (state = initialState, action) => {
     let id;
     let selectedSize;
     let updatedState;
-
+    console.log(action.payload);
     if (action.payload) {
         id = action.payload.id;
         selectedSize = action.payload.selectedSize;
@@ -77,7 +76,7 @@ const cartReducer = (state = initialState, action) => {
                 cartItems: updatedCartItems,
             };
 
-            // sendCartToServer(updatedState.cartItems);
+            sendCartToServer(updatedState.cartItems);
 
             return updatedState;
 
@@ -107,7 +106,7 @@ const cartReducer = (state = initialState, action) => {
                         cartItems: updatedItems,
                     };
 
-                    // sendCartToServer(updatedState.cartItems);
+                    sendCartToServer(updatedState.cartItems);
 
                     return updatedState;
                 } else {
@@ -132,14 +131,9 @@ const cartReducer = (state = initialState, action) => {
                 updatedState = {
                     cartItems: updatedItems,
                 };
-
+                sendCartToServer(updatedState.cartItems);
                 return updatedState;
             }
-            return state;
-        case SENDTOSERVER:
-            console.log(state);
-
-            sendCartToServer(state.cartItems);
             return state;
         case CLEAR_CART:
             localStorage.removeItem("cartItems");
