@@ -39,8 +39,9 @@ const CommentsSlider = ({ title, link }) => {
                 setComments(res.data);
             })
             .catch((error) => {
-                console.error("404", error);
+                console.error("405", error);
             });
+        
     }, [link]);
 
 
