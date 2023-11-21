@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query";
-
-const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
+import { URL } from "../../variables";
+const SearchBar = ({
+    classList,
+    onChangeFunc,
+    onKeyUpFunc,
+    closeTabsFunc,
+    LiveSearchStatus,
+}) => {
     const [term, setTerm] = useState("");
     const [options, setOptions] = useState([]);
 
     const isDesktop = useMediaQuery("(min-width: 991px)");
     const navigate = useNavigate();
+    useEffect(() => {
+        if (LiveSearchStatus) {
+            setOptions([]);
+            setTerm("");
+        }
+    }, [LiveSearchStatus]);
 
     const handleInputChange = (e) => {
         onChangeFunc(e);
@@ -34,22 +46,19 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
 
     const search = (value) => {
         axios
-            .post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/search",
-                { word: value }
-            )
+            .get(`${URL}product?page=1&limit=4&search=${value}`)
             .then((res) => {
                 if (res.status === 200) {
                     return res.data;
                 } else {
-                    throw new Error("Ошибка в ответе сервера");
+                    throw new Error("Error occur");
                 }
             })
             .then((data) => {
-                setOptions(data.resultArray.slice(0, 4));
+                setOptions(data.products);
             })
             .catch((error) => {
-                console.error("Произошла ошибка при запросе:", error);
+                console.error("Error occur:", error);
             });
     };
     return (
@@ -66,7 +75,7 @@ const SearchBar = ({ classList, onChangeFunc, onKeyUpFunc, closeTabsFunc }) => {
                     <ul className={styles.liveSearchList}>
                         {options.map((options) => (
                             <li
-                                key={options.id}
+                                key={options._id}
                                 onClick={() => {
                                     navigate(`/products/${options._id}`);
                                     if (!isDesktop) {
@@ -107,6 +116,7 @@ SearchBar.propTypes = {
     classList: PropTypes.string.isRequired,
     onChangeFunc: PropTypes.func.isRequired,
     onKeyUpFunc: PropTypes.func.isRequired,
+    LiveSearchStatus: PropTypes.bool,
     closeTabsFunc: PropTypes.func,
 };
 

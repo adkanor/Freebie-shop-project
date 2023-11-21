@@ -307,18 +307,20 @@ display: none;
     padding: 27px 0;
 	}
   .wrapper{
-    padding: 27px 0px;
+    padding: 24.5px 0px;
+    /* new */
   }
 
 	.header .responsiveNav {
-		transform: translateY(547px);
+		transform: translateY(546px);
+    /* new */
 	}
 	.header .responsiveSearch {
 		transform: translateY(628px);
 	}
   
 
-  ul.q.desktopMenuList::after{
+  ul.animationList.desktopMenuList::after{
     content: " ";
     position: fixed;  
     left: 0;
@@ -330,7 +332,7 @@ display: none;
   }
 
   
-  label.q.desktopSearchBar::after{
+  label.animationList.desktopSearchBar::after{
     content: " ";
     position: fixed;  
     left: 0;

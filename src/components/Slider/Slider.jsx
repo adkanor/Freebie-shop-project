@@ -6,6 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 import style from "./Slider.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { URL } from "../../variables";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 492 },
@@ -19,9 +20,7 @@ const Slider = () => {
 
     useEffect(() => {
         axios
-            .get(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/banners"
-            )
+            .get(`${URL}banners`)
             .then((res) => {
                 setBanners(res.data[0].urls);
             })

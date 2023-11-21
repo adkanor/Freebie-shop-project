@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -17,12 +17,28 @@ import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { fetchUserData } from "../../stores/personalInfo/action";
 import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import { toast } from "react-toastify";
+import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
+import { URL } from "../../variables";
 
+export const FormContext = createContext();
+
+export const useFormContext = () => {
+    return useContext(FormContext);
+};
 const CheckOut = () => {
     const cartProducts = useSelector((state) => state.cartReducer);
+    const cartItems = cartProducts.cartItems;
+    const cartData = cartSummaryCalculate(cartItems);
+
+    const [isSubmitting, setSubmitting] = useState(false);
+
+    const setSubmittingStatus = (status) => {
+        setSubmitting(status);
+    };
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || null;
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.personalInfoReducer.userData);
     const errorMessage = useSelector(
@@ -38,36 +54,30 @@ const CheckOut = () => {
             dispatch(fetchUserData(token))
                 .then(() => setIsLoading(false))
                 .catch(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
         }
     }, [dispatch, token]);
 
     const sendFormToServer = async (dataForm) => {
         try {
-            await axios.put(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/changeUser",
-                dataForm,
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
+            await axios.put(`${URL}changeUser`, dataForm, {
+                headers: {
+                    Authorization: token,
+                },
+            });
         } catch (error) {
             console.error(error);
         }
     };
 
-    const funct = async (data) => {
+    const addToOrders = async (data) => {
         try {
-            const response = await axios.post(
-                "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/orders/add",
-                data,
-                {
-                    headers: {
-                        Authorization: token,
-                    },
-                }
-            );
+            const response = await axios.post(`${URL}orders/add`, data, {
+                headers: {
+                    Authorization: token,
+                },
+            });
 
             if (response.data.status === 200) {
                 dispatch(clearCart());
@@ -82,21 +92,32 @@ const CheckOut = () => {
         }
     };
     const handleSubmit = async (values) => {
-        const orderData = {
-            personalInfo: values,
-            goods: cartProducts.cartItems,
-            email: values.email,
-            payment: values.payment,
-            orderDate:
-                new Date().toLocaleDateString() +
-                " " +
-                new Date().toLocaleTimeString(),
-            totalValue: Number(cartProducts.final_total.toFixed(2)),
-        };
-        await funct(orderData);
-        await sendFormToServer(values);
-    };
+        try {
+            const orderData = {
+                personalInfo: values,
+                goods: cartProducts.cartItems,
+                email: values.email,
+                payment: values.payment,
+                orderDate:
+                    new Date().toLocaleDateString() +
+                    " " +
+                    new Date().toLocaleTimeString(),
+                totalValue: Number(cartData.finalTotal.toFixed(2)),
+            };
+            setSubmitting(true);
+            await addToOrders(orderData);
 
+            if (token) {
+                await sendFormToServer(values);
+            }
+
+            setSubmitting(false);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+
+            setSubmitting(false);
+        }
+    };
     if (isLoading) {
         return <Preloader />;
     } else if (errorMessage) {
@@ -124,28 +145,47 @@ const CheckOut = () => {
                     <h1 className={styles.formTitle}>Billing Details</h1>
                     <Formik
                         initialValues={{
-                            userName: userData ? userData.userName : "",
-                            companyName: userData ? userData.companyName : "",
-                            streetAddress: userData
-                                ? userData.streetAddress
-                                : "",
-                            apartmentInfo: userData
-                                ? userData.apartmentInfo
-                                : "",
-                            city: userData ? userData.city : "",
-                            phoneNumber: userData ? userData.phoneNumber : "",
-                            email: userData ? userData.email : "",
+                            userName:
+                                userData?.userName && token
+                                    ? userData.userName
+                                    : "",
+                            companyName:
+                                userData?.companyName && token
+                                    ? userData.companyName
+                                    : "",
+                            streetAddress:
+                                userData?.streetAddress && token
+                                    ? userData.streetAddress
+                                    : "",
+                            apartmentInfo:
+                                userData?.apartmentInfo && token
+                                    ? userData.apartmentInfo
+                                    : "",
+                            city: userData?.city && token ? userData.city : "",
+                            phoneNumber:
+                                userData?.phoneNumber && token
+                                    ? userData.phoneNumber
+                                    : "",
+                            email:
+                                userData?.email && token ? userData.email : "",
                         }}
                         validationSchema={validationSchemaCheckout}
                         onSubmit={handleSubmit}
                     >
                         {({ errors, touched }) => (
                             <>
-                                <ProfileForm
-                                    isCheckOut={true}
-                                    errors={errors}
-                                    touched={touched}
-                                ></ProfileForm>
+                                <FormContext.Provider
+                                    value={{
+                                        isSubmitting,
+                                        setSubmittingStatus,
+                                    }}
+                                >
+                                    <ProfileForm
+                                        isCheckOut={true}
+                                        errors={errors}
+                                        touched={touched}
+                                    />
+                                </FormContext.Provider>
                             </>
                         )}
                     </Formik>

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import styles from "./CartSummary.module.css";
 import Button from "../Button/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import { checkAuthorization } from "../../stores/authorization/actions";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const CartSummary = ({
     discount,
@@ -15,7 +16,6 @@ const CartSummary = ({
     total,
 }) => {
     const dispatch = useDispatch();
-    let authData = useSelector((state) => state.authorizationReducer);
 
     const initialValues = {
         subtotal: cartSubtotal,
@@ -69,7 +69,7 @@ const CartSummary = ({
                         </div>
                     </div>
 
-                    <Link to={authData.status === 200 ? "checkout" : "/login"}>
+                    <Link to="checkout" onClick={scrollToTop}>
                         <Button
                             type="submit"
                             text="Go to Checkout"

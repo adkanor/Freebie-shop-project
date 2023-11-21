@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
 import "@testing-library/jest-dom/extend-expect";
@@ -8,8 +9,10 @@ jest.mock("react-router-dom", () => ({
   useNavigate: jest.fn(),
 }));
 jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
+  useSelector: jest.fn(() => {}),
+  useDispatch: jest.fn(() => {})
 }));
+
 
 describe("Header Component", () => {
   it("renders the Header component", () => {
@@ -20,6 +23,8 @@ describe("Header Component", () => {
       addEventListener: jest.fn(),
       removeEventListener: jest.fn(),
     }));
+    const dispatch = jest.fn();
+  useDispatch.mockReturnValue(dispatch);
     
     render(<Header />);
 
@@ -34,7 +39,8 @@ describe("Header Component", () => {
       addEventListener: jest.fn(),
       removeEventListener: jest.fn(),
     }));
-    
+    const dispatch = jest.fn();
+  useDispatch.mockReturnValue(dispatch);
     
     const cartAmount = [];
     const favoriteAmount = [];
@@ -58,7 +64,8 @@ describe("Header Component", () => {
       addEventListener: jest.fn(),
       removeEventListener: jest.fn(),
     }));
-    
+    const dispatch = jest.fn();
+  useDispatch.mockReturnValue(dispatch);
     
     const cartAmount = [];
     const favoriteAmount = [];

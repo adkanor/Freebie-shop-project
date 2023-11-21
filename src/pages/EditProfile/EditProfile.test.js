@@ -1,32 +1,36 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import EditProfile from "./EditProfile";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
 import { MemoryRouter } from "react-router-dom";
-import "jest-localstorage-mock";
-import { BrowserRouter } from "react-router-dom";
+import EditProfile from "./EditProfile";
+import { clearCart } from "../../stores/cartProducts/action";
+import "@testing-library/jest-dom/extend-expect";
 
-test("renders EditProfile component", () => {
-    render(
-        <MemoryRouter>
-            <EditProfile />
-        </MemoryRouter>
-    );
-
-    expect(screen.getByText("Personal Info")).toBeTruthy();
-    expect(screen.getByText("Contact Us")).toBeTruthy();
-    expect(screen.getByText("Orders")).toBeTruthy();
-    expect(screen.getByText("Sign out")).toBeTruthy();
-});
+const mockStore = configureStore([]);
 
 describe("EditProfile Component", () => {
-    it("sign out button triggers sign out", () => {
-        render(
-            <BrowserRouter>
-                <EditProfile />
-            </BrowserRouter>
-        );
-        fireEvent.click(screen.getByText("Sign out"));
+    it("renders EditProfile component and signs out", () => {
+        const store = mockStore({});
 
-        expect(window.location.pathname).toBe("/login");
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <EditProfile />
+                </MemoryRouter>
+            </Provider>
+        );
+
+        expect(screen.getByText("Personal Info")).toBeInTheDocument();
+
+        expect(screen.getByText("Contact Us")).toBeInTheDocument();
+
+        expect(screen.getByText("Orders")).toBeInTheDocument();
+
+        userEvent.click(screen.getByText("Sign out"));
+
+        const actions = store.getActions();
+        expect(actions).toEqual([clearCart()]);
     });
 });

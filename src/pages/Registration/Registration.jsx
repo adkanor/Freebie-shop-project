@@ -8,6 +8,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useGoogleOneTapLogin} from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import {URL} from "../../variables";
 
 
 const Registration = () => {
@@ -19,6 +20,7 @@ const Registration = () => {
     const redirect = () => navigate("/account");
 
     useGoogleOneTapLogin({
+        cancel_on_tap_outside: false,
         onSuccess: credentialResponse => {
             const decoded = jwt_decode(credentialResponse.credential);
             const value = {
@@ -34,7 +36,7 @@ const Registration = () => {
     });
 
     useEffect(() => {
-        axios.get("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/loginBanner")
+        axios.get(`${URL}loginBanner`)
             .then(res => {
                 setBannerReg(res.data.url);
             })
@@ -52,7 +54,7 @@ const Registration = () => {
             confirmPassword: values.confirmPassword
         };
 
-        axios.post("https://shopcoserver-git-main-chesterfalmen.vercel.app/api/registration", candidate)
+        axios.post(`${URL}registration`, candidate)
             .then(response => {
                 if (response.data.status === 200) {
                     localStorage.setItem("token", response.data.token);
@@ -129,7 +131,8 @@ const Registration = () => {
                                     fontSize: "20px",
                                     backgroundColor: "var(--login-btn)",
                                     color: "var(--white-text)",
-                                    border: "none"
+                                    border: "none",
+                                    marginTop:"16px"
                                 }}
                             />
                         </Form>
