@@ -129,7 +129,6 @@ const ListOrders = () => {
                                                         backgroundColor:
                                                             "var(--separator-line)",
                                                     }}
-                                                    onClick={() => setTabNum(1)}
                                                 />
                                             </Link>
                                         </div>
