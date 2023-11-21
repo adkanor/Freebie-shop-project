@@ -20,7 +20,8 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
         ...style,
         pointerEvents: "none",
         color: "white",
-        backgroundColor: "#dd6464",
+        backgroundColor: "var(--separator-line)",
+        boxShadow: "none"
     };
 
     const buttonClick = (size) => {
@@ -38,7 +39,7 @@ const DetailProductButtonGroup = ({ sizes, values }) => {
                         text={sizeObj.size}
                         type={"button"}
                         style={
-                            sizeObj.count === 0
+                            sizeObj.count <= 0
                                 ? {
                                     ...disabledStyle,
                                 }
