@@ -9,14 +9,13 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GMAILID } from "./config";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-console.log(process.env.REACT_APP_GMAIL);
 root.render(
     <>
         <Provider store={store}>
             <BrowserRouter>
                 <GoogleOAuthProvider
                     script-src={"https://accounts.google.com/gsi/"}
-                    clientId={process.env.REACT_APP_GMAIL}
+                    clientId={GMAILID}
                 >
                     <App />
                 </GoogleOAuthProvider>
