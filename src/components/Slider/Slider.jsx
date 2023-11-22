@@ -19,7 +19,6 @@ const Slider = () => {
     const [banner, setBanners] = useState([]);
 
     useEffect(() => {
-        console.log(URL);
         axios
             .get(`${URL}banners`)
             .then((res) => {
