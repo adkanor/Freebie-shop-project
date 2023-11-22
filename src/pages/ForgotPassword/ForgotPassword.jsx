@@ -71,6 +71,7 @@ const ForgotPassword = () => {
                                 text={"Restore"}
                                 style={{
                                     padding: "16px 35px",
+                                    margin: "8px 0",
                                     fontSize: "16px",
                                     backgroundColor: "var(--login-btn)",
                                     color: "var(--white-text)",
@@ -78,7 +79,6 @@ const ForgotPassword = () => {
                                 }}
                             />
                             <Link className={style.goHome} to="/">
-                                {" "}
                                 Go Home
                             </Link>
                         </div>
