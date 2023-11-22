@@ -50,6 +50,10 @@
 .filterToClose {
     display: block;
     cursor: pointer;
+    position: fixed;
+    right: 20px;
+    padding: 5px 5px;
+    box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .filterPriceInfo {
