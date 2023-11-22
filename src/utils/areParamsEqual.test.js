@@ -1,4 +1,3 @@
-// areParamsEqual.test.js
 import { areParamsEqual } from "./areParamsEqual";
 
 test("areParamsEqual returns true for equal params", () => {

@@ -1,18 +1,16 @@
 import axios from "axios";
-// axios = require("axios");
+import { URL } from "../../variables";
 export const CHECK_AUTHORIZATION = "CHECK_AUTHORIZATION";
 
-export const checkAuthorization = (token) => async (dispatch, getState) => {
+// Send a POST request to the server endpoint for user authorization
+
+export const checkAuthorization = (token) => async (dispatch) => {
     try {
-        const response = await axios.post(
-            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/isAuth",
-            "",
-            {
-                headers: {
-                    Authorization: token,
-                },
-            }
-        );
+        const response = await axios.post(`${URL}isAuth`, "", {
+            headers: {
+                Authorization: token,
+            },
+        });
 
         dispatch({
             type: CHECK_AUTHORIZATION,
@@ -21,8 +19,8 @@ export const checkAuthorization = (token) => async (dispatch, getState) => {
     } catch (error) {
         console.error("Error message:", error);
         const errorResponse = {
-            errorCode: error.response.status,
-            errorMsg: error.response.data.message,
+            errorCode: error.response?.status || 500,
+            errorMsg: error.response?.data?.message || "Internal Server Error",
         };
         dispatch({
             type: CHECK_AUTHORIZATION,
@@ -30,5 +28,3 @@ export const checkAuthorization = (token) => async (dispatch, getState) => {
         });
     }
 };
-
-

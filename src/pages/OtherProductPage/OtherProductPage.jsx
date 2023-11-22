@@ -60,14 +60,10 @@ const OtherProductPage = () => {
                 <>
                     <ul className={styles.favList}>
                         {products.map((fav) => (
-                            <ClosedProductCard
-                                key={fav._id}
-                                info={fav}
-                            />
+                            <ClosedProductCard key={fav._id} info={fav} />
                         ))}
                     </ul>
                     <PaginationNew
-                        // pageProps={parseInt(searchParamsObj.page)}
                         pageProps={page}
                         isAble={hasNextPage}
                         changeFilter={changePage}

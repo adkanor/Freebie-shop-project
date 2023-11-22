@@ -42,9 +42,9 @@ const ListOrders = () => {
         }
     }, [token]);
 
-    const handleAdding = (id) => {
-        navigate(`/products/${id}`, { state: { fromComponent: 'orders' }})
-    }
+    const handleAddingComent = (id) => {
+        navigate(`/products/${id}`, { state: { fromComponent: "orders" } });
+    };
 
     const addOrderToCart = (order) => {
         const orderItems = order.goods;
@@ -117,19 +117,23 @@ const ListOrders = () => {
                                             <p className={styles.productPrice}>
                                                 ${product.price}
                                             </p>
-                                                <Button
-                                                    onClick={() => handleAdding(product._id)}
-                                                    type="button"
-                                                    text="Add Review"
-                                                    style={{
-                                                        width: "100px",
-                                                        padding: "10px 10px",
-                                                        margin: "5px auto",
-                                                        color: "var(--black-color)",
-                                                        backgroundColor:
-                                                            "var(--separator-line)",
-                                                    }}
-                                                />
+                                            <Button
+                                                onClick={() =>
+                                                    handleAddingComent(
+                                                        product._id
+                                                    )
+                                                }
+                                                type="button"
+                                                text="Add Review"
+                                                style={{
+                                                    width: "100px",
+                                                    padding: "10px 10px",
+                                                    margin: "5px auto",
+                                                    color: "var(--black-color)",
+                                                    backgroundColor:
+                                                        "var(--separator-line)",
+                                                }}
+                                            />
                                         </div>
                                     ))}
                                 </div>
