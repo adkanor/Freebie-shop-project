@@ -57,6 +57,7 @@ const Header = () => {
             document.body.style.overflow = "visible";
         } else {
             document.body.style.overflow = "hidden";
+            document.body.style.position = "relative";
         }
     }, [showNav, showSearch, isDesktop]);
 
@@ -126,13 +127,14 @@ const Header = () => {
             <div className={styles.notification}>
                 <span className={styles.info}>
                     <p>
-                        Sign up and get promo code for order.
+                        Sign up for special offers and discounts!
                         <Link
                             to="login"
                             onClick={() => {
                                 hideAll();
                                 scrollToTop();
                             }}
+                            className={styles.infoLink}
                         >
                             <span>Sign Up Now</span>
                         </Link>
