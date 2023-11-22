@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Login.module.css";
-import {Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
-import {Link, useNavigate} from "react-router-dom";
-import {useGoogleOneTapLogin} from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import {URL} from "../../variables";
-import {useDispatch} from "react-redux";
-import {refreshCart} from "../../stores/cartProducts/action";
+import { URL } from "../../variables";
+import { useDispatch } from "react-redux";
+import { refreshCart } from "../../stores/cartProducts/action";
 
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
@@ -25,7 +25,7 @@ const Login = () => {
         if (basket) {
             const response = await axios.post(
                 `${URL}mergeBasket`,
-                {basket: JSON.parse(basket)},
+                { basket: JSON.parse(basket) },
                 {
                     headers: {
                         Authorization: data.token,
@@ -38,7 +38,6 @@ const Login = () => {
             }
         }
     };
-
 
     useEffect(() => {
         axios
@@ -77,10 +76,7 @@ const Login = () => {
         };
 
         axios
-            .post(
-                `${URL}login`,
-                user
-            )
+            .post(`${URL}login`, user)
             .then((response) => {
                 if (response.data.status === 200) {
                     memoryUser(response.data.info);
@@ -104,7 +100,7 @@ const Login = () => {
                 <img
                     className={style.bannerLogin}
                     src={bannerLog}
-                    alt={"bannerLogin"}
+                    alt="bannerLogin"
                 />
             </div>
             <div className={style.loginWrapper}>
@@ -122,7 +118,7 @@ const Login = () => {
                             apiServerLogin(values);
                         }}
                     >
-                        {({errors, touched}) => (
+                        {({ errors, touched }) => (
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
@@ -152,24 +148,21 @@ const Login = () => {
                                             backgroundColor: "var(--login-btn)",
                                             color: "var(--white-text)",
                                             border: "none",
-
                                         }}
                                     />
                                     <Link
                                         className={style.createAccount}
                                         to="/registration"
                                     >
-                                        {" "}
                                         Create account?
                                     </Link>
                                 </div>
-                            
+
                                 <div className={style.forgotPassword}>
                                     <Link
                                         className={style.forgotPasswordText}
                                         to="/forgotPassword"
                                     >
-                                        {" "}
                                         Forgot password?
                                     </Link>
                                 </div>
