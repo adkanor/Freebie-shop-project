@@ -73,6 +73,7 @@
         "match-media-mock": "^0.1.1",
         "moxios": "^0.4.0",
         "prettier": "3.0.3",
+        "react-native-zoom-reanimated": "^1.3.3",
         "react-test-renderer": "^18.2.0",
         "redux-devtools-extension": "^2.13.9",
         "redux-logger": "^3.0.6",
