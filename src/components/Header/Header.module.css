@@ -169,6 +169,10 @@ label {
   z-index: 1;
 }
 
+.infoLink{
+  margin-left: 5px;
+}
+
 #abs{
   position: absolute;
   width: 18px;

@@ -18,7 +18,12 @@ describe("FavouritesPage Component", () => {
                         name: "Product 1",
                         price: 20,
                         rating: 4,
-                        imageURL: "/product1.jpg",
+                        url_image: [
+                            "/product1.jpg",
+                            "/product1.jpg",
+                            "/product1.jpg",
+                            "/product1.jpg",
+                        ],
                         sale: true,
                         final_price: 15,
                     },
