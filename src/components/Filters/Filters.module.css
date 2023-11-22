@@ -26,18 +26,18 @@
 }
 
 .filtersName {
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Satoshi";
     font-weight: 700;
     margin: 6px 0;
 }
 
 .filterTitle {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--black-text);
     font-family: "Satoshi";
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-top: 10px;
     padding-top: 17px;
     border-top: 1px solid var(--separator-line);
@@ -68,7 +68,8 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin: 5px 0px;
+    padding: 5px 0px;
     font-size: 16px;
     font-family: "Satoshi";
     font-weight: 400;
@@ -79,7 +80,8 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 3px;
+    margin: 5px 0px;
+    padding: 5px 0px;
     font-size: 16px;
     font-family: "Satoshi";
     font-weight: 400;
