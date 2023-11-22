@@ -17,7 +17,7 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
                 />
                 <InputCheckout
                     name="companyName"
-                    text="Company Name"
+                    text="Last Name"
                     isError={errors.companyName && touched.companyName}
                     errorText={errors.companyName}
                 />
@@ -35,7 +35,7 @@ const ProfileForm = ({ children, isCheckOut, errors, touched }) => {
                 />
                 <InputCheckout
                     name="city"
-                    text="Town/City"
+                    text="Town/City/Village"
                     isError={errors.city && touched.city}
                     errorText={errors.city}
                 />

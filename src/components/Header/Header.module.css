@@ -175,14 +175,14 @@ label {
     position: absolute;
     width: 18px;
     height: 18px;
-    background-color: var(--login-btn);
+    background-color: var(--black-text);
     border-radius: 10px;
-    top: -5px;
-    right: -5px;
+    top: -9px;
+    right: -9px;
 }
 
 .new {
-    color: #fafafa;
+    color: var(--white-text);
     text-align: center;
     font-family: "Satoshi";
     font-weight: 400;

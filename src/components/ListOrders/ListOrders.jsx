@@ -100,7 +100,7 @@ const ListOrders = () => {
                                         </span>
                                     </span>
                                     <div className={styles.orderValue}>
-                                        Total Value: ${" "}
+                                        Total Value: $
                                         {order.totalValue.toFixed(2)}
                                     </div>
                                     <Button
