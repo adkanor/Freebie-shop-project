@@ -10,8 +10,6 @@ function FavouritesPage() {
         (state) => state.favoritesReducer.favorites
     );
 
-    console.log(favoriteProducts);
-
     return (
         <div className="section">
             <AdaptiveNav
@@ -25,10 +23,7 @@ function FavouritesPage() {
                     <h1 className={styles.favPageTitle}>Your favourites</h1>
                     <ul className={styles.favList}>
                         {favoriteProducts.map((fav) => (
-                            <ClosedProductCard
-                                key={fav._id}
-                                info={fav}
-                            />
+                            <ClosedProductCard key={fav._id} info={fav} />
                         ))}
                     </ul>
                 </>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import InputMask from "react-input-mask";
 import styles from "./FormContent.module.css";
 import stylesForm from "../../pages/CheckOut/CheckOut.module.css";
 import { useSelector } from "react-redux";
@@ -16,11 +15,10 @@ const FormContent = () => {
 
     const { isSubmitting } = useFormContext();
 
-    const [detail, setDetail] = useState({ number: "", cvv: "", expiry: "" });
+    const [detail, setDetail] = useState({ number: "", expiry: "" });
     const [errorMsg, SetErrorMsg] = useState("");
     const [isFormFilled, setIsFormFilled] = useState(false);
     const [paymentType, setPaymentType] = useState("Place Order");
-    const [showCvvIcon, SetShowCvvIcon] = useState(false);
     const [typeOfInput, SetTypeOfInput] = useState("password");
 
     const blackButtonStyle = useMemo(
@@ -40,7 +38,6 @@ const FormContent = () => {
         const checkFormFilled = () => {
             return (
                 detail?.number.isValid &&
-                detail?.cvv.length === 3 &&
                 detail?.expiry.isValid &&
                 detail?.expiry.input.slice(0, 2) <= 12 &&
                 detail?.expiry.input.slice(2) > new Date().getYear() % 100
@@ -67,7 +64,7 @@ const FormContent = () => {
     }, [detail]);
 
     useEffect(() => {
-        setDetail({ number: "", cvv: "", expiry: "" });
+        setDetail({ number: "", expiry: "" });
     }, [paymentType]);
 
     useEffect(() => {
@@ -91,12 +88,8 @@ const FormContent = () => {
     }, [paymentType, isFormFilled, blackButtonStyle]);
 
     useEffect(() => {
-        if (showCvvIcon) {
-            SetTypeOfInput("text");
-        } else {
-            SetTypeOfInput("password");
-        }
-    }, [showCvvIcon]);
+        SetTypeOfInput("password");
+    }, [typeOfInput]);
 
     return (
         <div className={styles.formContent}>
@@ -181,37 +174,6 @@ const FormContent = () => {
                     </div>
 
                     <div className={styles.cardInputContainer}>
-                        <InputMask
-                            className={stylesForm.formInput}
-                            mask="999"
-                            maskChar={""}
-                            required
-                            type={typeOfInput}
-                            onChange={(event) => {
-                                setDetail((prev) => ({
-                                    ...prev,
-                                    cvv: event?.target.value,
-                                }));
-                            }}
-                            placeholder="CVV"
-                        />
-                        <button type="button" className={styles.cvvShowCInput}>
-                            <span
-                                onClick={() => {
-                                    SetShowCvvIcon(!showCvvIcon);
-                                }}
-                            >
-                                {!showCvvIcon ? "🔒" : "👁️"}
-                            </span>
-                        </button>
-                        {detail?.cvv.length >= 1 && detail?.cvv.length < 3 && (
-                            <span className={styles.errorMessage}>
-                                The field is not filled.
-                            </span>
-                        )}
-                    </div>
-
-                    <div className={styles.cardInputContainer}>
                         <NewInputMask
                             className={stylesForm.formInput}
                             mask="XX/XX"
@@ -243,7 +205,13 @@ const FormContent = () => {
                             name="payment"
                             value="Bank"
                             required
-                            onClick={() => setPaymentType("Pay to Card")}
+                            onClick={() =>
+                                setPaymentType(
+                                    `Pay to Card ${cartData.finalTotal.toFixed(
+                                        2
+                                    )}$`
+                                )
+                            }
                         />
                         <p className={styles.paymentTitle}>Bank</p>
                     </div>

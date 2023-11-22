@@ -15,6 +15,12 @@ const CommentsCard = ({
         ...style,
     };
     const author = firstName;
+
+    const truncatedCommentaries =
+        commentaries.length > 130
+            ? commentaries.substring(0, 100) + "..."
+            : commentaries;
+
     return (
         <div
             style={cardStyle}
@@ -26,7 +32,7 @@ const CommentsCard = ({
                 <img src={approvedIcon} alt={"approvedIcon"} />
             </div>
 
-            <p className={styles.commentsText}>{commentaries}</p>
+            <p className={styles.commentsText}>{truncatedCommentaries}</p>
         </div>
     );
 };
