@@ -92,7 +92,7 @@ const Filters = ({
                     onClick={closeFilters}
                 />
             </div>
-            <form onSubmit={applyFilters}>
+            <form onSubmit={applyFilters} className={styles.formFilters}>
                 <div className={styles.filterSex}>
                     <h3 className={styles.filterTitle}>Gender</h3>
                     <label className={styles.filterLabel}>

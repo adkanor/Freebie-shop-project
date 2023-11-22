@@ -85,7 +85,7 @@ const Header = () => {
         });
     };
 
-    const redirectAccount = () => navigate("/account");
+    const redirectAccount = () => navigate("/account/info");
     const redirectLogin = () => navigate("/login");
 
     const toggleNav = () => {

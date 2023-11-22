@@ -10,6 +10,7 @@ export const REFRESH_CART = "REFRESH_CART";
 export const FETCH_CART_ITEMS_SUCCESS = "FETCH_CART_ITEMS_SUCCESS";
 export const FETCH_CART_ITEMS_FAILURE = "FETCH_CART_ITEMS_FAILURE";
 
+// Action creator to fetch cart items from the server
 export const fetchCartItems = () => async (dispatch) => {
     try {
         const token = localStorage.getItem("token");
@@ -21,6 +22,7 @@ export const fetchCartItems = () => async (dispatch) => {
                 },
             });
 
+            // Check if the server indicates that the user is not authenticated
             if (response.data.status === 407) {
                 const cartItems = localStorage.getItem("cartItems")
                     ? JSON.parse(localStorage.getItem("cartItems"))
@@ -29,6 +31,8 @@ export const fetchCartItems = () => async (dispatch) => {
                     type: FETCH_CART_ITEMS_SUCCESS,
                     payload: cartItems,
                 });
+
+                // If authenticated, merge local cart items with server cart items
             } else if (localStorage.getItem("cartItems")) {
                 const cartItemsFromLocal = JSON.parse(
                     localStorage.getItem("cartItems")
@@ -56,41 +60,50 @@ export const fetchCartItems = () => async (dispatch) => {
                 });
             }
         } else {
+            // If no user token, retrieve cart items from local storage
             const cartItems = localStorage.getItem("cartItems")
                 ? JSON.parse(localStorage.getItem("cartItems"))
                 : [];
             dispatch({ type: FETCH_CART_ITEMS_SUCCESS, payload: cartItems });
         }
     } catch (error) {
+        // Handle errors when fetching cart items from the server
         console.error("Error fetching cart items:", error);
         dispatch({ type: FETCH_CART_ITEMS_FAILURE });
     }
 };
 
+// Action creator to refresh the cart with a new array of items
 export const refreshCart = (array) => ({
     type: REFRESH_CART,
     payload: array,
 });
 
+// Action creator to add an item to the cart
 export const addToCart = (item) => ({
     type: ADD_TO_CART,
     payload: item,
 });
 
+// Action creator to remove an item from the cart
 export const removeFromCart = (id, selectedSize) => ({
     type: REMOVE_FROM_CART,
     payload: { id, selectedSize },
 });
 
+// Action creator to increment the quantity of an item in the cart
 export const incrementItemQuantity = (id, selectedSize) => ({
     type: INCREMENT_ITEM_QUANTITY,
     payload: { id, selectedSize },
 });
 
+// Action creator to decrement the quantity of an item in the cart
 export const decrementItemQuantity = (id, selectedSize) => ({
     type: DECREMENT_ITEM_QUANTITY,
     payload: { id, selectedSize },
 });
+
+// Action creator to clear all items from the cart
 export const clearCart = () => ({
     type: CLEAR_CART,
 });
