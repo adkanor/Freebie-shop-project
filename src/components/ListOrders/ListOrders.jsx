@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/cartProducts/action";
 import { useNavigate } from "react-router-dom";
-
+import { scrollToTop } from "../../utils/scrollToTop";
 /* eslint-disable */
 const ListOrders = () => {
     const [listOrders, setListOrders] = useState([]);
@@ -46,6 +46,13 @@ const ListOrders = () => {
         navigate(`/products/${id}`, { state: { fromComponent: "orders" } });
     };
 
+    const handleContactUs = (orderId) => {
+        navigate(`/account/contact`, {
+            state: { fromComponent: "orders", orderId },
+        });
+        scrollToTop();
+    };
+
     const addOrderToCart = (order) => {
         const orderItems = order.goods;
         orderItems.map((orderItem) => {
@@ -80,7 +87,17 @@ const ListOrders = () => {
                                     </span>
                                     <span className={styles.orderStatus}>
                                         Status:
-                                        {order.isOpen ? "Open" : "Close"}
+                                        <span
+                                            style={{
+                                                color: `${
+                                                    order.isOpen
+                                                        ? "var(--green-check)"
+                                                        : "var(--login-btn)"
+                                                }`,
+                                            }}
+                                        >
+                                            {order.isOpen ? "Open" : "Close"}
+                                        </span>
                                     </span>
                                     <div className={styles.orderValue}>
                                         Total Value: ${" "}
@@ -91,14 +108,29 @@ const ListOrders = () => {
                                         text="Order again"
                                         style={{
                                             width: "100%",
-                                            padding: "16px 0",
-                                            margin: "10px auto",
+                                            padding: "10px 10px",
+                                            margin: "5px auto",
                                             color: "var(--black-color)",
                                             backgroundColor:
                                                 "var(--separator-line)",
                                         }}
                                         onClick={() => {
                                             addOrderToCart(order);
+                                        }}
+                                    />
+                                    <Button
+                                        type="button"
+                                        text="Contact us"
+                                        style={{
+                                            width: "100%",
+                                            padding: "10px 10px",
+                                            margin: "5px auto",
+                                            color: "var(--black-color)",
+                                            backgroundColor:
+                                                "var(--gray-secondary)",
+                                        }}
+                                        onClick={() => {
+                                            handleContactUs(order._id);
                                         }}
                                     />
                                 </div>
