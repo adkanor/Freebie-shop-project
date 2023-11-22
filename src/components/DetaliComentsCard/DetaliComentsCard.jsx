@@ -8,6 +8,7 @@ import { URL } from "../../variables";
 import AddComment from "../AddComment/AddComment";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 /*eslint-disable*/
 
 const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
@@ -23,6 +24,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
     const isPersonAutorised = useSelector(
         (state) => state.authorizationReducer.isAuth
     );
+    const location = useLocation();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -52,6 +54,10 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
                     setIsAddingPossible(false);
                 } else {
                     setIsAddingPossible(true);
+                    if (location.state?.fromComponent === "orders") {
+                        setTabNum(1);
+                        setIsAddingOpened(true);
+                    }
                 }
             })
             .catch((error) => {
