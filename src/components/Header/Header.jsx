@@ -57,7 +57,6 @@ const Header = () => {
             document.body.style.overflow = "visible";
         } else {
             document.body.style.overflow = "hidden";
-            document.body.style.position = "relative";
         }
     }, [showNav, showSearch, isDesktop]);
 
