@@ -7,6 +7,7 @@ import style from "./Slider.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { URL } from "../../variables";
+import { defaultParams } from "../../variables";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 492 },
@@ -68,7 +69,10 @@ const Slider = () => {
                     garments, designed to bring out your individuality and cater
                     to your sense of style.
                 </p>
-                <Link className={style.bannerLink} to="/casual">
+                <Link
+                    className={style.bannerLink}
+                    to={`${defaultParams}&hasdiscount=true`}
+                >
                     <Button
                         text="Shop Now"
                         style={{
@@ -96,8 +100,6 @@ const Slider = () => {
                     <p>30,000+</p>
                     <span>Happy Customers</span>
                 </div>
-
-                {/* <img src={banner[0]} alt={"bannerStatic"}/> */}
             </div>
             <img
                 className={style.bannerTitleImg}

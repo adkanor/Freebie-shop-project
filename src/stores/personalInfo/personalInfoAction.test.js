@@ -6,7 +6,7 @@ import {
     SET_USER_DATA,
     SET_USER_DATA_ERROR,
 } from "./action";
-
+import { URL } from "../../variables";
 jest.mock("axios");
 
 describe("Redux Actions", () => {
@@ -39,7 +39,7 @@ describe("Redux Actions", () => {
         await fetchUserData(token)(dispatch);
 
         expect(axios.post).toHaveBeenCalledWith(
-            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/aboutUser",
+            `${URL}aboutUser`,
             { token },
             {
                 headers: {
@@ -61,7 +61,7 @@ describe("Redux Actions", () => {
         await fetchUserData(token)(dispatch);
 
         expect(axios.post).toHaveBeenCalledWith(
-            "https://shopcoserver-git-main-chesterfalmen.vercel.app/api/aboutUser",
+            `${URL}aboutUser`,
             { token },
             {
                 headers: {
