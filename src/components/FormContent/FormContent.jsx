@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import InputMask from "react-input-mask";
+// import InputMask from "react-input-mask";
 import styles from "./FormContent.module.css";
 import stylesForm from "../../pages/CheckOut/CheckOut.module.css";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const FormContent = () => {
     const [errorMsg, SetErrorMsg] = useState("");
     const [isFormFilled, setIsFormFilled] = useState(false);
     const [paymentType, setPaymentType] = useState("Place Order");
-    const [showCvvIcon, SetShowCvvIcon] = useState(false);
+    // const [showCvvIcon, SetShowCvvIcon] = useState(false);
     const [typeOfInput, SetTypeOfInput] = useState("password");
 
     const blackButtonStyle = useMemo(
@@ -91,12 +91,8 @@ const FormContent = () => {
     }, [paymentType, isFormFilled, blackButtonStyle]);
 
     useEffect(() => {
-        if (showCvvIcon) {
-            SetTypeOfInput("text");
-        } else {
-            SetTypeOfInput("password");
-        }
-    }, [showCvvIcon]);
+        SetTypeOfInput("password");
+    }, [typeOfInput]);
 
     return (
         <div className={styles.formContent}>
@@ -180,7 +176,7 @@ const FormContent = () => {
                         )}
                     </div>
 
-                    <div className={styles.cardInputContainer}>
+                    {/* <div className={styles.cardInputContainer}>
                         <InputMask
                             className={stylesForm.formInput}
                             mask="999"
@@ -194,6 +190,7 @@ const FormContent = () => {
                                 }));
                             }}
                             placeholder="CVV"
+                            autoComplete="new-cvv-field"
                         />
                         <button type="button" className={styles.cvvShowCInput}>
                             <span
@@ -209,7 +206,7 @@ const FormContent = () => {
                                 The field is not filled.
                             </span>
                         )}
-                    </div>
+                    </div> */}
 
                     <div className={styles.cardInputContainer}>
                         <NewInputMask
