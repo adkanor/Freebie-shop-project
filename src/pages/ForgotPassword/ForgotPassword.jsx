@@ -55,6 +55,7 @@ const ForgotPassword = () => {
                             Password recovery
                         </h2>
                         <Input
+                            className={style.InputEmailPassRecovery}
                             name="email"
                             placeholder="Email"
                             isError={errors.email && touched.email}
