@@ -33,7 +33,6 @@ const ListOrders = () => {
                 .then((response) => {
                     setListOrders(response.data.orders);
                     setIsLoading(false);
-                    console.log(response.data.orders);
                 })
                 .catch((error) => {
                     setErrorMessage(error.message);
@@ -43,7 +42,6 @@ const ListOrders = () => {
     }, [token]);
 
     const addOrderToCart = (order) => {
-        console.log(order.goods);
         const orderItems = order.goods;
         orderItems.map((orderItem) => {
             dispatch(addToCart(orderItem));
