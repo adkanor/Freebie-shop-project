@@ -4,12 +4,15 @@ import PropTypes from "prop-types";
 import FavoriteIcon from "../FavouriteIcon/FavouriteIcon";
 import ImageMagnifier from "./ImageMagnifier";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const DetailProductSlider = ({ info }) => {
     const imageArr = info.url_image;
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
@@ -31,11 +34,20 @@ const DetailProductSlider = ({ info }) => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <ImageMagnifier
-                        className={styles.bigSquareimg}
-                        width={"400px"}
-                        src={largeImage}
-                    />
+                    {isMobile ? (
+                        <img
+                            className={styles.bigSquareimg}
+                            width={"400px"}
+                            src={largeImage}
+                            alt="product"
+                        />
+                    ) : (
+                        <ImageMagnifier
+                            className={styles.bigSquareimg}
+                            width={"400px"}
+                            src={largeImage}
+                        />
+                    )}
                 </div>
                 {isPersonAutorised ? (
                     <FavoriteIcon thisCard={{ ...info, id: info._id }} />
