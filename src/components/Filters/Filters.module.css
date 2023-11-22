@@ -5,7 +5,7 @@
     bottom: 0px;
     width: 100vw;
     max-height: 80vh;
-    z-index: 6;
+    z-index: 3;
     background-color: rgb(255, 255, 255);
     padding: 20px 24px;
     border-radius: 20px;
@@ -50,10 +50,6 @@
 .filterToClose {
     display: block;
     cursor: pointer;
-    position: fixed;
-    right: 20px;
-    padding: 5px 5px;
-    box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .filterPriceInfo {
@@ -69,9 +65,10 @@
 }
 
 .filterLabel {
-    display: block;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     font-size: 16px;
     font-family: "Satoshi";
     font-weight: 400;
@@ -79,7 +76,8 @@
     text-transform: capitalize;
 }
 .filterLabelSizes {
-    display: block;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     margin-bottom: 3px;
     font-size: 16px;
@@ -90,8 +88,8 @@
 }
 .radioInput {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border: 2px solid var(--gray-text-primary);
     border-radius: 50%;
     outline: none;
