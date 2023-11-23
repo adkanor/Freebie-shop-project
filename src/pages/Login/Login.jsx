@@ -12,7 +12,6 @@ import { URL } from "../../variables";
 import { useDispatch } from "react-redux";
 import { fetchCartItems } from "../../stores/cartProducts/action";
 
-
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
     const [errorMessageServer, setErrorMessageServer] = useState();
@@ -65,7 +64,6 @@ const Login = () => {
             .post(`${URL}login`, user)
             .then((response) => {
                 if (response.data.status === 200) {
-                    console.log(response.data.info);
                     memoryUser(response.data.info);
                     redirectAccount();
                 }
@@ -83,7 +81,6 @@ const Login = () => {
 
     return (
         <div className={`section ${style.loginContainer}`}>
-
             <div className={style.bannerContainer}>
                 <img
                     className={style.bannerLogin}
@@ -133,12 +130,12 @@ const Login = () => {
                                         style={{
                                             padding: "16px 35px",
                                             fontSize: "16px",
-                                            backgroundColor: "var(--gray-secondary)",
-                                            color: "var(--gray-text-primary)",
+                                            backgroundColor:
+                                                "var(--lightblue-color)",
+                                            color: "var(--black-text)",
                                             border: "none",
                                             fontFamily: "Satoshi",
-                                            fontWeight: 600
-
+                                            fontWeight: 600,
                                         }}
                                     />
                                     <Link
@@ -156,7 +153,6 @@ const Login = () => {
                                     >
                                         Forgot password?
                                     </Link>
-
                                 </div>
                             </Form>
                         )}
