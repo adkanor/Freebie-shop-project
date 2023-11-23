@@ -1,18 +1,14 @@
 import styles from "./BrandsRow.module.css";
 import React from "react";
 
-import VercaceImg from "../../assets/icons/Brands/Versace.svg";
-import ZaraImg from "../../assets/icons/Brands/Zara.svg";
-import GucciImg from "../../assets/icons/Brands/Gucci.svg";
-import PradaImg from "../../assets/icons/Brands/Prada.svg";
-import CCImg from "../../assets/icons/Brands/Calvin-Klein.svg";
+import CheckImg from "./check-badge-svgrepo-com.svg";
+import PaymentImg from "./payment-svgrepo-com.svg";
+import StarsImg from "./stars-svgrepo-com.svg";
 
 const brandImages = [
-    { src: VercaceImg, alt: "Versace SVG" },
-    { src: ZaraImg, alt: "Zara SVG" },
-    { src: GucciImg, alt: "Gucci SVG" },
-    { src: PradaImg, alt: "Prada SVG" },
-    { src: CCImg, alt: "Calvin Klein SVG" },
+    { src: CheckImg, title: "24/7 Customer Support", alt: "Check SVG" },
+    { src: PaymentImg, title: "Secure Payment Options", alt: "Payment SVG" },
+    { src: StarsImg, title: "Satisfaction Guaranteed", alt: "Stars SVG" },
 ];
 
 function BrandBox() {
@@ -20,12 +16,16 @@ function BrandBox() {
         <div className={styles.BrandWrapper}>
             <div className={styles.BrandsContainer}>
                 {brandImages.map((brand, index) => (
-                    <img
-                        key={index}
-                        className={styles.BrandsLogo}
-                        src={brand.src}
-                        alt={brand.alt}
-                    />
+                    <div className={styles.BrandsOption} key={index}>
+                        <img
+                            className={styles.BrandsLogo}
+                            src={brand.src}
+                            alt={brand.alt}
+                        />
+                        <p className={styles.BrandsTitle} key={index}>
+                            {brand.title}
+                        </p>
+                    </div>
                 ))}
             </div>
         </div>

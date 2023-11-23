@@ -11,7 +11,7 @@ test("BrandBox renders without errors", () => {
 test("BrandBox displays the correct number of brands", () => {
   const { getAllByAltText } = render(<BrandBox />);
   const brandLogos = getAllByAltText(/.* SVG/);
-  expect(brandLogos).toHaveLength(5);
+  expect(brandLogos).toHaveLength(3);
 });
 
 test("Brands have the correct alt texts", () => {
@@ -19,11 +19,9 @@ test("Brands have the correct alt texts", () => {
   const brandImages = getAllByAltText(/.* SVG/);
 
   const expectedAltTexts = [
-    "Versace SVG",
-    "Zara SVG",
-    "Gucci SVG",
-    "Prada SVG",
-    "Calvin Klein SVG",
+    "Check SVG",
+    "Payment SVG",
+    "Stars SVG",
   ];
 
   for (let i = 0; i < brandImages.length; i++) {
