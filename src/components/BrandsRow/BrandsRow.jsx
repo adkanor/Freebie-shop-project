@@ -1,9 +1,9 @@
 import styles from "./BrandsRow.module.css";
 import React from "react";
 
-import CheckImg from "./check-badge-svgrepo-com.svg";
-import PaymentImg from "./payment-svgrepo-com.svg";
-import StarsImg from "./stars-svgrepo-com.svg";
+import CheckImg from "../../assets/icons/Brands/check-badge-svgrepo-com.svg";
+import PaymentImg from "../../assets/icons/Brands/payment-svgrepo-com.svg";
+import StarsImg from "../../assets/icons/Brands/stars-svgrepo-com.svg";
 
 const brandImages = [
     { src: CheckImg, title: "24/7 Customer Support", alt: "Check SVG" },
