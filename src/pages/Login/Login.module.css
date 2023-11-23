@@ -72,7 +72,8 @@
 }
 
 .createAccount {
-    color: var(--login-btn);
+    color: var(--gray-text-primary);
+    font-weight: 900;
 }
 
 .forgotPassword {
@@ -80,9 +81,9 @@
 }
 
 .forgotPasswordText {
-    color: var(--login-btn);
     font-family: "Satoshi", sans-serif;
-    font-weight: 500;
+    color: var(--gray-text-primary);
+    font-weight: 900;
 }
 
 

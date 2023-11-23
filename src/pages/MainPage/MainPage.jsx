@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
-import BrandBox from "../../components/BrandsRow/BrandsRow";
 import CommentsSlider from "../../components/CommentsSlider/СommentsSlider";
 import PropTypes from "prop-types";
 import RecommendationProducts from "../../components/RecommendationProducts/RecommendationProducts";
