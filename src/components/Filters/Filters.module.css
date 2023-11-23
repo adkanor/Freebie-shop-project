@@ -26,18 +26,18 @@
 }
 
 .filtersName {
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Satoshi";
     font-weight: 700;
     margin: 6px 0;
 }
 
 .filterTitle {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--black-text);
     font-family: "Satoshi";
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-top: 10px;
     padding-top: 17px;
     border-top: 1px solid var(--separator-line);
@@ -48,8 +48,12 @@
 }
 
 .filterToClose {
-    display: block;
+    position: fixed;
     cursor: pointer;
+    right: 20px;
+    padding: 5px 5px;
+    box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .filterPriceInfo {
@@ -65,9 +69,11 @@
 }
 
 .filterLabel {
-    display: block;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    margin-bottom: 3px;
+    margin: 5px 0px;
+    padding: 5px 0px;
     font-size: 16px;
     font-family: "Satoshi";
     font-weight: 400;
@@ -75,9 +81,11 @@
     text-transform: capitalize;
 }
 .filterLabelSizes {
-    display: block;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    margin-bottom: 3px;
+    margin: 5px 0px;
+    padding: 5px 0px;
     font-size: 16px;
     font-family: "Satoshi";
     font-weight: 400;
@@ -86,8 +94,8 @@
 }
 .radioInput {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border: 2px solid var(--gray-text-primary);
     border-radius: 50%;
     outline: none;

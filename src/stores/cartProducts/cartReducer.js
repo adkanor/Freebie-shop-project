@@ -70,7 +70,9 @@ const cartReducer = (state = initialState, action) => {
                 (item) =>
                     !(item._id === id && item.selectedSize === selectedSize)
             );
-            toast.success("Delete item from the cart");
+            toast.error("Delete item from the cart",{
+                     icon: false
+                });
             updatedState = {
                 cartItems: updatedCartItems,
             };
@@ -126,7 +128,9 @@ const cartReducer = (state = initialState, action) => {
                 const updatedItems = [...state.cartItems];
                 updatedItems[decrementItemIndex].selectedAmount -= 1;
 
-                toast.success("Quantity decreased by 1");
+                toast.error("Quantity decreased by 1",{
+                     icon: false
+                });
                 updatedState = {
                     cartItems: updatedItems,
                 };

@@ -129,10 +129,12 @@ const Registration = () => {
                                     maxWidth: "500px",
                                     padding: "16px 48px",
                                     fontSize: "20px",
-                                    backgroundColor: "var(--login-btn)",
-                                    color: "var(--white-text)",
+                                    marginTop:"16px",
+                                    backgroundColor: "var(--gray-secondary)",
+                                    color: "var(--gray-text-primary)",
                                     border: "none",
-                                    marginTop:"16px"
+                                    fontFamily: "Satoshi",
+                                    fontWeight: 600
                                 }}
                             />
                         </Form>

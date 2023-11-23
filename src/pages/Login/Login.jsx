@@ -12,6 +12,7 @@ import { URL } from "../../variables";
 import { useDispatch } from "react-redux";
 import { refreshCart } from "../../stores/cartProducts/action";
 
+
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
     const [errorMessageServer, setErrorMessageServer] = useState();
@@ -96,6 +97,7 @@ const Login = () => {
 
     return (
         <div className={`section ${style.loginContainer}`}>
+
             <div className={style.bannerContainer}>
                 <img
                     className={style.bannerLogin}
@@ -145,9 +147,12 @@ const Login = () => {
                                         style={{
                                             padding: "16px 35px",
                                             fontSize: "16px",
-                                            backgroundColor: "var(--login-btn)",
-                                            color: "var(--white-text)",
+                                            backgroundColor: "var(--gray-secondary)",
+                                            color: "var(--gray-text-primary)",
                                             border: "none",
+                                            fontFamily: "Satoshi",
+                                            fontWeight: 600
+
                                         }}
                                     />
                                     <Link
@@ -165,6 +170,7 @@ const Login = () => {
                                     >
                                         Forgot password?
                                     </Link>
+
                                 </div>
                             </Form>
                         )}

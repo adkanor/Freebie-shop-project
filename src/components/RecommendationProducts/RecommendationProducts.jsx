@@ -7,12 +7,12 @@ import { URL } from "../../variables";
 
 const RecommendationProducts = ({ title, children, urlParams }) => {
     const [littleArr, setLittleArr] = useState([]);
-
+    const link = `${URL}productOther/?${urlParams}`;
     useEffect(() => {
-        axios.get(`${URL}productOther/?${urlParams}`).then((responce) => {
+        axios.get(link).then((responce) => {
             setLittleArr(responce.data.products);
         });
-    }, [urlParams]);
+    }, [link]);
 
     return (
         <div className={styles.recommendationProducts}>
