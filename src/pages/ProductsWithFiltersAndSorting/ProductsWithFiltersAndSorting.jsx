@@ -18,6 +18,7 @@ import PaginationNew from "../../components/Pagination/PaginationNew";
 import Preloader from "../../components/Preloader/Preloader";
 import { getStyleValue } from "../../utils/generateTitle";
 import { getCategoryLinks } from "../../utils/generateTitle";
+import { useNavigate } from "react-router-dom";
 
 const ProductsWithFiltersAndSorting = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -75,6 +76,10 @@ const ProductsWithFiltersAndSorting = () => {
     };
 
     const linksObj = getCategoryLinks(title);
+    const navigate = useNavigate();
+    const goBackHistory = () => {
+        navigate(-1);
+    };
 
     return (
         <section className="section">
@@ -131,6 +136,19 @@ const ProductsWithFiltersAndSorting = () => {
                         <p className={styles.noProductsMessage}>
                             Sorry, there are currently no products available.
                         </p>
+
+                        <Button
+                            type={"text"}
+                            text={"Go back"}
+                            style={{
+                                backgroundColor: "var(--gray-text-primary)",
+                                color: "var(--white-text)",
+                                width: "100%",
+                                padding: "15px 0",
+                                margin: "15px 0",
+                            }}
+                            onClick={goBackHistory}
+                        />
                         <Link className={styles.goHomeLink} to="/">
                             <Button
                                 type={"text"}

@@ -18,7 +18,7 @@
     animation: fadeInText 1s ease-in-out forwards;
 }
 .discountScale {
-    background-color: var(--red-background-discount);
+    background-color: var(--lightblue-color);
     height: 10px;
     border-radius: 5px;
     margin-top: 10px;
@@ -27,7 +27,7 @@
 }
 
 .discountScaleFill {
-    background-color: var(--login-btn);
+    background-color: var(--darkblue-color);
     height: 100%;
     border-radius: 5px;
     width: 0%;

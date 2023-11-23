@@ -1,16 +1,19 @@
 import * as Yup from "yup";
 
-const nameRegExp = /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєҐґ ])?[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*)*$/;
+const nameRegExp =
+    /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєҐґ ])?[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*)*$/;
 
 const validateSchemaCheckout = Yup.object().shape({
     userName: Yup.string()
         .min(3, "Must be at least 3 characters")
         .max(40, "Must be less than 40 characters")
-        .matches(nameRegExp, "Username must contain only letters")
-        .required("Username is required"),
+        .matches(nameRegExp, "First name must contain only letters")
+        .required("First name is required"),
     companyName: Yup.string()
         .min(3, "Must be at least 3 characters")
-        .max(50, "Must be less than 50 characters"),
+        .max(40, "Must be less than 40 characters")
+        .matches(nameRegExp, "Last name must contain only letters")
+        .required("Last name is required"),
     streetAddress: Yup.string().max(40).required("This field is required"),
     apartmentInfo: Yup.string().max(40),
     city: Yup.string()

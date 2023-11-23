@@ -56,8 +56,8 @@
 
 .redirectLogin {
     font-family: "Satoshi", Arial, sans-serif;
-    font-weight: 600;
-    color: var(--login-btn);
+    color: var(--gray-text-primary);
+    font-weight: 900;
 }
 
 @media screen and (max-width: 991px) {
