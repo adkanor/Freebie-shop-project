@@ -87,7 +87,7 @@ const DetaiLComentsCard = ({ details, idGoods, FAQ }) => {
 
     function checkAccess() {
         if (!isAddingPossible) {
-            toast.error("Order product to leave a comment");
+            toast.error("You should order product first!");
         } else {
             setIsAddingOpened(true);
         }

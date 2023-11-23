@@ -55,6 +55,7 @@ const ForgotPassword = () => {
                             Password recovery
                         </h2>
                         <Input
+                            className={style.InputEmailPassRecovery}
                             name="email"
                             placeholder="Email"
                             isError={errors.email && touched.email}
@@ -70,15 +71,18 @@ const ForgotPassword = () => {
                                 text={"Restore"}
                                 style={{
                                     padding: "16px 35px",
+                                    margin: "8px 0",
                                     fontSize: "16px",
-                                    backgroundColor: "var(--login-btn)",
-                                    color: "var(--white-text)",
+                                    backgroundColor: "var(--gray-secondary)",
+                                    color: "var(--gray-text-primary)",
                                     border: "none",
+                                    fontFamily: "Satoshi",
+                                    fontWeight: 600,
+
                                 }}
                             />
                             <Link className={style.goHome} to="/">
-                                {" "}
-                                Go Home
+                                Home
                             </Link>
                         </div>
                         {isServerMassage && (

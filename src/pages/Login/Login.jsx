@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Login.module.css";
-import {Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import validationSchema from "./validationSchema";
 import Button from "../../components/Button/Button";
-import {Link, useNavigate} from "react-router-dom";
-import {useGoogleOneTapLogin} from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import {URL} from "../../variables";
-import {useDispatch} from "react-redux";
-import {refreshCart} from "../../stores/cartProducts/action";
+import { URL } from "../../variables";
+import { useDispatch } from "react-redux";
+import { fetchCartItems } from "../../stores/cartProducts/action";
+
 
 const Login = () => {
     const [bannerLog, setBannerLog] = useState();
@@ -21,24 +22,8 @@ const Login = () => {
 
     const memoryUser = async (data) => {
         localStorage.setItem("token", data.token);
-        const basket = localStorage.getItem("cartItems");
-        if (basket) {
-            const response = await axios.post(
-                `${URL}mergeBasket`,
-                {basket: JSON.parse(basket)},
-                {
-                    headers: {
-                        Authorization: data.token,
-                    },
-                }
-            );
-            if (response.data.status === 200) {
-                localStorage.removeItem("cartItems");
-                dispatch(refreshCart(response.data.basket));
-            }
-        }
+        dispatch(fetchCartItems());
     };
-
 
     useEffect(() => {
         axios
@@ -77,12 +62,10 @@ const Login = () => {
         };
 
         axios
-            .post(
-                `${URL}login`,
-                user
-            )
+            .post(`${URL}login`, user)
             .then((response) => {
                 if (response.data.status === 200) {
+                    console.log(response.data.info);
                     memoryUser(response.data.info);
                     redirectAccount();
                 }
@@ -100,11 +83,12 @@ const Login = () => {
 
     return (
         <div className={`section ${style.loginContainer}`}>
+
             <div className={style.bannerContainer}>
                 <img
                     className={style.bannerLogin}
                     src={bannerLog}
-                    alt={"bannerLogin"}
+                    alt="bannerLogin"
                 />
             </div>
             <div className={style.loginWrapper}>
@@ -122,7 +106,7 @@ const Login = () => {
                             apiServerLogin(values);
                         }}
                     >
-                        {({errors, touched}) => (
+                        {({ errors, touched }) => (
                             <Form className={style.formWrapper}>
                                 <Input
                                     name="email"
@@ -149,9 +133,11 @@ const Login = () => {
                                         style={{
                                             padding: "16px 35px",
                                             fontSize: "16px",
-                                            backgroundColor: "var(--login-btn)",
-                                            color: "var(--white-text)",
+                                            backgroundColor: "var(--gray-secondary)",
+                                            color: "var(--gray-text-primary)",
                                             border: "none",
+                                            fontFamily: "Satoshi",
+                                            fontWeight: 600
 
                                         }}
                                     />
@@ -159,19 +145,18 @@ const Login = () => {
                                         className={style.createAccount}
                                         to="/registration"
                                     >
-                                        {" "}
                                         Create account?
                                     </Link>
                                 </div>
-                            
+
                                 <div className={style.forgotPassword}>
                                     <Link
                                         className={style.forgotPasswordText}
                                         to="/forgotPassword"
                                     >
-                                        {" "}
                                         Forgot password?
                                     </Link>
+
                                 </div>
                             </Form>
                         )}

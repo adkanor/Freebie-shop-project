@@ -92,7 +92,7 @@ const Filters = ({
                     onClick={closeFilters}
                 />
             </div>
-            <form onSubmit={applyFilters}>
+            <form onSubmit={applyFilters} className={styles.formFilters}>
                 <div className={styles.filterSex}>
                     <h3 className={styles.filterTitle}>Gender</h3>
                     <label className={styles.filterLabel}>
@@ -180,7 +180,7 @@ const Filters = ({
                     style={{
                         width: "100%",
                         backgroundColor: "var(--black-text)",
-                        padding: "7px 0",
+                        padding: "12px 0",
                         margin: "20px 0",
                     }}
                 />
@@ -190,7 +190,7 @@ const Filters = ({
                     style={{
                         color: "var(--black-text)",
                         width: "100%",
-                        padding: "7px 0",
+                        padding: "12px 0",
                     }}
                     onClick={resetFiltersForm}
                 />

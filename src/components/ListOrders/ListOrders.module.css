@@ -15,6 +15,7 @@
     text-align: center;
     margin: 0 auto;
     flex-grow: 1;
+    max-width: 800px;
 }
 
 .order {
@@ -22,7 +23,7 @@
     padding: 10px;
     margin: 10px;
     width: 90%;
-
+    border-radius: 24px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,9 +43,11 @@
 
 .orderID {
     font-family: "Satoshi";
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 16px;
     margin-bottom: 20px;
+    color: var(--gray-text-primary);
+
 }
 
 .orderHeader .orderDate,
@@ -63,20 +66,22 @@
     font-family: "Satoshi";
     font-weight: 700;
     padding-bottom: 15px;
+    color: var(--gray-text-primary);
+
 }
 
 .productContainer {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .productImg {
     width: 80px;
     height: 80px;
-    padding: 6px 2px 5px 3px;
+    padding: 6px 1px 5px px;
     object-fit: contain;
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 .productDetails {
@@ -86,7 +91,7 @@
 }
 
 .productTitle {
-    padding-left: 40px;
+    padding-left: 20px;
     text-overflow: ellipsis;
     width: 150px;
     overflow: hidden;
@@ -116,6 +121,9 @@
     padding-right: 5px;
     font-family: "Satoshi";
     font-weight: 400;
+    justify-content: center;
+    align-items: center;
+
 }
 
 ::-webkit-scrollbar {
@@ -179,5 +187,11 @@
 
     .productsWrapper {
         flex-grow: 1;
+    }
+    .productImg{
+        margin-right: 20px;
+    }
+    .productPrice {
+        margin-right: 20px;
     }
 }

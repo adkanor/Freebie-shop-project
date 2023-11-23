@@ -4,17 +4,21 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 
 
+
 const NoPage = () => {
     const navigate = useNavigate();
     return <div className = {`section ${ style.noPageWrapper }`}>
+
         <div className={style.noPageTitle}>404 not found</div>
         <p className={style.noPageSubtitle}>Your visited page not found. You may go home page.</p>
         <Button onClick={() => navigate(-1)} text={"Go back"} style={{
             marginTop:"20px",
             padding: "10px 30px",
-            backgroundColor: "var(--login-btn)",
-            color: "var(--white-text)",
+            backgroundColor: "var(--gray-secondary)",
+            color: "var(--gray-text-primary)",
             border: "none",
+            fontFamily: "Satoshi",
+            fontWeight: 600
         }}/>
 
     </div>;

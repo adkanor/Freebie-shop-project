@@ -1,11 +1,11 @@
 .quantityNumber {
-    padding: 0px 4px;
+    padding: 3px 5px;
     user-select: none;
 }
 .quantityBtnDown {
     border-top-left-radius: 62px;
     border-bottom-left-radius: 62px;
-    padding: 8px;
+    padding: 14px;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -13,7 +13,7 @@
 .quantityBtnUp {
     border-top-right-radius: 62px;
     border-bottom-right-radius: 62px;
-    padding: 8px;
+    padding: 14px;
     border: none;
     cursor: pointer;
     background-color: transparent;

@@ -3,12 +3,15 @@ import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import PropTypes from "prop-types";
 import FavoriteIcon from "../FavouriteIcon/FavouriteIcon";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const DetailProductSlider = ({ info }) => {
     const imageArr = info.url_image;
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
