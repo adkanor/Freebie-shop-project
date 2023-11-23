@@ -1,15 +1,17 @@
 .favoriteIconSelected {
     position: absolute;
-    right: -4px;
-    top: -4px;
+    right: 2px;
+    top: 2px;
     fill: black;
     cursor: pointer;
+    filter: drop-shadow(0 2px 2px var(--gray-text-secondary));
+
 }
 .favoriteIconNotSelected {
     position: absolute;
-    right: -4px;
-    top: -4px;
+    right: 2px;
+    top: 2px;
     fill: var(--gray-primary);
     cursor: pointer;
-    filter: drop-shadow(0 0 3px var(--gray-text-secondary));
+    filter: drop-shadow(3px 5px 3px var(--gray-text-secondary));
 }

@@ -5,23 +5,31 @@ import Button from "../Button/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { URL } from "../../variables";
+import { useLocation } from "react-router";
 const ContactUs = () => {
     const token = localStorage.getItem("token");
+    const location = useLocation();
+    let orderText = "";
+    if (location.state?.fromComponent === "orders" && location.state?.orderId) {
+        orderText = `Hello, I want to write about order ${location.state.orderId}.`;
+    } else {
+        orderText = "";
+        console.log(orderText);
+    }
 
-    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    const handleSubmit = async (values, { setSubmitting, setFieldValue }) => {
         if (!values.message.trim()) {
             toast.error("Message cannot be empty");
         } else {
             const message = values.message;
             try {
+                setFieldValue("message", "");
                 await axios.post(`${URL}supportUser`, message, {
                     headers: {
                         Authorization: `${token}`,
                     },
                 });
-
                 toast.success("Message sent successfully!");
-                resetForm();
             } catch (error) {
                 toast.error(
                     "Failed to send the message. Please try again later."
@@ -36,7 +44,7 @@ const ContactUs = () => {
         <div className={styles.contactUsContainer}>
             <Formik
                 initialValues={{
-                    message: "",
+                    message: orderText,
                 }}
                 onSubmit={handleSubmit}
             >
@@ -49,6 +57,7 @@ const ContactUs = () => {
                             className={styles.messageTextarea}
                             maxLength={500}
                         />
+
                         <ErrorMessage
                             name="message"
                             component="div"
