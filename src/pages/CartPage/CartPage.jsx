@@ -11,6 +11,9 @@ import { cartSummaryCalculate } from "../../stores/cartProducts/utils";
 
 const CartPage = () => {
     const cartProducts = useSelector((state) => state.cartReducer.cartItems);
+    useEffect(() => {
+        console.log(cartProducts);
+    }, [cartProducts]);
     const [cartSummary, setCartSummary] = useState({
         deliveryFee: 15,
         discount: 0,
