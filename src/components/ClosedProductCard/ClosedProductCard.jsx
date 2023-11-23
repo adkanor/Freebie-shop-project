@@ -134,9 +134,4 @@ ClosedProductCard.propTypes = {
     info: PropTypes.object.isRequired,
 };
 
-ClosedProductCard.defaultValues = {
-    sale: 0,
-    salePrice: 0,
-};
-
 export default ClosedProductCard;
