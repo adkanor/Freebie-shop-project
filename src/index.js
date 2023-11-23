@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GMAIL } from "./config";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+console.log(GMAIL);
 root.render(
     <>
         <Provider store={store}>
