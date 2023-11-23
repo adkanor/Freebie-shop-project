@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { URL } from "../../variables";
 import { useDispatch } from "react-redux";
-import { refreshCart } from "../../stores/cartProducts/action";
+import { fetchCartItems } from "../../stores/cartProducts/action";
 
 
 const Login = () => {
@@ -22,22 +22,7 @@ const Login = () => {
 
     const memoryUser = async (data) => {
         localStorage.setItem("token", data.token);
-        const basket = localStorage.getItem("cartItems");
-        if (basket) {
-            const response = await axios.post(
-                `${URL}mergeBasket`,
-                { basket: JSON.parse(basket) },
-                {
-                    headers: {
-                        Authorization: data.token,
-                    },
-                }
-            );
-            if (response.data.status === 200) {
-                localStorage.removeItem("cartItems");
-                dispatch(refreshCart(response.data.basket));
-            }
-        }
+        dispatch(fetchCartItems());
     };
 
     useEffect(() => {
@@ -80,6 +65,7 @@ const Login = () => {
             .post(`${URL}login`, user)
             .then((response) => {
                 if (response.data.status === 200) {
+                    console.log(response.data.info);
                     memoryUser(response.data.info);
                     redirectAccount();
                 }
