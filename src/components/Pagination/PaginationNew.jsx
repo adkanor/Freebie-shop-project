@@ -43,6 +43,9 @@ const PaginationNew = ({ pageProps = 1, isAble, changeFilter }) => {
         color: "black",
         cursor: "pointer",
     };
+    if (page === 1 && !isAble) {
+        return null;
+    }
     return (
         <div className={styles.paginationContainer}>
             <Button
