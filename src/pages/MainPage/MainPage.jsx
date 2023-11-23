@@ -9,7 +9,8 @@ import Button from "../../components/Button/Button";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { URL } from "../../variables";
 import { defaultParams } from "../../variables";
-import BrandBox from "../../components/BrandsRow/BrandsRow";
+
+import TextScroller from "../../components/TickerComponent/TickerComponent";
 const MainPage = () => {
     const dressStyles = [
         {
@@ -33,7 +34,8 @@ const MainPage = () => {
     return (
         <section className="section">
             <Slider />
-            <BrandBox />
+            {/*<BrandBox />*/}
+            <TextScroller/>
             <RecommendationProducts
                 urlParams={"page=1&limit=4&sort=new"}
                 title={"New Arrivals"}
