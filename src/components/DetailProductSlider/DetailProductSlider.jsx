@@ -9,7 +9,7 @@ const DetailProductSlider = ({ info }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
-
+    console.log(info);
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
@@ -31,10 +31,7 @@ const DetailProductSlider = ({ info }) => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <img
-                        src={largeImage}
-                        alt={"Big square"}
-                    />
+                    <img src={largeImage} alt={"Big square"} />
                 </div>
                 {isPersonAutorised ? (
                     <FavoriteIcon thisCard={{ ...info, id: info._id }} />
