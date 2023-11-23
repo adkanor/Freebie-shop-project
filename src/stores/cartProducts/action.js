@@ -12,7 +12,6 @@ export const FETCH_CART_ITEMS_FAILURE = "FETCH_CART_ITEMS_FAILURE";
 
 // Action creator to fetch cart items from the server
 export const fetchCartItems = () => async (dispatch) => {
-    console.log("Fetching");
     try {
         const token = localStorage.getItem("token");
 
