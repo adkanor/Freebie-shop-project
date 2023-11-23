@@ -9,6 +9,7 @@ import Button from "../../components/Button/Button";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { URL } from "../../variables";
 import { defaultParams } from "../../variables";
+import BrandBox from "../../components/BrandsRow/BrandsRow";
 const MainPage = () => {
     const dressStyles = [
         {
