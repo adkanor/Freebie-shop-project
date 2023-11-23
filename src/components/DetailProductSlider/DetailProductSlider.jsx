@@ -9,7 +9,6 @@ const DetailProductSlider = ({ info }) => {
     const [largeImage, setLargeImage] = useState(imageArr[0]);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const smallContainer = useRef(null);
-    console.log(info);
     useEffect(() => {
         setLargeImage(imageArr[0]);
         setSelectedImageIndex(0);
