@@ -62,7 +62,7 @@ const CartSummary = ({
                             </p>
                         </div>
                         <div className={styles.cartTotal}>
-                            <h5 className={styles.cartTotalName}>Total</h5>
+                            <h5 className={styles.cartSummaryText}>Total</h5>
                             <p className={styles.cartSummaryPrice}>
                                 ${initialValues.total.toFixed(2)}
                             </p>
