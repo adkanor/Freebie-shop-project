@@ -62,12 +62,13 @@ const AddComment = ({ id, closeFunc, submitFunc }) => {
                         submitFunc(res.data.newComment);
                         toast.success("New comment added");
                     }
+                    closeFunc();
                 })
                 .catch((error) => {
                     console.error(error);
                     toast.error("Error during posting comment");
+                    closeFunc();
                 });
-            closeFunc();
         }
     }
 

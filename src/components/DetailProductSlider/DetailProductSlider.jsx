@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../../pages/DetailProduct/DetailProduct.module.css";
 import PropTypes from "prop-types";
 import FavoriteIcon from "../FavouriteIcon/FavouriteIcon";
-import ImageMagnifier from "./ImageMagnifier";
 import { useSelector } from "react-redux";
 
 const DetailProductSlider = ({ info }) => {
@@ -31,10 +30,9 @@ const DetailProductSlider = ({ info }) => {
         <div className={styles.productSlider}>
             <div className={styles.bigSquareContainer}>
                 <div className={styles.bigSquare}>
-                    <ImageMagnifier
-                        className={styles.bigSquareimg}
-                        width={"400px"}
+                    <img
                         src={largeImage}
+                        alt={"Big square"}
                     />
                 </div>
                 {isPersonAutorised ? (
