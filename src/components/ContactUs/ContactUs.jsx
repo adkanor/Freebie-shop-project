@@ -14,7 +14,6 @@ const ContactUs = () => {
         orderText = `Hello, I want to write about order ${location.state.orderId}.`;
     } else {
         orderText = "";
-        console.log(orderText);
     }
 
     const handleSubmit = async (values, { setSubmitting, setFieldValue }) => {

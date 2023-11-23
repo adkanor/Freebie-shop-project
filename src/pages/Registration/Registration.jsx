@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import validationSchema from "./validationSchema";
-import {Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import Input from "../../components/InputPassworgLogin/Input";
 import Button from "../../components/Button/Button";
 import style from "./Registration.module.css";
-import {Link, useNavigate} from "react-router-dom";
-import {useGoogleOneTapLogin} from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import {URL} from "../../variables";
-
+import { URL } from "../../variables";
 
 const Registration = () => {
     const [bannerReg, setBannerReg] = useState();
@@ -21,12 +20,12 @@ const Registration = () => {
 
     useGoogleOneTapLogin({
         cancel_on_tap_outside: false,
-        onSuccess: credentialResponse => {
+        onSuccess: (credentialResponse) => {
             const decoded = jwt_decode(credentialResponse.credential);
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
-                name: decoded.given_name
+                name: decoded.given_name,
             };
             apiServerRegistration(value);
         },
@@ -36,26 +35,27 @@ const Registration = () => {
     });
 
     useEffect(() => {
-        axios.get(`${URL}loginBanner`)
-            .then(res => {
+        axios
+            .get(`${URL}loginBanner`)
+            .then((res) => {
                 setBannerReg(res.data.url);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             });
     }, []);
-
 
     const apiServerRegistration = (values) => {
         const candidate = {
             email: values.email,
             userName: values.name,
             password: values.password,
-            confirmPassword: values.confirmPassword
+            confirmPassword: values.confirmPassword,
         };
 
-        axios.post(`${URL}registration`, candidate)
-            .then(response => {
+        axios
+            .post(`${URL}registration`, candidate)
+            .then((response) => {
                 if (response.data.status === 200) {
                     localStorage.setItem("token", response.data.token);
                     redirect();
@@ -65,31 +65,35 @@ const Registration = () => {
                     setIsErrorMessageServer(true);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             });
     };
 
-
     return (
         <div className={`section ${style.registrationWrapper}`}>
             <div className={style.registrationBanner}>
-                <img src={bannerReg} alt="bannerLogin"/>
+                <img src={bannerReg} alt="bannerLogin" />
             </div>
             <div className={style.registrationFormWrapper}>
                 <p className={style.registrationTitle}>Create an account</p>
-                <p className={style.registrationSubTitle}>Enter your details below</p>
-                <Formik initialValues={{
-                    name: "",
-                    email: "",
-                    password: "",
-                    confirmPassword: ""
-
-                }} validationSchema={validationSchema} onSubmit={values => {
-                    apiServerRegistration(values);
-                    setIsErrorMessageServer(false);
-                }}>
-                    {({errors, touched}) => (
+                <p className={style.registrationSubTitle}>
+                    Enter your details below
+                </p>
+                <Formik
+                    initialValues={{
+                        name: "",
+                        email: "",
+                        password: "",
+                        confirmPassword: "",
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values) => {
+                        apiServerRegistration(values);
+                        setIsErrorMessageServer(false);
+                    }}
+                >
+                    {({ errors, touched }) => (
                         <Form>
                             <Input
                                 name="name"
@@ -115,7 +119,10 @@ const Registration = () => {
                             <Input
                                 name="confirmPassword"
                                 placeholder="Confirm password"
-                                isError={errors.confirmPassword && touched.confirmPassword}
+                                isError={
+                                    errors.confirmPassword &&
+                                    touched.confirmPassword
+                                }
                                 errorText={errors.confirmPassword}
                                 type={"password"}
                                 errorMessageOther={errorMessageServer}
@@ -129,20 +136,22 @@ const Registration = () => {
                                     maxWidth: "500px",
                                     padding: "16px 48px",
                                     fontSize: "20px",
-                                    marginTop:"16px",
-                                    backgroundColor: "var(--gray-secondary)",
-                                    color: "var(--gray-text-primary)",
+                                    marginTop: "16px",
+                                    backgroundColor: "var(--lightblue-color)",
+                                    color: "var(--black-text)",
                                     border: "none",
                                     fontFamily: "Satoshi",
-                                    fontWeight: 600
+                                    fontWeight: 600,
                                 }}
                             />
                         </Form>
                     )}
                 </Formik>
                 <div className={style.redirectPanel}>
-                    <p>Already have account?</p>
-                    <Link className={style.redirectLogin} to="/login"> Log in</Link>
+                    <p className={style.redirectLogin}>Already have account?</p>
+                    <Link className={style.redirectLogin} to="/login">
+                        Log in
+                    </Link>
                 </div>
             </div>
         </div>

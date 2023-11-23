@@ -73,12 +73,11 @@ const ForgotPassword = () => {
                                     padding: "16px 35px",
                                     margin: "8px 0",
                                     fontSize: "16px",
-                                    backgroundColor: "var(--gray-secondary)",
-                                    color: "var(--gray-text-primary)",
+                                    backgroundColor: "var(--lightblue-color)",
+                                    color: "var(--black-text)",
                                     border: "none",
                                     fontFamily: "Satoshi",
                                     fontWeight: 600,
-
                                 }}
                             />
                             <Link className={style.goHome} to="/">
