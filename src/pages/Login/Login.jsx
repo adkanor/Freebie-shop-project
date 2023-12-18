@@ -42,7 +42,7 @@ const Login = () => {
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
-                name: decoded.given_name
+                name: decoded.given_name,
             };
             apiContinueWidthGoogle(value);
         },
@@ -54,7 +54,6 @@ const Login = () => {
     });
 
     const redirectAccount = () => navigate("/account");
-
 
     const apiServerLogin = (values) => {
         const user = {
@@ -90,7 +89,6 @@ const Login = () => {
         axios
             .post(`${URL}continuewidthgoogle`, candidate)
             .then((response) => {
-                console.log(response);
                 if (response.data.status === 200) {
                     localStorage.setItem("token", response.data.token);
                     redirectAccount();
@@ -104,9 +102,6 @@ const Login = () => {
                 console.error(error);
             });
     };
-
-
-
 
     return (
         <div className={`section ${style.loginContainer}`}>
