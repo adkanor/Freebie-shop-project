@@ -10,7 +10,7 @@ import { URL } from "../../variables";
 const ForgotPassword = () => {
     const [isServerMassage, setIsServerMassage] = useState(false);
     const [isServerErrorMassage, setIsServerErrorMassage] = useState(false);
-    const [serverMassage, setServerMassage] = useState();
+    const [serverMassage] = useState();
 
     const showMassage = () => {
         setIsServerMassage(true);
@@ -29,8 +29,12 @@ const ForgotPassword = () => {
                 if (res.data.status === 200) {
                     showMassage();
                 } else {
-                    setIsServerErrorMassage(true);
-                    setServerMassage(res.data.message);
+                    // showMassage();
+                    // setIsServerErrorMassage(false);
+                    // // setServerMassage(res.data.message);
+                    // setServerMassage("fgdfggfd");
+                    // showMassage();
+                    setIsServerMassage(true);
                 }
             })
             .catch((error) => {
@@ -86,8 +90,7 @@ const ForgotPassword = () => {
                         </div>
                         {isServerMassage && (
                             <p className={style.forgotMassage}>
-                                Password recovery instructions have been sent to
-                                your email
+                                If the email is registered, instructions for changing the password will be sent to it.
                             </p>
                         )}
                     </Form>

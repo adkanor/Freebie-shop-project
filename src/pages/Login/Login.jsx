@@ -42,8 +42,9 @@ const Login = () => {
             const value = {
                 email: decoded.email,
                 password: decoded.azp,
+                name: decoded.given_name
             };
-            apiServerLogin(value);
+            apiContinueWidthGoogle(value);
         },
         onError: () => {
             setErrorMessageServer("Login failed");
@@ -53,6 +54,7 @@ const Login = () => {
     });
 
     const redirectAccount = () => navigate("/account");
+
 
     const apiServerLogin = (values) => {
         const user = {
@@ -78,6 +80,33 @@ const Login = () => {
                 setIsErrorMessageServer(true);
             });
     };
+
+    const apiContinueWidthGoogle = (values) => {
+        const candidate = {
+            email: values.email,
+            userName: values.name,
+            password: values.password,
+        };
+        axios
+            .post(`${URL}continuewidthgoogle`, candidate)
+            .then((response) => {
+                console.log(response);
+                if (response.data.status === 200) {
+                    localStorage.setItem("token", response.data.token);
+                    redirectAccount();
+                }
+                if (response.data.status === 400) {
+                    setErrorMessageServer(response.data.info);
+                    setIsErrorMessageServer(true);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
+
 
     return (
         <div className={`section ${style.loginContainer}`}>
